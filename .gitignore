@@ -1,0 +1,14 @@
+_ReSharper.*
+MeasureIt
+*.vsp
+TestResults
+obj
+bin
+*.suo
+*.user
+*.trx
+StyleCop.Cache
+*.vs10x
+*.tmp
+UpgradeLog.*
+_UpgradeReport_Files
