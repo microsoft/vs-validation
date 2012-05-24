@@ -56,6 +56,29 @@ namespace Microsoft.Validation
         }
 
         /// <summary>
+        /// Throws an exception if the specified parameter's value is null.
+        /// </summary>
+        /// <typeparam name="T">The type of the parameter.</typeparam>
+        /// <param name="value">The value of the argument.</param>
+        /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
+        /// <returns>The value of the parameter.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c></exception>
+        /// <remarks>
+        /// This method exists for callers who themselves only know the type as a generic parameter which
+        /// may or may not be a class, but certainly cannot be null.
+        /// </remarks>
+        [DebuggerStepThrough]
+        public static T NotNullAllowStructs<T>([ValidatedNotNull]T value, string parameterName)
+        {
+            if (null == value)
+            {
+                throw new ArgumentNullException(parameterName);
+            }
+
+            return value;
+        }
+
+        /// <summary>
         /// Throws an exception if the specified parameter's value is null or empty.
         /// </summary>
         /// <param name="value">The value of the argument.</param>
