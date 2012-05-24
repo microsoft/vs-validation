@@ -14,7 +14,7 @@ namespace Microsoft.Validation
     /// </summary>
     [ExcludeFromCodeCoverage]
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
-    internal sealed class ValidatedNotNullAttribute : Attribute
+    public sealed class ValidatedNotNullAttribute : Attribute
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidatedNotNullAttribute"/> class.

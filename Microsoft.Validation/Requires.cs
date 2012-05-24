@@ -15,7 +15,7 @@ namespace Microsoft.Validation
     /// <summary>
     /// Common runtime checks that throw ArgumentExceptions upon failure.
     /// </summary>
-    internal static class Requires
+    public static class Requires
     {
         /// <summary>
         /// Throws an exception if the specified parameter's value is null.

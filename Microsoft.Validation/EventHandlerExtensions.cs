@@ -11,7 +11,7 @@ namespace Microsoft.Validation
     /// <summary>
     /// Extension methods to make it easier to safely invoke events.
     /// </summary>
-    internal static class EventHandlerExtensions
+    public static class EventHandlerExtensions
     {
         /// <summary>
         /// Invokes any event handlers that are hooked to the specified event.

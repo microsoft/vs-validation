@@ -17,14 +17,14 @@ namespace Microsoft.Validation
     /// Common runtime checks that trace messages and invoke an assertion failure,
     /// but does *not* throw exceptions.
     /// </summary>
-    internal static class Report
+    public static class Report
     {
         /// <summary>
         /// Verifies that a value is not null, and reports an error about a missing MEF component otherwise.
         /// </summary>
         /// <typeparam name="T">The interface of the imported part.</typeparam>
         [DebuggerStepThrough]
-        internal static void IfNotPresent<T>(T part)
+        public static void IfNotPresent<T>(T part)
         {
             if (part == null)
             {
@@ -40,7 +40,7 @@ namespace Microsoft.Validation
         /// Reports an error if a condition evaluates to true.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void If(bool condition, string message = null)
+        public static void If(bool condition, string message = null)
         {
             if (condition)
             {
@@ -52,7 +52,7 @@ namespace Microsoft.Validation
         /// Reports an error if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void IfNot(bool condition, string message = null)
+        public static void IfNot(bool condition, string message = null)
         {
             if (!condition)
             {
@@ -64,7 +64,7 @@ namespace Microsoft.Validation
         /// Reports an error if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void IfNot(bool condition, string message, object arg1)
+        public static void IfNot(bool condition, string message, object arg1)
         {
             if (!condition)
             {
@@ -76,7 +76,7 @@ namespace Microsoft.Validation
         /// Reports an error if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void IfNot(bool condition, string message, object arg1, object arg2)
+        public static void IfNot(bool condition, string message, object arg1, object arg2)
         {
             if (!condition)
             {
@@ -88,7 +88,7 @@ namespace Microsoft.Validation
         /// Reports an error if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void IfNot(bool condition, string message, params object[] args)
+        public static void IfNot(bool condition, string message, params object[] args)
         {
             if (!condition)
             {
@@ -100,11 +100,11 @@ namespace Microsoft.Validation
         /// Reports a certain failure.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void Fail(string message = null)
+        public static void Fail(string message = null)
         {
             if (message == null)
             {
-                message = "An internal error occurred.";
+                message = "An public error occurred.";
             }
 
             Debug.WriteLine(message);
@@ -115,7 +115,7 @@ namespace Microsoft.Validation
         /// Reports a certain failure.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void Fail(string message, params object[] args)
+        public static void Fail(string message, params object[] args)
         {
             Fail(PrivateErrorHelpers.Format(message, args));
         }

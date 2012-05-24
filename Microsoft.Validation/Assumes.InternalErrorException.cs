@@ -15,7 +15,7 @@ namespace Microsoft.Validation
     /// <content>
     /// Contains the inner exception thrown by Assumes.
     /// </content>
-    internal partial class Assumes
+    public partial class Assumes
     {
         /// <summary>
         /// The exception that is thrown when an internal assumption failed.

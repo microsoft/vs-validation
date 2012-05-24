@@ -13,9 +13,9 @@ namespace Microsoft.Validation
     using System.Linq;
 
     /// <summary>
-    /// Common runtime checks that throw internal error exceptions upon failure.
+    /// Common runtime checks that throw public error exceptions upon failure.
     /// </summary>
-    internal static partial class Assumes
+    public static partial class Assumes
     {
         /// <summary>
         /// Throws an exception if the specified value is null.
@@ -84,7 +84,7 @@ namespace Microsoft.Validation
         }
 
         /// <summary>
-        /// Throws an internal exception if a condition evaluates to true.
+        /// Throws an public exception if a condition evaluates to true.
         /// </summary>
         [DebuggerStepThrough]
         public static void False(bool condition, string message = null)
@@ -96,7 +96,7 @@ namespace Microsoft.Validation
         }
 
         /// <summary>
-        /// Throws an internal exception if a condition evaluates to true.
+        /// Throws an public exception if a condition evaluates to true.
         /// </summary>
         [DebuggerStepThrough]
         public static void False(bool condition, string unformattedMessage, object arg1)
@@ -108,7 +108,7 @@ namespace Microsoft.Validation
         }
 
         /// <summary>
-        /// Throws an internal exception if a condition evaluates to true.
+        /// Throws an public exception if a condition evaluates to true.
         /// </summary>
         [DebuggerStepThrough]
         public static void False(bool condition, string unformattedMessage, params object[] args)
@@ -120,7 +120,7 @@ namespace Microsoft.Validation
         }
 
         /// <summary>
-        /// Throws an internal exception if a condition evaluates to false.
+        /// Throws an public exception if a condition evaluates to false.
         /// </summary>
         [DebuggerStepThrough]
         public static void True(bool condition, string message = null)
@@ -132,7 +132,7 @@ namespace Microsoft.Validation
         }
 
         /// <summary>
-        /// Throws an internal exception if a condition evaluates to false.
+        /// Throws an public exception if a condition evaluates to false.
         /// </summary>
         [DebuggerStepThrough]
         public static void True(bool condition, string unformattedMessage, object arg1)
@@ -144,7 +144,7 @@ namespace Microsoft.Validation
         }
 
         /// <summary>
-        /// Throws an internal exception if a condition evaluates to false.
+        /// Throws an public exception if a condition evaluates to false.
         /// </summary>
         [DebuggerStepThrough]
         public static void True(bool condition, string unformattedMessage, params object[] args)
@@ -156,7 +156,7 @@ namespace Microsoft.Validation
         }
 
         /// <summary>
-        /// Throws an internal exception.
+        /// Throws an public exception.
         /// </summary>
         [DebuggerStepThrough]
         public static Exception NotReachable()
@@ -183,7 +183,7 @@ namespace Microsoft.Validation
         }
 
         /// <summary>
-        /// Throws an internal exception.
+        /// Throws an public exception.
         /// </summary>
         /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
         public static Exception Fail(string message = null, bool showAssert = true)
@@ -196,7 +196,7 @@ namespace Microsoft.Validation
         }
 
         /// <summary>
-        /// Throws an internal exception.
+        /// Throws an public exception.
         /// </summary>
         /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
         public static Exception Fail(string message, Exception innerException, bool showAssert = true)

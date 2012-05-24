@@ -17,12 +17,12 @@ namespace Microsoft.Validation
     /// <summary>
     /// Common runtime checks that throw exceptions upon failure.
     /// </summary>
-    internal static class Verify
+    public static class Verify
     {
         /// <summary>
         /// Indicates what the desired behavior is in the event of a failure.
         /// </summary>
-        internal enum ErrorBehavior
+        public enum ErrorBehavior
         {
             /// <summary>
             /// An exception should be (re)thrown.
@@ -44,7 +44,7 @@ namespace Microsoft.Validation
         /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void Operation(bool condition, string message)
+        public static void Operation(bool condition, string message)
         {
             if (!condition)
             {
@@ -56,7 +56,7 @@ namespace Microsoft.Validation
         /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void Operation(bool condition, string unformattedMessage, object arg1)
+        public static void Operation(bool condition, string unformattedMessage, object arg1)
         {
             if (!condition)
             {
@@ -68,7 +68,7 @@ namespace Microsoft.Validation
         /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void Operation(bool condition, string unformattedMessage, object arg1, object arg2)
+        public static void Operation(bool condition, string unformattedMessage, object arg1, object arg2)
         {
             if (!condition)
             {
@@ -80,7 +80,7 @@ namespace Microsoft.Validation
         /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void Operation(bool condition, string unformattedMessage, params object[] args)
+        public static void Operation(bool condition, string unformattedMessage, params object[] args)
         {
             if (!condition)
             {
@@ -92,7 +92,7 @@ namespace Microsoft.Validation
         /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void OperationWithHelp(bool condition, string message, string helpLink)
+        public static void OperationWithHelp(bool condition, string message, string helpLink)
         {
             if (!condition)
             {
@@ -106,7 +106,7 @@ namespace Microsoft.Validation
         /// Throws an <see cref="InvalidOperationException"/>.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void FailOperation(string message, params object[] args)
+        public static void FailOperation(string message, params object[] args)
         {
             throw new InvalidOperationException(PrivateErrorHelpers.Format(message, args));
         }
@@ -115,7 +115,7 @@ namespace Microsoft.Validation
         /// Throws an <see cref="ObjectDisposedException"/> if an object is disposed.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void NotDisposed(IDisposableObservable disposedValue, string message = null)
+        public static void NotDisposed(IDisposableObservable disposedValue, string message = null)
         {
             Contract.Requires<ArgumentNullException>(disposedValue != null);
 
@@ -137,7 +137,7 @@ namespace Microsoft.Validation
         /// Throws an <see cref="ObjectDisposedException"/> if a condition is false.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void NotDisposed(bool condition, object disposedValue, string message = null)
+        public static void NotDisposed(bool condition, object disposedValue, string message = null)
         {
             if (!condition)
             {
@@ -157,7 +157,7 @@ namespace Microsoft.Validation
         /// Throws an <see cref="ObjectDisposedException"/> if a condition is false.
         /// </summary>
         [DebuggerStepThrough]
-        internal static void NotDisposed(bool condition, string message)
+        public static void NotDisposed(bool condition, string message)
         {
             if (!condition)
             {
@@ -174,7 +174,7 @@ namespace Microsoft.Validation
         /// No exception is thrown for S_FALSE.
         /// </remarks>
         [DebuggerStepThrough]
-        internal static void HResult(int hresult, bool ignorePreviousComCalls = false)
+        public static void HResult(int hresult, bool ignorePreviousComCalls = false)
         {
             if (hresult < 0)
             {

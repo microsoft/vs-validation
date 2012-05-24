@@ -11,7 +11,7 @@ namespace Microsoft.Validation
     /// <summary>
     /// A disposable object that also provides a safe way to query its disposed status.
     /// </summary>
-    internal interface IDisposableObservable : IDisposable
+    public interface IDisposableObservable : IDisposable
     {
         /// <summary>
         /// Gets a value indicating whether this instance has been disposed.
