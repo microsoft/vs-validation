@@ -101,6 +101,7 @@ namespace Microsoft.Validation
             }
         }
 
+#if !NET35
         /// <summary>
         /// Throws an exception if the specified parameter's value is null, empty, or whitespace.
         /// </summary>
@@ -128,6 +129,7 @@ namespace Microsoft.Validation
                 throw new ArgumentException(Format(Strings.Argument_Whitespace, parameterName));
             }
         }
+#endif
 
         /// <summary>
         /// Throws an exception if the specified parameter's value is null,

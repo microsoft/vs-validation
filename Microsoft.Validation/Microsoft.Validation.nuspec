@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>$id$</id>
+    <id>Microsoft.Validation</id>
     <version>$version$</version>
-    <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <title>Microsoft Validation</title>
+    <authors>Microsoft Corp.</authors>
+    <owners>Microsoft Corp.</owners>
     <licenseUrl>http://lcaweb/</licenseUrl>
     <projectUrl>file:////andarno4/public/git/Microsoft.Validation</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -14,4 +14,10 @@
     <copyright>Copyright 2012</copyright>
     <tags>InputValidation IntegrityCheck</tags>
   </metadata>
+  <files>
+    <file src="bin\v4.0\release\Microsoft.Validation.dll" target="lib\net40-client" />
+    <file src="bin\v4.0\release\Microsoft.Validation.xml" target="lib\net40-client" />
+    <file src="bin\v3.5\release\Microsoft.Validation.dll" target="lib\net35-client" />
+    <file src="bin\v3.5\release\Microsoft.Validation.xml" target="lib\net35-client" />
+  </files>
 </package>

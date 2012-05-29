@@ -12,7 +12,9 @@ namespace Microsoft.Validation
     /// <summary>
     /// Indicates to Code Analysis that a method validates a particular parameter.
     /// </summary>
+#if !NET35
     [ExcludeFromCodeCoverage]
+#endif
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
     public sealed class ValidatedNotNullAttribute : Attribute
     {

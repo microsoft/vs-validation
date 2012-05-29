@@ -5,5 +5,8 @@ if "%1"=="" (
     EXIT /b 1
 )
 
+msbuild "%~dp0Microsoft.Validation.csproj" /p:TargetFrameworkVersion=v3.5,Configuration=Release /v:minimal /nologo
+msbuild "%~dp0Microsoft.Validation.csproj" /p:TargetFrameworkVersion=v4.0,Configuration=Release	/v:minimal /nologo
+
 @echo on
-nuget pack -build -symbols  -properties configuration=release -OutputDirectory bin\release -Version %1
+nuget pack "%~dp0Microsoft.Validation.nuspec" -symbols -OutputDirectory bin -Version %1

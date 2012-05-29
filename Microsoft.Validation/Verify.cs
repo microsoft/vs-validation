@@ -9,7 +9,6 @@ namespace Microsoft.Validation
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
     using System.Runtime.InteropServices;
@@ -117,7 +116,7 @@ namespace Microsoft.Validation
         [DebuggerStepThrough]
         public static void NotDisposed(IDisposableObservable disposedValue, string message = null)
         {
-            Contract.Requires<ArgumentNullException>(disposedValue != null);
+            Requires.NotNull(disposedValue, "disposedValue");
 
             if (disposedValue.IsDisposed)
             {

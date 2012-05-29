@@ -9,7 +9,6 @@ namespace Microsoft.Validation
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Linq;
 
@@ -28,7 +27,11 @@ namespace Microsoft.Validation
         {
             if (part == null)
             {
+#if NET35
+                Type coreType = typeof(T);
+#else
                 Type coreType = PrivateErrorHelpers.TrimGenericWrapper(typeof(T), typeof(Lazy<>));
+#endif
                 if (Environment.GetEnvironmentVariable("CPSUnitTest") != "true")
                 {
                     Fail(Strings.ServiceMissing, coreType.FullName);

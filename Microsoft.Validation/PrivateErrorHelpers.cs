@@ -11,7 +11,6 @@ namespace Microsoft.Validation
     using System.Globalization;
     using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Common utility methods used by the various error detection and reporting classes.
