@@ -27,6 +27,7 @@ namespace Microsoft
             /// <summary>
             /// Initializes a new instance of the <see cref="InternalErrorException"/> class.
             /// </summary>
+            [DebuggerStepThrough]
             public InternalErrorException(string message = null, bool showAssert = true)
                 : base(message ?? Strings.InternalExceptionMessage)
             {
@@ -36,6 +37,7 @@ namespace Microsoft
             /// <summary>
             /// Initializes a new instance of the <see cref="InternalErrorException"/> class.
             /// </summary>
+            [DebuggerStepThrough]
             public InternalErrorException(string message, Exception innerException, bool showAssert = true)
                 : base(message ?? Strings.InternalExceptionMessage, innerException)
             {
@@ -45,6 +47,7 @@ namespace Microsoft
             /// <summary>
             /// Initializes a new instance of the <see cref="InternalErrorException"/> class.
             /// </summary>
+            [DebuggerStepThrough]
             protected InternalErrorException(SerializationInfo info, StreamingContext context)
                 : base(info, context)
             {
@@ -58,6 +61,7 @@ namespace Microsoft
             /// The assertion dialog may yet be suppressed if 
             /// ((DefaultTraceListener)System.Diagnostics.Trace.Listeners["Default"]).AssertUiEnabled == false
             /// </remarks>
+            [DebuggerStepThrough]
             private void ShowAssertDialog(bool showAssert)
             {
                 if (showAssert)

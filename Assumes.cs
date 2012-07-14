@@ -190,13 +190,16 @@ namespace Microsoft
         /// Throws an public exception.
         /// </summary>
         /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
+        [DebuggerStepThrough]
         public static Exception Fail(string message = null, bool showAssert = true)
         {
-            // Keep these two as separate lines of code, so the debugger can come in during the assert dialog
-            // that the exception's constructor displays, and the debugger can then be made to skip the throw
-            // in order to continue the investigation.
             var exception = new InternalErrorException(message, showAssert);
-            throw exception;
+            bool continueToThrow = true; // allows debuggers to skip throwing.
+            if (continueToThrow) {
+                throw exception;
+            } else {
+                return null;
+            }
         }
 
         /// <summary>
