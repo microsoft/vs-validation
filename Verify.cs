@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace Microsoft.Validation
+namespace Microsoft
 {
     using System;
     using System.Collections.Generic;
@@ -18,27 +18,6 @@ namespace Microsoft.Validation
     /// </summary>
     public static class Verify
     {
-        /// <summary>
-        /// Indicates what the desired behavior is in the event of a failure.
-        /// </summary>
-        public enum ErrorBehavior
-        {
-            /// <summary>
-            /// An exception should be (re)thrown.
-            /// </summary>
-            Throw,
-
-            /// <summary>
-            /// An error should be reported to the user, but then execution flow should resume.
-            /// </summary>
-            Report,
-
-            /// <summary>
-            /// An error should be quietly logged, and then execution flow should resume.
-            /// </summary>
-            Log,
-        }
-
         /// <summary>
         /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
         /// </summary>
