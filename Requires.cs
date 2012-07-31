@@ -11,6 +11,7 @@ namespace Microsoft
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Common runtime checks that throw ArgumentExceptions upon failure.
@@ -53,6 +54,47 @@ namespace Microsoft
             }
 
             return value;
+        }
+
+        /// <summary>
+        /// Throws an exception if the specified parameter's value is null.
+        /// </summary>
+        /// <param name="value">The value of the argument.</param>
+        /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
+        /// <returns>The value of the parameter.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c></exception>
+        /// <remarks>
+        /// This method allows async methods to use Requires.NotNull without having to assign the result
+        /// to local variables to avoid C# warnings.
+        /// </remarks>
+        [DebuggerStepThrough]
+        public static void NotNull([ValidatedNotNull]Task value, string parameterName)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(parameterName);
+            }
+        }
+
+        /// <summary>
+        /// Throws an exception if the specified parameter's value is null.
+        /// </summary>
+        /// <typeparam name="T">The type of the return value of the task.</typeparam>
+        /// <param name="value">The value of the argument.</param>
+        /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
+        /// <returns>The value of the parameter.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c></exception>
+        /// <remarks>
+        /// This method allows async methods to use Requires.NotNull without having to assign the result
+        /// to local variables to avoid C# warnings.
+        /// </remarks>
+        [DebuggerStepThrough]
+        public static void NotNull<T>([ValidatedNotNull]Task<T> value, string parameterName)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(parameterName);
+            }
         }
 
         /// <summary>
