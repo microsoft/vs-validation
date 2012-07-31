@@ -165,7 +165,15 @@ namespace Microsoft
             // that the exception's constructor displays, and the debugger can then be made to skip the throw
             // in order to continue the investigation.
             var exception = new InternalErrorException();
-            throw exception;
+            bool proceed = true; // allows debuggers to skip the throw statement
+            if (proceed)
+            {
+                throw exception;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -194,10 +202,13 @@ namespace Microsoft
         public static Exception Fail(string message = null, bool showAssert = true)
         {
             var exception = new InternalErrorException(message, showAssert);
-            bool continueToThrow = true; // allows debuggers to skip throwing.
-            if (continueToThrow) {
+            bool proceed = true; // allows debuggers to skip the throw statement
+            if (proceed)
+            {
                 throw exception;
-            } else {
+            }
+            else
+            {
                 return null;
             }
         }
@@ -208,11 +219,16 @@ namespace Microsoft
         /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
         public static Exception Fail(string message, Exception innerException, bool showAssert = true)
         {
-            // Keep these two as separate lines of code, so the debugger can come in during the assert dialog
-            // that the exception's constructor displays, and the debugger can then be made to skip the throw
-            // in order to continue the investigation.
             var exception = new InternalErrorException(message, innerException, showAssert);
-            throw exception;
+            bool proceed = true; // allows debuggers to skip the throw statement
+            if (proceed)
+            {
+                throw exception;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
