@@ -83,8 +83,13 @@ namespace Microsoft
         /// <summary>
         /// Throws an <see cref="InvalidOperationException"/>.
         /// </summary>
+        /// <returns>
+        /// Nothing.  This method always throws.
+        /// The signature claims to return an exception to allow callers to throw this method
+        /// to satisfy C# execution path constraints.
+        /// </returns>
         [DebuggerStepThrough]
-        public static void FailOperation(string message, params object[] args)
+        public static Exception FailOperation(string message, params object[] args)
         {
             throw new InvalidOperationException(PrivateErrorHelpers.Format(message, args));
         }
