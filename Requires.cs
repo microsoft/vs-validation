@@ -11,6 +11,7 @@ namespace Microsoft
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Runtime;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -27,6 +28,7 @@ namespace Microsoft
         /// <returns>The value of the parameter.</returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c></exception>
         [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static T NotNull<T>([ValidatedNotNull]T value, string parameterName)
             where T : class // ensures value-types aren't passed to a null checking method
         {
@@ -46,6 +48,7 @@ namespace Microsoft
         /// <returns>The value of the parameter.</returns>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is IntPtr.Zero</exception>
         [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static IntPtr NotNull(IntPtr value, string parameterName)
         {
             if (value == IntPtr.Zero)
@@ -68,6 +71,7 @@ namespace Microsoft
         /// to local variables to avoid C# warnings.
         /// </remarks>
         [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void NotNull([ValidatedNotNull]Task value, string parameterName)
         {
             if (value == null)
@@ -89,6 +93,7 @@ namespace Microsoft
         /// to local variables to avoid C# warnings.
         /// </remarks>
         [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void NotNull<T>([ValidatedNotNull]Task<T> value, string parameterName)
         {
             if (value == null)

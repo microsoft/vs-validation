@@ -11,6 +11,7 @@ namespace Microsoft
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
+    using System.Runtime;
 
     /// <summary>
     /// Common runtime checks that throw public error exceptions upon failure.
@@ -22,6 +23,7 @@ namespace Microsoft
         /// </summary>
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void NotNull<T>([ValidatedNotNull]T value)
             where T : class
         {
@@ -66,6 +68,7 @@ namespace Microsoft
         /// </summary>
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void Null<T>(T value)
             where T : class
         {
@@ -78,6 +81,7 @@ namespace Microsoft
         /// <typeparam name="T">The type the value is expected to be.</typeparam>
         /// <param name="value">The value to test.</param>
         [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void Is<T>(object value)
         {
             True(value is T);
@@ -87,6 +91,7 @@ namespace Microsoft
         /// Throws an public exception if a condition evaluates to true.
         /// </summary>
         [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void False(bool condition, string message = null)
         {
             if (condition)
@@ -99,6 +104,7 @@ namespace Microsoft
         /// Throws an public exception if a condition evaluates to true.
         /// </summary>
         [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void False(bool condition, string unformattedMessage, object arg1)
         {
             if (condition)
@@ -111,6 +117,7 @@ namespace Microsoft
         /// Throws an public exception if a condition evaluates to true.
         /// </summary>
         [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void False(bool condition, string unformattedMessage, params object[] args)
         {
             if (condition)
@@ -123,6 +130,7 @@ namespace Microsoft
         /// Throws an public exception if a condition evaluates to false.
         /// </summary>
         [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void True(bool condition, string message = null)
         {
             if (!condition)
@@ -135,6 +143,7 @@ namespace Microsoft
         /// Throws an public exception if a condition evaluates to false.
         /// </summary>
         [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void True(bool condition, string unformattedMessage, object arg1)
         {
             if (!condition)
@@ -147,6 +156,7 @@ namespace Microsoft
         /// Throws an public exception if a condition evaluates to false.
         /// </summary>
         [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static void True(bool condition, string unformattedMessage, params object[] args)
         {
             if (!condition)
