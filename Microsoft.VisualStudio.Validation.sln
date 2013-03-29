@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 11
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Validation", "Microsoft.Validation.csproj", "{E016A630-A79B-4B5D-8997-E66581D62B81}"
+# Visual Studio 12
+VisualStudioVersion = 12.0.20328.0 VSPRO_PLATFORM
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation", "Microsoft.VisualStudio.Validation.csproj", "{E016A630-A79B-4B5D-8997-E66581D62B81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
