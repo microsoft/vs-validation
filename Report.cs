@@ -8,6 +8,7 @@ namespace Microsoft
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
@@ -43,7 +44,7 @@ namespace Microsoft
         /// Reports an error if a condition evaluates to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void If(bool condition, string message = null)
+        public static void If(bool condition, [Localizable(false)] string message = null)
         {
             if (condition)
             {
@@ -55,7 +56,7 @@ namespace Microsoft
         /// Reports an error if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void IfNot(bool condition, string message = null)
+        public static void IfNot(bool condition, [Localizable(false)] string message = null)
         {
             if (!condition)
             {
@@ -67,7 +68,7 @@ namespace Microsoft
         /// Reports an error if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void IfNot(bool condition, string message, object arg1)
+        public static void IfNot(bool condition, [Localizable(false)] string message, object arg1)
         {
             if (!condition)
             {
@@ -79,7 +80,7 @@ namespace Microsoft
         /// Reports an error if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void IfNot(bool condition, string message, object arg1, object arg2)
+        public static void IfNot(bool condition, [Localizable(false)] string message, object arg1, object arg2)
         {
             if (!condition)
             {
@@ -91,7 +92,7 @@ namespace Microsoft
         /// Reports an error if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void IfNot(bool condition, string message, params object[] args)
+        public static void IfNot(bool condition, [Localizable(false)] string message, params object[] args)
         {
             if (!condition)
             {
@@ -103,7 +104,7 @@ namespace Microsoft
         /// Reports a certain failure.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Fail(string message = null)
+        public static void Fail([Localizable(false)] string message = null)
         {
             if (message == null)
             {
@@ -118,7 +119,7 @@ namespace Microsoft
         /// Reports a certain failure.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Fail(string message, params object[] args)
+        public static void Fail([Localizable(false)] string message, params object[] args)
         {
             Fail(PrivateErrorHelpers.Format(message, args));
         }

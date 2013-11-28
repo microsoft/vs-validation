@@ -8,6 +8,7 @@ namespace Microsoft
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
@@ -92,7 +93,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void False(bool condition, string message = null)
+        public static void False(bool condition, [Localizable(false)] string message = null)
         {
             if (condition)
             {
@@ -105,7 +106,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void False(bool condition, string unformattedMessage, object arg1)
+        public static void False(bool condition, [Localizable(false)] string unformattedMessage, object arg1)
         {
             if (condition)
             {
@@ -118,7 +119,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void False(bool condition, string unformattedMessage, params object[] args)
+        public static void False(bool condition, [Localizable(false)] string unformattedMessage, params object[] args)
         {
             if (condition)
             {
@@ -131,7 +132,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void True(bool condition, string message = null)
+        public static void True(bool condition, [Localizable(false)] string message = null)
         {
             if (!condition)
             {
@@ -144,7 +145,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void True(bool condition, string unformattedMessage, object arg1)
+        public static void True(bool condition, [Localizable(false)] string unformattedMessage, object arg1)
         {
             if (!condition)
             {
@@ -157,7 +158,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void True(bool condition, string unformattedMessage, params object[] args)
+        public static void True(bool condition, [Localizable(false)] string unformattedMessage, params object[] args)
         {
             if (!condition)
             {
@@ -209,7 +210,7 @@ namespace Microsoft
         /// </summary>
         /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
         [DebuggerStepThrough]
-        public static Exception Fail(string message = null, bool showAssert = true)
+        public static Exception Fail([Localizable(false)] string message = null, bool showAssert = true)
         {
             var exception = new InternalErrorException(message, showAssert);
             bool proceed = true; // allows debuggers to skip the throw statement
@@ -227,7 +228,7 @@ namespace Microsoft
         /// Throws an public exception.
         /// </summary>
         /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
-        public static Exception Fail(string message, Exception innerException, bool showAssert = true)
+        public static Exception Fail([Localizable(false)] string message, Exception innerException, bool showAssert = true)
         {
             var exception = new InternalErrorException(message, innerException, showAssert);
             bool proceed = true; // allows debuggers to skip the throw statement
