@@ -12,3 +12,4 @@ StyleCop.Cache
 *.tmp
 UpgradeLog.*
 _UpgradeReport_Files
+*.log
