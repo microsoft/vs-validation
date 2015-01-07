@@ -100,7 +100,7 @@ namespace Microsoft
         [DebuggerStepThrough]
         public static void NotDisposed(IDisposableObservable disposedValue, string message = null)
         {
-            Requires.NotNull(disposedValue, "disposedValue");
+            Requires.NotNull(disposedValue, nameof(disposedValue));
 
             if (disposedValue.IsDisposed)
             {

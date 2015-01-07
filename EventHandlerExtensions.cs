@@ -21,8 +21,8 @@ namespace Microsoft
         /// <param name="e">Event arguments to include.</param>
         public static void Raise(this Delegate handler, object sender, EventArgs e)
         {
-            Requires.NotNull(sender, "sender");
-            Requires.NotNull(e, "e");
+            Requires.NotNull(sender, nameof(sender));
+            Requires.NotNull(e, nameof(e));
 
             if (handler != null)
             {
@@ -38,8 +38,8 @@ namespace Microsoft
         /// <param name="e">Event arguments to include.</param>
         public static void Raise(this EventHandler handler, object sender, EventArgs e)
         {
-            Requires.NotNull(sender, "sender");
-            Requires.NotNull(e, "e");
+            Requires.NotNull(sender, nameof(sender));
+            Requires.NotNull(e, nameof(e));
 
             if (handler != null)
             {
@@ -57,8 +57,8 @@ namespace Microsoft
         public static void Raise<T>(this EventHandler<T> handler, object sender, T e)
             where T : EventArgs
         {
-            Requires.NotNull(sender, "sender");
-            Requires.NotNull(e, "e");
+            Requires.NotNull(sender, nameof(sender));
+            Requires.NotNull(e, nameof(e));
 
             if (handler != null)
             {
