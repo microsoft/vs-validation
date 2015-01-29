@@ -13,3 +13,4 @@ StyleCop.Cache
 UpgradeLog.*
 _UpgradeReport_Files
 *.log
+/.vs/
