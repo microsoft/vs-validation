@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LCX SchemaVersion="6.0" Name="f:\LocTmp\ddSetup\binaries.x86ret\bin\i386\vsproject\cps\package\core\Microsoft.VisualStudio.Validation.dll" PsrId="211" FileType="1" SrcCul="en-US" TgtCul="fr-FR" xmlns="http://schemas.microsoft.com/locstudio/2006/6/lcx">
+  <Props>
+    <Str Name="CustomName1" Val="Custom 1" />
+    <Str Name="CustomName2" Val="Custom 2" />
+    <Str Name="CustomName3" Val="Custom 3" />
+    <Str Name="CustomName4" Val="Custom 4" />
+    <Str Name="CustomName5" Val="Custom 5" />
+    <Str Name="CustomName6" Val="IQA" />
+    <Str Name="HobbitID" Val="584a0d5a-8236-41c2-8212-6b8cb31f1e51" />
+  </Props>
+  <OwnedComments>
+    <Cmt Name="Dev" />
+    <Cmt Name="LcxAdmin" />
+    <Cmt Name="Loc" />
+    <Cmt Name="Note" />
+    <Cmt Name="Rccx" />
+  </OwnedComments>
+  <Settings Name="@vsLocTools@\current\default.lss" Type="LSS" />
+  <Item ItemId=";Managed Resources" ItemType="0" PsrId="211" Leaf="true">
+    <Disp Icon="Expand" Expand="true" Disp="true" LocTbl="false" />
+    <Modified By="daneoh" DateTime="2013-05-08T23:58:20Z" />
+  </Item>
+  <Item ItemId=";Microsoft.Strings.resources" ItemType="0" PsrId="211" Leaf="false">
+    <Disp Icon="Expand" Expand="true" Disp="true" LocTbl="false" Path=" \ ;Managed Resources \ 0 \ 0" />
+    <Modified By="daneoh" DateTime="2013-05-08T23:58:20Z" />
+    <Item ItemId=";Strings" ItemType="0" PsrId="211" Leaf="false">
+      <Disp Icon="Str" Disp="true" LocTbl="false" />
+      <Modified By="daneoh" DateTime="2013-05-08T23:58:20Z" />
+      <Item ItemId=";Argument_EmptyArray" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA['{0}' must contain at least one element.]]></Val>
+          <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="PrevVer" AutoAppr="N/A" Confidence="100">
+            <Val><![CDATA['{0}' doit contenir au moins un élément.]]></Val>
+          </Tgt>
+        </Str>
+        <Disp Icon="Str" />
+        <Modified By="henry.hsu" DateTime="2013-05-15T09:58:42Z" />
+        <Props>
+          <Str Name="Custom1" Val="Dev12_HO6.1" />
+        </Props>
+      </Item>
+      <Item ItemId=";Argument_EmptyString" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA['{0}' cannot be an empty string ("") or start with the null character.]]></Val>
+          <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="PrevVer" AutoAppr="N/A" Confidence="100">
+            <Val><![CDATA['{0}' ne peut pas être une chaîne vide ("") ni commencer par le caractère Null.]]></Val>
+          </Tgt>
+        </Str>
+        <Disp Icon="Str" />
+        <Modified By="henry.hsu" DateTime="2013-05-15T09:58:42Z" />
+        <Props>
+          <Str Name="Custom1" Val="Dev12_HO6.1" />
+        </Props>
+      </Item>
+      <Item ItemId=";Argument_NullElement" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA['{0}' cannot contain a null (Nothing in Visual Basic) element.]]></Val>
+          <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="PrevVer" AutoAppr="N/A" Confidence="100">
+            <Val><![CDATA['{0}' ne peut pas contenir d'élément Null (Nothing en Visual Basic).]]></Val>
+          </Tgt>
+        </Str>
+        <Disp Icon="Str" />
+        <Modified By="henry.hsu" DateTime="2013-05-15T09:58:42Z" />
+        <Props>
+          <Str Name="Custom1" Val="Dev12_HO6.1" />
+        </Props>
+      </Item>
+      <Item ItemId=";Argument_Whitespace" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The parameter "{0}" cannot consist entirely of white space characters.]]></Val>
+          <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="PrevVer" AutoAppr="N/A" Confidence="100">
+            <Val><![CDATA[Le paramètre "{0}" ne peut pas être composé uniquement d'espaces blancs.]]></Val>
+          </Tgt>
+        </Str>
+        <Disp Icon="Str" />
+        <Modified By="henry.hsu" DateTime="2013-05-15T09:58:42Z" />
+        <Props>
+          <Str Name="Custom1" Val="Dev12_HO6.1" />
+        </Props>
+      </Item>
+      <Item ItemId=";InternalExceptionMessage" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[An internal error occurred. Please contact Microsoft Product Support Services.]]></Val>
+          <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="PrevVer" AutoAppr="N/A" Confidence="100">
+            <Val><![CDATA[Une erreur interne s'est produite. Contactez le Support Technique Microsoft.]]></Val>
+          </Tgt>
+        </Str>
+        <Disp Icon="Str" />
+        <Modified By="henry.hsu" DateTime="2013-05-15T09:58:42Z" />
+        <Props>
+          <Str Name="Custom1" Val="Dev12_HO6.1" />
+        </Props>
+      </Item>
+      <Item ItemId=";ServiceMissing" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Cannot find an instance of the {0} service.]]></Val>
+          <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="PrevVer" AutoAppr="N/A" Confidence="100">
+            <Val><![CDATA[Impossible de trouver une instance pour le service {0}.]]></Val>
+          </Tgt>
+        </Str>
+        <Disp Icon="Str" />
+        <Modified By="henry.hsu" DateTime="2013-05-15T09:58:42Z" />
+        <Props>
+          <Str Name="Custom1" Val="Dev12_HO6.1" />
+        </Props>
+      </Item>
+    </Item>
+  </Item>
+  <Item ItemId=";Version" ItemType="0" PsrId="211" Leaf="false">
+    <Disp Icon="Ver" Disp="true" LocTbl="false" Path=" \ ;Version \ 8 \ 0" />
+    <Modified By="daneoh" DateTime="2013-05-08T23:58:20Z" />
+    <Item ItemId=";AssemblyVersion" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" DevLk="true">
+        <Val><![CDATA[14.0.0.0]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="henry.hsu" DateTime="2013-05-15T13:23:35Z" />
+    </Item>
+    <Item ItemId=";Comments" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" UsrLk="true">
+        <Val><![CDATA[Microsoft.VisualStudio.Validation.dll]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="henry.hsu" DateTime="2013-05-15T13:23:35Z" />
+    </Item>
+    <Item ItemId=";CompanyName" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" UsrLk="true">
+        <Val><![CDATA[Microsoft Corporation]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="henry.hsu" DateTime="2013-05-15T13:23:35Z" />
+    </Item>
+    <Item ItemId=";FileDescription" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" UsrLk="true">
+        <Val><![CDATA[Microsoft.VisualStudio.Validation.dll]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="henry.hsu" DateTime="2013-05-15T13:23:35Z" />
+    </Item>
+    <Item ItemId=";FileVersion" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" DevLk="true">
+        <Val><![CDATA[14.0.22410.0]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="henry.hsu" DateTime="2013-05-15T13:23:35Z" />
+    </Item>
+    <Item ItemId=";InternalName" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" DevLk="true">
+        <Val><![CDATA[Microsoft.VisualStudio.Validation.dll]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="henry.hsu" DateTime="2013-05-15T13:23:35Z" />
+    </Item>
+    <Item ItemId=";LegalCopyright" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text">
+        <Val><![CDATA[© Microsoft Corporation. All rights reserved.]]></Val>
+        <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="PrevVer" AutoAppr="N/A">
+          <Val><![CDATA[© Microsoft Corporation. Tous droits réservés.]]></Val>
+        </Tgt>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="daneoh" DateTime="2013-05-08T23:58:20Z" />
+    </Item>
+    <Item ItemId=";OriginalFilename" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" DevLk="true">
+        <Val><![CDATA[Microsoft.VisualStudio.Validation.dll]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="henry.hsu" DateTime="2013-05-15T13:23:35Z" />
+    </Item>
+    <Item ItemId=";ProductName" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" >
+        <Val><![CDATA[Microsoft® Visual Studio® 2015 CTP]]></Val>
+        <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="New" AutoAppr="N/A">
+<Val><![CDATA[Microsoft® Visual Studio® 2015 CTP]]></Val>
+        </Tgt>
+        <Prev Cat="Text">
+          <Val><![CDATA[Microsoft® Visual Studio® 2015 Preview]]></Val>
+        </Prev>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="daneoh" DateTime="2013-05-08T23:58:20Z" />
+      <Props>
+        
+      </Props>
+    </Item>
+    <Item ItemId=";ProductVersion" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" DevLk="true">
+        <Val><![CDATA[14.0.22410.0]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="henry.hsu" DateTime="2013-05-15T13:23:35Z" />
+    </Item>
+  </Item>
+  <Item ItemId=";Version" ItemType="8" PsrId="211" Leaf="true">
+    <Disp Icon="Expand" Expand="true" Disp="true" LocTbl="false" />
+    <Modified By="daneoh" DateTime="2013-05-08T23:58:20Z" />
+  </Item>
+</LCX>

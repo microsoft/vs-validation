@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LCX SchemaVersion="6.0" Name="f:\LocTmp\ddSetup\binaries.x86ret\bin\i386\vsproject\cps\package\core\Microsoft.VisualStudio.Validation.dll" PsrId="211" FileType="1" SrcCul="en-US" TgtCul="ko-KR" xmlns="http://schemas.microsoft.com/locstudio/2006/6/lcx">
+  <Props>
+    <Str Name="CustomName1" Val="Custom 1" />
+    <Str Name="CustomName2" Val="Custom 2" />
+    <Str Name="CustomName3" Val="Custom 3" />
+    <Str Name="CustomName4" Val="Custom 4" />
+    <Str Name="CustomName5" Val="Custom 5" />
+    <Str Name="CustomName6" Val="Custom 6" />
+    <Str Name="HobbitID" Val="584a0d5a-8236-41c2-8212-6b8cb31f1e51" />
+  </Props>
+  <OwnedComments>
+    <Cmt Name="Dev" />
+    <Cmt Name="LcxAdmin" />
+    <Cmt Name="Loc" />
+    <Cmt Name="Note" />
+    <Cmt Name="Rccx" />
+  </OwnedComments>
+  <Settings Name="@vsLocTools@\current\default.lss" Type="LSS" />
+  <Item ItemId=";Managed Resources" ItemType="0" PsrId="211" Leaf="true">
+    <Disp Icon="Expand" Expand="true" Disp="true" LocTbl="false" />
+    <Modified By="JiYoung.Yun" DateTime="2014-07-01T09:52:17Z" />
+  </Item>
+  <Item ItemId=";Microsoft.Strings.resources" ItemType="0" PsrId="211" Leaf="false">
+    <Disp Icon="Expand" Expand="true" Disp="true" LocTbl="false" Path=" \ ;Managed Resources \ 0 \ 0" />
+    <Modified By="JiYoung.Yun" DateTime="2014-07-01T09:52:17Z" />
+    <Item ItemId=";Strings" ItemType="0" PsrId="211" Leaf="false">
+      <Disp Icon="Str" Disp="true" LocTbl="false" />
+      <Modified By="JiYoung.Yun" DateTime="2014-07-01T09:52:17Z" />
+      <Item ItemId=";Argument_EmptyArray" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA['{0}' must contain at least one element.]]></Val>
+          <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="PrevVer" AutoAppr="N/A" Confidence="100">
+            <Val><![CDATA['{0}'에 적어도 하나의 요소를 포함해야 합니다.]]></Val>
+          </Tgt>
+        </Str>
+        <Disp Icon="Str" />
+        <Modified By="henry.hsu" DateTime="2013-05-14T02:38:32Z" />
+        <Props>
+          <Str Name="Custom1" Val="Dev12_HO6.1" />
+        </Props>
+      </Item>
+      <Item ItemId=";Argument_EmptyString" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA['{0}' cannot be an empty string ("") or start with the null character.]]></Val>
+          <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="PrevVer" AutoAppr="N/A" Confidence="100">
+            <Val><![CDATA['{0}'은(는) 빈 문자열("")이거나 null 문자로 시작할 수 없습니다.]]></Val>
+          </Tgt>
+        </Str>
+        <Disp Icon="Str" />
+        <Modified By="henry.hsu" DateTime="2013-05-14T02:38:32Z" />
+        <Props>
+          <Str Name="Custom1" Val="Dev12_HO6.1" />
+        </Props>
+      </Item>
+      <Item ItemId=";Argument_NullElement" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA['{0}' cannot contain a null (Nothing in Visual Basic) element.]]></Val>
+          <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="PrevVer" AutoAppr="N/A" Confidence="100">
+            <Val><![CDATA['{0}에 null(Visual Basic에서는 Nothing) 요소를 포함할 수 없습니다.]]></Val>
+          </Tgt>
+        </Str>
+        <Disp Icon="Str" />
+        <Modified By="henry.hsu" DateTime="2013-05-14T02:38:32Z" />
+        <Props>
+          <Str Name="Custom1" Val="Dev12_HO6.1" />
+        </Props>
+      </Item>
+      <Item ItemId=";Argument_Whitespace" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[The parameter "{0}" cannot consist entirely of white space characters.]]></Val>
+          <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="PrevVer" AutoAppr="N/A">
+            <Val><![CDATA["{0}" 매개 변수는 공백 문자로만 구성될 수 없습니다.]]></Val>
+          </Tgt>
+        </Str>
+        <Disp Icon="Str" />
+        <Modified By="henry.hsu" DateTime="2013-05-14T02:30:52Z" />
+        <Props>
+          <Str Name="Custom1" Val="Dev12_HO6.1" />
+        </Props>
+      </Item>
+      <Item ItemId=";InternalExceptionMessage" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[An internal error occurred. Please contact Microsoft Product Support Services.]]></Val>
+          <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="PrevVer" AutoAppr="N/A" Confidence="100">
+            <Val><![CDATA[내부 오류가 발생했습니다. Microsoft 기술 지원 서비스에 문의하십시오.]]></Val>
+          </Tgt>
+        </Str>
+        <Disp Icon="Str" />
+        <Modified By="henry.hsu" DateTime="2013-05-14T02:38:32Z" />
+        <Props>
+          <Str Name="Custom1" Val="Dev12_HO6.1" />
+        </Props>
+      </Item>
+      <Item ItemId=";ServiceMissing" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA[Cannot find an instance of the {0} service.]]></Val>
+          <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="PrevVer" AutoAppr="N/A" Confidence="100">
+            <Val><![CDATA[{0} 서비스의 인스턴스를 찾을 수 없습니다.]]></Val>
+          </Tgt>
+        </Str>
+        <Disp Icon="Str" />
+        <Modified By="henry.hsu" DateTime="2013-05-14T02:38:32Z" />
+        <Props>
+          <Str Name="Custom1" Val="Dev12_HO6.1" />
+        </Props>
+      </Item>
+    </Item>
+  </Item>
+  <Item ItemId=";Version" ItemType="0" PsrId="211" Leaf="false">
+    <Disp Icon="Ver" Disp="true" LocTbl="false" Path=" \ ;Version \ 8 \ 0" />
+    <Modified By="JiYoung.Yun" DateTime="2014-07-01T09:52:17Z" />
+    <Item ItemId=";AssemblyVersion" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" DevLk="true">
+        <Val><![CDATA[14.0.0.0]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="JiYoung.Yun" DateTime="2014-07-30T09:18:57Z" />
+    </Item>
+    <Item ItemId=";Comments" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" UsrLk="true">
+        <Val><![CDATA[Microsoft.VisualStudio.Validation.dll]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="JiYoung.Yun" DateTime="2014-07-30T09:18:57Z" />
+    </Item>
+    <Item ItemId=";CompanyName" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" UsrLk="true">
+        <Val><![CDATA[Microsoft Corporation]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="JiYoung.Yun" DateTime="2014-07-30T09:18:57Z" />
+    </Item>
+    <Item ItemId=";FileDescription" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" UsrLk="true">
+        <Val><![CDATA[Microsoft.VisualStudio.Validation.dll]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="JiYoung.Yun" DateTime="2014-07-30T09:18:57Z" />
+    </Item>
+    <Item ItemId=";FileVersion" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" DevLk="true">
+        <Val><![CDATA[14.0.22410.0]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="JiYoung.Yun" DateTime="2014-07-30T09:18:57Z" />
+    </Item>
+    <Item ItemId=";InternalName" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" DevLk="true">
+        <Val><![CDATA[Microsoft.VisualStudio.Validation.dll]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="JiYoung.Yun" DateTime="2014-07-30T09:18:57Z" />
+    </Item>
+    <Item ItemId=";LegalCopyright" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text">
+        <Val><![CDATA[© Microsoft Corporation. All rights reserved.]]></Val>
+        <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="New" AutoAppr="N/A">
+          <Val><![CDATA[© Microsoft Corporation. All rights reserved.]]></Val>
+        </Tgt>
+        <Prev Cat="Text">
+          <Val><![CDATA[ⓒ Microsoft Corporation. All rights reserved.]]></Val>
+        </Prev>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="islezarova" DateTime="2014-10-30T10:40:54Z" />
+      <Notes>
+        <Note Name="Loc" Order="0"><![CDATA[1063579]]></Note>
+      </Notes>
+    </Item>
+    <Item ItemId=";OriginalFilename" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" DevLk="true">
+        <Val><![CDATA[Microsoft.VisualStudio.Validation.dll]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="JiYoung.Yun" DateTime="2014-07-30T09:18:57Z" />
+    </Item>
+    <Item ItemId=";ProductName" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" >
+        <Val><![CDATA[Microsoft® Visual Studio® 2015 CTP]]></Val>
+        <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="New" AutoAppr="N/A">
+<Val><![CDATA[Microsoft® Visual Studio® 2015 CTP]]></Val>
+        </Tgt>
+        <Prev Cat="Text">
+          <Val><![CDATA[Microsoft® Visual Studio® 2015 Preview]]></Val>
+        </Prev>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="daneoh" DateTime="2013-05-08T23:58:20Z" />
+      <Props>
+        
+      </Props>
+    </Item>
+    <Item ItemId=";ProductVersion" ItemType="0" PsrId="211" Leaf="true">
+      <Str Cat="Text" DevLk="true">
+        <Val><![CDATA[14.0.22410.0]]></Val>
+      </Str>
+      <Disp Icon="Str" />
+      <Modified By="JiYoung.Yun" DateTime="2014-07-30T09:18:57Z" />
+    </Item>
+  </Item>
+  <Item ItemId=";Version" ItemType="8" PsrId="211" Leaf="true">
+    <Disp Icon="Expand" Expand="true" Disp="true" LocTbl="false" />
+    <Modified By="JiYoung.Yun" DateTime="2014-07-01T09:52:17Z" />
+  </Item>
+</LCX>
