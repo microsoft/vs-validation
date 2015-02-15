@@ -22,7 +22,7 @@ namespace Microsoft
         /// </summary>
         [Serializable]
         [SuppressMessage("Microsoft.Design", "CA1064:ExceptionsShouldBePublic", Justification = "Internal exceptions should not be caught.")]
-        private class InternalErrorException : Exception
+        private sealed class InternalErrorException : Exception
         {
             /// <summary>
             /// Initializes a new instance of the <see cref="InternalErrorException"/> class.
@@ -48,7 +48,7 @@ namespace Microsoft
             /// Initializes a new instance of the <see cref="InternalErrorException"/> class.
             /// </summary>
             [DebuggerStepThrough]
-            protected InternalErrorException(SerializationInfo info, StreamingContext context)
+            private InternalErrorException(SerializationInfo info, StreamingContext context)
                 : base(info, context)
             {
             }
