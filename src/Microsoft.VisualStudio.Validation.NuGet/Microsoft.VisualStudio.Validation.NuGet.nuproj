@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <DevDivProjectType>NuPkg</DevDivProjectType>
+  </PropertyGroup>
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), EnlistmentInfo.props))\EnlistmentInfo.props" Condition=" '$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), EnlistmentInfo.props))' != '' " />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|AnyCPU">
@@ -14,19 +17,10 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>c51acf4a-3e2c-44b2-99fc-1a838518c690</ProjectGuid>
   </PropertyGroup>
-  <PropertyGroup>
-    <OutDir Condition=" '$(OutDir)' == ''" >$(ProjectDepotRoot)\bin\$(Configuration)\</OutDir>
-    <IntermediateOutputPath Condition=" '$(IntermediateOutputPath)' == '' ">$(ProjectDepotRoot)\obj\$(Configuration)\</IntermediateOutputPath>
-
-    <NuProjPath Condition=" '$(NuProjPath)' == '' ">..\packages\NuProj.0.9.3-beta\tools</NuProjPath>
-  </PropertyGroup>
-  <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
     <Id>Microsoft.VisualStudio.Validation</Id>
-    <Version>14.0.0</Version>
     <Title>Microsoft.VisualStudio.Validation</Title>
     <Authors>andarno</Authors>
-    <Owners>andarno</Owners>
     <Summary>
     </Summary>
     <Description>Common input validation and state verification utility methods.</Description>
@@ -36,11 +30,10 @@
     </ProjectUrl>
     <LicenseUrl>
     </LicenseUrl>
-    <Copyright>Copyright © Microsoft</Copyright>
     <Tags>InputValidation IntegrityCheck</Tags>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj" />
   </ItemGroup>
-  <Import Project="$(NuProjPath)\NuProj.targets" />
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), EnlistmentInfo.targets))\EnlistmentInfo.targets" Condition=" '$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), EnlistmentInfo.targets))' != '' " />
 </Project>
