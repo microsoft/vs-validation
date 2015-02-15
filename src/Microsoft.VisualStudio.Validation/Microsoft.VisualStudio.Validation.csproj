@@ -10,6 +10,8 @@
     <RootNamespace>Microsoft</RootNamespace>
     <AssemblyName>Microsoft.VisualStudio.Validation</AssemblyName>
     <GenerateLCE>true</GenerateLCE>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DefineConstants>DEBUG;TRACE</DefineConstants>
