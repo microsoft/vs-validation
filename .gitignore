@@ -14,3 +14,4 @@ UpgradeLog.*
 _UpgradeReport_Files
 *.log
 /src/.vs/
+/src/Packages/
