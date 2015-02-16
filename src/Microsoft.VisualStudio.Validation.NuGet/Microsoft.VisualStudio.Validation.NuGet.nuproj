@@ -26,8 +26,7 @@
     <Description>Common input validation and state verification utility methods.</Description>
     <ReleaseNotes>
     </ReleaseNotes>
-    <ProjectUrl>
-    </ProjectUrl>
+    <ProjectUrl>https://mseng.visualstudio.com/DefaultCollection/VSIDEProj/_git/VSIDEProj.Validation/</ProjectUrl>
     <LicenseUrl>
     </LicenseUrl>
     <Tags>InputValidation IntegrityCheck</Tags>
