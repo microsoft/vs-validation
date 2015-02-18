@@ -140,7 +140,7 @@
     </Item>
     <Item ItemId=";FileVersion" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text" DevLk="true">
-        <Val><![CDATA[14.0.22410.0]]></Val>
+        <Val><![CDATA[14.0.22521.0]]></Val>
       </Str>
       <Disp Icon="Str" />
       <Modified By="gerard" DateTime="2014-10-17T08:29:06Z" />
@@ -155,12 +155,12 @@
     <Item ItemId=";LegalCopyright" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text">
         <Val><![CDATA[© Microsoft Corporation. All rights reserved.]]></Val>
-        <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="PrevVer" AutoAppr="N/A">
-          <Val><![CDATA[© Microsoft Corporation. Reservados todos los derechos.]]></Val>
+        <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="New" AutoAppr="N/A">
+          <Val><![CDATA[© Microsoft Corporation. Todos los derechos reservados.]]></Val>
         </Tgt>
       </Str>
       <Disp Icon="Str" />
-      <Modified By="daneoh" DateTime="2013-05-08T23:58:20Z" />
+      <Modified By="JHosek" DateTime="2015-01-19T15:55:16Z" />
     </Item>
     <Item ItemId=";OriginalFilename" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text" DevLk="true">
@@ -170,24 +170,27 @@
       <Modified By="gerard" DateTime="2014-10-17T08:29:06Z" />
     </Item>
     <Item ItemId=";ProductName" ItemType="0" PsrId="211" Leaf="true">
-      <Str Cat="Text" >
-        <Val><![CDATA[Microsoft® Visual Studio® 2015 CTP]]></Val>
-        <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="New" AutoAppr="N/A">
-<Val><![CDATA[Microsoft® Visual Studio® 2015 CTP]]></Val>
+      <Str Cat="Text">
+        <Val><![CDATA[Microsoft® Visual Studio® 2015 RC]]></Val>
+        <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="New">
+          <Val><![CDATA[Microsoft® Visual Studio® 2015 RC]]></Val>
         </Tgt>
         <Prev Cat="Text">
-          <Val><![CDATA[Microsoft® Visual Studio® 2015 Preview]]></Val>
+          <Val><![CDATA[Microsoft® Visual Studio® 2015 CTP]]></Val>
         </Prev>
       </Str>
       <Disp Icon="Str" />
-      <Modified By="gerard" DateTime="2014-10-17T08:29:06Z" />
+      <Modified By="islezarova" DateTime="2015-01-27T10:37:09Z" />
+      <Notes>
+        <Note Name="Loc" Order="0"><![CDATA[PreApproved]]></Note>
+      </Notes>
       <Props>
-        
+        <Str Name="Custom1" Val="S78.0121" />
       </Props>
     </Item>
     <Item ItemId=";ProductVersion" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text" DevLk="true">
-        <Val><![CDATA[14.0.22410.0]]></Val>
+        <Val><![CDATA[14.0.22521.0]]></Val>
       </Str>
       <Disp Icon="Str" />
       <Modified By="gerard" DateTime="2014-10-17T08:29:06Z" />
