@@ -6,13 +6,12 @@
     <Str Name="CustomName3" Val="Custom 3" />
     <Str Name="CustomName4" Val="Custom 4" />
     <Str Name="CustomName5" Val="Custom 5" />
-    <Str Name="CustomName6" Val="Custom 6" />
+    <Str Name="CustomName6" Val="IQA" />
     <Str Name="HobbitID" Val="584a0d5a-8236-41c2-8212-6b8cb31f1e51" />
   </Props>
   <OwnedComments>
     <Cmt Name="Dev" />
     <Cmt Name="LcxAdmin" />
-    <Cmt Name="Loc" />
     <Cmt Name="Note" />
     <Cmt Name="Rccx" />
   </OwnedComments>
@@ -117,39 +116,22 @@
       <Disp Icon="Str" />
       <Modified By="PM1-Upwords" DateTime="2014-07-16T16:17:17Z" />
     </Item>
-    <Item ItemId=";Comments" ItemType="0" PsrId="211" Leaf="true">
-      <Str Cat="Text" UsrLk="true">
-        <Val><![CDATA[Microsoft.VisualStudio.Validation.dll]]></Val>
-      </Str>
-      <Disp Icon="Str" />
-      <Modified By="PM1-Upwords" DateTime="2014-07-16T16:17:17Z" />
-      <Props>
-        <Str Name="Custom1" Val="Dev12_S50" />
-      </Props>
-    </Item>
-    <Item ItemId=";CompanyName" ItemType="0" PsrId="211" Leaf="true">
-      <Str Cat="Text" UsrLk="true">
-        <Val><![CDATA[Microsoft Corporation]]></Val>
-      </Str>
-      <Disp Icon="Str" />
-      <Modified By="PM1-Upwords" DateTime="2014-07-16T16:17:17Z" />
-      <Props>
-        <Str Name="Custom1" Val="Dev12_S50" />
-      </Props>
-    </Item>
     <Item ItemId=";FileDescription" ItemType="0" PsrId="211" Leaf="true">
-      <Str Cat="Text" UsrLk="true">
-        <Val><![CDATA[Microsoft.VisualStudio.Validation.dll]]></Val>
+      <Str Cat="Text">
+        <Val><![CDATA[Microsoft.VisualStudio.Validation]]></Val>
+        <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="New">
+          <Val><![CDATA[Microsoft.VisualStudio.Validation]]></Val>
+        </Tgt>
       </Str>
       <Disp Icon="Str" />
-      <Modified By="PM1-Upwords" DateTime="2014-07-16T16:17:17Z" />
+      <Modified By="islezarova" DateTime="2015-02-25T21:00:05Z" />
       <Props>
         <Str Name="Custom1" Val="Dev12_S50" />
       </Props>
     </Item>
     <Item ItemId=";FileVersion" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text" DevLk="true">
-        <Val><![CDATA[14.0.22521.0]]></Val>
+        <Val><![CDATA[14.0.50225.1]]></Val>
       </Str>
       <Disp Icon="Str" />
       <Modified By="PM1-Upwords" DateTime="2014-07-16T16:17:17Z" />
@@ -180,23 +162,23 @@
     </Item>
     <Item ItemId=";ProductName" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text">
-        <Val><![CDATA[Microsoft® Visual Studio® 2015 RC]]></Val>
+        <Val><![CDATA[Microsoft® Visual Studio®]]></Val>
         <Tgt Cat="Text" Stat="Loc" Orig="New" Appr="PreApproved">
-          <Val><![CDATA[Microsoft® Visual Studio® 2015 RC]]></Val>
+          <Val><![CDATA[Microsoft® Visual Studio®]]></Val>
         </Tgt>
         <Prev Cat="Text">
-          <Val><![CDATA[Microsoft® Visual Studio® 2015 CTP]]></Val>
+          <Val><![CDATA[Microsoft® Visual Studio® 2015 RC]]></Val>
         </Prev>
       </Str>
       <Disp Icon="Str" />
-      <Modified By="JHosek" DateTime="2015-01-26T18:06:00Z" />
+      <Modified By="islezarova" DateTime="2015-02-25T21:00:17Z" />
       <Props>
         <Str Name="Custom6" Val="S78.0121_1" />
       </Props>
     </Item>
     <Item ItemId=";ProductVersion" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text" DevLk="true">
-        <Val><![CDATA[14.0.22521.0]]></Val>
+        <Val><![CDATA[14.0.50225.1-pre+commit.eb10f86f64]]></Val>
       </Str>
       <Disp Icon="Str" />
       <Modified By="PM1-Upwords" DateTime="2014-07-16T16:17:17Z" />
