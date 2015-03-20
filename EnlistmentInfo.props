@@ -6,7 +6,6 @@
     <SubmoduleRoot>$(MSBuildThisFileDirectory)\src</SubmoduleRoot>
     <NuGetPackageRestorePath>$(ProjectDepotRoot)\src\Packages\</NuGetPackageRestorePath>
     <DeployExtension Condition=" '$(IsLabBuild)' == 'true' ">false</DeployExtension>
-    <ModuleName>Microsoft.VisualStudio.Validation</ModuleName>
 
     <VSToolsDeRazzlePath>$(NuGetPackageRestorePath)VS.Tools.Derazzle.1.0.150317.2\</VSToolsDeRazzlePath>
     <VSToolsModuleTargetsPath>$(NuGetPackageRestorePath)VS.Tools.ModuleTargets.1.0.150313.1\</VSToolsModuleTargetsPath>
