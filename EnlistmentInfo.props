@@ -5,9 +5,10 @@
     <ProjectDepotRoot>$(MSBuildThisFileDirectory)</ProjectDepotRoot>
     <SubmoduleRoot>$(MSBuildThisFileDirectory)\src</SubmoduleRoot>
     <NuGetPackageRestorePath>$(ProjectDepotRoot)\src\Packages\</NuGetPackageRestorePath>
+    <NuGetToolPath>$(NuGetPackageRestorePath)NuGet.CommandLine.2.8.3\tools\NuGet.exe</NuGetToolPath>
     <DeployExtension Condition=" '$(IsLabBuild)' == 'true' ">false</DeployExtension>
 
-    <VSToolsDeRazzlePath>$(NuGetPackageRestorePath)VS.Tools.Derazzle.1.0.150317.2\</VSToolsDeRazzlePath>
+    <VSToolsDeRazzlePath>$(NuGetPackageRestorePath)VS.Tools.Derazzle.1.0.150321.1\</VSToolsDeRazzlePath>
     <VSToolsModuleTargetsPath>$(NuGetPackageRestorePath)VS.Tools.ModuleTargets.1.0.150313.1\</VSToolsModuleTargetsPath>
     <VSToolsDevDivFilesPath>$(NuGetPackageRestorePath)VS.Tools.DevDivFiles.1.0.150305.3\</VSToolsDevDivFilesPath>
   </PropertyGroup>
