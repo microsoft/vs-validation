@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\VS.Insertion.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="$(ProjectDepotRoot)src\Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\VS.Insertion.targets" />
+</Project>

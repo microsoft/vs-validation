@@ -6,7 +6,7 @@
     <authors>VSEng</authors>
     <owners>VSEng</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Package containing VS.ExternalApis.VSPlatform.Validation artifacts</description>
+    <description>Package containing VS.ExternalApis.VSPlatform artifacts</description>
     <releaseNotes />
     <copyright>Copyright (c) Microsoft</copyright>
   </metadata>
