@@ -5,12 +5,16 @@
     <ProjectDepotRoot>$(MSBuildThisFileDirectory)</ProjectDepotRoot>
     <SubmoduleRoot>$(MSBuildThisFileDirectory)\src</SubmoduleRoot>
     <NuGetPackageRestorePath>$(ProjectDepotRoot)\src\Packages\</NuGetPackageRestorePath>
-    <NuGetToolPath>$(NuGetPackageRestorePath)NuGet.CommandLine.2.8.3\tools\NuGet.exe</NuGetToolPath>
     <DeployExtension Condition=" '$(IsLabBuild)' == 'true' ">false</DeployExtension>
 
-    <VSToolsDeRazzlePath>$(NuGetPackageRestorePath)VS.Tools.Derazzle.1.0.150321.1\</VSToolsDeRazzlePath>
+    <VSToolsDeRazzlePath>$(NuGetPackageRestorePath)VS.Tools.Derazzle.1.0.150321.2\</VSToolsDeRazzlePath>
     <VSToolsModuleTargetsPath>$(NuGetPackageRestorePath)VS.Tools.ModuleTargets.1.0.150313.1\</VSToolsModuleTargetsPath>
     <VSToolsDevDivFilesPath>$(NuGetPackageRestorePath)VS.Tools.DevDivFiles.1.0.150305.3\</VSToolsDevDivFilesPath>
+    <VSToolsX86Managed45>$(NuGetPackageRestorePath)VS.Tools.X86.Managed.V4_5.1.0.150317.3\</VSToolsX86Managed45>
+
+    <NuGetToolPath>$(NuGetPackageRestorePath)NuGet.CommandLine.2.8.3\tools\NuGet.exe</NuGetToolPath>
+    <UnzipToolPath>$(NuGetPackageRestorePath)VS.Tools.X86Files.1.0.150316.1\unzip.exe</UnzipToolPath>
+    <IBCMergeToolPath>$(VSToolsX86Managed45)ibcmerge.exe</IBCMergeToolPath>
   </PropertyGroup>
 
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), EnlistmentInfo.xml))\EnlistmentInfo.xml" />
