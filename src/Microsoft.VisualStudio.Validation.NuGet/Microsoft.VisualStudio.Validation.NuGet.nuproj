@@ -20,16 +20,19 @@
   <PropertyGroup Label="Configuration">
     <Id>Microsoft.VisualStudio.Validation</Id>
     <Title>Microsoft.VisualStudio.Validation</Title>
-    <Authors>andarno</Authors>
-    <Summary>
-    </Summary>
+    <Summary>Common input validation and state verification utility methods.</Summary>
     <Description>Common input validation and state verification utility methods.</Description>
-    <ReleaseNotes>
-    </ReleaseNotes>
-    <ProjectUrl>https://mseng.visualstudio.com/DefaultCollection/VSIDEProj/_git/VSIDEProj.Validation/</ProjectUrl>
-    <LicenseUrl>
-    </LicenseUrl>
     <Tags>InputValidation IntegrityCheck</Tags>
+
+    <Authors>Microsoft</Authors>
+    <Owners>Microsoft, VisualStudioExtensibility</Owners>
+    <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
+    <ProjectUrl>http://aka.ms/VsExtensibility</ProjectUrl>
+    <IconUrl>http://aka.ms/VsExtensibilityIcon</IconUrl>
+<!--
+    <LicenseUrl>http://go.microsoft.com/fwlink/?LinkID=517238</LicenseUrl>
+    <RequireLicenseAcceptance>true</RequireLicenseAcceptance>
+-->
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj" />
