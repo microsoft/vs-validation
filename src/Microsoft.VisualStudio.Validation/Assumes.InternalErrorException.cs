@@ -31,7 +31,7 @@ namespace Microsoft
             public InternalErrorException(string message = null, bool showAssert = true)
                 : base(message ?? Strings.InternalExceptionMessage)
             {
-                ShowAssertDialog(showAssert);
+                this.ShowAssertDialog(showAssert);
             }
 
             /// <summary>
@@ -41,7 +41,7 @@ namespace Microsoft
             public InternalErrorException(string message, Exception innerException, bool showAssert = true)
                 : base(message ?? Strings.InternalExceptionMessage, innerException)
             {
-                ShowAssertDialog(showAssert);
+                this.ShowAssertDialog(showAssert);
             }
 
             /// <summary>

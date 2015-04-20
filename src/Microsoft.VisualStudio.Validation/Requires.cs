@@ -171,7 +171,7 @@ namespace Microsoft
                 throw new ArgumentException(Format(Strings.Argument_EmptyString, parameterName), parameterName);
             }
 
-            if (String.IsNullOrWhiteSpace(value))
+            if (string.IsNullOrWhiteSpace(value))
             {
                 throw new ArgumentException(Format(Strings.Argument_Whitespace, parameterName));
             }
@@ -282,7 +282,7 @@ namespace Microsoft
         [DebuggerStepThrough]
         public static Exception FailRange(string parameterName, string message = null)
         {
-            if (String.IsNullOrEmpty(message))
+            if (string.IsNullOrEmpty(message))
             {
                 throw new ArgumentOutOfRangeException(parameterName);
             }

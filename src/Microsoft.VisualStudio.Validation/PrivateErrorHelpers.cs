@@ -43,7 +43,7 @@ namespace Microsoft
         /// </summary>
         internal static string Format(string format, params object[] arguments)
         {
-            return String.Format(CultureInfo.CurrentCulture, format, arguments);
+            return string.Format(CultureInfo.CurrentCulture, format, arguments);
         }
     }
 }

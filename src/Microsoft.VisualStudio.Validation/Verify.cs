@@ -104,7 +104,7 @@ namespace Microsoft
 
             if (disposedValue.IsDisposed)
             {
-                string objectName = disposedValue != null ? disposedValue.GetType().FullName : String.Empty;
+                string objectName = disposedValue != null ? disposedValue.GetType().FullName : string.Empty;
                 if (message != null)
                 {
                     throw new ObjectDisposedException(objectName, message);
@@ -124,7 +124,7 @@ namespace Microsoft
         {
             if (!condition)
             {
-                string objectName = disposedValue != null ? disposedValue.GetType().FullName : String.Empty;
+                string objectName = disposedValue != null ? disposedValue.GetType().FullName : string.Empty;
                 if (message != null)
                 {
                     throw new ObjectDisposedException(objectName, message);
