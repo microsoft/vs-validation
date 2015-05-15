@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22913.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation", "Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj", "{E016A630-A79B-4B5D-8997-E66581D62B81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation.Desktop", "Microsoft.VisualStudio.Validation.Desktop\Microsoft.VisualStudio.Validation.Desktop.csproj", "{E016A630-A79B-4B5D-8997-E66581D62B81}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B7B2BF20-AA7A-4BAD-9D31-00C6D39CB3F5}"
 	ProjectSection(SolutionItems) = preProject

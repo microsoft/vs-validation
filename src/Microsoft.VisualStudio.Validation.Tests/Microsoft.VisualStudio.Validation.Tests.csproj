@@ -50,9 +50,9 @@
     <Compile Include="RequiresTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj">
+    <ProjectReference Include="..\Microsoft.VisualStudio.Validation.Desktop\Microsoft.VisualStudio.Validation.Desktop.csproj">
       <Project>{e016a630-a79b-4b5d-8997-e66581d62b81}</Project>
-      <Name>Microsoft.VisualStudio.Validation</Name>
+      <Name>Microsoft.VisualStudio.Validation.Desktop</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
