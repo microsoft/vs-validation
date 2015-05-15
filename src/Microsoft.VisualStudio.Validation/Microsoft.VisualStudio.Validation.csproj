@@ -14,7 +14,7 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS;DESKTOP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
@@ -24,6 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>Microsoft.VisualStudio.Validation.ruleset</CodeAnalysisRuleSet>
+    <DefineConstants>DESKTOP</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -33,28 +34,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Assumes.cs" />
-    <Compile Include="Assumes.InternalErrorException.cs" />
-    <Compile Include="EventHandlerExtensions.cs" />
-    <Compile Include="IDisposableObservable.cs" />
-    <Compile Include="PrivateErrorHelpers.cs" />
-    <Compile Include="Report.cs" />
-    <Compile Include="Requires.cs" />
-    <Compile Include="Strings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Strings.resx</DependentUpon>
-    </Compile>
-    <Compile Include="ValidatedNotNullAttribute.cs" />
-    <Compile Include="Verify.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Strings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
@@ -81,5 +60,17 @@
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0-alpha005\tools\analyzers\StyleCop.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Strings.Designer.cs">
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <Import Project="..\Microsoft.VisualStudio.Validation.Shared\Microsoft.VisualStudio.Validation.Shared.projitems" Label="Shared" />
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), EnlistmentInfo.targets))\EnlistmentInfo.targets" Condition=" '$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), EnlistmentInfo.targets))' != '' " />
 </Project>

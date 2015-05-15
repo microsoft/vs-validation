@@ -23,7 +23,6 @@
     <Summary>Common input validation and state verification utility methods.</Summary>
     <Description>Common input validation and state verification utility methods.</Description>
     <Tags>InputValidation IntegrityCheck</Tags>
-
     <Authors>Microsoft</Authors>
     <Owners>Microsoft, VisualStudioExtensibility</Owners>
     <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>

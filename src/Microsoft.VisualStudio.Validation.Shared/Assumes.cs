@@ -196,11 +196,7 @@ namespace Microsoft
         {
             if (component == null)
             {
-#if NET35
-                Type coreType = typeof(T);
-#else
                 Type coreType = PrivateErrorHelpers.TrimGenericWrapper(typeof(T), typeof(Lazy<>));
-#endif
                 Fail(string.Format(CultureInfo.CurrentCulture, Strings.ServiceMissing, coreType.FullName));
             }
         }
