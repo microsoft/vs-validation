@@ -58,7 +58,7 @@ namespace Microsoft
             /// </summary>
             /// <param name="showAssert">Whether to show the assert.</param>
             /// <remarks>
-            /// The assertion dialog may yet be suppressed if 
+            /// The assertion dialog may yet be suppressed if
             /// ((DefaultTraceListener)System.Diagnostics.Trace.Listeners["Default"]).AssertUiEnabled == false
             /// </remarks>
             [DebuggerStepThrough]
@@ -66,7 +66,7 @@ namespace Microsoft
             {
                 if (showAssert)
                 {
-                    // In debug builds, throw up a dialog.  This allows a dev to 
+                    // In debug builds, throw up a dialog.  This allows a dev to
                     // attach a debugger right at the point where the exception is
                     // thrown rather than at the point where the exception is caught.
                     string message = this.Message;
