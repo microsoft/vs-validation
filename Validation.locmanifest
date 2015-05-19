@@ -10,6 +10,7 @@
     </FilesToLocalize>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <FilesToLocalize Include="$(OutDir)\Microsoft.VisualStudio.Validation.dll" Condition="'$(MSBuildProjectFile)' == 'Microsoft.VisualStudio.Validation.csproj'" />
+    <FilesToLocalize Include="$(OutDir)\Microsoft.VisualStudio.Validation.dll" Condition="'$(MSBuildProjectFile)' == 'Microsoft.VisualStudio.Validation.Desktop.csproj'" />
+    <FilesToLocalize Include="$(OutDir)\Microsoft.VisualStudio.Validation.Portable\Microsoft.VisualStudio.Validation.dll" Condition="'$(MSBuildProjectFile)' == 'Microsoft.VisualStudio.Validation.Portable.csproj'" />
   </ItemGroup>
 </Project>
