@@ -19,6 +19,7 @@
     <TargetFrameworkProfile>Profile151</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <OutputPath>$(OutputPath)$(MSBuildProjectName)\</OutputPath>
+    <LocalizeOutputAssembly>true</LocalizeOutputAssembly>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CodeAnalysisRuleSet>Microsoft.VisualStudio.Validation.Portable.ruleset</CodeAnalysisRuleSet>

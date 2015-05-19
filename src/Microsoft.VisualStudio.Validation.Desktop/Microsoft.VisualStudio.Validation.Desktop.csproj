@@ -12,6 +12,7 @@
     <GenerateLCE>true</GenerateLCE>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
+    <LocalizeOutputAssembly>true</LocalizeOutputAssembly>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DefineConstants>TRACE;DEBUG;DESKTOP</DefineConstants>
