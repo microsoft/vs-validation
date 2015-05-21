@@ -4,6 +4,7 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
 
     <DistinguishingFactor Condition=" '$(TargetFrameworkProfile)' != '' ">.$(TargetFrameworkProfile)</DistinguishingFactor>
+    <OutputPath Condition=" '$(TargetFrameworkProfile)' != '' ">$(OutputPath)\$(TargetFrameworkProfile)\</OutputPath>
   </PropertyGroup>
 
   <Import Project="$(VSToolsDeRazzlePath)Common.targets"/>
