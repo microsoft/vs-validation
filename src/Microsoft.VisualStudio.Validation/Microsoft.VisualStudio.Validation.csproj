@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.VisualStudio.props" Condition="Exists('..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.VisualStudio.props')" />
+  <Import Project="..\..\packages\MicroBuild.ReadOnlySourceTree.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.ReadOnlySourceTree.props" Condition="Exists('..\..\packages\MicroBuild.ReadOnlySourceTree.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.ReadOnlySourceTree.props')" />
+  <Import Project="..\..\packages\MicroBuild.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.props" Condition="Exists('..\..\packages\MicroBuild.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.props')" />
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), EnlistmentInfo.props))\EnlistmentInfo.props" Condition=" '$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), EnlistmentInfo.props))' != '' " />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +15,8 @@
     <GenerateLCE>true</GenerateLCE>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -60,20 +65,22 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(NuGetPackageRestorePath)VS.ToolsFiles.*\RunMeElevated.cmd">
+    <None Include="$(NuGetPackageRestorePath)MicroBuild.VisualStudio.*\tools\RunMeElevated.cmd">
       <Link>UpdateVS\RunMeElevated.cmd</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Microsoft.VisualStudio.Validation.ruleset">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="UpdateVS\UpdateVS.cmd">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(NuGetPackageRestorePath)VS.ToolsFiles.*\Elevate.exe">
+    <Content Include="$(NuGetPackageRestorePath)MicroBuild.VisualStudio.*\tools\Elevate.exe">
       <Link>UpdateVS\Elevate.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -81,5 +88,22 @@
   <ItemGroup>
     <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0-alpha-g7231c28eeb\tools\analyzers\StyleCop.Analyzers.dll" />
   </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), EnlistmentInfo.targets))\EnlistmentInfo.targets" Condition=" '$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), EnlistmentInfo.targets))' != '' " />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\MicroBuild.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\MicroBuild.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.props'))" />
+    <Error Condition="!Exists('..\..\packages\MicroBuild.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\MicroBuild.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.targets'))" />
+    <Error Condition="!Exists('..\..\packages\MicroBuild.ReadOnlySourceTree.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.ReadOnlySourceTree.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\MicroBuild.ReadOnlySourceTree.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.ReadOnlySourceTree.props'))" />
+    <Error Condition="!Exists('..\..\packages\MicroBuild.ReadOnlySourceTree.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.ReadOnlySourceTree.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\MicroBuild.ReadOnlySourceTree.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.ReadOnlySourceTree.targets'))" />
+    <Error Condition="!Exists('..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.VisualStudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.VisualStudio.props'))" />
+    <Error Condition="!Exists('..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.VisualStudio.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.VisualStudio.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Nerdbank.GitVersioning.1.0.15136-beta\build\NerdBank.GitVersioning.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Nerdbank.GitVersioning.1.0.15136-beta\build\NerdBank.GitVersioning.targets'))" />
+  </Target>
+  <Import Project="..\..\packages\MicroBuild.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.targets" Condition="Exists('..\..\packages\MicroBuild.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.targets')" />
+  <Import Project="..\..\packages\MicroBuild.ReadOnlySourceTree.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.ReadOnlySourceTree.targets" Condition="Exists('..\..\packages\MicroBuild.ReadOnlySourceTree.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.ReadOnlySourceTree.targets')" />
+  <Import Project="..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.VisualStudio.targets" Condition="Exists('..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-gfa30d21a6d\build\MicroBuild.VisualStudio.targets')" />
+  <Import Project="..\..\packages\Nerdbank.GitVersioning.1.0.15136-beta\build\NerdBank.GitVersioning.targets" Condition="Exists('..\..\packages\Nerdbank.GitVersioning.1.0.15136-beta\build\NerdBank.GitVersioning.targets')" />
 </Project>
