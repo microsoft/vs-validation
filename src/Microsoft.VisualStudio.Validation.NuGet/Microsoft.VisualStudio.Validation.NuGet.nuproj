@@ -18,7 +18,7 @@
     <ProjectGuid>c51acf4a-3e2c-44b2-99fc-1a838518c690</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup>
-    <NuProjPath Condition=" '$(NuProjPath)' == '' ">..\..\packages\NuProj.0.10.0-beta-gfdf934ba23\tools\</NuProjPath>
+    <NuProjPath Condition=" '$(NuProjPath)' == '' ">..\..\packages\NuProj.0.10.0-beta-gd6d4e1ff23\tools\</NuProjPath>
     <VersionDependsOn>$(VersionDependsOn);GetNuPkgVersion</VersionDependsOn>
   </PropertyGroup>
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
