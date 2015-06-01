@@ -1,11 +1,9 @@
 <?xml version="1.0"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-g6d01b9fb0f\build\MicroBuild.VisualStudio.props" />
-  <Import Project="..\..\packages\MicroBuild.ReadOnlySourceTree.1.0.0-alpha-g6d01b9fb0f\build\MicroBuild.ReadOnlySourceTree.props" />
-  <Import Project="..\..\packages\MicroBuild.1.0.0-alpha-g6d01b9fb0f\build\MicroBuild.props" />
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), EnlistmentInfo.props))\EnlistmentInfo.props" Condition=" '$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), EnlistmentInfo.props))' != '' " />
-  <Import Project="..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-g6d01b9fb0f\build\VS.Insertion.props" />
-  <Import Project="..\..\packages\MicroBuild.1.0.0-alpha-g6d01b9fb0f\build\NuPkg.props" />
+  <Import Project="..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-gbd81187371\build\MicroBuild.VisualStudio.props" />
+  <Import Project="..\..\packages\MicroBuild.1.0.0-alpha-gbd81187371\build\MicroBuild.props" />
+  <Import Project="..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-gbd81187371\build\VS.Insertion.props" />
+  <Import Project="..\..\packages\MicroBuild.1.0.0-alpha-gbd81187371\build\NuPkg.props" />
 
   <PropertyGroup>
     <PackageLocalizedArtifacts>true</PackageLocalizedArtifacts>
@@ -16,12 +14,10 @@
   </ItemGroup>
 
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), EnlistmentInfo.targets))\EnlistmentInfo.targets" Condition=" '$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildProjectDirectory), EnlistmentInfo.targets))' != '' " />
-  <Import Project="..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-g6d01b9fb0f\build\VS.Insertion.targets" />
-  <Import Project="..\..\packages\MicroBuild.1.0.0-alpha-g6d01b9fb0f\build\NuPkg.targets" />
+  <Import Project="..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-gbd81187371\build\VS.Insertion.targets" />
+  <Import Project="..\..\packages\MicroBuild.1.0.0-alpha-gbd81187371\build\NuPkg.targets" />
 
-  <Import Project="..\..\packages\MicroBuild.1.0.0-alpha-g6d01b9fb0f\build\MicroBuild.targets" />
-  <Import Project="..\..\packages\MicroBuild.ReadOnlySourceTree.1.0.0-alpha-g6d01b9fb0f\build\MicroBuild.ReadOnlySourceTree.targets" />
-  <Import Project="..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-g6d01b9fb0f\build\MicroBuild.VisualStudio.targets" />
+  <Import Project="..\..\packages\MicroBuild.1.0.0-alpha-gbd81187371\build\MicroBuild.targets" />
+  <Import Project="..\..\packages\MicroBuild.VisualStudio.1.0.0-alpha-gbd81187371\build\MicroBuild.VisualStudio.targets" />
   <Import Project="..\..\packages\Nerdbank.GitVersioning.1.0.15136-beta\build\NerdBank.GitVersioning.targets" />
 </Project>
