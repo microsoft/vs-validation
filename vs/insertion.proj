@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\MicroBuild.VisualStudio.1.0.0-alpha-gb1b44e9a74\build\MicroBuild.VisualStudio.props" />
+  <Import Project="..\packages\MicroBuild.1.0.0-alpha-gb1b44e9a74\build\MicroBuild.props" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" />
 
   <PropertyGroup>
@@ -12,6 +14,8 @@
   </ItemGroup>
 
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <Import Project="..\packages\MicroBuild.1.0.0-alpha-gb1b44e9a74\build\MicroBuild.targets" />
+  <Import Project="..\packages\MicroBuild.VisualStudio.1.0.0-alpha-gb1b44e9a74\build\MicroBuild.VisualStudio.targets" />
 
   <Target Name="Build" DependsOnTargets="ResolveProjectReferences" />
 </Project>
