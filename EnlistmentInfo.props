@@ -8,5 +8,6 @@
     <MicroBuild_ReadOnlySourceTree>true</MicroBuild_ReadOnlySourceTree>
     <MicroBuild_GenerateDocumentationFile>true</MicroBuild_GenerateDocumentationFile>
     <MicroBuild_DefineCommonProperties>true</MicroBuild_DefineCommonProperties>
+    <MicroBuild_DefineCommonAssemblyAttributes>true</MicroBuild_DefineCommonAssemblyAttributes>
   </PropertyGroup>
 </Project>
