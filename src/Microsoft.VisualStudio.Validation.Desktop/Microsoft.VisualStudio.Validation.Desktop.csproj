@@ -52,6 +52,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0-alpha-g4e621dfd0d\tools\analyzers\StyleCop.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="$(NuGetPackageRestorePath)MicroBuild.VisualStudio.*\tools\RunMeElevated.cmd">
       <Link>UpdateVS\RunMeElevated.cmd</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -71,12 +74,6 @@
       <Link>UpdateVS\Elevate.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0-alpha-g7231c28eeb\tools\analyzers\StyleCop.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="..\Microsoft.VisualStudio.Validation.Shared\Microsoft.VisualStudio.Validation.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
