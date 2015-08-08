@@ -39,8 +39,10 @@
     <ProjectReference Include="..\Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="tools\RequiresNotNullOrEmpty.snippet" />
-    <Content Include="tools\RequiresNotNull.snippet" />
+    <Content Include="tools\2013\RequiresNotNull.snippet" />
+    <Content Include="tools\2013\RequiresNotNullOrEmpty.snippet" />
+    <Content Include="tools\2015\RequiresNotNull.snippet" />
+    <Content Include="tools\2015\RequiresNotNullOrEmpty.snippet" />
     <Content Include="tools\install-snippets.cmd" />
   </ItemGroup>
   <ItemGroup>

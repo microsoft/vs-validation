@@ -2,7 +2,7 @@
 <CodeSnippet Format="1.0.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
   <Header>
     <Title>Verifies that an argument is not null via a Requires method call.</Title>
-    <Author>Andrew Arnott</Author>
+    <Author>Microsoft</Author>
     <Shortcut>rnn</Shortcut>
     <Description>Checks an argument for a null value and throws a ArgumentNullException if it is.</Description>
     <SnippetTypes>
@@ -17,7 +17,7 @@
       </Literal>
     </Declarations>
     <Code Language="CSharp">
-      <![CDATA[Requires.NotNull($paramName$, nameof($paramName$));
+      <![CDATA[Requires.NotNull($paramName$, "$paramName$");
       $end$]]>
     </Code>
     <Imports>
