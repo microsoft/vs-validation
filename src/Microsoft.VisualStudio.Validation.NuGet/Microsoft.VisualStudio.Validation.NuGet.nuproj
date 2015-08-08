@@ -43,6 +43,7 @@
     <Content Include="tools\2013\RequiresNotNullOrEmpty.snippet" />
     <Content Include="tools\2015\RequiresNotNull.snippet" />
     <Content Include="tools\2015\RequiresNotNullOrEmpty.snippet" />
+    <Content Include="tools\uninstall-snippets.cmd" />
     <Content Include="tools\install-snippets.cmd" />
   </ItemGroup>
   <ItemGroup>
