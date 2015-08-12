@@ -36,7 +36,8 @@
     <ReleaseNotes>https://www.visualstudio.com/news/vs2015-vs</ReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj" />
+    <ProjectReference Include="..\Microsoft.VisualStudio.Validation.Portable\Microsoft.VisualStudio.Validation.Portable.csproj" />
+    <ProjectReference Include="..\Microsoft.VisualStudio.Validation.Desktop\Microsoft.VisualStudio.Validation.Desktop.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="tools\2013\RequiresNotNull.snippet" />

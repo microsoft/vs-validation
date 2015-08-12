@@ -20,7 +20,9 @@ namespace Microsoft
         /// <summary>
         /// The exception that is thrown when an internal assumption failed.
         /// </summary>
+#if DESKTOP
         [Serializable]
+#endif
         [SuppressMessage("Microsoft.Design", "CA1064:ExceptionsShouldBePublic", Justification = "Internal exceptions should not be caught.")]
         private sealed class InternalErrorException : Exception
         {
@@ -44,6 +46,7 @@ namespace Microsoft
                 this.ShowAssertDialog(showAssert);
             }
 
+#if DESKTOP
             /// <summary>
             /// Initializes a new instance of the <see cref="InternalErrorException"/> class.
             /// </summary>
@@ -52,6 +55,7 @@ namespace Microsoft
                 : base(info, context)
             {
             }
+#endif
 
             /// <summary>
             /// Show the assert if showAssert==true.

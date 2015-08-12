@@ -6,7 +6,7 @@
   <Import Project="..\..\packages\MicroBuild.1.0.0-alpha-g914708b2a3\build\NuPkg.props" />
 
   <ItemGroup>
-    <ProjectReference Include="$(ProjectDepotRoot)src\Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj" />
+    <ProjectReference Include="$(ProjectDepotRoot)src\Microsoft.VisualStudio.Validation.Desktop\Microsoft.VisualStudio.Validation.Desktop.csproj" />
   </ItemGroup>
 
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
