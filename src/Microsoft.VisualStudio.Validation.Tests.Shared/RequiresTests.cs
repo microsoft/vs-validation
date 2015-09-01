@@ -1,14 +1,12 @@
-﻿namespace Microsoft.VisualStudio.Validation.Tests
-{
-    using System;
-    using Xunit;
+﻿using System;
+using Microsoft;
+using Xunit;
 
-    public class RequiresTests
+public class RequiresTests
+{
+    [Fact]
+    public void NotNull_ThrowsOnNull()
     {
-        [Fact]
-        public void NotNull_ThrowsOnNull()
-        {
-            Assert.Throws<ArgumentNullException>(() => Requires.NotNull<object>((object)null, "foo"));
-        }
+        Assert.Throws<ArgumentNullException>(() => Requires.NotNull<object>((object)null, "foo"));
     }
 }
