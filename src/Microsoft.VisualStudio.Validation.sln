@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22915.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation", "Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj", "{E016A630-A79B-4B5D-8997-E66581D62B81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation.Desktop", "Microsoft.VisualStudio.Validation.Desktop\Microsoft.VisualStudio.Validation.Desktop.csproj", "{E016A630-A79B-4B5D-8997-E66581D62B81}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B7B2BF20-AA7A-4BAD-9D31-00C6D39CB3F5}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,12 +12,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B7B2BF
 EndProject
 Project("{FF286327-C783-4F7A-AB73-9BCBAD0D4460}") = "Microsoft.VisualStudio.Validation.NuGet", "Microsoft.VisualStudio.Validation.NuGet\Microsoft.VisualStudio.Validation.NuGet.nuproj", "{C51ACF4A-3E2C-44B2-99FC-1A838518C690}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation.Tests", "Microsoft.VisualStudio.Validation.Tests\Microsoft.VisualStudio.Validation.Tests.csproj", "{0527FE43-67A2-454C-BCCC-06B70ADDA84A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation.Portable", "Microsoft.VisualStudio.Validation.Portable\Microsoft.VisualStudio.Validation.Portable.csproj", "{1B0C1B16-1B25-4CC7-AD34-E8F998ADECCE}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Microsoft.VisualStudio.Validation.Shared", "Microsoft.VisualStudio.Validation.Shared\Microsoft.VisualStudio.Validation.Shared.shproj", "{7603B334-F6B8-43E0-AFA3-AA70AAADFC90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation.Tests.Portable", "Microsoft.VisualStudio.Validation.Tests.Portable\Microsoft.VisualStudio.Validation.Tests.Portable.csproj", "{B48344AC-2982-45A9-9459-90C895EBFABF}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Microsoft.VisualStudio.Validation.Tests.Shared", "Microsoft.VisualStudio.Validation.Tests.Shared\Microsoft.VisualStudio.Validation.Tests.Shared.shproj", "{35D55599-B2D6-4368-A296-805AAE17EB04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation.Tests.Desktop", "Microsoft.VisualStudio.Validation.Tests.Desktop\Microsoft.VisualStudio.Validation.Tests.Desktop.csproj", "{0527FE43-67A2-454C-BCCC-06B70ADDA84A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B0D3F769-14E3-4662-BF0F-8FB7D8A2AF25}"
 	ProjectSection(SolutionItems) = preProject
 		..\EnlistmentInfo.props = ..\EnlistmentInfo.props
 		..\EnlistmentInfo.targets = ..\EnlistmentInfo.targets
+		..\version.txt = ..\version.txt
 	EndProjectSection
 EndProject
 Global
@@ -34,6 +43,14 @@ Global
 		{C51ACF4A-3E2C-44B2-99FC-1A838518C690}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C51ACF4A-3E2C-44B2-99FC-1A838518C690}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C51ACF4A-3E2C-44B2-99FC-1A838518C690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B0C1B16-1B25-4CC7-AD34-E8F998ADECCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B0C1B16-1B25-4CC7-AD34-E8F998ADECCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B0C1B16-1B25-4CC7-AD34-E8F998ADECCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B0C1B16-1B25-4CC7-AD34-E8F998ADECCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B48344AC-2982-45A9-9459-90C895EBFABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B48344AC-2982-45A9-9459-90C895EBFABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B48344AC-2982-45A9-9459-90C895EBFABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B48344AC-2982-45A9-9459-90C895EBFABF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0527FE43-67A2-454C-BCCC-06B70ADDA84A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0527FE43-67A2-454C-BCCC-06B70ADDA84A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0527FE43-67A2-454C-BCCC-06B70ADDA84A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,5 +58,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Microsoft.VisualStudio.Validation.Shared\Microsoft.VisualStudio.Validation.Shared.projitems*{e016a630-a79b-4b5d-8997-e66581d62b81}*SharedItemsImports = 4
+		Microsoft.VisualStudio.Validation.Shared\Microsoft.VisualStudio.Validation.Shared.projitems*{1b0c1b16-1b25-4cc7-ad34-e8f998adecce}*SharedItemsImports = 4
+		Microsoft.VisualStudio.Validation.Tests.Shared\Microsoft.VisualStudio.Validation.Tests.Shared.projitems*{35d55599-b2d6-4368-a296-805aae17eb04}*SharedItemsImports = 13
+		Microsoft.VisualStudio.Validation.Tests.Shared\Microsoft.VisualStudio.Validation.Tests.Shared.projitems*{b48344ac-2982-45a9-9459-90c895ebfabf}*SharedItemsImports = 4
+		Microsoft.VisualStudio.Validation.Shared\Microsoft.VisualStudio.Validation.Shared.projitems*{7603b334-f6b8-43e0-afa3-aa70aaadfc90}*SharedItemsImports = 13
+		Microsoft.VisualStudio.Validation.Tests.Shared\Microsoft.VisualStudio.Validation.Tests.Shared.projitems*{0527fe43-67a2-454c-bccc-06b70adda84a}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal

@@ -28,15 +28,13 @@ namespace Microsoft
         {
             if (part == null)
             {
-#if NET35
-                Type coreType = typeof(T);
-#else
                 Type coreType = PrivateErrorHelpers.TrimGenericWrapper(typeof(T), typeof(Lazy<>));
-#endif
+#if DESKTOP // TODO: we should remove this entire CPS-specific behavior.
                 if (Environment.GetEnvironmentVariable("CPSUnitTest") != "true")
                 {
                     Fail(Strings.ServiceMissing, coreType.FullName);
                 }
+#endif
             }
         }
 
@@ -112,7 +110,7 @@ namespace Microsoft
             }
 
             Debug.WriteLine(message);
-            Debug.Fail(message);
+            Debug.Assert(false, message);
         }
 
         /// <summary>
