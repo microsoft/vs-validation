@@ -4,6 +4,10 @@
 *                                                        *
 *********************************************************/
 
+// Enable calling the Debug class even in Release builds,
+// and be able to call other methods in this same class.
+#define DEBUG
+
 namespace Microsoft
 {
     using System;
@@ -23,7 +27,7 @@ namespace Microsoft
         /// Verifies that a value is not null, and reports an error about a missing MEF component otherwise.
         /// </summary>
         /// <typeparam name="T">The interface of the imported part.</typeparam>
-        [DebuggerStepThrough]
+        [Conditional("DEBUG")]
         public static void IfNotPresent<T>(T part)
         {
             if (part == null)
@@ -41,7 +45,7 @@ namespace Microsoft
         /// <summary>
         /// Reports an error if a condition evaluates to true.
         /// </summary>
-        [DebuggerStepThrough]
+        [Conditional("DEBUG")]
         public static void If(bool condition, [Localizable(false)] string message = null)
         {
             if (condition)
@@ -53,7 +57,7 @@ namespace Microsoft
         /// <summary>
         /// Reports an error if a condition does not evaluate to true.
         /// </summary>
-        [DebuggerStepThrough]
+        [Conditional("DEBUG")]
         public static void IfNot(bool condition, [Localizable(false)] string message = null)
         {
             if (!condition)
@@ -65,7 +69,7 @@ namespace Microsoft
         /// <summary>
         /// Reports an error if a condition does not evaluate to true.
         /// </summary>
-        [DebuggerStepThrough]
+        [Conditional("DEBUG")]
         public static void IfNot(bool condition, [Localizable(false)] string message, object arg1)
         {
             if (!condition)
@@ -77,7 +81,7 @@ namespace Microsoft
         /// <summary>
         /// Reports an error if a condition does not evaluate to true.
         /// </summary>
-        [DebuggerStepThrough]
+        [Conditional("DEBUG")]
         public static void IfNot(bool condition, [Localizable(false)] string message, object arg1, object arg2)
         {
             if (!condition)
@@ -89,7 +93,7 @@ namespace Microsoft
         /// <summary>
         /// Reports an error if a condition does not evaluate to true.
         /// </summary>
-        [DebuggerStepThrough]
+        [Conditional("DEBUG")]
         public static void IfNot(bool condition, [Localizable(false)] string message, params object[] args)
         {
             if (!condition)
@@ -101,7 +105,7 @@ namespace Microsoft
         /// <summary>
         /// Reports a certain failure.
         /// </summary>
-        [DebuggerStepThrough]
+        [Conditional("DEBUG")]
         public static void Fail([Localizable(false)] string message = null)
         {
             if (message == null)
@@ -116,7 +120,7 @@ namespace Microsoft
         /// <summary>
         /// Reports a certain failure.
         /// </summary>
-        [DebuggerStepThrough]
+        [Conditional("DEBUG")]
         public static void Fail([Localizable(false)] string message, params object[] args)
         {
             Fail(PrivateErrorHelpers.Format(message, args));
