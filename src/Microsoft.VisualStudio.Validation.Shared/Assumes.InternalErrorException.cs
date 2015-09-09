@@ -68,6 +68,7 @@ namespace Microsoft
             [DebuggerStepThrough]
             private void ShowAssertDialog(bool showAssert)
             {
+#if DESKTOP
                 if (showAssert)
                 {
                     // In debug builds, throw up a dialog.  This allows a dev to
@@ -81,6 +82,7 @@ namespace Microsoft
 
                     Report.Fail(message);
                 }
+#endif
             }
         }
     }

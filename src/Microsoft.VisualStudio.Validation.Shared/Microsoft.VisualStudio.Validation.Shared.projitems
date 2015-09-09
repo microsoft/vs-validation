@@ -15,7 +15,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)EventHandlerExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IDisposableObservable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PrivateErrorHelpers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Report.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Requires.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ValidatedNotNullAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Verify.cs" />
