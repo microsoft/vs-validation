@@ -4,6 +4,10 @@
 *                                                        *
 *********************************************************/
 
+// Enable calling the Debug class even in Release builds,
+// and be able to call other methods in this same class.
+#define DEBUG
+
 namespace Microsoft
 {
     using System;
@@ -109,11 +113,8 @@ namespace Microsoft
                 message = "A recoverable error has been detected.";
             }
 
-            // We must use the Trace static class instead of Debug because although we may be
-            // compiled without the DEBUG symbol, our caller may have been compiled
-            // for DEBUG, and we want this call to propagate all the way through.
-            Trace.WriteLine(message);
-            Trace.Assert(false, message);
+            Debug.WriteLine(message);
+            Debug.Assert(false, message);
         }
 
         /// <summary>
