@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Ensure the tests defined in this file always emulate a client compiled for Release
+#undef DEBUG
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,15 +10,15 @@ using Moq;
 using Xunit;
 
 /// <summary>
-/// Verify that the message propagates to the trace listeners if and only if
-/// the test project compiles with DEBUG (and the supplied condition is as appropriate).
+/// Verify that the message does NOT propagate to the trace listeners when
+/// the test project compiles without DEBUG.
 /// </summary>
-public class ReportTests : IDisposable
+public class ReportReleaseTests : IDisposable
 {
     private const string FailureMessage = "failure";
     private const string DefaultFailureMessage = "A recoverable error has been detected.";
 
-    public ReportTests()
+    public ReportReleaseTests()
     {
         var defaultListener = Trace.Listeners.OfType<DefaultTraceListener>().FirstOrDefault();
         if (defaultListener != null)
@@ -39,11 +42,6 @@ public class ReportTests : IDisposable
         using (var listener = Listen())
         {
             Report.If(false, FailureMessage);
-
-#if DEBUG
-            listener.Value.Setup(l => l.WriteLine(FailureMessage)).Verifiable();
-            listener.Value.Setup(l => l.Fail(FailureMessage)).Verifiable();
-#endif
             Report.If(true, FailureMessage);
         }
     }
@@ -54,11 +52,6 @@ public class ReportTests : IDisposable
         using (var listener = Listen())
         {
             Report.IfNot(true, FailureMessage);
-
-#if DEBUG
-            listener.Value.Setup(l => l.WriteLine(FailureMessage)).Verifiable();
-            listener.Value.Setup(l => l.Fail(FailureMessage)).Verifiable();
-#endif
             Report.IfNot(false, FailureMessage);
         }
     }
@@ -69,11 +62,6 @@ public class ReportTests : IDisposable
         using (var listener = Listen())
         {
             Report.IfNot(true, "a{0}c", "b");
-
-#if DEBUG
-            listener.Value.Setup(l => l.WriteLine("abc")).Verifiable();
-            listener.Value.Setup(l => l.Fail("abc")).Verifiable();
-#endif
             Report.IfNot(false, "a{0}c", "b");
         }
     }
@@ -84,11 +72,6 @@ public class ReportTests : IDisposable
         using (var listener = Listen())
         {
             Report.IfNot(true, "a{0}{1}d", "b", "c");
-
-#if DEBUG
-            listener.Value.Setup(l => l.WriteLine("abcd")).Verifiable();
-            listener.Value.Setup(l => l.Fail("abcd")).Verifiable();
-#endif
             Report.IfNot(false, "a{0}{1}d", "b", "c");
         }
     }
@@ -99,11 +82,6 @@ public class ReportTests : IDisposable
         using (var listener = Listen())
         {
             Report.IfNot(true, "a{0}{1}{2}e", "b", "c", "d");
-
-#if DEBUG
-            listener.Value.Setup(l => l.WriteLine("abcde")).Verifiable();
-            listener.Value.Setup(l => l.Fail("abcde")).Verifiable();
-#endif
             Report.IfNot(false, "a{0}{1}{2}e", "b", "c", "d");
         }
     }
@@ -116,11 +94,6 @@ public class ReportTests : IDisposable
             var possiblyPresent = "not missing";
             var missingTypeName = possiblyPresent.GetType().FullName;
             Report.IfNotPresent(possiblyPresent);
-
-#if DEBUG
-            listener.Value.Setup(l => l.WriteLine(It.Is<string>(v => v.Contains(missingTypeName)))).Verifiable();
-            listener.Value.Setup(l => l.Fail(It.Is<string>(v => v.Contains(missingTypeName)))).Verifiable();
-#endif
             possiblyPresent = null;
             Report.IfNotPresent(possiblyPresent);
         }
@@ -131,10 +104,6 @@ public class ReportTests : IDisposable
     {
         using (var listener = Listen())
         {
-#if DEBUG
-            listener.Value.Setup(l => l.WriteLine(FailureMessage)).Verifiable();
-            listener.Value.Setup(l => l.Fail(FailureMessage)).Verifiable();
-#endif
             Report.Fail(FailureMessage);
         }
     }
@@ -144,10 +113,6 @@ public class ReportTests : IDisposable
     {
         using (var listener = Listen())
         {
-#if DEBUG
-            listener.Value.Setup(l => l.WriteLine(DefaultFailureMessage)).Verifiable();
-            listener.Value.Setup(l => l.Fail(DefaultFailureMessage)).Verifiable();
-#endif
             Report.Fail();
         }
     }
