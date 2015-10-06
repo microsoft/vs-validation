@@ -18,6 +18,7 @@
   <PropertyGroup>
     <NuProjPath Condition=" '$(NuProjPath)' == '' ">..\..\packages\NuProj.0.10.0-beta-gd6d4e1ff23\tools\</NuProjPath>
     <VersionDependsOn>$(VersionDependsOn);GetNuPkgVersion</VersionDependsOn>
+    <NuSpecTemplate>Microsoft.VisualStudio.Validation.nuspec</NuSpecTemplate>
   </PropertyGroup>
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
@@ -34,6 +35,7 @@
     <LicenseUrl>http://go.microsoft.com/fwlink/?LinkID=614949</LicenseUrl>
     <RequireLicenseAcceptance>true</RequireLicenseAcceptance>
     <ReleaseNotes>https://www.visualstudio.com/news/vs2015-vs</ReleaseNotes>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.VisualStudio.Validation.Portable\Microsoft.VisualStudio.Validation.Portable.csproj" />
@@ -46,6 +48,7 @@
     <Content Include="tools\2015\RequiresNotNullOrEmpty.snippet" />
     <Content Include="tools\uninstall-snippets.cmd" />
     <Content Include="tools\install-snippets.cmd" />
+    <None Include="Microsoft.VisualStudio.Validation.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.txt" />
@@ -55,6 +58,13 @@
     <PropertyGroup>
       <Version>$(NuGetPackageVersion)</Version>
     </PropertyGroup>
+  </Target>
+  <Target Name="CopyAssemblyToLibDotNetFolder" DependsOnTargets="ConvertItems" AfterTargets="ConvertItems">
+    <ItemGroup>
+      <File Include="@(File)" Condition=" '%(File.TargetFramework)' == 'portable-net451+win81+wpa81' ">
+        <TargetPath>lib\dotnet\%(FileName)%(Extension)</TargetPath>
+      </File>
+    </ItemGroup>
   </Target>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
