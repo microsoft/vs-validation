@@ -16,7 +16,7 @@
     <ProjectGuid>c51acf4a-3e2c-44b2-99fc-1a838518c690</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup>
-    <NuProjPath Condition=" '$(NuProjPath)' == '' ">..\..\packages\NuProj.0.10.0-beta-gd6d4e1ff23\tools\</NuProjPath>
+    <NuProjPath Condition=" '$(NuProjPath)' == '' ">..\..\packages\NuProj.0.10.4-beta-gf7fc34e7d8\tools\</NuProjPath>
     <VersionDependsOn>$(VersionDependsOn);GetNuPkgVersion</VersionDependsOn>
     <NuSpecTemplate>Microsoft.VisualStudio.Validation.nuspec</NuSpecTemplate>
   </PropertyGroup>
@@ -35,7 +35,6 @@
     <LicenseUrl>http://go.microsoft.com/fwlink/?LinkID=614949</LicenseUrl>
     <RequireLicenseAcceptance>true</RequireLicenseAcceptance>
     <ReleaseNotes>https://www.visualstudio.com/news/vs2015-vs</ReleaseNotes>
-    <NoPackageAnalysis>true</NoPackageAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.VisualStudio.Validation.Portable\Microsoft.VisualStudio.Validation.Portable.csproj" />
