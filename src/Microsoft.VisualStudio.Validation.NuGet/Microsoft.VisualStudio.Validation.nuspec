@@ -25,25 +25,10 @@
       <group targetFramework="net">
         <!-- this section intentionally left blank. -->
       </group>
-      <group targetFramework="sl">
-        <!-- this section intentionally left blank. -->
-      </group>
       <group targetFramework="win">
         <!-- this section intentionally left blank. -->
       </group>
       <group targetFramework="wpa">
-        <!-- this section intentionally left blank. -->
-      </group>
-      <group targetFramework="wp">
-        <!-- this section intentionally left blank. -->
-      </group>
-      <group targetFramework="MonoAndroid">
-        <!-- this section intentionally left blank. -->
-      </group>
-      <group targetFramework="MonoTouch">
-        <!-- this section intentionally left blank. -->
-      </group>
-      <group targetFramework="XamarinIOS">
         <!-- this section intentionally left blank. -->
       </group>
       <group>
