@@ -22,6 +22,33 @@
         <dependency id="System.Runtime.InteropServices" version="4.0.10" />
         <dependency id="System.Threading.Tasks" version="4.0.0" />
       </group>
+      <group targetFramework="net">
+        <!-- this section intentionally left blank. -->
+      </group>
+      <group targetFramework="sl">
+        <!-- this section intentionally left blank. -->
+      </group>
+      <group targetFramework="win">
+        <!-- this section intentionally left blank. -->
+      </group>
+      <group targetFramework="wpa">
+        <!-- this section intentionally left blank. -->
+      </group>
+      <group targetFramework="wp">
+        <!-- this section intentionally left blank. -->
+      </group>
+      <group targetFramework="MonoAndroid">
+        <!-- this section intentionally left blank. -->
+      </group>
+      <group targetFramework="MonoTouch">
+        <!-- this section intentionally left blank. -->
+      </group>
+      <group targetFramework="XamarinIOS">
+        <!-- this section intentionally left blank. -->
+      </group>
+      <group>
+        <!-- this section intentionally left blank. -->
+      </group>
     </dependencies>
   </metadata>
 </package>
