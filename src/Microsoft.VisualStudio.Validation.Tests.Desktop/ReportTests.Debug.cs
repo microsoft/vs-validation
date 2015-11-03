@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft;
 using Moq;
@@ -13,6 +14,7 @@ using Xunit;
 /// Verify that the message propagates to the trace listeners if
 /// the test project compiles with DEBUG (and the supplied condition is as appropriate).
 /// </summary>
+[SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:File name must match first type name", Justification = "By design")]
 public class ReportDebugTests : IDisposable
 {
     private const string FailureMessage = "failure";
