@@ -16,8 +16,9 @@
     <ProjectGuid>c51acf4a-3e2c-44b2-99fc-1a838518c690</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup>
-    <NuProjPath Condition=" '$(NuProjPath)' == '' ">..\..\packages\NuProj.0.10.0-beta-gd6d4e1ff23\tools\</NuProjPath>
+    <NuProjPath Condition=" '$(NuProjPath)' == '' ">..\..\packages\NuProj.0.10.4-beta-gf7fc34e7d8\tools\</NuProjPath>
     <VersionDependsOn>$(VersionDependsOn);GetNuPkgVersion</VersionDependsOn>
+    <NuSpecTemplate>Microsoft.VisualStudio.Validation.nuspec</NuSpecTemplate>
   </PropertyGroup>
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
@@ -46,6 +47,7 @@
     <Content Include="tools\2015\RequiresNotNullOrEmpty.snippet" />
     <Content Include="tools\uninstall-snippets.cmd" />
     <Content Include="tools\install-snippets.cmd" />
+    <None Include="Microsoft.VisualStudio.Validation.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.txt" />
@@ -55,6 +57,15 @@
     <PropertyGroup>
       <Version>$(NuGetPackageVersion)</Version>
     </PropertyGroup>
+  </Target>
+  <Target Name="CopyAssemblyToLibDotNetFolder" DependsOnTargets="ConvertItems" AfterTargets="ConvertItems">
+    <!-- NuProj doesn't yet support populating the lib\dotnet folder. So we do it ourselves. -->
+    <ItemGroup>
+      <File Include="@(File)"
+            Condition=" '%(File.TargetFrameworkMoniker)' == '.NETPortable,Version=v4.5,Profile=Profile259' ">
+        <TargetPath>lib\dotnet\%(FileName)%(Extension)</TargetPath>
+      </File>
+    </ItemGroup>
   </Target>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
