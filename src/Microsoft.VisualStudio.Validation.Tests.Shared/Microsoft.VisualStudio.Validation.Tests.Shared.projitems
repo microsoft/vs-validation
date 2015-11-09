@@ -9,6 +9,8 @@
     <Import_RootNamespace>Microsoft.VisualStudio.Validation.Tests.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)DisposableValue{T}.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RequiresTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)VerifyTests.cs" />
   </ItemGroup>
 </Project>

@@ -115,7 +115,7 @@ namespace Microsoft
         [DebuggerStepThrough]
         public static T NotNullAllowStructs<T>([ValidatedNotNull]T value, string parameterName)
         {
-            if (null == value)
+            if (value == null)
             {
                 throw new ArgumentNullException(parameterName);
             }
