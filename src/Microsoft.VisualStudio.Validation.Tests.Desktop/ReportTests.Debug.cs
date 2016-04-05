@@ -20,22 +20,11 @@ public class ReportDebugTests : IDisposable
     private const string FailureMessage = "failure";
     private const string DefaultFailureMessage = "A recoverable error has been detected.";
 
-    public ReportDebugTests()
-    {
-        var defaultListener = Trace.Listeners.OfType<DefaultTraceListener>().FirstOrDefault();
-        if (defaultListener != null)
-        {
-            defaultListener.AssertUiEnabled = false;
-        }
-    }
+    private AssertDialogSuppression suppressAssertUi = new AssertDialogSuppression();
 
     public void Dispose()
     {
-        var defaultListener = Trace.Listeners.OfType<DefaultTraceListener>().FirstOrDefault();
-        if (defaultListener != null)
-        {
-            defaultListener.AssertUiEnabled = true;
-        }
+        this.suppressAssertUi.Dispose();
     }
 
     [Fact]
