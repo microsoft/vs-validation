@@ -71,6 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AssertDialogSuppression.cs" />
+    <Compile Include="AssumesTests.cs" />
     <Compile Include="ReportTests.Release.cs" />
     <Compile Include="ReportTests.Debug.cs" />
   </ItemGroup>
