@@ -10,7 +10,9 @@ namespace Microsoft
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+#if DESKTOP
     using System.Runtime.Serialization;
+#endif
 
     /// <content>
     /// Contains the inner exception thrown by Assumes.

@@ -1,0 +1,18 @@
+﻿{
+  "dependencies": {
+    "MicroBuild.Core": "0.1.1",
+    "MicroBuild.NonShipping": "1.0.110-rc",
+    "MicroBuild.VisualStudio": "1.0.110-rc",
+    "Nerdbank.GitVersioning": "1.4.19",
+    "NuSpec.ReferenceGenerator": "1.4.2",
+    "StyleCop.Analyzers": "1.0.0",
+    "xunit": "2.1.0",
+    "xunit.runner.visualstudio": "2.1.0"
+  },
+  "frameworks": {
+    ".NETPortable,Version=v4.5,Profile=Profile259": { }
+  },
+  "runtimes": {
+    "win": { }
+  }
+}
