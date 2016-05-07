@@ -10,11 +10,9 @@
     <MicroBuild_GenerateDocumentationFile>true</MicroBuild_GenerateDocumentationFile>
     <MicroBuild_DefineCommonProperties>true</MicroBuild_DefineCommonProperties>
     <MicroBuild_DefineCommonAssemblyAttributes>true</MicroBuild_DefineCommonAssemblyAttributes>
-    <MicroBuild_DoNotAppendBuildMetadata>true</MicroBuild_DoNotAppendBuildMetadata>
   </PropertyGroup>
 
   <ItemGroup>
     <BuildMetadata Condition=" '$(PublicRelease)' == 'true' " Include="PublicRelease" />
-    <BuildMetadata Condition=" '$(SignType)' != '' " Include="$(SignType)" />
   </ItemGroup>
 </Project>
