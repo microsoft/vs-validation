@@ -1,0 +1,15 @@
+﻿{
+  "dependencies": {
+    "MicroBuild.Core": "0.1.1",
+    "MicroBuild.VisualStudio": "1.0.111-rc",
+    "Nerdbank.GitVersioning": "1.4.19",
+    "NuSpec.ReferenceGenerator": "1.4.2",
+    "StyleCop.Analyzers": "1.0.0"
+  },
+  "frameworks": {
+    "net45": { }
+  },
+  "runtimes": {
+    "win": { }
+  }
+}

@@ -82,5 +82,6 @@
     <Rule Id="SA1639" Action="Hidden" />
     <Rule Id="SA1640" Action="Hidden" />
     <Rule Id="SA1641" Action="Hidden" />
+    <Rule Id="SA1601" Action="None" />
   </Rules>
 </RuleSet>

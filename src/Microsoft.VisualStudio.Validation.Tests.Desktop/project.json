@@ -1,0 +1,19 @@
+﻿{
+  "dependencies": {
+    "MicroBuild.Core": "0.1.1",
+    "MicroBuild.NonShipping": "1.0.111-rc",
+    "MicroBuild.VisualStudio": "1.0.111-rc",
+    "Moq": "4.2.1507.0118",
+    "Nerdbank.GitVersioning": "1.4.19",
+    "NuSpec.ReferenceGenerator": "1.4.2",
+    "StyleCop.Analyzers": "1.0.0",
+    "xunit": "2.1.0",
+    "xunit.runner.visualstudio": "2.1.0"
+  },
+  "frameworks": {
+    "net46": { }
+  },
+  "runtimes": {
+    "win": { }
+  }
+}
