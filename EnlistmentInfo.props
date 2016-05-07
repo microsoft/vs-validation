@@ -14,6 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <BuildMetadata Condition=" '$(PublicRelease)' == 'true' " Include="PublicRelease" />
     <BuildMetadata Condition=" '$(SignType)' != '' " Include="$(SignType)" />
   </ItemGroup>
 </Project>
