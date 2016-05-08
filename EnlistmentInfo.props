@@ -6,7 +6,6 @@
     <MicroBuildPackageVersion>1.0.117-rc</MicroBuildPackageVersion>
 
     <MicroBuild_OptimizationDataDir>$(MSBuildThisFileDirectory)Razzle\src\OptimizationData\x86\</MicroBuild_OptimizationDataDir>
-    <MicroBuild_ReadOnlySourceTree>true</MicroBuild_ReadOnlySourceTree>
     <MicroBuild_GenerateDocumentationFile>true</MicroBuild_GenerateDocumentationFile>
     <MicroBuild_DefineCommonProperties>true</MicroBuild_DefineCommonProperties>
     <MicroBuild_DefineCommonAssemblyAttributes>true</MicroBuild_DefineCommonAssemblyAttributes>
