@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Microsoft.VisualStudio.Validation.Portable.ruleset" />
+    <None Include="project.json" />
   </ItemGroup>
   <Import Project="..\Microsoft.VisualStudio.Validation.Shared\Microsoft.VisualStudio.Validation.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
