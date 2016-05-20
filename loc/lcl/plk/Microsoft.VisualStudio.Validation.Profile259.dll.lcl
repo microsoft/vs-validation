@@ -12,20 +12,18 @@
   <OwnedComments>
     <Cmt Name="Dev" />
     <Cmt Name="LcxAdmin" />
+    <Cmt Name="Loc" />
     <Cmt Name="Note" />
-    <Cmt Name="Rccx" />
+    <Cmt Name="RCCX" />
   </OwnedComments>
   <Settings Name="@vsLocTools@\current\default.lss" Type="LSS" />
   <Item ItemId=";Managed Resources" ItemType="0" PsrId="211" Leaf="true">
     <Disp Icon="Expand" Expand="true" Disp="true" LocTbl="false" />
-    <Modified By="daneoh" DateTime="2013-05-08T05:34:11Z" />
   </Item>
   <Item ItemId=";Microsoft.Strings.resources" ItemType="0" PsrId="211" Leaf="false">
     <Disp Icon="Expand" Expand="true" Disp="true" LocTbl="false" Path=" \ ;Managed Resources \ 0 \ 0" />
-    <Modified By="daneoh" DateTime="2013-05-08T05:34:11Z" />
     <Item ItemId=";Strings" ItemType="0" PsrId="211" Leaf="false">
       <Disp Icon="Str" Disp="true" LocTbl="false" />
-      <Modified By="daneoh" DateTime="2013-05-08T05:34:11Z" />
       <Item ItemId=";Argument_EmptyArray" ItemType="0" PsrId="211" Leaf="true">
         <Str Cat="Text">
           <Val><![CDATA['{0}' must contain at least one element.]]></Val>
@@ -34,7 +32,6 @@
           </Tgt>
         </Str>
         <Disp Icon="Str" />
-        <Modified By="joseignacio.dedios" DateTime="2013-06-03T10:37:34Z" />
       </Item>
       <Item ItemId=";Argument_EmptyString" ItemType="0" PsrId="211" Leaf="true">
         <Str Cat="Text">
@@ -44,7 +41,6 @@
           </Tgt>
         </Str>
         <Disp Icon="Str" />
-        <Modified By="joseignacio.dedios" DateTime="2013-06-03T10:37:34Z" />
       </Item>
       <Item ItemId=";Argument_NullElement" ItemType="0" PsrId="211" Leaf="true">
         <Str Cat="Text">
@@ -54,7 +50,6 @@
           </Tgt>
         </Str>
         <Disp Icon="Str" />
-        <Modified By="joseignacio.dedios" DateTime="2013-06-03T10:37:34Z" />
       </Item>
       <Item ItemId=";Argument_Whitespace" ItemType="0" PsrId="211" Leaf="true">
         <Str Cat="Text">
@@ -64,7 +59,6 @@
           </Tgt>
         </Str>
         <Disp Icon="Str" />
-        <Modified By="joseignacio.dedios" DateTime="2013-06-03T10:37:34Z" />
       </Item>
       <Item ItemId=";InternalExceptionMessage" ItemType="0" PsrId="211" Leaf="true">
         <Str Cat="Text">
@@ -74,7 +68,6 @@
           </Tgt>
         </Str>
         <Disp Icon="Str" />
-        <Modified By="joseignacio.dedios" DateTime="2013-06-03T10:37:34Z" />
       </Item>
       <Item ItemId=";ServiceMissing" ItemType="0" PsrId="211" Leaf="true">
         <Str Cat="Text">
@@ -84,19 +77,16 @@
           </Tgt>
         </Str>
         <Disp Icon="Str" />
-        <Modified By="joseignacio.dedios" DateTime="2013-06-03T10:37:34Z" />
       </Item>
     </Item>
   </Item>
   <Item ItemId=";Version" ItemType="0" PsrId="211" Leaf="false">
     <Disp Icon="Ver" Disp="true" LocTbl="false" Path=" \ ;Version \ 8 \ 0" />
-    <Modified By="daneoh" DateTime="2013-05-08T05:34:11Z" />
     <Item ItemId=";AssemblyVersion" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text" DevLk="true">
-        <Val><![CDATA[14.0.0.0]]></Val>
+        <Val><![CDATA[15.0.0.0]]></Val>
       </Str>
       <Disp Icon="Str" />
-      <Modified By="daneoh" DateTime="2013-05-08T05:34:11Z" />
     </Item>
     <Item ItemId=";FileDescription" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text">
@@ -106,21 +96,18 @@
         </Tgt>
       </Str>
       <Disp Icon="Str" />
-      <Modified By="islezarova" DateTime="2015-02-25T21:00:05Z" />
     </Item>
     <Item ItemId=";FileVersion" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text" DevLk="true">
-        <Val><![CDATA[14.0.50225.1]]></Val>
+        <Val><![CDATA[15.0.21.8933]]></Val>
       </Str>
       <Disp Icon="Str" />
-      <Modified By="daneoh" DateTime="2013-05-08T05:34:11Z" />
     </Item>
     <Item ItemId=";InternalName" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text" DevLk="true">
         <Val><![CDATA[Microsoft.VisualStudio.Validation.dll]]></Val>
       </Str>
       <Disp Icon="Str" />
-      <Modified By="daneoh" DateTime="2013-05-08T05:34:11Z" />
     </Item>
     <Item ItemId=";LegalCopyright" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text">
@@ -130,19 +117,17 @@
         </Tgt>
       </Str>
       <Disp Icon="Str" />
-      <Modified By="joseignacio.dedios" DateTime="2013-06-03T10:37:34Z" />
     </Item>
     <Item ItemId=";OriginalFilename" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text" DevLk="true">
         <Val><![CDATA[Microsoft.VisualStudio.Validation.dll]]></Val>
       </Str>
       <Disp Icon="Str" />
-      <Modified By="daneoh" DateTime="2013-05-08T05:34:11Z" />
     </Item>
     <Item ItemId=";ProductName" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text">
         <Val><![CDATA[Microsoft® Visual Studio®]]></Val>
-        <Tgt Cat="Text" Stat="Loc" Orig="New" Appr="PreApproved">
+        <Tgt Cat="Text" Stat="Loc" Appr="PreApproved" Orig="New">
           <Val><![CDATA[Microsoft® Visual Studio®]]></Val>
         </Tgt>
         <Prev Cat="Text">
@@ -150,21 +135,15 @@
         </Prev>
       </Str>
       <Disp Icon="Str" />
-      <Modified By="islezarova" DateTime="2015-02-25T21:00:17Z" />
-      <Props>
-        <Str Name="Custom6" Val="S78.0121_1" />
-      </Props>
     </Item>
     <Item ItemId=";ProductVersion" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text" DevLk="true">
-        <Val><![CDATA[14.0.50225.1-pre+commit.eb10f86f64]]></Val>
+        <Val><![CDATA[15.0.21-pre+ge52299b830.RT]]></Val>
       </Str>
       <Disp Icon="Str" />
-      <Modified By="daneoh" DateTime="2013-05-08T05:34:11Z" />
     </Item>
   </Item>
   <Item ItemId=";Version" ItemType="8" PsrId="211" Leaf="true">
     <Disp Icon="Expand" Expand="true" Disp="true" LocTbl="false" />
-    <Modified By="daneoh" DateTime="2013-05-08T05:34:11Z" />
   </Item>
 </LCX>

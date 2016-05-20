@@ -99,7 +99,7 @@
     </Item>
     <Item ItemId=";FileVersion" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text" DevLk="true">
-        <Val><![CDATA[15.0.5.8296]]></Val>
+        <Val><![CDATA[15.0.21.8933]]></Val>
       </Str>
       <Disp Icon="Str" />
     </Item>
@@ -138,7 +138,7 @@
     </Item>
     <Item ItemId=";ProductVersion" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text" DevLk="true">
-        <Val><![CDATA[15.0.51109.1-alpha+g6820f1cc54]]></Val>
+        <Val><![CDATA[15.0.21-pre+ge52299b830.RT]]></Val>
       </Str>
       <Disp Icon="Str" />
     </Item>
