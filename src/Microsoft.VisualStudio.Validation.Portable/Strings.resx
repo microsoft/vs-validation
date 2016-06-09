@@ -120,6 +120,9 @@
   <data name="Argument_EmptyArray" xml:space="preserve">
     <value>'{0}' must contain at least one element.</value>
   </data>
+  <data name="Argument_EmptyGuid" xml:space="preserve">
+    <value>'{0}' cannot be an empty guid. </value>
+  </data>
   <data name="Argument_EmptyString" xml:space="preserve">
     <value>'{0}' cannot be an empty string ("") or start with the null character.</value>
   </data>

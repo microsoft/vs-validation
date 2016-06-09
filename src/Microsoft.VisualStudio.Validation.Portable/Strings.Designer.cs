@@ -71,6 +71,15 @@ namespace Microsoft {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; cannot be an empty guid. .
+        /// </summary>
+        internal static string Argument_EmptyGuid {
+            get {
+                return ResourceManager.GetString("Argument_EmptyGuid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; cannot be an empty string (&quot;&quot;) or start with the null character..
         /// </summary>
         internal static string Argument_EmptyString {
