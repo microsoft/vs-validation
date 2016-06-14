@@ -33,6 +33,15 @@
         </Str>
         <Disp Icon="Str" />
       </Item>
+      <Item ItemId=";Argument_EmptyGuid" ItemType="0" PsrId="211" Leaf="true">
+        <Str Cat="Text">
+          <Val><![CDATA['{0}' cannot be an empty guid. ]]></Val>
+          <Tgt Cat="Text" Stat="Loc" Orig="New">
+            <Val><![CDATA["{0}" darf keine leere GUID sein. ]]></Val>
+          </Tgt>
+        </Str>
+        <Disp Icon="Str" />
+      </Item>
       <Item ItemId=";Argument_EmptyString" ItemType="0" PsrId="211" Leaf="true">
         <Str Cat="Text">
           <Val><![CDATA['{0}' cannot be an empty string ("") or start with the null character.]]></Val>
@@ -99,7 +108,7 @@
     </Item>
     <Item ItemId=";FileVersion" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text" DevLk="true">
-        <Val><![CDATA[15.0.21.8933]]></Val>
+        <Val><![CDATA[15.0.24.48385]]></Val>
       </Str>
       <Disp Icon="Str" />
     </Item>
@@ -138,7 +147,7 @@
     </Item>
     <Item ItemId=";ProductVersion" ItemType="0" PsrId="211" Leaf="true">
       <Str Cat="Text" DevLk="true">
-        <Val><![CDATA[15.0.21-pre+ge52299b830.RT]]></Val>
+        <Val><![CDATA[15.0.24-pre+g01bdc7bf6e.RR]]></Val>
       </Str>
       <Disp Icon="Str" />
     </Item>
