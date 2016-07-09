@@ -30,10 +30,23 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <EmbeddedResource Include="Strings.cs.resx" />
+    <EmbeddedResource Include="Strings.de.resx" />
+    <EmbeddedResource Include="Strings.es.resx" />
+    <EmbeddedResource Include="Strings.fr.resx" />
+    <EmbeddedResource Include="Strings.it.resx" />
+    <EmbeddedResource Include="Strings.ja.resx" />
+    <EmbeddedResource Include="Strings.ko.resx" />
+    <EmbeddedResource Include="Strings.pl.resx" />
+    <EmbeddedResource Include="Strings.pt-BR.resx" />
     <EmbeddedResource Include="Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Strings.ru.resx" />
+    <EmbeddedResource Include="Strings.tr.resx" />
+    <EmbeddedResource Include="Strings.zh-Hans.resx" />
+    <EmbeddedResource Include="Strings.zh-Hant.resx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExcludeFromCodeCoverageAttribute.cs" />
@@ -49,6 +62,21 @@
   <ItemGroup>
     <None Include="Microsoft.VisualStudio.Validation.Portable.ruleset" />
     <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Portable.cs.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Portable.de.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Portable.es.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Portable.fr.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Portable.it.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Portable.ja.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Portable.ko.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Portable.pl.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Portable.pt-BR.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Portable.ru.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Portable.tr.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Portable.zh-Hans.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Portable.zh-Hant.xlf" />
   </ItemGroup>
   <Import Project="..\Microsoft.VisualStudio.Validation.Shared\Microsoft.VisualStudio.Validation.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

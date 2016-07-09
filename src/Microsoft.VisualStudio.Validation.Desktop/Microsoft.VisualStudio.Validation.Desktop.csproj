@@ -51,10 +51,23 @@
     <Compile Include="Verify.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Strings.cs.resx" />
+    <EmbeddedResource Include="Strings.de.resx" />
+    <EmbeddedResource Include="Strings.es.resx" />
+    <EmbeddedResource Include="Strings.fr.resx" />
+    <EmbeddedResource Include="Strings.it.resx" />
+    <EmbeddedResource Include="Strings.ja.resx" />
+    <EmbeddedResource Include="Strings.ko.resx" />
+    <EmbeddedResource Include="Strings.pl.resx" />
+    <EmbeddedResource Include="Strings.pt-BR.resx" />
     <EmbeddedResource Include="Strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Strings.ru.resx" />
+    <EmbeddedResource Include="Strings.tr.resx" />
+    <EmbeddedResource Include="Strings.zh-Hans.resx" />
+    <EmbeddedResource Include="Strings.zh-Hant.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(NuGetPackageRestorePath)MicroBuild.VisualStudio\$(MicroBuildPackageVersion)\tools\RunMeElevated.cmd">
@@ -74,6 +87,21 @@
       <Link>UpdateVS\Elevate.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Desktop.cs.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Desktop.de.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Desktop.es.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Desktop.fr.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Desktop.it.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Desktop.ja.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Desktop.ko.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Desktop.pl.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Desktop.pt-BR.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Desktop.ru.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Desktop.tr.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Desktop.zh-Hans.xlf" />
+    <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Desktop.zh-Hant.xlf" />
   </ItemGroup>
   <Import Project="..\Microsoft.VisualStudio.Validation.Shared\Microsoft.VisualStudio.Validation.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
