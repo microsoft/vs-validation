@@ -30,6 +30,10 @@
           <source>Cannot find an instance of the {0} service.</source>
           <target state="new">Cannot find an instance of the {0} service.</target>
         </trans-unit>
+        <trans-unit id="Argument_EmptyGuid" translate="yes" xml:space="preserve">
+          <source>'{0}' cannot be an empty guid.</source>
+          <target state="new">'{0}' cannot be an empty guid.</target>
+        </trans-unit>
       </group>
     </body>
   </file>
