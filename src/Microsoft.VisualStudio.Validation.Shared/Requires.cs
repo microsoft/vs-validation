@@ -260,6 +260,21 @@ namespace Microsoft
         }
 
         /// <summary>
+        /// Throws an exception if the specified parameter's value is Guid.Empty
+        /// </summary>
+        /// <param name="value">The value of the argument.</param>
+        /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is an empty guid (Guid.Empty)</exception>
+        [DebuggerStepThrough]
+        public static void NotEmpty(Guid value, string parameterName)
+        {
+            if (value == Guid.Empty)
+            {
+                throw new ArgumentException(Format(Strings.Argument_EmptyGuid, parameterName), parameterName);
+            }
+        }
+
+        /// <summary>
         /// Throws an <see cref="ArgumentOutOfRangeException"/> if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
