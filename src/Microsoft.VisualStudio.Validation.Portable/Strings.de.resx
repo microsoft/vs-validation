@@ -12,4 +12,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Argument_EmptyArray" xml:space="preserve">
+    <value>"{0}" muss mindestens ein Element enthalten.</value>
+  </data>
+  <data name="Argument_EmptyString" xml:space="preserve">
+    <value>"{0}" darf keine leere Zeichenfolge ("") sein und nicht mit dem Nullzeichen beginnen.</value>
+  </data>
+  <data name="Argument_NullElement" xml:space="preserve">
+    <value>"{0}" darf kein NULL-Element ("Nothing" in Visual Basic) enthalten.</value>
+  </data>
+  <data name="Argument_Whitespace" xml:space="preserve">
+    <value>Der Parameter "{0}" darf nicht nur aus Leerzeichen bestehen.</value>
+  </data>
+  <data name="InternalExceptionMessage" xml:space="preserve">
+    <value>Interner Fehler. Wenden Sie sich an den Microsoft-Produktsupport.</value>
+  </data>
+  <data name="ServiceMissing" xml:space="preserve">
+    <value>Es wurde keine Instanz des {0}-Diensts gefunden.</value>
+  </data>
+  <data name="Argument_EmptyGuid" xml:space="preserve">
+    <value>"{0}" darf keine leere GUID sein. </value>
+  </data>
 </root>

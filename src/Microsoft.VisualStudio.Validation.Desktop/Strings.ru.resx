@@ -12,4 +12,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Argument_EmptyArray" xml:space="preserve">
+    <value>В "{0}"должен содержаться хотя бы один элемент.</value>
+  </data>
+  <data name="Argument_EmptyString" xml:space="preserve">
+    <value>"{0}" не может быть пустой строкой ("") или начинаться с символа NULL.</value>
+  </data>
+  <data name="Argument_NullElement" xml:space="preserve">
+    <value>"{0}" не может содержать элемент NULL (Nothing в Visual Basic).</value>
+  </data>
+  <data name="Argument_Whitespace" xml:space="preserve">
+    <value>Параметр "{0}" не может состоять только из пробелов.</value>
+  </data>
+  <data name="InternalExceptionMessage" xml:space="preserve">
+    <value>Произошла внутренняя ошибка. Обратитесь в службу технической поддержки Майкрософт.</value>
+  </data>
+  <data name="ServiceMissing" xml:space="preserve">
+    <value>Невозможно найти экземпляр службы {0}.</value>
+  </data>
+  <data name="Argument_EmptyGuid" xml:space="preserve">
+    <value>GUID "{0}" не может быть пустым.</value>
+  </data>
 </root>
