@@ -3,7 +3,7 @@
     "MicroBuild.Core": "0.2.0",
     "MicroBuild.NonShipping": "1.0.125-rc",
     "MicroBuild.VisualStudio": "1.0.125-rc",
-    "Nerdbank.GitVersioning": "1.4.19",
+    "Nerdbank.GitVersioning": "1.5.46",
     "NuSpec.ReferenceGenerator": "1.4.2",
     "ReadOnlySourceTree": "0.1.37-beta",
     "StyleCop.Analyzers": "1.0.0",
