@@ -3,7 +3,7 @@
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <NuGetPackageRestorePath>$(UserProfile)\.nuget\Packages\</NuGetPackageRestorePath>
-    <MicroBuildPackageVersion>1.0.129-rc</MicroBuildPackageVersion>
+    <MicroBuildPackageVersion>2.0.7-beta</MicroBuildPackageVersion>
 
     <MicroBuild_GenerateDocumentationFile>true</MicroBuild_GenerateDocumentationFile>
     <MicroBuild_DefineCommonProperties>true</MicroBuild_DefineCommonProperties>
