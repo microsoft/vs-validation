@@ -20,9 +20,11 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CodeAnalysisRuleSet>Microsoft.VisualStudio.Validation.Portable.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\bin\Debug\Profile259\Microsoft.VisualStudio.Validation.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <CodeAnalysisRuleSet>Microsoft.VisualStudio.Validation.Portable.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\bin\Release\Profile259\Microsoft.VisualStudio.Validation.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Label="MultilingualAppToolkit">
     <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>

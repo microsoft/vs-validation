@@ -21,12 +21,14 @@
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>Microsoft.VisualStudio.Validation.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\bin\Debug\Microsoft.VisualStudio.Validation.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>Microsoft.VisualStudio.Validation.ruleset</CodeAnalysisRuleSet>
     <DefineConstants>DESKTOP</DefineConstants>
+    <DocumentationFile>..\..\bin\Release\Microsoft.VisualStudio.Validation.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Label="MultilingualAppToolkit">
     <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
