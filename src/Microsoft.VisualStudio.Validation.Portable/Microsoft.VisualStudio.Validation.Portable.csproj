@@ -19,10 +19,16 @@
     <OutputPath Condition=" '$(OutputPath)' == '' ">bin</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
     <CodeAnalysisRuleSet>Microsoft.VisualStudio.Validation.Portable.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>..\..\bin\Debug\Profile259\Microsoft.VisualStudio.Validation.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
     <CodeAnalysisRuleSet>Microsoft.VisualStudio.Validation.Portable.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>..\..\bin\Release\Profile259\Microsoft.VisualStudio.Validation.XML</DocumentationFile>
   </PropertyGroup>
