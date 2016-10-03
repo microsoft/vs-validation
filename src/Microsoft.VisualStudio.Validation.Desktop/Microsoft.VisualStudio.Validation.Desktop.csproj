@@ -12,21 +12,27 @@
     <GenerateLCE>true</GenerateLCE>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
-    <MicroBuild_DefineCommonAssemblyAttributes>false</MicroBuild_DefineCommonAssemblyAttributes>
     <OutputPath Condition=" '$(OutputPath)' == '' ">bin</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DefineConstants>TRACE;DEBUG;DESKTOP</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>Microsoft.VisualStudio.Validation.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\..\bin\Debug\Microsoft.VisualStudio.Validation.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>Microsoft.VisualStudio.Validation.ruleset</CodeAnalysisRuleSet>
     <DefineConstants>DESKTOP</DefineConstants>
+    <DocumentationFile>..\..\bin\Release\Microsoft.VisualStudio.Validation.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Label="MultilingualAppToolkit">
     <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
@@ -70,23 +76,10 @@
     <EmbeddedResource Include="Strings.zh-Hant.resx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(NuGetPackageRestorePath)MicroBuild.VisualStudio\$(MicroBuildPackageVersion)\tools\RunMeElevated.cmd">
-      <Link>UpdateVS\RunMeElevated.cmd</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Microsoft.VisualStudio.Validation.ruleset">
       <SubType>Designer</SubType>
     </None>
     <None Include="project.json" />
-    <None Include="UpdateVS\UpdateVS.cmd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="$(NuGetPackageRestorePath)MicroBuild.VisualStudio\$(MicroBuildPackageVersion)\tools\Elevate.exe">
-      <Link>UpdateVS\Elevate.exe</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <XliffResource Include="MultilingualResources\Microsoft.VisualStudio.Validation.Desktop.cs.xlf" />
