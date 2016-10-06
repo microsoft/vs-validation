@@ -4,7 +4,7 @@
     "MicroBuild.NonShipping": "2.0.23-beta",
     "MicroBuild.VisualStudio": "2.0.23-beta",
     "Moq": "4.2.1507.0118",
-    "Nerdbank.GitVersioning": "1.5.46",
+    "Nerdbank.GitVersioning": "1.5.58",
     "NuSpec.ReferenceGenerator": "1.4.2",
     "ReadOnlySourceTree": "0.1.37-beta",
     "StyleCop.Analyzers": "1.0.0",
