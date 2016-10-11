@@ -3,7 +3,7 @@ Microsoft.VisualStudio.Validation
 
 [![NuGet package](https://img.shields.io/nuget/v/Microsoft.VisualStudio.Validation.svg)](https://nuget.org/packages/Microsoft.VisualStudio.Validation)
 
-This project is available as the [Validation][1] NuGet package.
+This project is available as the [Microsoft.VisualStudio.Validation][1] NuGet package.
 
 Basic input validation via the `Requires` class throws an ArgumentException.
 
