@@ -7,21 +7,29 @@ This project is available as the [Validation][1] NuGet package.
 
 Basic input validation via the `Requires` class throws an ArgumentException.
 
-    Requires.NotNull(arg1, "arg1");
-    Requires.NotNullOrEmpty(arg2, "arg2");
+```csharp
+Requires.NotNull(arg1, nameof(arg1));
+Requires.NotNullOrEmpty(arg2, nameof(arg2));
+```
 
 State validation via the `Verify` class throws an InvalidOperationException.
 
-    Verify.Operation(condition, "some error occurred.");
+```csharp
+Verify.Operation(condition, "some error occurred.");
+```
 
 Internal integrity checks via the `Assumes` class throws an
 InternalErrorException.
 
-    Assumes.True(condition, "some error");
+```csharp
+Assumes.True(condition, "some error");
+```
 
 Warning signs that should not throw exceptions via the `Report` class.
 
-    Report.IfNot(condition, "some error");
+```csharp
+Report.IfNot(condition, "some error");
+```
 
 Code Snippets
 -------------
@@ -38,15 +46,19 @@ of the code snippet name for it to become available.
 
 Example:
 
-    private void SomeMethod(string input) {
-        rnne<TAB>
-    }
+```csharp
+private void SomeMethod(string input) {
+    rnne<TAB>
+}
+```
 
 Expands to
 
-    private void SomeMethod(string input) {
-        Requires.NotNullOrEmpty(paramName, nameof(paramName));
-    }
+```csharp
+private void SomeMethod(string input) {
+    Requires.NotNullOrEmpty(paramName, nameof(paramName));
+}
+```
 
 And the first `paramName` is selected. Simply type the actual parameter name
 (Intellisense will auto-complete for you) and then the quoted paramName name
