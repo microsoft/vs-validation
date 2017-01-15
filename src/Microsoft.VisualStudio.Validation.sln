@@ -1,64 +1,54 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation.Desktop", "Microsoft.VisualStudio.Validation.Desktop\Microsoft.VisualStudio.Validation.Desktop.csproj", "{E016A630-A79B-4B5D-8997-E66581D62B81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation", "Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj", "{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}"
 EndProject
-Project("{FF286327-C783-4F7A-AB73-9BCBAD0D4460}") = "Microsoft.VisualStudio.Validation.NuGet", "Microsoft.VisualStudio.Validation.NuGet\Microsoft.VisualStudio.Validation.NuGet.nuproj", "{C51ACF4A-3E2C-44B2-99FC-1A838518C690}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation.Portable", "Microsoft.VisualStudio.Validation.Portable\Microsoft.VisualStudio.Validation.Portable.csproj", "{1B0C1B16-1B25-4CC7-AD34-E8F998ADECCE}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Microsoft.VisualStudio.Validation.Shared", "Microsoft.VisualStudio.Validation.Shared\Microsoft.VisualStudio.Validation.Shared.shproj", "{7603B334-F6B8-43E0-AFA3-AA70AAADFC90}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation.Tests.Portable", "Microsoft.VisualStudio.Validation.Tests.Portable\Microsoft.VisualStudio.Validation.Tests.Portable.csproj", "{B48344AC-2982-45A9-9459-90C895EBFABF}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Microsoft.VisualStudio.Validation.Tests.Shared", "Microsoft.VisualStudio.Validation.Tests.Shared\Microsoft.VisualStudio.Validation.Tests.Shared.shproj", "{35D55599-B2D6-4368-A296-805AAE17EB04}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation.Tests.Desktop", "Microsoft.VisualStudio.Validation.Tests.Desktop\Microsoft.VisualStudio.Validation.Tests.Desktop.csproj", "{0527FE43-67A2-454C-BCCC-06B70ADDA84A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B0D3F769-14E3-4662-BF0F-8FB7D8A2AF25}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{871C5DB2-2E11-428A-A9FA-78E269B6E9B0}"
 	ProjectSection(SolutionItems) = preProject
-		..\EnlistmentInfo.props = ..\EnlistmentInfo.props
-		..\EnlistmentInfo.targets = ..\EnlistmentInfo.targets
-		..\nuget.config = ..\nuget.config
-		..\version.json = ..\version.json
+		..\appveyor.yml = ..\appveyor.yml
+		Directory.Build.props = Directory.Build.props
+		nuget.config = nuget.config
+		version.json = version.json
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.VisualStudio.Validation.Tests", "Microsoft.VisualStudio.Validation.Tests\Microsoft.VisualStudio.Validation.Tests.csproj", "{B68F4565-AC94-4533-A9D6-5701F67D9C85}"
+EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Microsoft.VisualStudio.Validation.Shared\Microsoft.VisualStudio.Validation.Shared.projitems*{e016a630-a79b-4b5d-8997-e66581d62b81}*SharedItemsImports = 4
-		Microsoft.VisualStudio.Validation.Shared\Microsoft.VisualStudio.Validation.Shared.projitems*{1b0c1b16-1b25-4cc7-ad34-e8f998adecce}*SharedItemsImports = 4
-		Microsoft.VisualStudio.Validation.Tests.Shared\Microsoft.VisualStudio.Validation.Tests.Shared.projitems*{35d55599-b2d6-4368-a296-805aae17eb04}*SharedItemsImports = 13
-		Microsoft.VisualStudio.Validation.Tests.Shared\Microsoft.VisualStudio.Validation.Tests.Shared.projitems*{b48344ac-2982-45a9-9459-90c895ebfabf}*SharedItemsImports = 4
-		Microsoft.VisualStudio.Validation.Shared\Microsoft.VisualStudio.Validation.Shared.projitems*{7603b334-f6b8-43e0-afa3-aa70aaadfc90}*SharedItemsImports = 13
-		Microsoft.VisualStudio.Validation.Tests.Shared\Microsoft.VisualStudio.Validation.Tests.Shared.projitems*{0527fe43-67a2-454c-bccc-06b70adda84a}*SharedItemsImports = 4
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E016A630-A79B-4B5D-8997-E66581D62B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E016A630-A79B-4B5D-8997-E66581D62B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E016A630-A79B-4B5D-8997-E66581D62B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E016A630-A79B-4B5D-8997-E66581D62B81}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C51ACF4A-3E2C-44B2-99FC-1A838518C690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C51ACF4A-3E2C-44B2-99FC-1A838518C690}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C51ACF4A-3E2C-44B2-99FC-1A838518C690}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C51ACF4A-3E2C-44B2-99FC-1A838518C690}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B0C1B16-1B25-4CC7-AD34-E8F998ADECCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B0C1B16-1B25-4CC7-AD34-E8F998ADECCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B0C1B16-1B25-4CC7-AD34-E8F998ADECCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B0C1B16-1B25-4CC7-AD34-E8F998ADECCE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B48344AC-2982-45A9-9459-90C895EBFABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B48344AC-2982-45A9-9459-90C895EBFABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B48344AC-2982-45A9-9459-90C895EBFABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B48344AC-2982-45A9-9459-90C895EBFABF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0527FE43-67A2-454C-BCCC-06B70ADDA84A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0527FE43-67A2-454C-BCCC-06B70ADDA84A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0527FE43-67A2-454C-BCCC-06B70ADDA84A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0527FE43-67A2-454C-BCCC-06B70ADDA84A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}.Debug|x64.Build.0 = Debug|Any CPU
+		{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}.Debug|x86.Build.0 = Debug|Any CPU
+		{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}.Release|x64.ActiveCfg = Release|Any CPU
+		{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}.Release|x64.Build.0 = Release|Any CPU
+		{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}.Release|x86.ActiveCfg = Release|Any CPU
+		{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}.Release|x86.Build.0 = Release|Any CPU
+		{B68F4565-AC94-4533-A9D6-5701F67D9C85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B68F4565-AC94-4533-A9D6-5701F67D9C85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B68F4565-AC94-4533-A9D6-5701F67D9C85}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B68F4565-AC94-4533-A9D6-5701F67D9C85}.Debug|x64.Build.0 = Debug|Any CPU
+		{B68F4565-AC94-4533-A9D6-5701F67D9C85}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B68F4565-AC94-4533-A9D6-5701F67D9C85}.Debug|x86.Build.0 = Debug|Any CPU
+		{B68F4565-AC94-4533-A9D6-5701F67D9C85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B68F4565-AC94-4533-A9D6-5701F67D9C85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B68F4565-AC94-4533-A9D6-5701F67D9C85}.Release|x64.ActiveCfg = Release|Any CPU
+		{B68F4565-AC94-4533-A9D6-5701F67D9C85}.Release|x64.Build.0 = Release|Any CPU
+		{B68F4565-AC94-4533-A9D6-5701F67D9C85}.Release|x86.ActiveCfg = Release|Any CPU
+		{B68F4565-AC94-4533-A9D6-5701F67D9C85}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
