@@ -6,7 +6,7 @@
     <SharedGUID>35d55599-b2d6-4368-a296-805aae17eb04</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>Microsoft.VisualStudio.Validation.Tests.Shared</Import_RootNamespace>
+    <Import_RootNamespace>Microsoft</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DisposableValue{T}.cs" />
