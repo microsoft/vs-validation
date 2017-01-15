@@ -9,6 +9,7 @@
     <Import_RootNamespace>Microsoft.VisualStudio.Validation.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ExceptionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Properties\AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Assumes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Assumes.InternalErrorException.cs" />
