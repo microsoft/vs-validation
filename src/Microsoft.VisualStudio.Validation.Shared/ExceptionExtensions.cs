@@ -21,6 +21,11 @@ namespace Microsoft
         /// <param name="key">The key to use for the added data.</param>
         /// <param name="values">The values to add with the given <paramref name="key"/>.</param>
         /// <returns>A reference to the same <paramref name="exception"/>.</returns>
+        /// <remarks>
+        /// <para>This method should be used to add context (beyond the message and callstack we normally get) to the exception
+        /// that would be useful when debugging Watson crashes.</para>
+        /// <para>Do not use this method when you expect the exception to be handled.</para>
+        /// </remarks>
         public static T AddData<T>(this T exception, string key, params object[] values)
             where T : Exception
         {
