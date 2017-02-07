@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "OpenCover": "4.6.519",
     "MicroBuild.Core": "0.2.0",
     "MicroBuild.NonShipping": "2.0.34",
     "MicroBuild.VisualStudio": "2.0.34",
