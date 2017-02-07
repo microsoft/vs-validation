@@ -3,6 +3,7 @@ Microsoft.VisualStudio.Validation
 
 [![NuGet package](https://img.shields.io/nuget/v/Microsoft.VisualStudio.Validation.svg)](https://nuget.org/packages/Microsoft.VisualStudio.Validation)
 [![Build status](https://ci.appveyor.com/api/projects/status/my8aqxc30x0n2xtl/branch/master?svg=true)](https://ci.appveyor.com/project/AArnott/vs-validation/branch/master)
+[![codecov](https://codecov.io/gh/Microsoft/vs-validation/branch/master/graph/badge.svg)](https://codecov.io/gh/Microsoft/vs-validation)
 
 This project is available as the [Microsoft.VisualStudio.Validation][1] NuGet package.
 
