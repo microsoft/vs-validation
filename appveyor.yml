@@ -2,7 +2,7 @@ version: 1.0.{build}
 branches:
   only:
   - master
-  - /^v\d+(?:.\d+)?$/
+  - /^v\d+(?:\.\d+)?$/
   - /[\b_]validate\b/
 skip_tags: true
 nuget:
@@ -22,7 +22,22 @@ build:
   verbosity: minimal
 test_script:
 - cmd: >-
-    %xunit20%\xunit.console.x86 "bin\Release\Microsoft.VisualStudio.Validation.Tests.Desktop.dll" "bin\Release\Profile259\Microsoft.VisualStudio.Validation.Tests.Portable.dll" -noshadow -parallel all -html bin\release\testresults.html -xml bin\release\testresults.xml -appveyor -notrait "TestCategory=FailsInCloudTest" -nologo
+    "%userprofile%\.nuget\packages\OpenCover\4.6.519\tools\OpenCover.Console.exe"
+    -register:user
+    -target:"%xunit20%\xunit.console.x86.exe"
+    -targetargs:"bin\Release\Microsoft.VisualStudio.Validation.Tests.Desktop.dll bin\Release\Profile259\Microsoft.VisualStudio.Validation.Tests.Portable.dll -noshadow -parallel all -html bin\release\testresults.html -xml bin\release\testresults.xml -appveyor -notrait TestCategory=FailsInCloudTest -nologo"
+    -returntargetcode
+    -excludebyattribute:*.ExcludeFromCodeCoverage*
+    -excludebyfile:*\*Designer.cs
+    -filter:"+[Microsoft.VisualStudio.Validation]*"
+    -hideskipped:All
+    -output:bin\Release\code_coverage.xml
+
+    SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%
+
+    pip install codecov
+
+    codecov -f "bin\Release\code_coverage.xml"
 artifacts:
 - path: bin\**\*.nupkg
   name: NuGet Package
