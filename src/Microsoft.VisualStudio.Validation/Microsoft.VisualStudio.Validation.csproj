@@ -13,6 +13,12 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <DebugType>full</DebugType>
   </PropertyGroup>
+  <PropertyGroup Label="MultilingualAppToolkit">
+    <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
+    <MultilingualFallbackLanguage>en-US</MultilingualFallbackLanguage>
+    <TranslationReport Condition="'$(Configuration)' == 'Release'">true</TranslationReport>
+    <SuppressPseudoWarning Condition="'$(Configuration)' == 'Debug'">true</SuppressPseudoWarning>
+  </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
@@ -29,6 +35,9 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\*.xlf" />
+  </ItemGroup>
   <ItemDefinitionGroup>
     <PackageReference>
       <PrivateAssets>all</PrivateAssets>
@@ -42,4 +51,8 @@
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" />
   </ItemGroup>
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\v$(MultilingualAppToolkitVersion)\Microsoft.Multilingual.ResxResources.targets')" />
+  <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" Label="MultilingualAppToolkit">
+    <Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
+  </Target>
 </Project>
