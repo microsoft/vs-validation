@@ -8,7 +8,6 @@
     <PackageTags>InputValidation IntegrityCheck</PackageTags>
     <Company>Microsoft</Company>
     <Authors>Microsoft</Authors>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/Microsoft/vs-validation/$GitCommitIdShort$/LICENSE</PackageLicenseUrl>
     <PackageReleaseNotes>https://go.microsoft.com/fwlink/?LinkID=746387</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <DebugType>full</DebugType>
@@ -54,5 +53,10 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\v$(MultilingualAppToolkitVersion)\Microsoft.Multilingual.ResxResources.targets')" />
   <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" Label="MultilingualAppToolkit">
     <Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
+  </Target>
+  <Target Name="SetNuSpecProperties" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">
+    <PropertyGroup>
+      <PackageLicenseUrl>https://raw.githubusercontent.com/Microsoft/vs-validation/$(GitCommitIdShort)/LICENSE</PackageLicenseUrl>
+    </PropertyGroup>
   </Target>
 </Project>
