@@ -11,9 +11,6 @@
     <AdditionalFile Include="..\Microsoft.VisualStudio.Validation\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="1.6.19-beta" />
-    <PackageReference Include="MicroBuild.VisualStudio" Version="2.0.37" />
     <PackageReference Include="Moq" Version="4.7.1" />
     <PackageReference Include="xunit" Version="2.2.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
