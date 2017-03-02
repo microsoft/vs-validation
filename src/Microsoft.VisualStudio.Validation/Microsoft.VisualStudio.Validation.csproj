@@ -11,6 +11,7 @@
     <PackageLicenseUrl>https://raw.githubusercontent.com/Microsoft/vs-validation/$GitCommitIdShort$/LICENSE</PackageLicenseUrl>
     <PackageReleaseNotes>https://go.microsoft.com/fwlink/?LinkID=746387</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <DebugType>full</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="stylecop.json" />
