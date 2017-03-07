@@ -7,37 +7,43 @@ branches:
 skip_tags: true
 nuget:
   disable_publish_on_pr: true
-image: Visual Studio 2015
+image: Visual Studio 2017 RC
 configuration: Release
 environment:
-  VisualStudioVersion: 14.0
-cache:
-- '%USERPROFILE%\.nuget\packages -> **\project.json'
-- 'obj\tools -> tools\**'
+  VisualStudioVersion: 15.0
 before_build:
-- ps: .\init.ps1
-build:
-  project: src\Microsoft.VisualStudio.Validation.sln
-  parallel: true
-  verbosity: minimal
+- ps: >-
+    cd src
+
+    dotnet restore
+build_script:
+- ps: msbuild /nologo /m /t:pack
 test_script:
 - cmd: >-
+    cd ..
+
+    SET testdir=bin\Microsoft.VisualStudio.Validation.Tests\%configuration%\net452\
+
     "%userprofile%\.nuget\packages\OpenCover\4.6.519\tools\OpenCover.Console.exe"
     -register:user
     -target:"%xunit20%\xunit.console.x86.exe"
-    -targetargs:"bin\Release\Microsoft.VisualStudio.Validation.Tests.Desktop.dll bin\Release\Profile259\Microsoft.VisualStudio.Validation.Tests.Portable.dll -noshadow -parallel all -html bin\release\testresults.html -xml bin\release\testresults.xml -appveyor -notrait TestCategory=FailsInCloudTest -nologo"
+    -targetargs:"%testdir%Microsoft.VisualStudio.Validation.Tests.dll -noshadow -parallel all -html %testdir%testresults.html -xml %testdir%testresults.xml -appveyor -notrait TestCategory=FailsInCloudTest -nologo"
     -returntargetcode
     -excludebyattribute:*.ExcludeFromCodeCoverage*
     -excludebyfile:*\*Designer.cs
     -filter:"+[Microsoft.VisualStudio.Validation]*"
     -hideskipped:All
-    -output:bin\Release\code_coverage.xml
+    -output:%testdir%code_coverage.xml
 
     SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%
 
     pip install codecov
 
-    codecov -f "bin\Release\code_coverage.xml"
+    codecov -f "%testdir%code_coverage.xml"
+
+    cd src\Microsoft.VisualStudio.Validation.Tests
+
+    dotnet test --no-build -f netcoreapp1.0
 artifacts:
-- path: bin\**\*.nupkg
+- path: bin\Microsoft.VisualStudio.Validation\%configuration%\*.nupkg
   name: NuGet Package
