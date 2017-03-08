@@ -6,6 +6,7 @@
     <PackageTargetFallback>portable-net45+win8+wp8+wpa81</PackageTargetFallback>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFile Include="..\Microsoft.VisualStudio.Validation\stylecop.json" Link="stylecop.json" />
