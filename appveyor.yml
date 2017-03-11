@@ -7,7 +7,7 @@ branches:
 skip_tags: true
 nuget:
   disable_publish_on_pr: true
-image: Visual Studio 2017 RC
+image: Visual Studio 2017
 configuration: Release
 environment:
   VisualStudioVersion: 15.0
