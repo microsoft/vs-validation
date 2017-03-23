@@ -19,4 +19,26 @@ public class RequiresTests
         // Make sure an argument exception is thrown when an empty guid is passed in.
         Assert.Throws<ArgumentException>(() => Requires.NotEmpty(Guid.Empty, "foo"));
     }
+
+    [Fact]
+    public void Argument_Bool_String_String()
+    {
+        Requires.Argument(true, "a", "b");
+        Assert.Throws<ArgumentException>("a", () => Requires.Argument(false, "a", "b"));
+    }
+
+    [Fact]
+    public void Range_Bool_String_String()
+    {
+        Requires.Range(true, "a");
+        Requires.Range(true, "a", "b");
+        Assert.Throws<ArgumentOutOfRangeException>("a", () => Requires.Range(false, "a", "b"));
+        Assert.Throws<ArgumentOutOfRangeException>("a", () => Requires.Range(false, "a"));
+    }
+
+    [Fact]
+    public void FailRange()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>("a", () => Requires.FailRange("a"));
+    }
 }
