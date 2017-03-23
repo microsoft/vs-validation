@@ -33,6 +33,7 @@ public class RequiresTests
         Requires.Range(true, "a");
         Requires.Range(true, "a", "b");
         Assert.Throws<ArgumentOutOfRangeException>("a", () => Requires.Range(false, "a", "b"));
+        Assert.Throws<ArgumentOutOfRangeException>("a", () => Requires.Range(false, "a"));
     }
 
     [Fact]
