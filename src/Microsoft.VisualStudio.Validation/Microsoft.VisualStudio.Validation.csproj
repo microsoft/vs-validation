@@ -44,7 +44,7 @@
     </PackageReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <PackageReference Include="MicroBuild.VisualStudio" Version="2.0.37" />
+    <PackageReference Include="MicroBuild.VisualStudio" Version="2.0.40" />
     <PackageReference Include="MSBuild.SDK.Extras" Version="1.0.0-rc4.23" />
     <PackageReference Include="PdbGit" Version="3.0.41" />
   </ItemGroup>
