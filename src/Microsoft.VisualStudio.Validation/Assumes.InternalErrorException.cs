@@ -9,7 +9,6 @@ namespace Microsoft
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
 #if NET45
     using System.Runtime.Serialization;
 #endif
@@ -26,6 +25,7 @@ namespace Microsoft
         [Serializable]
 #endif
         [SuppressMessage("Microsoft.Design", "CA1064:ExceptionsShouldBePublic", Justification = "Internal exceptions should not be caught.")]
+        [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors", Justification = "This is an internal exception type and we don't use the recommended ctors.")]
         private sealed class InternalErrorException : Exception
         {
             /// <summary>

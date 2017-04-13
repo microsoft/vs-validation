@@ -74,8 +74,10 @@ namespace Microsoft
         {
             if (!condition)
             {
-                var ex = new InvalidOperationException(message);
-                ex.HelpLink = helpLink;
+                var ex = new InvalidOperationException(message)
+                {
+                    HelpLink = helpLink
+                };
                 throw ex;
             }
         }
