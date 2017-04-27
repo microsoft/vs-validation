@@ -28,8 +28,7 @@ internal class AssertDialogSuppression : IDisposable
     {
 #if NET452
         // We disable the assertion dialog so it doesn't block tests, as we expect some tests to test failure cases.
-        DefaultTraceListener assertDialogListener = Trace.Listeners["Default"] as DefaultTraceListener;
-        if (assertDialogListener != null)
+        if (Trace.Listeners["Default"] is DefaultTraceListener assertDialogListener)
         {
             this.originalAssertUiSetting = assertDialogListener.AssertUiEnabled;
             assertDialogListener.AssertUiEnabled = false;
@@ -46,8 +45,7 @@ internal class AssertDialogSuppression : IDisposable
 #if NET452
         if (this.originalAssertUiSetting.HasValue)
         {
-            DefaultTraceListener assertDialogListener = Trace.Listeners["Default"] as DefaultTraceListener;
-            if (assertDialogListener != null)
+            if (Trace.Listeners["Default"] is DefaultTraceListener assertDialogListener)
             {
                 assertDialogListener.AssertUiEnabled = this.originalAssertUiSetting.Value;
             }

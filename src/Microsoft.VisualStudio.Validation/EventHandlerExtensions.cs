@@ -7,10 +7,12 @@
 namespace Microsoft
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Extension methods to make it easier to safely invoke events.
     /// </summary>
+    [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate", Justification = "These aren't events.")]
     public static class EventHandlerExtensions
     {
         /// <summary>
@@ -41,10 +43,7 @@ namespace Microsoft
             Requires.NotNull(sender, nameof(sender));
             Requires.NotNull(e, nameof(e));
 
-            if (handler != null)
-            {
-                handler(sender, e);
-            }
+            handler?.Invoke(sender, e);
         }
 
         /// <summary>
@@ -60,10 +59,7 @@ namespace Microsoft
             Requires.NotNull(sender, nameof(sender));
             Requires.NotNull(e, nameof(e));
 
-            if (handler != null)
-            {
-                handler(sender, e);
-            }
+            handler?.Invoke(sender, e);
         }
     }
 }
