@@ -35,10 +35,10 @@ namespace Microsoft
                 Type coreType = PrivateErrorHelpers.TrimGenericWrapper(typeof(T), typeof(Lazy<>));
 #if NET45       // TODO: we should remove this entire CPS-specific behavior.
                 if (Environment.GetEnvironmentVariable("CPSUnitTest") != "true")
+#endif
                 {
                     Fail(Strings.ServiceMissing, coreType.FullName);
                 }
-#endif
             }
         }
 
