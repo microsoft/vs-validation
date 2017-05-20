@@ -7,6 +7,9 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <IsPackable>false</IsPackable>
+
+    <!-- VS2017 Test Explorer test navigation and callstack links don't work with portable PDBs yet. -->
+    <DebugType>Full</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFile Include="..\Microsoft.VisualStudio.Validation\stylecop.json" Link="stylecop.json" />
