@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-#if NET45
+#if NET452
 using System.Runtime.Serialization.Formatters.Binary;
 #endif
 using Microsoft;
@@ -23,7 +23,7 @@ public partial class AssumesTests : IDisposable
         Assert.ThrowsAny<Exception>(() => Assumes.True(false, TestMessage));
     }
 
-#if NET45
+#if NET452
     [Fact]
     public void InternalErrorException_IsSerializable()
     {
@@ -33,7 +33,7 @@ public partial class AssumesTests : IDisposable
         }
         catch (Exception ex)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
+            var formatter = new BinaryFormatter();
             var ms = new MemoryStream();
             formatter.Serialize(ms, ex);
             ms.Position = 0;
