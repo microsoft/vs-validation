@@ -11,7 +11,6 @@
     <Authors>Microsoft</Authors>
     <PackageProjectUrl>https://github.com/Microsoft/vs-validation</PackageProjectUrl>
     <PackageReleaseNotes>https://go.microsoft.com/fwlink/?LinkID=746387</PackageReleaseNotes>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageIconUrl>https://aka.ms/VsExtensibilityIcon</PackageIconUrl>
     <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
     <DebugType>full</DebugType>
