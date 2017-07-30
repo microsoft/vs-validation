@@ -30,6 +30,11 @@ namespace Microsoft.VisualStudio.Validation.Tests
 
             Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
             Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
+
+            handler = null;
+            handler.Raise(this, Args);
+            Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
+            Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
         }
 
         [Fact]
@@ -47,6 +52,11 @@ namespace Microsoft.VisualStudio.Validation.Tests
 
             Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
             Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
+
+            handler = null;
+            handler.Raise(this, Args);
+            Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
+            Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
         }
 
         [Fact]
@@ -62,6 +72,11 @@ namespace Microsoft.VisualStudio.Validation.Tests
             handler.Raise(this, Args);
             Assert.True(invoked);
 
+            Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
+            Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
+
+            handler = null;
+            handler.Raise(this, Args);
             Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
             Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
         }
