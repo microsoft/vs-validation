@@ -1,84 +1,74 @@
-﻿// <copyright file="EventHandlerExtensionsTests.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
+﻿using System;
+using Microsoft;
+using Xunit;
 
-namespace Microsoft.VisualStudio.Validation.Tests
+public class EventHandlerExtensionsTests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Xunit;
+    private static readonly EventArgs Args = new EventArgs();
 
-    public class EventHandlerExtensionsTests
+    [Fact]
+    public void Raise_EventHandlerOfT()
     {
-        private static readonly EventArgs Args = new EventArgs();
-
-        [Fact]
-        public void Raise_EventHandlerOfT()
+        bool invoked = false;
+        EventHandler<EventArgs> handler = (s, e) =>
         {
-            bool invoked = false;
-            EventHandler<EventArgs> handler = (s, e) =>
-            {
-                Assert.Same(this, s);
-                Assert.Same(Args, e);
-                invoked = true;
-            };
-            handler.Raise(this, Args);
-            Assert.True(invoked);
+            Assert.Same(this, s);
+            Assert.Same(Args, e);
+            invoked = true;
+        };
+        handler.Raise(this, Args);
+        Assert.True(invoked);
 
-            Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
-            Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
+        Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
+        Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
 
-            handler = null;
-            handler.Raise(this, Args);
-            Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
-            Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
-        }
+        handler = null;
+        handler.Raise(this, Args);
+        Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
+        Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
+    }
 
-        [Fact]
-        public void Raise_EventHandler()
+    [Fact]
+    public void Raise_EventHandler()
+    {
+        bool invoked = false;
+        EventHandler handler = (s, e) =>
         {
-            bool invoked = false;
-            EventHandler handler = (s, e) =>
-            {
-                Assert.Same(this, s);
-                Assert.Same(Args, e);
-                invoked = true;
-            };
-            handler.Raise(this, Args);
-            Assert.True(invoked);
+            Assert.Same(this, s);
+            Assert.Same(Args, e);
+            invoked = true;
+        };
+        handler.Raise(this, Args);
+        Assert.True(invoked);
 
-            Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
-            Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
+        Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
+        Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
 
-            handler = null;
-            handler.Raise(this, Args);
-            Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
-            Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
-        }
+        handler = null;
+        handler.Raise(this, Args);
+        Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
+        Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
+    }
 
-        [Fact]
-        public void Raise_Delegate()
+    [Fact]
+    public void Raise_Delegate()
+    {
+        bool invoked = false;
+        Delegate handler = new EventHandler((s, e) =>
         {
-            bool invoked = false;
-            Delegate handler = new EventHandler((s, e) =>
-            {
-                Assert.Same(this, s);
-                Assert.Same(Args, e);
-                invoked = true;
-            });
-            handler.Raise(this, Args);
-            Assert.True(invoked);
+            Assert.Same(this, s);
+            Assert.Same(Args, e);
+            invoked = true;
+        });
+        handler.Raise(this, Args);
+        Assert.True(invoked);
 
-            Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
-            Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
+        Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
+        Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
 
-            handler = null;
-            handler.Raise(this, Args);
-            Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
-            Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
-        }
+        handler = null;
+        handler.Raise(this, Args);
+        Assert.Throws<ArgumentNullException>(() => handler.Raise(null, EventArgs.Empty));
+        Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null));
     }
 }
