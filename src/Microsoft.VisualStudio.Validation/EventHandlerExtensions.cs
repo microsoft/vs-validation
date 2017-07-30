@@ -26,10 +26,7 @@ namespace Microsoft
             Requires.NotNull(sender, nameof(sender));
             Requires.NotNull(e, nameof(e));
 
-            if (handler != null)
-            {
-                handler.DynamicInvoke(sender, e);
-            }
+            handler?.DynamicInvoke(sender, e);
         }
 
         /// <summary>
