@@ -1,8 +1,21 @@
 <Project>
   <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
     <BaseOutputPath Condition=" '$(BaseOutputPath)' == '' ">$(MSBuildThisFileDirectory)..\bin\$(MSBuildProjectName)\</BaseOutputPath>
+
+    <MicroBuildPackageVersion>2.0.44</MicroBuildPackageVersion>
   </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'debug' ">
+    <!-- VS2017 Test Explorer test navigation and callstack links don't work with portable PDBs yet. -->
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'release' ">
+    <!-- Watson doesn't work with portable PDBs yet. -->
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Nerdbank.GitVersioning" Version="1.6.25" PrivateAssets="all" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" PrivateAssets="all" />
