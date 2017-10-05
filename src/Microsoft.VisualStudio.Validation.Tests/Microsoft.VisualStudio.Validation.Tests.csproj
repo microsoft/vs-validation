@@ -9,7 +9,7 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <AdditionalFile Include="..\Microsoft.VisualStudio.Validation\stylecop.json" Link="stylecop.json" />
+    <AdditionalFiles Include="..\Microsoft.VisualStudio.Validation\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Moq" Version="4.7.1" />
