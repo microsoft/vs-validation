@@ -47,9 +47,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <PackageReference Include="MicroBuild.VisualStudio" Version="$(MicroBuildPackageVersion)" />
-    <PackageReference Include="MSBuild.SDK.Extras" Version="1.0.9" />
+    <PackageReference Include="MSBuild.SDK.Extras" Version="1.1.0" />
     <PackageReference Include="PdbGit" Version="3.0.41" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="1.2.0-beta2" />
+    <!--<PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="1.2.0-beta2" />-->
   </ItemGroup>
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\v$(MultilingualAppToolkitVersion)\Microsoft.Multilingual.ResxResources.targets')" />
