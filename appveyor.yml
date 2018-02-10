@@ -16,6 +16,7 @@ image: Visual Studio 2017
 configuration: Release
 environment:
   VisualStudioVersion: 15.0
+  codecov_token: 1c079a51-729f-4e18-9792-2a75f2e074e0
 before_build:
 - ps: >-
     cd src
