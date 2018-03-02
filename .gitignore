@@ -39,11 +39,11 @@ build/
 *.tmp
 *.tmp_proj
 *.log
+msbuild.binlog
 *.vspscc
 *.vssscc
 .builds
 *.pidb
-*.log
 *.scc
 
 # Visual C++ cache files
