@@ -42,7 +42,7 @@ steps:
 - task: VSBuild@1
   inputs:
     vsVersion: 15.0
-    msbuildArgs: /t:build,pack
+    msbuildArgs: /t:build,pack /m
     platform: $(BuildPlatform)
     configuration: $(BuildConfiguration)
   displayName: Build Visual Studio solution
