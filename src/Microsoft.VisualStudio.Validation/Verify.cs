@@ -160,6 +160,7 @@ namespace Microsoft
         /// No exception is thrown for S_FALSE.
         /// </remarks>
         [DebuggerStepThrough]
+        [System.Security.SecurityCritical]
         public static void HResult(int hresult, bool ignorePreviousComCalls = false)
         {
             if (hresult < 0)

@@ -7,4 +7,4 @@ using System.Security;
 [assembly: NeutralResourcesLanguage("en-US")]
 #endif
 
-[assembly: SecurityTransparent]
+[assembly: AllowPartiallyTrustedCallers]
