@@ -133,7 +133,7 @@
     <value>The parameter "{0}" cannot consist entirely of white space characters.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
-    <value>An internal error occurred. Please contact Microsoft Product Support Services.</value>
+    <value>An internal error occurred. Please contact Microsoft Support.</value>
   </data>
   <data name="ServiceMissing" xml:space="preserve">
     <value>Cannot find an instance of the {0} service.</value>
