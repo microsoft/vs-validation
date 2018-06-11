@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en-US" target-language="tr" original="MICROSOFT.VISUALSTUDIO.VALIDATION/STRINGS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
@@ -8,32 +8,32 @@
       <group id="MICROSOFT.VISUALSTUDIO.VALIDATION/STRINGS.RESX" datatype="resx">
         <trans-unit id="Argument_EmptyArray" translate="yes" xml:space="preserve">
           <source>'{0}' must contain at least one element.</source>
-          <target state="translated">'{0}' en az bir öğe içermelidir.</target>
+		  <target state="translated">'{0}' en az bir öğe içermelidir.</target>
         </trans-unit>
         <trans-unit id="Argument_EmptyString" translate="yes" xml:space="preserve">
           <source>'{0}' cannot be an empty string ("") or start with the null character.</source>
-          <target state="translated">'{0}', boş bir dize("") olamaz veya null karakteri ile başlayamaz.</target>
+		  <target state="translated">'{0}', boş bir dize("") olamaz veya null karakteri ile başlayamaz.</target>
         </trans-unit>
         <trans-unit id="Argument_NullElement" translate="yes" xml:space="preserve">
           <source>'{0}' cannot contain a null (Nothing in Visual Basic) element.</source>
-          <target state="translated">'{0}' null (Visual Basic'te Hiçbir Şey) öğe içeremez.</target>
+		  <target state="translated">'{0}' null (Visual Basic'te Hiçbir Şey) öğe içeremez.</target>
         </trans-unit>
         <trans-unit id="Argument_Whitespace" translate="yes" xml:space="preserve">
           <source>The parameter "{0}" cannot consist entirely of white space characters.</source>
-          <target state="translated">"{0}" parametresi tamamen boşluk karakterlerinden oluşamaz.</target>
+		  <target state="translated">"{0}" parametresi tamamen boşluk karakterlerinden oluşamaz.</target>
         </trans-unit>
         <trans-unit id="InternalExceptionMessage" translate="yes" xml:space="preserve">
           <source>An internal error occurred. Please contact Microsoft Support.</source>
-          <target state="needs-review-translation">Bir iç hata oluştu. Lütfen Microsoft Ürün Destek Hizmetleri'ne başvurun.</target>
+		  <target state="translated">Bir iç hata oluştu. Lütfen Microsoft Desteğine başvurun.</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ServiceMissing" translate="yes" xml:space="preserve">
           <source>Cannot find an instance of the {0} service.</source>
-          <target state="translated">{0} hizmetinin örneği bulunamıyor.</target>
+		  <target state="translated">{0} hizmetinin örneği bulunamıyor.</target>
         </trans-unit>
         <trans-unit id="Argument_EmptyGuid" translate="yes" xml:space="preserve">
           <source>'{0}' cannot be an empty guid.</source>
-          <target state="translated">'{0}' boş bir guid olamaz.</target>
+		  <target state="translated">'{0}' boş bir guid olamaz.</target>
         </trans-unit>
       </group>
     </body>
