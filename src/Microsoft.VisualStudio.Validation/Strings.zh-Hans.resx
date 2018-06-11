@@ -25,7 +25,7 @@
     <value>参数“{0}”不能全部由空白字符组成。</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
-    <value>发生内部错误。请与 Microsoft 产品支持服务联系。</value>
+    <value>发生内部错误。请与 Microsoft 支持部门联系。</value>
   </data>
   <data name="ServiceMissing" xml:space="preserve">
     <value>找不到 {0} 服务的实例。</value>

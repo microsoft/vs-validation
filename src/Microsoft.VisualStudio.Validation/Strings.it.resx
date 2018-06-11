@@ -25,7 +25,7 @@
     <value>Il parametro "{0}" non può essere interamente costituito da spazi vuoti.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
-    <value>Si è verificato un errore interno. Contattare il Servizio Supporto Tecnico Clienti Microsoft.</value>
+    <value>Si è verificato un errore interno. Contattare il Supporto tecnico Microsoft.</value>
   </data>
   <data name="ServiceMissing" xml:space="preserve">
     <value>Non è stata trovata alcuna istanza del servizio {0}.</value>

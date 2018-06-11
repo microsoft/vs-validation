@@ -25,7 +25,7 @@
     <value>Parametr {0} nemůže sestávat jen z prázdných znaků.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
-    <value>Došlo k vnitřní chybě. Prosím kontaktujte Microsoft Product Support Services.</value>
+    <value>Došlo k vnitřní chybě. Obraťte se prosím na Podporu Microsoftu.</value>
   </data>
   <data name="ServiceMissing" xml:space="preserve">
     <value>Nelze nalézt instanci služby {0}.</value>

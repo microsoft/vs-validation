@@ -25,7 +25,7 @@
     <value>O parâmetro "{0}" não pode consistir inteiramente em caracteres de espaço em branco.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
-    <value>Ocorreu um erro interno. Entre em contato com o Microsoft Product Support Services.</value>
+    <value>Ocorreu um erro interno. Entre em contato com o Suporte da Microsoft.</value>
   </data>
   <data name="ServiceMissing" xml:space="preserve">
     <value>Não é possível localizar uma instância do serviço {0}.</value>
