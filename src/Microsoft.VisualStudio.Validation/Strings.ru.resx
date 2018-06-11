@@ -25,7 +25,7 @@
     <value>Параметр "{0}" не может состоять только из пробелов.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
-    <value>Произошла внутренняя ошибка. Обратитесь в службу технической поддержки Майкрософт.</value>
+    <value>Произошла внутренняя ошибка. Обратитесь в службу поддержки Майкрософт.</value>
   </data>
   <data name="ServiceMissing" xml:space="preserve">
     <value>Невозможно найти экземпляр службы {0}.</value>

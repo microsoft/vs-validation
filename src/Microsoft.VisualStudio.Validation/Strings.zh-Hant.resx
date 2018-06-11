@@ -25,7 +25,7 @@
     <value>參數 "{0}" 不可完全由空白字元構成。</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
-    <value>發生內部錯誤。請連絡 Microsoft 產品支援服務。</value>
+    <value>發生內部錯誤，請連絡 Microsoft 支援服務。</value>
   </data>
   <data name="ServiceMissing" xml:space="preserve">
     <value>找不到 {0} 服務的執行個體。</value>

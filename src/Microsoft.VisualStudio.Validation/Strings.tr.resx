@@ -25,7 +25,7 @@
     <value>"{0}" parametresi tamamen boşluk karakterlerinden oluşamaz.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
-    <value>Bir iç hata oluştu. Lütfen Microsoft Ürün Destek Hizmetleri'ne başvurun.</value>
+    <value>Bir iç hata oluştu. Lütfen Microsoft Desteğine başvurun.</value>
   </data>
   <data name="ServiceMissing" xml:space="preserve">
     <value>{0} hizmetinin örneği bulunamıyor.</value>

@@ -25,7 +25,7 @@
     <value>Der Parameter "{0}" darf nicht nur aus Leerzeichen bestehen.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
-    <value>Interner Fehler. Wenden Sie sich an den Microsoft-Produktsupport.</value>
+    <value>Interner Fehler. Wenden Sie sich an den Microsoft-Support.</value>
   </data>
   <data name="ServiceMissing" xml:space="preserve">
     <value>Es wurde keine Instanz des {0}-Diensts gefunden.</value>
