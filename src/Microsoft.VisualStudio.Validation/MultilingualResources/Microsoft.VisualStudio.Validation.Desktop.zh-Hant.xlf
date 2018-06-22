@@ -25,7 +25,6 @@
         <trans-unit id="InternalExceptionMessage" translate="yes" xml:space="preserve">
           <source>An internal error occurred. Please contact Microsoft Support.</source>
           <target state="translated">發生內部錯誤，請連絡 Microsoft 支援服務。</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ServiceMissing" translate="yes" xml:space="preserve">
           <source>Cannot find an instance of the {0} service.</source>
