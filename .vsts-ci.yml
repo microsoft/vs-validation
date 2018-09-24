@@ -1,129 +1,39 @@
-steps:
-- task: PowerShell@2
-  displayName: Set VSTS variables
-  inputs:
-    targetType: inline
-    script: |
-      if ($env:SignType -eq 'Real') {
-        $feedGuid = '09d8d03c-1ac8-456e-9274-4d2364527d99'
-      } else {
-        $feedGuid = 'da484c78-f942-44ef-b197-99e2a1bef53c'
-      }
+trigger:
+  branches:
+    include: ["master"]
+  paths:
+    exclude: [".github", "doc", "*.md"]
 
-      Write-Host "##vso[task.setvariable variable=feedGuid]$feedGuid"
+variables:
+  TreatWarningsAsErrors: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  BuildConfiguration: Release
+  BuildPlatform: Any CPU
 
-      if ($env:ComputerName.StartsWith('factoryvm', [StringComparison]::OrdinalIgnoreCase)) {
-        Write-Host "Running on hosted queue"
-        Write-Host "##vso[task.setvariable variable=Hosted]true"
-      }
+resources:
+  containers:
+  - container: xenial
+    image: andrewarnott/linux-buildagent
 
-- task: CmdLine@2
-  inputs:
-    script: |
-      del /s /q "%userprofile%\.nuget\packages"
-      del /s /q "%LocalAppData%\NuGet\Cache"
-      del /s /q "%AppData%\tsd-cache"
-  displayName: Purge package caches
-  condition: and(succeeded(), ne(variables['Hosted'], 'true'))
+jobs:
+- job: Windows
+  pool: Hosted VS2017
+  steps:
+  - template: azure-pipelines/build.yml
 
-- task: MicroBuildIBCMergePlugin@0
-  inputs:
-    branch: $(InsertTargetBranch)
-  condition: and(succeeded(), ne(variables['Hosted'], 'true'))
+- job: Linux
+  pool:
+    vmImage: Ubuntu 16.04
+#  container: xenial
+  steps:
+  - template: azure-pipelines/testfx.yml
+    parameters:
+      projectdirectory: src/Microsoft.VisualStudio.Validation.Tests
 
-- task: MicroBuildSigningPlugin@1
-  inputs:
-    signType: $(SignType)
-    esrpSigning: true
-    zipSources: false
-
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '**\*.sln'
-    feedsToUse: config
-    nugetConfigPath: src\nuget.config
-  displayName: Nuget restore packages
-
-- task: VSBuild@1
-  inputs:
-    vsVersion: 15.0
-    msbuildArgs: /t:build,pack /m /bl:"$(Build.ArtifactStagingDirectory)/build_logs/msbuild.binlog"
-    platform: $(BuildPlatform)
-    configuration: $(BuildConfiguration)
-  displayName: Build Visual Studio solution
-
-- task: VSTest@1
-  inputs:
-    testAssembly: $(System.DefaultWorkingDirectory)\bin\Microsoft.VisualStudio.Validation.Tests\$(BuildConfiguration)\net452\Microsoft.VisualStudio.Validation.Tests.dll
-    codeCoverageEnabled: true
-    runInParallel: true
-    vsTestVersion: latest
-    pathtoCustomTestAdapters: $(System.DefaultWorkingDirectory)\bin\Microsoft.VisualStudio.Validation.Tests\$(BuildConfiguration)\net452
-
-- task: MicroBuildCleanup@1
-  condition: succeededOrFailed()
-
-## The rest of these steps are for deployment and skipped for PR builds
-
-#- task: PublishBuildArtifacts@1
-#  inputs:
-#    PathtoPublish: $(build.sourcesdirectory)/bin
-#    ArtifactName: bin
-#    ArtifactType: Container
-#  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-
-- task: CopyFiles@1
-  inputs:
-    SourceFolder: bin
-    Contents: |
-      Microsoft.VisualStudio.Validation/$(BuildConfiguration)/**/Microsoft.VisualStudio.Validation.dll
-      Microsoft.VisualStudio.Validation/$(BuildConfiguration)/**/Microsoft.VisualStudio.Validation.pdb
-    TargetFolder: $(Build.ArtifactStagingDirectory)/symbols
-  displayName: Collecting symbols artifacts
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: $(Build.ArtifactStagingDirectory)/symbols
-    ArtifactName: symbols
-    ArtifactType: Container
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-
-- task: CopyFiles@1
-  inputs:
-    Contents: |
-      bin/**/$(BuildConfiguration)/**/Microsoft.VisualStudio.Validation.*.nupkg
-    TargetFolder: $(Build.ArtifactStagingDirectory)/deployables
-    flattenFolders: true
-  displayName: Collecting deployables
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: $(Build.ArtifactStagingDirectory)/deployables
-    ArtifactName: deployables
-    ArtifactType: Container
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: $(Build.ArtifactStagingDirectory)/build_logs
-    ArtifactName: build_logs
-    ArtifactType: Container
-  condition: succeededOrFailed()
-
-- task: PublishSymbols@2
-  inputs:
-    SymbolsFolder: $(Build.ArtifactStagingDirectory)/symbols
-    SearchPattern: '**/*.pdb'
-    IndexSources: false
-    SymbolServerType: TeamServices
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-
-- task: NuGetCommand@2
-  inputs:
-    command: push
-    searchPatternPush: '$(Build.SourcesDirectory)\bin\**\$(BuildConfiguration)\**\*.nupkg;!**\*.symbols.nupkg;!**/VS.*.nupkg'
-    publishVstsFeed: $(feedGuid)
-    allowPackageConflicts: true
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+- job: macOS
+  pool:
+    vmImage: macOS 10.13
+  steps:
+  - template: azure-pipelines/testfx.yml
+    parameters:
+      projectdirectory: src/Microsoft.VisualStudio.Validation.Tests
