@@ -2,7 +2,7 @@ trigger:
   branches:
     include: ["master"]
   paths:
-    exclude: [".github", "doc", "*.md", ".appveyor.yml", ".travis.yml"]
+    exclude: [".github", "doc", "*.md"]
 
 variables:
   TreatWarningsAsErrors: true
