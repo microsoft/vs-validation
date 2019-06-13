@@ -4,7 +4,7 @@
 *                                                        *
 *********************************************************/
 
-#if NETSTANDARD1_0 || PROFILE259
+#if NETSTANDARD1_1
 namespace System.Diagnostics.CodeAnalysis
 {
     /// <summary>

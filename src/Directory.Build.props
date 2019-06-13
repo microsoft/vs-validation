@@ -3,6 +3,10 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
     <BaseOutputPath Condition=" '$(BaseOutputPath)' == '' ">$(MSBuildThisFileDirectory)..\bin\$(MSBuildProjectName)\</BaseOutputPath>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)..\bin\Packages\$(Configuration)\</PackageOutputPath>
+    <LangVersion>7.3</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DebugType>portable</DebugType>
 
     <MicroBuildPackageVersion>2.0.55</MicroBuildPackageVersion>
 
@@ -14,8 +18,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Nerdbank.GitVersioning" Version="2.3.105" PrivateAssets="all" />
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.0.15-beta" PrivateAssets="all" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19270-01" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0-preview.2" PrivateAssets="All" />
+    <!-- Explicitly set the version of NETStandard.Library so that our netstandard1.1 target uses something newer than what brings in System.Net.Http 4.3.0, which Component Governance forbids. -->
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
   </ItemGroup>
 </Project>

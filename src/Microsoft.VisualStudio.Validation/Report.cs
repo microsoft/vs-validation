@@ -33,12 +33,7 @@ namespace Microsoft
             if (part == null)
             {
                 Type coreType = PrivateErrorHelpers.TrimGenericWrapper(typeof(T), typeof(Lazy<>));
-#if NET45       // TODO: we should remove this entire CPS-specific behavior.
-                if (Environment.GetEnvironmentVariable("CPSUnitTest") != "true")
-#endif
-                {
-                    Fail(Strings.ServiceMissing, coreType.FullName);
-                }
+                Fail(Strings.ServiceMissing, coreType.FullName);
             }
         }
 
@@ -114,7 +109,9 @@ namespace Microsoft
             }
 
             Debug.WriteLine(message);
+#if !NETSTANDARD2_0 // workaround https://github.com/dotnet/corefx/issues/38497
             Debug.Assert(false, message);
+#endif
         }
 
         /// <summary>

@@ -82,7 +82,6 @@ public class VerifyTests
         Assert.Throws<InvalidOperationException>(() => Verify.FailOperation("message", "arg1"));
     }
 
-#if NET452
     [Fact]
     public void HResult()
     {
@@ -94,7 +93,6 @@ public class VerifyTests
         Assert.Throws<ArgumentException>(() => Verify.HResult(E_INALIDARG, ignorePreviousComCalls: true));
         Assert.Throws<COMException>(() => Verify.HResult(E_FAIL, ignorePreviousComCalls: true));
     }
-#endif
 
     private class Disposable : IDisposableObservable
     {

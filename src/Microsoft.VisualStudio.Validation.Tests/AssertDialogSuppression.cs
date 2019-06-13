@@ -1,5 +1,5 @@
 ﻿using System;
-#if NET452
+#if !NETCOREAPP1_0
 using System.Diagnostics;
 #endif
 
@@ -13,7 +13,7 @@ using System.Diagnostics;
 /// </remarks>
 internal class AssertDialogSuppression : IDisposable
 {
-#if NET452
+#if !NETCOREAPP1_0
     /// <summary>
     /// Stores the original popup-ability of the assertion dialog.
     /// </summary>
@@ -26,7 +26,7 @@ internal class AssertDialogSuppression : IDisposable
     /// </summary>
     public AssertDialogSuppression()
     {
-#if NET452
+#if !NETCOREAPP1_0
         // We disable the assertion dialog so it doesn't block tests, as we expect some tests to test failure cases.
         if (Trace.Listeners["Default"] is DefaultTraceListener assertDialogListener)
         {
@@ -42,7 +42,7 @@ internal class AssertDialogSuppression : IDisposable
     /// </summary>
     public void Dispose()
     {
-#if NET452
+#if !NETCOREAPP1_0
         if (this.originalAssertUiSetting.HasValue)
         {
             if (Trace.Listeners["Default"] is DefaultTraceListener assertDialogListener)

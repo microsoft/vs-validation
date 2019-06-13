@@ -12,6 +12,18 @@ variables:
 
 jobs:
 - job: Windows
-  pool: VSEng-MicroBuildVS2017
+  pool: VSEng-MicroBuildVS2019
   steps:
-  - template: build.yml
+  - template: azure-pipeline.microbuild.before.yml
+  - template: install-dependencies.yml
+
+  - script: |
+      dotnet tool install --tool-path .. nbgv
+      ..\nbgv cloud
+    workingDirectory: src
+    displayName: Set build number
+
+  - template: dotnet.yml
+  - template: azure-pipeline.microbuild.after.yml
+  - template: collect-deployables.yml
+  - template: collect-logs.yml

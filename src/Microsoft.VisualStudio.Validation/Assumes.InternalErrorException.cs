@@ -9,7 +9,7 @@ namespace Microsoft
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-#if NET45
+#if NETFRAMEWORK || NETSTANDARD2_0
     using System.Runtime.Serialization;
 #endif
 
@@ -21,7 +21,7 @@ namespace Microsoft
         /// <summary>
         /// The exception that is thrown when an internal assumption failed.
         /// </summary>
-#if NET45
+#if NETFRAMEWORK || NETSTANDARD2_0
         [Serializable]
 #endif
         [SuppressMessage("Microsoft.Design", "CA1064:ExceptionsShouldBePublic", Justification = "Internal exceptions should not be caught.")]
@@ -32,23 +32,21 @@ namespace Microsoft
             /// Initializes a new instance of the <see cref="InternalErrorException"/> class.
             /// </summary>
             [DebuggerStepThrough]
-            public InternalErrorException(string message = null, bool showAssert = true)
+            public InternalErrorException(string message = null)
                 : base(message ?? Strings.InternalExceptionMessage)
             {
-                this.ShowAssertDialog(showAssert);
             }
 
             /// <summary>
             /// Initializes a new instance of the <see cref="InternalErrorException"/> class.
             /// </summary>
             [DebuggerStepThrough]
-            public InternalErrorException(string message, Exception innerException, bool showAssert = true)
+            public InternalErrorException(string message, Exception innerException)
                 : base(message ?? Strings.InternalExceptionMessage, innerException)
             {
-                this.ShowAssertDialog(showAssert);
             }
 
-#if NET45
+#if NETFRAMEWORK || NETSTANDARD2_0
             /// <summary>
             /// Initializes a new instance of the <see cref="InternalErrorException"/> class.
             /// </summary>
@@ -58,32 +56,6 @@ namespace Microsoft
             {
             }
 #endif
-
-            /// <summary>
-            /// Show the assert if showAssert==true.
-            /// </summary>
-            /// <param name="showAssert">Whether to show the assert.</param>
-            /// <remarks>
-            /// The assertion dialog may yet be suppressed if
-            /// ((DefaultTraceListener)System.Diagnostics.Trace.Listeners["Default"]).AssertUiEnabled == false
-            /// </remarks>
-            [DebuggerStepThrough]
-            private void ShowAssertDialog(bool showAssert)
-            {
-                if (showAssert)
-                {
-                    // In debug builds, throw up a dialog.  This allows a dev to
-                    // attach a debugger right at the point where the exception is
-                    // thrown rather than at the point where the exception is caught.
-                    string message = this.Message;
-                    if (this.InnerException != null)
-                    {
-                        message += " " + this.InnerException;
-                    }
-
-                    Report.Fail(message);
-                }
-            }
         }
     }
 }
