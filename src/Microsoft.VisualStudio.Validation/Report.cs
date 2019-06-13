@@ -109,7 +109,9 @@ namespace Microsoft
             }
 
             Debug.WriteLine(message);
+#if !NETSTANDARD2_0 // workaround https://github.com/dotnet/corefx/issues/38497
             Debug.Assert(false, message);
+#endif
         }
 
         /// <summary>
