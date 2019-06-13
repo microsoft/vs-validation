@@ -1,23 +1,41 @@
 steps:
-
-- task: CmdLine@2
+- task: PowerShell@2
+  displayName: Set VSTS variables
   inputs:
+    targetType: inline
     script: |
-      del /s /q "%userprofile%\.nuget\packages"
-      del /s /q "%LocalAppData%\NuGet\Cache"
-      del /s /q "%AppData%\tsd-cache"
+      if ($env:SignType -eq 'Real') {
+        $feedGuid = '09d8d03c-1ac8-456e-9274-4d2364527d99'
+      } else {
+        $feedGuid = 'da484c78-f942-44ef-b197-99e2a1bef53c'
+      }
+
+      Write-Host "##vso[task.setvariable variable=feedGuid]$feedGuid"
+
+      if ($env:ComputerName.StartsWith('factoryvm', [StringComparison]::OrdinalIgnoreCase)) {
+        Write-Host "Running on hosted queue"
+        Write-Host "##vso[task.setvariable variable=Hosted]true"
+      }
+
+      if ($env:SYSTEM_COLLECTIONID -eq '011b8bdf-6d56-4f87-be0d-0092136884d9') {
+        Write-Host "Running on official devdiv account: $env:System_TeamFoundationCollectionUri"
+      } else {
+        Write-Host "Running under OSS account: $env:System_TeamFoundationCollectionUri"
+      }
+
+- powershell: |
+    "$env:userprofile\.nuget\packages", "$env:LocalAppData\NuGet\Cache", "$env:AppData\tsd-cache" |% {
+      if (Test-Path $_) { Remove-Item $_ -Recurse -Force }
+    }
   displayName: Purge package caches
-  condition: and(succeeded(), ne(variables['Hosted'], 'true'))
 
 - task: MicroBuildIBCMergePlugin@0
   inputs:
     branch: rel/d15.8
   displayName: Install MicroBuild IBCMerge Plugin
-  condition: and(succeeded(), ne(variables['Hosted'], 'true'))
 
 - task: MicroBuildSigningPlugin@1
   inputs:
     signType: $(SignType)
     zipSources: false
   displayName: Install MicroBuild Signing Plugin
-  condition: and(succeeded(), ne(variables['Hosted'], 'true'))

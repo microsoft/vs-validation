@@ -1,6 +1,6 @@
 steps:
 - task: MicroBuildCleanup@1
-  condition: and(succeededOrFailed(), ne(variables['Hosted'], 'true'))
+  condition: succeededOrFailed()
   displayName: MicroBuild Cleanup
 
 - task: ms.vss-governance-buildtask.governance-build-task-component-detection.ComponentGovernanceComponentDetection@0
@@ -15,6 +15,11 @@ steps:
     allowPackageConflicts: true
   displayName: Push packages to VSTS feed
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+
+- task: NuGetToolInstaller@0
+  displayName: Install nuget.exe on PATH
+  inputs:
+    versionSpec: 4.x
 
 - powershell: |
     $DllPaths = @(
@@ -34,8 +39,6 @@ steps:
     Contents: |
       Microsoft.VisualStudio.Validation/$(BuildConfiguration)/**/Microsoft.VisualStudio.Validation.dll
       Microsoft.VisualStudio.Validation/$(BuildConfiguration)/**/symstore/Microsoft.VisualStudio.Validation.pdb
-#      Microsoft.VisualStudio.Validation.Analyzers/$(BuildConfiguration)/**/Microsoft.VisualStudio.Validation.Analyzers.dll
-#      Microsoft.VisualStudio.Validation.Analyzers/$(BuildConfiguration)/**/symstore/Microsoft.VisualStudio.Validation.Analyzers.pdb
     TargetFolder: $(Build.ArtifactStagingDirectory)/symbols
   displayName: Collecting symbols artifacts
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
