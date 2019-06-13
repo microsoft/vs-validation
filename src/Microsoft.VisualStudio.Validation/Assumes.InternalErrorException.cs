@@ -9,7 +9,7 @@ namespace Microsoft
     using System;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-#if NET45
+#if NETFRAMEWORK || NETSTANDARD2_0
     using System.Runtime.Serialization;
 #endif
 
@@ -21,7 +21,7 @@ namespace Microsoft
         /// <summary>
         /// The exception that is thrown when an internal assumption failed.
         /// </summary>
-#if NET45
+#if NETFRAMEWORK || NETSTANDARD2_0
         [Serializable]
 #endif
         [SuppressMessage("Microsoft.Design", "CA1064:ExceptionsShouldBePublic", Justification = "Internal exceptions should not be caught.")]
@@ -48,7 +48,7 @@ namespace Microsoft
                 this.ShowAssertDialog(showAssert);
             }
 
-#if NET45
+#if NETFRAMEWORK || NETSTANDARD2_0
             /// <summary>
             /// Initializes a new instance of the <see cref="InternalErrorException"/> class.
             /// </summary>

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-#if NET452
+#if !NETCOREAPP1_0
 using System.Runtime.Serialization.Formatters.Binary;
 #endif
 using Microsoft;
@@ -97,7 +98,7 @@ public partial class AssumesTests : IDisposable
         Assumes.Present("hi");
     }
 
-#if NET452
+#if !NETCOREAPP1_0
     [Fact]
     public void InternalErrorException_IsSerializable()
     {

@@ -150,7 +150,6 @@ namespace Microsoft
             }
         }
 
-#if NET45
         /// <summary>
         /// Throws an exception if the given value is negative.
         /// </summary>
@@ -175,6 +174,5 @@ namespace Microsoft
                 }
             }
         }
-#endif
     }
 }
