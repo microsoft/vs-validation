@@ -206,9 +206,26 @@ namespace Microsoft
         /// </summary>
         /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
         [DebuggerStepThrough]
-        public static Exception Fail([Localizable(false)] string message = null, bool showAssert = true)
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [Obsolete("Use Fail(string) instead.")]
+        public static Exception Fail([Localizable(false)] string message = null, bool showAssert = true) => Fail(message);
+
+        /// <summary>
+        /// Throws an public exception.
+        /// </summary>
+        /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [Obsolete("Use Fail(string, Exception) instead.")]
+        public static Exception Fail([Localizable(false)] string message, Exception innerException, bool showAssert = true) => Fail(message, innerException);
+
+        /// <summary>
+        /// Throws an public exception.
+        /// </summary>
+        /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
+        [DebuggerStepThrough]
+        public static Exception Fail([Localizable(false)] string message = null)
         {
-            var exception = new InternalErrorException(message, showAssert);
+            var exception = new InternalErrorException(message);
             bool proceed = true; // allows debuggers to skip the throw statement
             if (proceed)
             {
@@ -224,9 +241,9 @@ namespace Microsoft
         /// Throws an public exception.
         /// </summary>
         /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
-        public static Exception Fail([Localizable(false)] string message, Exception innerException, bool showAssert = true)
+        public static Exception Fail([Localizable(false)] string message, Exception innerException)
         {
-            var exception = new InternalErrorException(message, innerException, showAssert);
+            var exception = new InternalErrorException(message, innerException);
             bool proceed = true; // allows debuggers to skip the throw statement
             if (proceed)
             {
