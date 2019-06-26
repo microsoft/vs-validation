@@ -9,18 +9,10 @@ steps:
     version: 2.2.300
 
 - task: UseDotNet@2
-  displayName: Install .NET Core runtime 1.1.13 (non-Linux)
+  displayName: Install .NET Core runtime 1.1.13
   inputs:
     packageType: runtime
     version: 1.1.13
-  condition: ne(variables['Agent.OS'], 'Linux') # workaround https://github.com/microsoft/azure-pipelines-tasks/issues/10560
-
-- script: |
-    wget https://dot.net/v1/dotnet-install.sh -O $(Agent.TempDirectory)/dotnet-install.sh
-    chmod +x $(Agent.TempDirectory)/dotnet-install.sh
-    $(Agent.TempDirectory)/dotnet-install.sh --install-dir $(Agent.ToolsDirectory)/dotnet -v 1.1.13 --runtime dotnet
-  displayName: Install .NET Core runtime 1.1.13 (Linux)
-  condition: eq(variables['Agent.OS'], 'Linux') # workaround https://github.com/microsoft/azure-pipelines-tasks/issues/10560
 
 - script: dotnet --info
   displayName: .NET Core SDK/runtimes (explicitly installed)
