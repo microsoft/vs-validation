@@ -20,15 +20,12 @@ steps:
   condition: ne(variables['Agent.OS'], 'Windows_NT')
   displayName: dotnet pack
 
-- script: dotnet test src --no-build -c $(BuildConfiguration) -f net452 --filter "TestCategory!=FailsInCloudTest" -v n -l trx /p:CollectCoverage=true
-  displayName: dotnet test -f net452
+- script: dotnet test src --no-build -c $(BuildConfiguration) -f net472 --filter "TestCategory!=FailsInCloudTest" -v n -l trx /p:CollectCoverage=true
+  displayName: dotnet test -f net472
   continueOnError: true
   condition: eq(variables['Agent.OS'], 'Windows_NT')
-- script: dotnet test src --no-build -c $(BuildConfiguration) -f netcoreapp1.0 --filter "TestCategory!=FailsInCloudTest" -v n -l trx # Avoid code coverage on netcoreapp1.0 (see https://github.com/tonerdo/coverlet/issues/466)
-  displayName: dotnet test -f netcoreapp1.0
-  continueOnError: true
-- script: dotnet test src --no-build -c $(BuildConfiguration) -f netcoreapp2.2 --filter "TestCategory!=FailsInCloudTest" -v n -l trx /p:CollectCoverage=true
-  displayName: dotnet test -f netcoreapp2.2
+- script: dotnet test src --no-build -c $(BuildConfiguration) -f netcoreapp2.1 --filter "TestCategory!=FailsInCloudTest" -v n -l trx /p:CollectCoverage=true
+  displayName: dotnet test -f netcoreapp2.1
   continueOnError: true
 
 - task: PublishTestResults@2

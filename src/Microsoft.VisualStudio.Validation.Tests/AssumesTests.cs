@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-#if !NETCOREAPP1_0
 using System.Runtime.Serialization.Formatters.Binary;
-#endif
 using Microsoft;
 using Xunit;
 
@@ -98,7 +96,6 @@ public partial class AssumesTests : IDisposable
         Assumes.Present("hi");
     }
 
-#if !NETCOREAPP1_0
     [Fact]
     public void InternalErrorException_IsSerializable()
     {
@@ -117,5 +114,4 @@ public partial class AssumesTests : IDisposable
             Assert.Equal(ex.Message, ex2.Message);
         }
     }
-#endif
 }

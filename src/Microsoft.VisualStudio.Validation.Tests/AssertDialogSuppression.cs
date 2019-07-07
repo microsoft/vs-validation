@@ -1,7 +1,5 @@
 ﻿using System;
-#if !NETCOREAPP1_0
 using System.Diagnostics;
-#endif
 
 /// <summary>
 /// Suppresses the managed Assertion Failure dialog box, and continues
@@ -13,12 +11,10 @@ using System.Diagnostics;
 /// </remarks>
 internal class AssertDialogSuppression : IDisposable
 {
-#if !NETCOREAPP1_0
     /// <summary>
     /// Stores the original popup-ability of the assertion dialog.
     /// </summary>
     private bool? originalAssertUiSetting;
-#endif
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AssertDialogSuppression"/> class,
@@ -26,14 +22,12 @@ internal class AssertDialogSuppression : IDisposable
     /// </summary>
     public AssertDialogSuppression()
     {
-#if !NETCOREAPP1_0
         // We disable the assertion dialog so it doesn't block tests, as we expect some tests to test failure cases.
         if (Trace.Listeners["Default"] is DefaultTraceListener assertDialogListener)
         {
             this.originalAssertUiSetting = assertDialogListener.AssertUiEnabled;
             assertDialogListener.AssertUiEnabled = false;
         }
-#endif
     }
 
     /// <summary>
@@ -42,7 +36,6 @@ internal class AssertDialogSuppression : IDisposable
     /// </summary>
     public void Dispose()
     {
-#if !NETCOREAPP1_0
         if (this.originalAssertUiSetting.HasValue)
         {
             if (Trace.Listeners["Default"] is DefaultTraceListener assertDialogListener)
@@ -50,6 +43,5 @@ internal class AssertDialogSuppression : IDisposable
                 assertDialogListener.AssertUiEnabled = this.originalAssertUiSetting.Value;
             }
         }
-#endif
     }
 }
