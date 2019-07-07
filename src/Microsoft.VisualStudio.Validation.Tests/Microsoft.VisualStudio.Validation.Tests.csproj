@@ -10,12 +10,12 @@
     <AdditionalFiles Include="..\Microsoft.VisualStudio.Validation\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Moq" Version="4.8.3" />
+    <PackageReference Include="Moq" Version="4.12.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
     <PackageReference Include="MicroBuild.Nonshipping" Version="$(MicroBuildPackageVersion)" />
-    <PackageReference Include="coverlet.msbuild" Version="2.6.1" />
+    <PackageReference Include="coverlet.msbuild" Version="2.6.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj" />
