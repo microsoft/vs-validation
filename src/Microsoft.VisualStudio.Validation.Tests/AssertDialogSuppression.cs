@@ -7,7 +7,7 @@ using System.Diagnostics;
 /// </summary>
 /// <remarks>
 /// Inspired by Matt Ellis' post at:
-/// http://blogs.msdn.com/bclteam/archive/2007/07/19/customizing-the-behavior-of-system-diagnostics-debug-assert-matt-ellis.aspx
+/// <see href="http://blogs.msdn.com/bclteam/archive/2007/07/19/customizing-the-behavior-of-system-diagnostics-debug-assert-matt-ellis.aspx"/>.
 /// </remarks>
 internal class AssertDialogSuppression : IDisposable
 {

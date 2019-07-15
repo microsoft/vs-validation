@@ -26,7 +26,7 @@ namespace Microsoft
         /// <param name="value">The value of the argument.</param>
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <returns>The value of the parameter.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c></exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c>.</exception>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static T NotNull<T>([ValidatedNotNull]T value, string parameterName)
@@ -46,7 +46,7 @@ namespace Microsoft
         /// <param name="value">The value of the argument.</param>
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <returns>The value of the parameter.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is IntPtr.Zero</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see cref="IntPtr.Zero"/>.</exception>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
         public static IntPtr NotNull(IntPtr value, string parameterName)
@@ -64,7 +64,7 @@ namespace Microsoft
         /// </summary>
         /// <param name="value">The value of the argument.</param>
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c></exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c>.</exception>
         /// <remarks>
         /// This method allows async methods to use Requires.NotNull without having to assign the result
         /// to local variables to avoid C# warnings.
@@ -85,7 +85,7 @@ namespace Microsoft
         /// <typeparam name="T">The type of the return value of the task.</typeparam>
         /// <param name="value">The value of the argument.</param>
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c></exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c>.</exception>
         /// <remarks>
         /// This method allows async methods to use Requires.NotNull without having to assign the result
         /// to local variables to avoid C# warnings.
@@ -107,7 +107,7 @@ namespace Microsoft
         /// <param name="value">The value of the argument.</param>
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <returns>The value of the parameter.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c></exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c>.</exception>
         /// <remarks>
         /// This method exists for callers who themselves only know the type as a generic parameter which
         /// may or may not be a class, but certainly cannot be null.
@@ -260,11 +260,11 @@ namespace Microsoft
         }
 
         /// <summary>
-        /// Throws an exception if the specified parameter's value is Guid.Empty
+        /// Throws an exception if the specified parameter's value is <see cref="Guid.Empty"/>.
         /// </summary>
         /// <param name="value">The value of the argument.</param>
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
-        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is an empty guid (Guid.Empty)</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is an empty guid (<see cref="Guid.Empty"/>.)</exception>
         [DebuggerStepThrough]
         public static void NotEmpty(Guid value, string parameterName)
         {
