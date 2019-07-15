@@ -27,7 +27,7 @@ public class ReportDebugTests : IDisposable
         this.suppressAssertUi.Dispose();
     }
 
-#if !NETCOREAPP // corefx doesn't let us use TraceListeners to verify behavior https://github.com/dotnet/corefx/issues/16596
+#if !NETCOREAPP2_1 // .NET Core < 3.0 doesn't let us use TraceListeners to verify behavior https://github.com/dotnet/corefx/issues/16596
     [Fact]
     public void If()
     {
