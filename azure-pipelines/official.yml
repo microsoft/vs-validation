@@ -1,29 +1,22 @@
 trigger:
   branches:
-    include: ["master"]
+    include:
+    - master
+    - validate/*
   paths:
-    exclude: [".github", "doc", "*.md"]
+    exclude:
+    - doc/
+    - '*.md'
+    - .vscode/
 
 variables:
   TreatWarningsAsErrors: true
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   BuildConfiguration: Release
   BuildPlatform: Any CPU
+  push_to_ci: true
 
 jobs:
-- job: Windows
-  pool: VSEng-MicroBuildVS2019
-  steps:
-  - template: azure-pipeline.microbuild.before.yml
-  - template: install-dependencies.yml
-
-  - script: |
-      dotnet tool install --tool-path .. nbgv
-      ..\nbgv cloud
-    workingDirectory: src
-    displayName: Set build number
-
-  - template: dotnet.yml
-  - template: azure-pipeline.microbuild.after.yml
-  - template: collect-deployables.yml
-  - template: collect-logs.yml
+- template: build.yml
+  parameters:
+    windowsPool: VSEng-MicroBuildVS2019

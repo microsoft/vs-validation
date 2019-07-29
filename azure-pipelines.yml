@@ -1,8 +1,13 @@
 trigger:
   branches:
-    include: ["master"]
+    include:
+    - master
+    - validate/*
   paths:
-    exclude: [".github", "doc", "*.md"]
+    exclude:
+    - doc/
+    - '*.md'
+    - .vscode/
 
 variables:
   TreatWarningsAsErrors: true
@@ -12,33 +17,4 @@ variables:
   codecov_token: 1c079a51-729f-4e18-9792-2a75f2e074e0
 
 jobs:
-- job: Windows
-  pool: Hosted Windows 2019 with VS2019
-  steps:
-  - template: azure-pipelines/install-dependencies.yml
-
-  - script: |
-      dotnet tool install --tool-path .. nbgv
-      ..\nbgv cloud
-    workingDirectory: src
-    displayName: Set build number
-
-  - template: azure-pipelines/dotnet.yml
-  - template: azure-pipelines/collect-deployables.yml
-  - template: azure-pipelines/collect-logs.yml
-
-- job: Linux
-  pool:
-    vmImage: Ubuntu 16.04
-  steps:
-  - template: azure-pipelines/install-dependencies.yml
-  - template: azure-pipelines/dotnet.yml
-  - template: azure-pipelines/collect-logs.yml
-
-- job: macOS
-  pool:
-    vmImage: macOS 10.13
-  steps:
-  - template: azure-pipelines/install-dependencies.yml
-  - template: azure-pipelines/dotnet.yml
-  - template: azure-pipelines/collect-logs.yml
+- template: azure-pipelines/build.yml

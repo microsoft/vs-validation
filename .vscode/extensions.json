@@ -4,12 +4,15 @@
 
 	// List of extensions which should be recommended for users of this workspace.
 	"recommendations": [
-		"pflannery.vscode-versionlens",
 		"ms-azure-devops.azure-pipelines",
-		"ms-vscode.csharp"
+		"ms-vscode.csharp",
+		"k--kato.docomment",
+		"editorconfig.editorconfig",
+		"pflannery.vscode-versionlens",
+		"davidanson.vscode-markdownlint"
 	],
 	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
 	"unwantedRecommendations": [
-
+		
 	]
 }

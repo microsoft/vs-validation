@@ -1,66 +1,65 @@
 steps:
-- script: dotnet restore src  /v:m /bl:"$(Build.ArtifactStagingDirectory)/build_logs/restore.binlog"
-  displayName: dotnet restore
-
-# Use msbuild instead of dotnet build because MicroBuild plugins don't work on dotnet build.
+# We use VSBuild instead of "dotnet build" on Windows where MicroBuild tasks have to run (since they don't support MSBuild Core yet).
 - task: VSBuild@1
-  condition: eq(variables['Agent.OS'], 'Windows_NT')
+  displayName: Build Visual Studio solution
   inputs:
-    vsVersion: 16.0
-    msbuildArgs: /t:build,pack /m /bl:"$(Build.ArtifactStagingDirectory)/build_logs/build.binlog"
+    msbuildArgs: /t:build,pack /m /bl:"$(Build.ArtifactStagingDirectory)/build_logs/msbuild.binlog"
+    platform: Any CPU
     configuration: $(BuildConfiguration)
-    platform: $(BuildPlatform)
-  displayName: msbuild
-
-- script: dotnet build src --no-restore -c $(BuildConfiguration) /v:m /bl:"$(Build.ArtifactStagingDirectory)/build_logs/build.binlog"
-  condition: ne(variables['Agent.OS'], 'Windows_NT')
-  displayName: dotnet build
-
-- script: dotnet pack src --no-build -c $(BuildConfiguration) /v:m /bl:"$(Build.ArtifactStagingDirectory)/build_logs/pack.binlog"
-  condition: ne(variables['Agent.OS'], 'Windows_NT')
-  displayName: dotnet pack
-
-- script: dotnet test src --no-build -c $(BuildConfiguration) -f net472 --filter "TestCategory!=FailsInCloudTest" -v n -l trx /p:CollectCoverage=true
-  displayName: dotnet test -f net472
-  continueOnError: true
   condition: eq(variables['Agent.OS'], 'Windows_NT')
-- script: dotnet test src --no-build -c $(BuildConfiguration) -f netcoreapp2.1 --filter "TestCategory!=FailsInCloudTest" -v n -l trx /p:CollectCoverage=true
+
+- script: dotnet build --no-restore -c $(BuildConfiguration) /v:m /bl:"$(Build.ArtifactStagingDirectory)/build_logs/build.binlog"
+  displayName: dotnet build
+  workingDirectory: src
+  condition: ne(variables['Agent.OS'], 'Windows_NT')
+
+- script: dotnet pack --no-build -c $(BuildConfiguration) /v:m /bl:"$(Build.ArtifactStagingDirectory)/build_logs/pack.binlog"
+  displayName: dotnet pack
+  workingDirectory: src
+  condition: ne(variables['Agent.OS'], 'Windows_NT')
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet test -f net472
+  inputs:
+    command: test
+    arguments: --no-build -c $(BuildConfiguration) -f net472 --filter "TestCategory!=FailsInCloudTest" -v n /p:CollectCoverage=true
+    testRunTitle: net472-$(Agent.JobName)
+    workingDirectory: src
+  condition: eq(variables['Agent.OS'], 'Windows_NT')
+
+- task: DotNetCoreCLI@2
   displayName: dotnet test -f netcoreapp2.1
-  continueOnError: true
-
-- task: PublishTestResults@2
-  displayName: Publish test results
   inputs:
-    testRunner: VSTest
-    #mergeTestResults: true
-    testResultsFormat: trx
-    testResultsFiles: '**/*.trx'
-    failTaskOnFailedTests: true
+    command: test
+    arguments: --no-build -c $(BuildConfiguration) -f netcoreapp2.1 --filter "TestCategory!=FailsInCloudTest" -v n /p:CollectCoverage=true
+    testRunTitle: netcoreapp2.1-$(Agent.JobName)
+    workingDirectory: src
+
+- task: PowerShell@2
+  inputs:
+    filePath: azure-pipelines/variables/_pipelines.ps1
+    failOnStderr: true
+  displayName: Update pipeline variables based on build outputs
   condition: succeededOrFailed()
 
-- task: PublishCodeCoverageResults@1
-  displayName: Publish code coverage results to Azure DevOps
+- task: PowerShell@2
   inputs:
-    codeCoverageTool: cobertura
-    summaryFileLocation: '**/coverage.cobertura.xml'
+    filePath: azure-pipelines/artifacts/_pipelines.ps1
+    arguments: -ArtifactNameSuffix "-$(Agent.JobName)"
+  displayName: Publish artifacts
   condition: succeededOrFailed()
+
+- task: PublishSymbols@2
+  inputs:
+    SymbolsFolder: $(Build.ArtifactStagingDirectory)/symbols-Windows
+    SearchPattern: '**/*.pdb'
+    IndexSources: false
+    SymbolServerType: TeamServices
+  displayName: Publish symbols to symbol server
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Agent.OS'], 'Windows_NT'))
 
 - bash: bash <(curl -s https://codecov.io/bash)
   displayName: Publish code coverage results to codecov.io
-  condition: and(succeededOrFailed(), ne(variables['system.collectionId'], '011b8bdf-6d56-4f87-be0d-0092136884d9'))
-
-- task: CopyFiles@1
-  inputs:
-    Contents: |
-      obj/**/project.assets.json
-    TargetFolder: $(Build.ArtifactStagingDirectory)/projectAssetsJson
-  displayName: Collecting project.assets.json artifacts
-  condition: succeededOrFailed()
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: $(Build.ArtifactStagingDirectory)/projectAssetsJson
-    ArtifactName: projectAssetsJson-$(Agent.JobName)
-    ArtifactType: Container
-  displayName: Publish projectAssetsJson artifacts
-  condition: succeededOrFailed()
+  condition: ne(variables['codecov_token'], '')
+  timeoutInMinutes: 3
+  continueOnError: true
