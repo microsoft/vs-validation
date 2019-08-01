@@ -63,7 +63,7 @@ try {
         $EnvVars['SignType'] = "Test"
     }
 
-    & ".\azure-pipelines\Set-EnvVars.ps1" -Variables $EnvVars
+    & ".\azure-pipelines\Set-EnvVars.ps1" -Variables $EnvVars | Out-Null
 }
 catch {
     Write-Error $error[0]
