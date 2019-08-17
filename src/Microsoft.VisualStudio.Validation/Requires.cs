@@ -8,9 +8,8 @@ namespace Microsoft
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Diagnostics;
-    using System.Globalization;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Threading.Tasks;
 
@@ -278,7 +277,7 @@ namespace Microsoft
         /// Throws an <see cref="ArgumentOutOfRangeException"/> if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Range(bool condition, string parameterName, string message = null)
+        public static void Range([DoesNotReturnIf(false)] bool condition, string parameterName, string message = null)
         {
             if (!condition)
             {
@@ -291,6 +290,7 @@ namespace Microsoft
         /// </summary>
         /// <returns>Nothing.  This method always throws.</returns>
         [DebuggerStepThrough]
+        [DoesNotReturn]
         public static Exception FailRange(string parameterName, string message = null)
         {
             if (string.IsNullOrEmpty(message))
@@ -307,7 +307,7 @@ namespace Microsoft
         /// Throws an ArgumentException if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Argument(bool condition, string parameterName, string message)
+        public static void Argument([DoesNotReturnIf(false)] bool condition, string parameterName, string message)
         {
             if (!condition)
             {
@@ -319,7 +319,7 @@ namespace Microsoft
         /// Throws an ArgumentException if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Argument(bool condition, string parameterName, string message, object arg1)
+        public static void Argument([DoesNotReturnIf(false)] bool condition, string parameterName, string message, object arg1)
         {
             if (!condition)
             {
@@ -331,7 +331,7 @@ namespace Microsoft
         /// Throws an ArgumentException if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Argument(bool condition, string parameterName, string message, object arg1, object arg2)
+        public static void Argument([DoesNotReturnIf(false)] bool condition, string parameterName, string message, object arg1, object arg2)
         {
             if (!condition)
             {
@@ -343,7 +343,7 @@ namespace Microsoft
         /// Throws an ArgumentException if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Argument(bool condition, string parameterName, string message, params object[] args)
+        public static void Argument([DoesNotReturnIf(false)] bool condition, string parameterName, string message, params object[] args)
         {
             if (!condition)
             {
@@ -356,6 +356,7 @@ namespace Microsoft
         /// </summary>
         /// <returns>Nothing.  It always throws.</returns>
         [DebuggerStepThrough]
+        [DoesNotReturn]
         public static Exception Fail(string message)
         {
             throw new ArgumentException(message);
@@ -366,6 +367,7 @@ namespace Microsoft
         /// </summary>
         /// <returns>Nothing.  It always throws.</returns>
         [DebuggerStepThrough]
+        [DoesNotReturn]
         public static Exception Fail(string unformattedMessage, params object[] args)
         {
             throw Fail(Format(unformattedMessage, args));
@@ -375,6 +377,7 @@ namespace Microsoft
         /// Throws an ArgumentException.
         /// </summary>
         [DebuggerStepThrough]
+        [DoesNotReturn]
         public static Exception Fail(Exception innerException, string unformattedMessage, params object[] args)
         {
             throw new ArgumentException(Format(unformattedMessage, args), innerException);
