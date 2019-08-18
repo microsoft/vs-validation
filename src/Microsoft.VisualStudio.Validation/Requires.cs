@@ -28,7 +28,7 @@ namespace Microsoft
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c>.</exception>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static T NotNull<T>([ValidatedNotNull]T value, string parameterName)
+        public static T NotNull<T>([ValidatedNotNull, NotNull]T value, string parameterName)
             where T : class // ensures value-types aren't passed to a null checking method
         {
             if (value == null)
@@ -70,7 +70,7 @@ namespace Microsoft
         /// </remarks>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void NotNull([ValidatedNotNull]Task value, string parameterName)
+        public static void NotNull([ValidatedNotNull, NotNull]Task value, string parameterName)
         {
             if (value == null)
             {
@@ -91,7 +91,7 @@ namespace Microsoft
         /// </remarks>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void NotNull<T>([ValidatedNotNull]Task<T> value, string parameterName)
+        public static void NotNull<T>([ValidatedNotNull, NotNull]Task<T> value, string parameterName)
         {
             if (value == null)
             {
@@ -112,7 +112,7 @@ namespace Microsoft
         /// may or may not be a class, but certainly cannot be null.
         /// </remarks>
         [DebuggerStepThrough]
-        public static T NotNullAllowStructs<T>([ValidatedNotNull]T value, string parameterName)
+        public static T NotNullAllowStructs<T>([ValidatedNotNull, NotNull]T value, string parameterName)
         {
             if (value == null)
             {
@@ -129,7 +129,7 @@ namespace Microsoft
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <c>null</c> or empty.</exception>
         [DebuggerStepThrough]
-        public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
+        public static void NotNullOrEmpty([ValidatedNotNull, NotNull]string value, string parameterName)
         {
             // To the guy that is doing random code cleaning:
             // Consider the perfomance when changing the code to delegate to NotNull.
@@ -152,7 +152,7 @@ namespace Microsoft
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <c>null</c> or empty.</exception>
         [DebuggerStepThrough]
-        public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
+        public static void NotNullOrWhiteSpace([ValidatedNotNull, NotNull]string value, string parameterName)
         {
             // To the guy that is doing random code cleaning:
             // Consider the perfomance when changing the code to delegate to NotNull.
@@ -181,7 +181,7 @@ namespace Microsoft
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentException">Thrown if the tested condition is false.</exception>
         [DebuggerStepThrough]
-        public static void NotNullOrEmpty([ValidatedNotNull]System.Collections.IEnumerable values, string parameterName)
+        public static void NotNullOrEmpty([ValidatedNotNull, NotNull]System.Collections.IEnumerable values, string parameterName)
         {
             // To the guy that is doing random code cleaning:
             // Consider the perfomance when changing the code to delegate to NotNull.
@@ -213,7 +213,7 @@ namespace Microsoft
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentException">Thrown if the tested condition is false.</exception>
         [DebuggerStepThrough]
-        public static void NotNullEmptyOrNullElements<T>([ValidatedNotNull]IEnumerable<T> values, string parameterName)
+        public static void NotNullEmptyOrNullElements<T>([ValidatedNotNull, NotNull]IEnumerable<T> values, string parameterName)
             where T : class // ensures value-types aren't passed to a null checking method
         {
             NotNull(values, parameterName);

@@ -26,7 +26,7 @@ namespace Microsoft
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void NotNull<T>([ValidatedNotNull]T value)
+        public static void NotNull<T>([ValidatedNotNull, NotNull]T value)
             where T : class
         {
             True(value != null);
@@ -36,7 +36,7 @@ namespace Microsoft
         /// Throws an exception if the specified value is null or empty.
         /// </summary>
         [DebuggerStepThrough]
-        public static void NotNullOrEmpty([ValidatedNotNull]string value)
+        public static void NotNullOrEmpty([ValidatedNotNull, NotNull]string value)
         {
             NotNull(value);
             True(value.Length > 0);
@@ -48,7 +48,7 @@ namespace Microsoft
         /// </summary>
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
-        public static void NotNullOrEmpty<T>([ValidatedNotNull]ICollection<T> values)
+        public static void NotNullOrEmpty<T>([ValidatedNotNull, NotNull]ICollection<T> values)
         {
             Assumes.NotNull(values);
             Assumes.True(values.Count > 0);
@@ -59,7 +59,7 @@ namespace Microsoft
         /// </summary>
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
-        public static void NotNullOrEmpty<T>([ValidatedNotNull]IEnumerable<T> values)
+        public static void NotNullOrEmpty<T>([ValidatedNotNull, NotNull]IEnumerable<T> values)
         {
             Assumes.NotNull(values);
             Assumes.True(values.Any());
