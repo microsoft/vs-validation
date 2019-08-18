@@ -131,8 +131,8 @@ namespace Microsoft
         [DebuggerStepThrough]
         public static void NotNullOrEmpty([ValidatedNotNull]string value, string parameterName)
         {
-            // To the guy that is doing random code cleaning:
-            // Consider the perfomance when changing the code to delegate to NotNull.
+            // To whoever is doing random code cleaning:
+            // Consider the performance when changing the code to delegate to NotNull.
             // In general do not chain call to another function, check first and return as earlier as possible.
             if (value == null)
             {
@@ -154,8 +154,8 @@ namespace Microsoft
         [DebuggerStepThrough]
         public static void NotNullOrWhiteSpace([ValidatedNotNull]string value, string parameterName)
         {
-            // To the guy that is doing random code cleaning:
-            // Consider the perfomance when changing the code to delegate to NotNull.
+            // To whoever is doing random code cleaning:
+            // Consider the performance when changing the code to delegate to NotNull.
             // In general do not chain call to another function, check first and return as earlier as possible.
             if (value == null)
             {
@@ -183,8 +183,8 @@ namespace Microsoft
         [DebuggerStepThrough]
         public static void NotNullOrEmpty([ValidatedNotNull]System.Collections.IEnumerable values, string parameterName)
         {
-            // To the guy that is doing random code cleaning:
-            // Consider the perfomance when changing the code to delegate to NotNull.
+            // To whoever is doing random code cleaning:
+            // Consider the performance when changing the code to delegate to NotNull.
             // In general do not chain call to another function, check first and return as earlier as possible.
             if (values == null)
             {
