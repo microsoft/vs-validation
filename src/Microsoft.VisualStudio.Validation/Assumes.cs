@@ -10,6 +10,7 @@ namespace Microsoft
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using System.Runtime;
@@ -93,7 +94,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void False(bool condition, [Localizable(false)] string message = null)
+        public static void False([DoesNotReturnIf(true)] bool condition, [Localizable(false)] string message = null)
         {
             if (condition)
             {
@@ -106,7 +107,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void False(bool condition, [Localizable(false)] string unformattedMessage, object arg1)
+        public static void False([DoesNotReturnIf(true)] bool condition, [Localizable(false)] string unformattedMessage, object arg1)
         {
             if (condition)
             {
@@ -119,7 +120,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void False(bool condition, [Localizable(false)] string unformattedMessage, params object[] args)
+        public static void False([DoesNotReturnIf(true)] bool condition, [Localizable(false)] string unformattedMessage, params object[] args)
         {
             if (condition)
             {
@@ -132,7 +133,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void True(bool condition, [Localizable(false)] string message = null)
+        public static void True([DoesNotReturnIf(false)] bool condition, [Localizable(false)] string message = null)
         {
             if (!condition)
             {
@@ -145,7 +146,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void True(bool condition, [Localizable(false)] string unformattedMessage, object arg1)
+        public static void True([DoesNotReturnIf(false)] bool condition, [Localizable(false)] string unformattedMessage, object arg1)
         {
             if (!condition)
             {
@@ -158,7 +159,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void True(bool condition, [Localizable(false)] string unformattedMessage, params object[] args)
+        public static void True([DoesNotReturnIf(false)] bool condition, [Localizable(false)] string unformattedMessage, params object[] args)
         {
             if (!condition)
             {
@@ -170,6 +171,7 @@ namespace Microsoft
         /// Throws an public exception.
         /// </summary>
         [DebuggerStepThrough]
+        [DoesNotReturn]
         public static Exception NotReachable()
         {
             // Keep these two as separate lines of code, so the debugger can come in during the assert dialog
@@ -208,6 +210,7 @@ namespace Microsoft
         [DebuggerStepThrough]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Use Fail(string) instead.")]
+        [DoesNotReturn]
         public static Exception Fail([Localizable(false)] string message = null, bool showAssert = true) => Fail(message);
 
         /// <summary>
@@ -216,6 +219,7 @@ namespace Microsoft
         /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Use Fail(string, Exception) instead.")]
+        [DoesNotReturn]
         public static Exception Fail([Localizable(false)] string message, Exception innerException, bool showAssert = true) => Fail(message, innerException);
 
         /// <summary>
@@ -223,6 +227,7 @@ namespace Microsoft
         /// </summary>
         /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
         [DebuggerStepThrough]
+        [DoesNotReturn]
         public static Exception Fail([Localizable(false)] string message = null)
         {
             var exception = new InternalErrorException(message);
@@ -241,6 +246,7 @@ namespace Microsoft
         /// Throws an public exception.
         /// </summary>
         /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
+        [DoesNotReturn]
         public static Exception Fail([Localizable(false)] string message, Exception innerException)
         {
             var exception = new InternalErrorException(message, innerException);

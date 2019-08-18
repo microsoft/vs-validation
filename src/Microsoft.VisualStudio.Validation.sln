@@ -1,16 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29216.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudio.Validation", "Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj", "{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.VisualStudio.Validation", "Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj", "{4D36901F-A937-4A2F-B086-CB2CD4DFB3FB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{871C5DB2-2E11-428A-A9FA-78E269B6E9B0}"
 	ProjectSection(SolutionItems) = preProject
-		..\appveyor.yml = ..\appveyor.yml
+		.editorconfig = .editorconfig
 		Directory.Build.props = Directory.Build.props
-		nuget.config = nuget.config
-		version.json = version.json
+		Directory.Build.targets = Directory.Build.targets
+		..\global.json = ..\global.json
+		..\nuget.config = ..\nuget.config
+		stylecop.json = stylecop.json
+		..\version.json = ..\version.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.VisualStudio.Validation.Tests", "Microsoft.VisualStudio.Validation.Tests\Microsoft.VisualStudio.Validation.Tests.csproj", "{B68F4565-AC94-4533-A9D6-5701F67D9C85}"
@@ -52,5 +55,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1AFE11BB-B1CE-40D5-AA63-E80706C7682C}
 	EndGlobalSection
 EndGlobal
