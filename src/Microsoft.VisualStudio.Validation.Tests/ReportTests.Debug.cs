@@ -93,7 +93,7 @@ public class ReportDebugTests : IDisposable
     {
         using (var listener = Listen())
         {
-            var possiblyPresent = "not missing";
+            string? possiblyPresent = "not missing";
             var missingTypeName = possiblyPresent.GetType().FullName;
             Report.IfNotPresent(possiblyPresent);
             listener.Value.Setup(l => l.WriteLine(It.Is<string>(v => v.Contains(missingTypeName)))).Verifiable();

@@ -4,7 +4,7 @@ using System.Text;
 
 internal class DisposableValue<T> : IDisposable
 {
-    private Action disposeAction;
+    private Action? disposeAction;
 
     internal DisposableValue(T value, Action disposeAction)
     {
