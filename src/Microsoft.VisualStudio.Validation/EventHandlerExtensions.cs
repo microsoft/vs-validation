@@ -51,10 +51,9 @@ namespace Microsoft
         /// <param name="sender">The value to pass as the sender of the event.</param>
         /// <param name="e">Event arguments to include.</param>
         public static void Raise<T>(this EventHandler<T> handler, object sender, T e)
-            where T : EventArgs
         {
             Requires.NotNull(sender, nameof(sender));
-            Requires.NotNull(e, nameof(e));
+            Requires.NotNullAllowStructs(e, nameof(e));
 
             handler?.Invoke(sender, e);
         }
