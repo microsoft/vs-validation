@@ -11,6 +11,13 @@ public class ExceptionExtensionsTests
     }
 
     [Fact]
+    public void AddData_NullKey()
+    {
+        ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => new InvalidOperationException().AddData(null, "a"));
+        Assert.Equal("key", ex.ParamName);
+    }
+
+    [Fact]
     public void AddData_NullValuesArray()
     {
         InvalidOperationException ex = new InvalidOperationException().AddData("hi", null);

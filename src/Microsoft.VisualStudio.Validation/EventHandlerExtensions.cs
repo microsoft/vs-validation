@@ -4,6 +4,8 @@
 *                                                        *
 *********************************************************/
 
+#nullable enable
+
 namespace Microsoft
 {
     using System;
@@ -21,7 +23,7 @@ namespace Microsoft
         /// <param name="handler">The event.  Null is allowed.</param>
         /// <param name="sender">The value to pass as the sender of the event.</param>
         /// <param name="e">Event arguments to include.</param>
-        public static void Raise(this Delegate handler, object sender, EventArgs e)
+        public static void Raise(this Delegate? handler, object sender, EventArgs e)
         {
             Requires.NotNull(sender, nameof(sender));
             Requires.NotNull(e, nameof(e));
@@ -35,7 +37,7 @@ namespace Microsoft
         /// <param name="handler">The event.  Null is allowed.</param>
         /// <param name="sender">The value to pass as the sender of the event.</param>
         /// <param name="e">Event arguments to include.</param>
-        public static void Raise(this EventHandler handler, object sender, EventArgs e)
+        public static void Raise(this EventHandler? handler, object sender, EventArgs e)
         {
             Requires.NotNull(sender, nameof(sender));
             Requires.NotNull(e, nameof(e));
@@ -50,7 +52,7 @@ namespace Microsoft
         /// <param name="handler">The event.  Null is allowed.</param>
         /// <param name="sender">The value to pass as the sender of the event.</param>
         /// <param name="e">Event arguments to include.</param>
-        public static void Raise<T>(this EventHandler<T> handler, object sender, T e)
+        public static void Raise<T>(this EventHandler<T>? handler, object sender, T e)
         {
             Requires.NotNull(sender, nameof(sender));
             Requires.NotNullAllowStructs(e, nameof(e));

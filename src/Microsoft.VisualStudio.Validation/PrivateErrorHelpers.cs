@@ -4,14 +4,13 @@
 *                                                        *
 *********************************************************/
 
+#nullable enable
+
 namespace Microsoft
 {
     using System;
-    using System.Collections.Generic;
     using System.Globalization;
-    using System.Linq;
     using System.Reflection;
-    using System.Text;
 
     /// <summary>
     /// Common utility methods used by the various error detection and reporting classes.
@@ -26,7 +25,7 @@ namespace Microsoft
         /// <param name="type">The type to trim, or return unmodified.</param>
         /// <param name="wrapper">The SomeType&lt;&gt; generic type definition to trim away from <paramref name="type"/> if it is present.</param>
         /// <returns><paramref name="type"/>, if it is not a generic type instance of <paramref name="wrapper"/>; otherwise the type argument.</returns>
-        internal static Type TrimGenericWrapper(Type type, Type wrapper)
+        internal static Type TrimGenericWrapper(Type type, Type? wrapper)
         {
             Type[] typeArgs;
             if (type.GetTypeInfo().IsGenericType && type.GetGenericTypeDefinition() == wrapper && (typeArgs = type.GenericTypeArguments).Length == 1)
@@ -42,7 +41,7 @@ namespace Microsoft
         /// <summary>
         /// Helper method that formats string arguments.
         /// </summary>
-        internal static string Format(string format, params object[] arguments)
+        internal static string Format(string format, params object?[] arguments)
         {
             return string.Format(CultureInfo.CurrentCulture, format, arguments);
         }

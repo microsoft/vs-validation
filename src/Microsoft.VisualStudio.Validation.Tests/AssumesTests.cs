@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -44,7 +46,7 @@ public partial class AssumesTests : IDisposable
     [Fact]
     public void NotNull()
     {
-        Assert.ThrowsAny<Exception>(() => Assumes.NotNull((object)null));
+        Assert.ThrowsAny<Exception>(() => Assumes.NotNull((object?)null));
         Assumes.NotNull("success");
     }
 
@@ -52,7 +54,7 @@ public partial class AssumesTests : IDisposable
     public void Null()
     {
         Assert.ThrowsAny<Exception>(() => Assumes.Null("not null"));
-        Assumes.Null((object)null);
+        Assumes.Null((object?)null);
     }
 
     [Fact]
@@ -64,11 +66,11 @@ public partial class AssumesTests : IDisposable
         Assert.ThrowsAny<Exception>(() => Assumes.NotNullOrEmpty(string.Empty));
         Assumes.NotNullOrEmpty("success");
 
-        Assert.ThrowsAny<Exception>(() => Assumes.NotNullOrEmpty((ICollection<string>)null));
+        Assert.ThrowsAny<Exception>(() => Assumes.NotNullOrEmpty((ICollection<string>?)null));
         Assert.ThrowsAny<Exception>(() => Assumes.NotNullOrEmpty(collection.Take(0).ToList()));
         Assumes.NotNullOrEmpty(collection);
 
-        Assert.ThrowsAny<Exception>(() => Assumes.NotNullOrEmpty((IEnumerable<string>)null));
+        Assert.ThrowsAny<Exception>(() => Assumes.NotNullOrEmpty((IEnumerable<string>?)null));
         Assert.ThrowsAny<Exception>(() => Assumes.NotNullOrEmpty(collection.Take(0)));
         Assumes.NotNullOrEmpty(collection.Take(1));
     }
@@ -91,7 +93,7 @@ public partial class AssumesTests : IDisposable
     [Fact]
     public void Present()
     {
-        IServiceProvider someService = null;
+        IServiceProvider? someService = null;
         Assert.ThrowsAny<Exception>(() => Assumes.Present(someService));
         Assumes.Present("hi");
     }
