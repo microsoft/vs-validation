@@ -11,7 +11,7 @@ public class RequiresTests
     [Fact]
     public void NotNull_ThrowsOnNull()
     {
-        Assert.Throws<ArgumentNullException>(() => Requires.NotNull((object?)null, "foo"));
+        Assert.Throws<ArgumentNullException>(() => Requires.NotNull((object)null!, "foo"));
         Requires.NotNull(new object(), "foo");
     }
 
@@ -25,14 +25,14 @@ public class RequiresTests
     [Fact]
     public void NotNull_Task_ThrowsOnNull()
     {
-        Assert.Throws<ArgumentNullException>(() => Requires.NotNull((Task?)null, "foo"));
+        Assert.Throws<ArgumentNullException>(() => Requires.NotNull((Task)null!, "foo"));
         Requires.NotNull((Task)Task.FromResult(0), "foo");
     }
 
     [Fact]
     public void NotNull_TaskOfT_ThrowsOnNull()
     {
-        Assert.Throws<ArgumentNullException>(() => Requires.NotNull((Task<int>?)null, "foo"));
+        Assert.Throws<ArgumentNullException>(() => Requires.NotNull((Task<int>)null!, "foo"));
         Requires.NotNull(Task.FromResult(0), "foo");
     }
 
@@ -119,7 +119,7 @@ public class RequiresTests
     public void NotNullOrEmpty()
     {
         Requires.NotNullOrEmpty("not empty", "param");
-        Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrEmpty(null, "paramName"));
+        Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrEmpty(null!, "paramName"));
         Assert.Throws<ArgumentException>(() => Requires.NotNullOrEmpty(string.Empty, "paramName"));
         Assert.Throws<ArgumentException>(() => Requires.NotNullOrEmpty("\0", "paramName"));
         ArgumentException ex = Assert.Throws<ArgumentException>(() => Requires.NotNullOrEmpty(string.Empty, null));
@@ -130,7 +130,7 @@ public class RequiresTests
     public void NotNullOrWhitespace()
     {
         Requires.NotNullOrEmpty("not empty", "param");
-        Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrWhiteSpace(null, "paramName"));
+        Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrWhiteSpace(null!, "paramName"));
         Assert.Throws<ArgumentException>(() => Requires.NotNullOrWhiteSpace(string.Empty, "paramName"));
         Assert.Throws<ArgumentException>(() => Requires.NotNullOrWhiteSpace("\0", "paramName"));
         ArgumentException ex = Assert.Throws<ArgumentException>(() => Requires.NotNullOrWhiteSpace(" \t\n\r ", "paramName"));
@@ -144,7 +144,7 @@ public class RequiresTests
         ICollection<string> emptyCollection = new string[0];
         ICollection<string> collection = new[] { "hi" };
         Requires.NotNullOrEmpty(collection, "param");
-        Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrEmpty(nullCollection, "param"));
+        Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrEmpty(nullCollection!, "param"));
         Assert.Throws<ArgumentException>(() => Requires.NotNullOrEmpty(emptyCollection, "param"));
     }
 
@@ -154,10 +154,10 @@ public class RequiresTests
         ICollection<string>? nullCollection = null;
         ICollection<string> emptyCollection = new string[0];
         ICollection<string> collection = new[] { "hi" };
-        ICollection<string?> collectionWithNullElement = new[] { "hi", null, "bye" };
+        ICollection<string> collectionWithNullElement = new[] { "hi", null!, "bye" };
 
         Requires.NotNullEmptyOrNullElements(collection, "param");
-        Assert.Throws<ArgumentNullException>(() => Requires.NotNullEmptyOrNullElements(nullCollection, "param"));
+        Assert.Throws<ArgumentNullException>(() => Requires.NotNullEmptyOrNullElements(nullCollection!, "param"));
         Assert.Throws<ArgumentException>(() => Requires.NotNullEmptyOrNullElements(emptyCollection, "param"));
         Assert.Throws<ArgumentException>(() => Requires.NotNullEmptyOrNullElements(collectionWithNullElement, "param"));
     }
@@ -170,7 +170,7 @@ public class RequiresTests
         IEnumerable<string> collection = new[] { "hi" };
         IEnumerable<string?> collectionWithNullElement = new[] { "hi", null, "bye" };
 
-        Requires.NullOrNotNullElements(nullCollection, "param");
+        Requires.NullOrNotNullElements(nullCollection!, "param");
         Requires.NullOrNotNullElements(emptyCollection, "param");
         Requires.NullOrNotNullElements(collection, "param");
         Assert.Throws<ArgumentException>(() => Requires.NullOrNotNullElements(collectionWithNullElement, "param"));
