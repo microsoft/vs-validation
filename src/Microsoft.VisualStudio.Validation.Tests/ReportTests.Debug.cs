@@ -31,7 +31,7 @@ public class ReportDebugTests : IDisposable
     [Fact]
     public void If()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             Report.If(false, FailureMessage);
             listener.Value.Setup(l => l.WriteLine(FailureMessage)).Verifiable();
@@ -43,7 +43,7 @@ public class ReportDebugTests : IDisposable
     [Fact]
     public void IfNot()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             Report.IfNot(true, FailureMessage);
             listener.Value.Setup(l => l.WriteLine(FailureMessage)).Verifiable();
@@ -55,7 +55,7 @@ public class ReportDebugTests : IDisposable
     [Fact]
     public void IfNot_Format1Arg()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             Report.IfNot(true, "a{0}c", "b");
             listener.Value.Setup(l => l.WriteLine("abc")).Verifiable();
@@ -67,7 +67,7 @@ public class ReportDebugTests : IDisposable
     [Fact]
     public void IfNot_Format2Arg()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             Report.IfNot(true, "a{0}{1}d", "b", "c");
             listener.Value.Setup(l => l.WriteLine("abcd")).Verifiable();
@@ -79,7 +79,7 @@ public class ReportDebugTests : IDisposable
     [Fact]
     public void IfNot_FormatNArg()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             Report.IfNot(true, "a{0}{1}{2}e", "b", "c", "d");
             listener.Value.Setup(l => l.WriteLine("abcde")).Verifiable();
@@ -91,7 +91,7 @@ public class ReportDebugTests : IDisposable
     [Fact]
     public void IfNotPresent()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             string? possiblyPresent = "not missing";
             var missingTypeName = possiblyPresent.GetType().FullName;
@@ -106,7 +106,7 @@ public class ReportDebugTests : IDisposable
     [Fact]
     public void Fail()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             listener.Value.Setup(l => l.WriteLine(FailureMessage)).Verifiable();
             listener.Value.Setup(l => l.Fail(FailureMessage)).Verifiable();
@@ -117,7 +117,7 @@ public class ReportDebugTests : IDisposable
     [Fact]
     public void Fail_DefaultMessage()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             listener.Value.Setup(l => l.WriteLine(DefaultFailureMessage)).Verifiable();
             listener.Value.Setup(l => l.Fail(DefaultFailureMessage)).Verifiable();
