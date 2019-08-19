@@ -4,6 +4,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <CodeAnalysisRuleSet>..\shipping.ruleset</CodeAnalysisRuleSet>
     <RootNamespace>Microsoft</RootNamespace>
+    <Nullable>enable</Nullable>
 
     <Description>Common input validation and state verification utility methods.</Description>
     <PackageTags>InputValidation IntegrityCheck</PackageTags>

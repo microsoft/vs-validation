@@ -8,8 +8,6 @@
 // and be able to call other methods in this same class.
 #define DEBUG
 
-#nullable enable
-
 namespace Microsoft
 {
     using System;

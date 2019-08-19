@@ -4,8 +4,6 @@
 *                                                        *
 *********************************************************/
 
-#nullable enable
-
 namespace Microsoft
 {
     using System;
