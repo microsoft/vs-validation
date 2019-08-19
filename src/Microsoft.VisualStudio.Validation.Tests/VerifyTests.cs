@@ -71,7 +71,7 @@ public class VerifyTests
         }
         catch (ObjectDisposedException ex)
         {
-            Assert.Null(ex.ObjectName);
+            Assert.Equal(string.Empty, ex.ObjectName);
             Assert.Equal("message", ex.Message);
         }
     }
