@@ -39,8 +39,12 @@ public class VerifyTests
     public void NotDisposed()
     {
         Verify.NotDisposed(true, "message");
-        Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, "message"));
+        ObjectDisposedException actualException = Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, "message"));
+        Assert.Equal(string.Empty, actualException.ObjectName);
+        Assert.Equal("message", actualException.Message);
+
         Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, null));
+        Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, (object)null));
 
         try
         {
@@ -62,17 +66,6 @@ public class VerifyTests
         catch (ObjectDisposedException ex)
         {
             Assert.Equal(typeof(object).FullName, ex.ObjectName);
-        }
-
-        try
-        {
-            Verify.NotDisposed(false, "message");
-            Assert.False(true, "Expected exception not thrown.");
-        }
-        catch (ObjectDisposedException ex)
-        {
-            Assert.Equal(string.Empty, ex.ObjectName);
-            Assert.Equal("message", ex.Message);
         }
     }
 

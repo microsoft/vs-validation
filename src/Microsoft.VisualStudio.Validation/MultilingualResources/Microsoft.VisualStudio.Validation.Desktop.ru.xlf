@@ -19,8 +19,9 @@
           <target state="translated">"{0}" не может содержать элемент NULL (Nothing в Visual Basic).</target>
         </trans-unit>
         <trans-unit id="Argument_Whitespace" translate="yes" xml:space="preserve">
-          <source>The parameter "{0}" cannot consist entirely of white space characters.</source>
-          <target state="translated">Параметр "{0}" не может состоять только из пробелов.</target>
+          <source>The argument cannot consist entirely of white space characters.</source>
+          <target state="needs-review-translation">Параметр "{0}" не может состоять только из пробелов.</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="InternalExceptionMessage" translate="yes" xml:space="preserve">
           <source>An internal error occurred. Please contact Microsoft Support.</source>

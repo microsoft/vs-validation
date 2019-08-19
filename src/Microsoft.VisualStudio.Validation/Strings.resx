@@ -130,7 +130,7 @@
     <value>'{0}' cannot contain a null (Nothing in Visual Basic) element.</value>
   </data>
   <data name="Argument_Whitespace" xml:space="preserve">
-    <value>The parameter "{0}" cannot consist entirely of white space characters.</value>
+    <value>The argument cannot consist entirely of white space characters.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
     <value>An internal error occurred. Please contact Microsoft Support.</value>

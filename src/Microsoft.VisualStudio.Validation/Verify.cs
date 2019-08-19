@@ -126,11 +126,9 @@ namespace Microsoft
         [DebuggerStepThrough]
         public static void NotDisposed([DoesNotReturnIf(false)] bool condition, object disposedValue, string message = null)
         {
-            Requires.NotNull(disposedValue, nameof(disposedValue));
-
             if (!condition)
             {
-                string objectName = disposedValue.GetType().FullName;
+                string objectName = disposedValue != null ? disposedValue.GetType().FullName : string.Empty;
                 if (message != null)
                 {
                     throw new ObjectDisposedException(objectName, message);
