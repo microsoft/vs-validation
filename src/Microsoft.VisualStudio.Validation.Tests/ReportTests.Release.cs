@@ -30,7 +30,7 @@ public class ReportReleaseTests : IDisposable
     [Fact]
     public void If()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             Report.If(false, FailureMessage);
             Report.If(true, FailureMessage);
@@ -40,7 +40,7 @@ public class ReportReleaseTests : IDisposable
     [Fact]
     public void IfNot()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             Report.IfNot(true, FailureMessage);
             Report.IfNot(false, FailureMessage);
@@ -50,7 +50,7 @@ public class ReportReleaseTests : IDisposable
     [Fact]
     public void IfNot_Format1Arg()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             Report.IfNot(true, "a{0}c", "b");
             Report.IfNot(false, "a{0}c", "b");
@@ -60,7 +60,7 @@ public class ReportReleaseTests : IDisposable
     [Fact]
     public void IfNot_Format2Arg()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             Report.IfNot(true, "a{0}{1}d", "b", "c");
             Report.IfNot(false, "a{0}{1}d", "b", "c");
@@ -70,7 +70,7 @@ public class ReportReleaseTests : IDisposable
     [Fact]
     public void IfNot_FormatNArg()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             Report.IfNot(true, "a{0}{1}{2}e", "b", "c", "d");
             Report.IfNot(false, "a{0}{1}{2}e", "b", "c", "d");
@@ -80,7 +80,7 @@ public class ReportReleaseTests : IDisposable
     [Fact]
     public void IfNotPresent()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             string? possiblyPresent = "not missing";
             var missingTypeName = possiblyPresent.GetType().FullName;
@@ -93,7 +93,7 @@ public class ReportReleaseTests : IDisposable
     [Fact]
     public void Fail()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             Report.Fail(FailureMessage);
         }
@@ -102,7 +102,7 @@ public class ReportReleaseTests : IDisposable
     [Fact]
     public void Fail_DefaultMessage()
     {
-        using (var listener = Listen())
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             Report.Fail();
         }
