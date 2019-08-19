@@ -136,7 +136,8 @@ public class RequiresTests
         Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrWhiteSpace(null, "paramName"));
         Assert.Throws<ArgumentException>(() => Requires.NotNullOrWhiteSpace(string.Empty, "paramName"));
         Assert.Throws<ArgumentException>(() => Requires.NotNullOrWhiteSpace("\0", "paramName"));
-        Assert.Throws<ArgumentException>(() => Requires.NotNullOrWhiteSpace(" \t\n\r ", "paramName"));
+        ArgumentException ex = Assert.Throws<ArgumentException>(() => Requires.NotNullOrWhiteSpace(" \t\n\r ", "paramName"));
+        Assert.Equal("paramName", ex.ParamName);
     }
 
     [Fact]
