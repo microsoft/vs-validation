@@ -87,15 +87,8 @@ public class RequiresTests
     [Fact]
     public void Fail_Exception_ObjectArray()
     {
-        try
-        {
-            Requires.Fail(new InvalidOperationException(), "message", "arg1");
-            Assert.False(true, "Expected exception not thrown.");
-        }
-        catch (ArgumentException ex)
-        {
-            Assert.IsType<InvalidOperationException>(ex.InnerException);
-        }
+        ArgumentException ex = Assert.Throws<ArgumentException>(() => Requires.Fail(new InvalidOperationException(), "message", "arg1"));
+        Assert.IsType<InvalidOperationException>(ex.InnerException);
     }
 
     [Fact]
