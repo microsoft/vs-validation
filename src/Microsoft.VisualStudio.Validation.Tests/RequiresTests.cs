@@ -87,15 +87,8 @@ public class RequiresTests
     [Fact]
     public void Fail_Exception_ObjectArray()
     {
-        try
-        {
-            Requires.Fail(new InvalidOperationException(), "message", "arg1");
-            Assert.False(true, "Expected exception not thrown.");
-        }
-        catch (ArgumentException ex)
-        {
-            Assert.IsType<InvalidOperationException>(ex.InnerException);
-        }
+        ArgumentException ex = Assert.Throws<ArgumentException>(() => Requires.Fail(new InvalidOperationException(), "message", "arg1"));
+        Assert.IsType<InvalidOperationException>(ex.InnerException);
     }
 
     [Fact]
@@ -136,7 +129,8 @@ public class RequiresTests
         Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrWhiteSpace(null, "paramName"));
         Assert.Throws<ArgumentException>(() => Requires.NotNullOrWhiteSpace(string.Empty, "paramName"));
         Assert.Throws<ArgumentException>(() => Requires.NotNullOrWhiteSpace("\0", "paramName"));
-        Assert.Throws<ArgumentException>(() => Requires.NotNullOrWhiteSpace(" \t\n\r ", "paramName"));
+        ArgumentException ex = Assert.Throws<ArgumentException>(() => Requires.NotNullOrWhiteSpace(" \t\n\r ", "paramName"));
+        Assert.Equal("paramName", ex.ParamName);
     }
 
     [Fact]

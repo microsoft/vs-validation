@@ -23,47 +23,29 @@ public class VerifyTests
     public void OperationWithHelp()
     {
         Verify.OperationWithHelp(true, "message", "helpLink");
-        try
-        {
-            Verify.OperationWithHelp(false, "message", "helpLink");
-            Assert.True(false, "Expected exception not thrown");
-        }
-        catch (InvalidOperationException ex)
-        {
-            Assert.Equal("message", ex.Message);
-            Assert.Equal("helpLink", ex.HelpLink);
-        }
+        InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => Verify.OperationWithHelp(false, "message", "helpLink"));
+        Assert.Equal("message", ex.Message);
+        Assert.Equal("helpLink", ex.HelpLink);
     }
 
     [Fact]
     public void NotDisposed()
     {
         Verify.NotDisposed(true, "message");
-        Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, "message"));
+        ObjectDisposedException actualException = Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, "message"));
+        Assert.Equal(string.Empty, actualException.ObjectName);
+        Assert.Equal("message", actualException.Message);
+
         Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, null));
         Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, (object)null));
 
-        try
-        {
-            Verify.NotDisposed(false, "hi", "message");
-            Assert.False(true, "Expected exception not thrown.");
-        }
-        catch (ObjectDisposedException ex)
-        {
-            string expectedObjectName = typeof(string).FullName;
-            Assert.Equal(expectedObjectName, ex.ObjectName);
-            Assert.Equal(new ObjectDisposedException(expectedObjectName, "message").Message, ex.Message);
-        }
+        actualException = Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, "hi", "message"));
+        string expectedObjectName = typeof(string).FullName;
+        Assert.Equal(expectedObjectName, actualException.ObjectName);
+        Assert.Equal(new ObjectDisposedException(expectedObjectName, "message").Message, actualException.Message);
 
-        try
-        {
-            Verify.NotDisposed(false, new object());
-            Assert.False(true, "Expected exception not thrown.");
-        }
-        catch (ObjectDisposedException ex)
-        {
-            Assert.Equal(typeof(object).FullName, ex.ObjectName);
-        }
+        actualException = Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, new object()));
+        Assert.Equal(typeof(object).FullName, actualException.ObjectName);
     }
 
     [Fact]
