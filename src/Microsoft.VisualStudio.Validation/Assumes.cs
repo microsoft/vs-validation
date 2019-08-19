@@ -26,7 +26,7 @@ namespace Microsoft
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void NotNull<T>([ValidatedNotNull, NotNull]T value)
+        public static void NotNull<T>([ValidatedNotNull, NotNull]T? value)
             where T : class
         {
             True(value != null);
@@ -36,7 +36,7 @@ namespace Microsoft
         /// Throws an exception if the specified value is null or empty.
         /// </summary>
         [DebuggerStepThrough]
-        public static void NotNullOrEmpty([ValidatedNotNull, NotNull]string value)
+        public static void NotNullOrEmpty([ValidatedNotNull, NotNull]string? value)
         {
             NotNull(value);
             True(value.Length > 0);
@@ -48,7 +48,7 @@ namespace Microsoft
         /// </summary>
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
-        public static void NotNullOrEmpty<T>([ValidatedNotNull, NotNull]ICollection<T> values)
+        public static void NotNullOrEmpty<T>([ValidatedNotNull, NotNull]ICollection<T>? values)
         {
             Assumes.NotNull(values);
             Assumes.True(values.Count > 0);
@@ -59,7 +59,7 @@ namespace Microsoft
         /// </summary>
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
-        public static void NotNullOrEmpty<T>([ValidatedNotNull, NotNull]IEnumerable<T> values)
+        public static void NotNullOrEmpty<T>([ValidatedNotNull, NotNull]IEnumerable<T>? values)
         {
             Assumes.NotNull(values);
             Assumes.True(values.Any());
@@ -71,7 +71,7 @@ namespace Microsoft
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void Null<T>(T value)
+        public static void Null<T>(T? value)
             where T : class
         {
             True(value == null);
@@ -84,7 +84,7 @@ namespace Microsoft
         /// <param name="value">The value to test.</param>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void Is<T>(object value)
+        public static void Is<T>(object? value)
         {
             True(value is T);
         }
@@ -94,7 +94,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void False([DoesNotReturnIf(true)] bool condition, [Localizable(false)] string message = null)
+        public static void False([DoesNotReturnIf(true)] bool condition, [Localizable(false)] string? message = null)
         {
             if (condition)
             {
@@ -107,7 +107,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void False([DoesNotReturnIf(true)] bool condition, [Localizable(false)] string unformattedMessage, object arg1)
+        public static void False([DoesNotReturnIf(true)] bool condition, [Localizable(false)] string unformattedMessage, object? arg1)
         {
             if (condition)
             {
@@ -120,7 +120,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void False([DoesNotReturnIf(true)] bool condition, [Localizable(false)] string unformattedMessage, params object[] args)
+        public static void False([DoesNotReturnIf(true)] bool condition, [Localizable(false)] string unformattedMessage, params object?[] args)
         {
             if (condition)
             {
@@ -133,7 +133,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void True([DoesNotReturnIf(false)] bool condition, [Localizable(false)] string message = null)
+        public static void True([DoesNotReturnIf(false)] bool condition, [Localizable(false)] string? message = null)
         {
             if (!condition)
             {
@@ -146,7 +146,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void True([DoesNotReturnIf(false)] bool condition, [Localizable(false)] string unformattedMessage, object arg1)
+        public static void True([DoesNotReturnIf(false)] bool condition, [Localizable(false)] string unformattedMessage, object? arg1)
         {
             if (!condition)
             {
@@ -159,7 +159,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void True([DoesNotReturnIf(false)] bool condition, [Localizable(false)] string unformattedMessage, params object[] args)
+        public static void True([DoesNotReturnIf(false)] bool condition, [Localizable(false)] string unformattedMessage, params object?[] args)
         {
             if (!condition)
             {
@@ -185,7 +185,7 @@ namespace Microsoft
             }
             else
             {
-                return null;
+                return new Exception();
             }
         }
 
@@ -194,7 +194,7 @@ namespace Microsoft
         /// </summary>
         /// <typeparam name="T">The interface of the imported part.</typeparam>
         [DebuggerStepThrough]
-        public static void Present<T>(T component)
+        public static void Present<T>([NotNull]T component)
         {
             if (component == null)
             {
@@ -211,7 +211,7 @@ namespace Microsoft
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Use Fail(string) instead.")]
         [DoesNotReturn]
-        public static Exception Fail([Localizable(false)] string message = null, bool showAssert = true) => Fail(message);
+        public static Exception Fail([Localizable(false)] string? message = null, bool showAssert = true) => Fail(message);
 
         /// <summary>
         /// Throws an public exception.
@@ -220,7 +220,7 @@ namespace Microsoft
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Use Fail(string, Exception) instead.")]
         [DoesNotReturn]
-        public static Exception Fail([Localizable(false)] string message, Exception innerException, bool showAssert = true) => Fail(message, innerException);
+        public static Exception Fail([Localizable(false)] string? message, Exception? innerException, bool showAssert = true) => Fail(message, innerException);
 
         /// <summary>
         /// Throws an public exception.
@@ -228,7 +228,7 @@ namespace Microsoft
         /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
         [DebuggerStepThrough]
         [DoesNotReturn]
-        public static Exception Fail([Localizable(false)] string message = null)
+        public static Exception Fail([Localizable(false)] string? message = null)
         {
             var exception = new InternalErrorException(message);
             bool proceed = true; // allows debuggers to skip the throw statement
@@ -238,7 +238,7 @@ namespace Microsoft
             }
             else
             {
-                return null;
+                return new Exception();
             }
         }
 
@@ -247,7 +247,7 @@ namespace Microsoft
         /// </summary>
         /// <returns>Nothing, as this method always throws.  The signature allows for "throwing" Fail so C# knows execution will stop.</returns>
         [DoesNotReturn]
-        public static Exception Fail([Localizable(false)] string message, Exception innerException)
+        public static Exception Fail([Localizable(false)] string? message, Exception? innerException)
         {
             var exception = new InternalErrorException(message, innerException);
             bool proceed = true; // allows debuggers to skip the throw statement
@@ -257,14 +257,14 @@ namespace Microsoft
             }
             else
             {
-                return null;
+                return new Exception();
             }
         }
 
         /// <summary>
         /// Helper method that formats string arguments.
         /// </summary>
-        private static string Format(string format, params object[] arguments)
+        private static string Format(string format, params object?[] arguments)
         {
             return PrivateErrorHelpers.Format(format, arguments);
         }

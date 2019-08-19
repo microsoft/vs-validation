@@ -82,7 +82,7 @@ public class ReportReleaseTests : IDisposable
     {
         using (var listener = Listen())
         {
-            var possiblyPresent = "not missing";
+            string? possiblyPresent = "not missing";
             var missingTypeName = possiblyPresent.GetType().FullName;
             Report.IfNotPresent(possiblyPresent);
             possiblyPresent = null;

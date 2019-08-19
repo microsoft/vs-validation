@@ -28,7 +28,7 @@ namespace Microsoft
             /// Initializes a new instance of the <see cref="InternalErrorException"/> class.
             /// </summary>
             [DebuggerStepThrough]
-            public InternalErrorException(string message = null)
+            public InternalErrorException(string? message = null)
                 : base(message ?? Strings.InternalExceptionMessage)
             {
             }
@@ -37,7 +37,7 @@ namespace Microsoft
             /// Initializes a new instance of the <see cref="InternalErrorException"/> class.
             /// </summary>
             [DebuggerStepThrough]
-            public InternalErrorException(string message, Exception innerException)
+            public InternalErrorException(string? message, Exception? innerException)
                 : base(message ?? Strings.InternalExceptionMessage, innerException)
             {
             }

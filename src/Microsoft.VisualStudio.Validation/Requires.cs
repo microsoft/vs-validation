@@ -28,7 +28,7 @@ namespace Microsoft
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c>.</exception>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static T NotNull<T>([ValidatedNotNull, NotNull]T value, string parameterName)
+        public static T NotNull<T>([ValidatedNotNull, NotNull]T value, string? parameterName)
             where T : class // ensures value-types aren't passed to a null checking method
         {
             if (value == null)
@@ -48,7 +48,7 @@ namespace Microsoft
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see cref="IntPtr.Zero"/>.</exception>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static IntPtr NotNull(IntPtr value, string parameterName)
+        public static IntPtr NotNull(IntPtr value, string? parameterName)
         {
             if (value == IntPtr.Zero)
             {
@@ -70,7 +70,7 @@ namespace Microsoft
         /// </remarks>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void NotNull([ValidatedNotNull, NotNull]Task value, string parameterName)
+        public static void NotNull([ValidatedNotNull, NotNull]Task value, string? parameterName)
         {
             if (value == null)
             {
@@ -91,7 +91,7 @@ namespace Microsoft
         /// </remarks>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void NotNull<T>([ValidatedNotNull, NotNull]Task<T> value, string parameterName)
+        public static void NotNull<T>([ValidatedNotNull, NotNull]Task<T> value, string? parameterName)
         {
             if (value == null)
             {
@@ -112,7 +112,7 @@ namespace Microsoft
         /// may or may not be a class, but certainly cannot be null.
         /// </remarks>
         [DebuggerStepThrough]
-        public static T NotNullAllowStructs<T>([ValidatedNotNull, NotNull]T value, string parameterName)
+        public static T NotNullAllowStructs<T>([ValidatedNotNull, NotNull]T value, string? parameterName)
         {
             if (value == null)
             {
@@ -129,7 +129,7 @@ namespace Microsoft
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <c>null</c> or empty.</exception>
         [DebuggerStepThrough]
-        public static void NotNullOrEmpty([ValidatedNotNull, NotNull]string value, string parameterName)
+        public static void NotNullOrEmpty([ValidatedNotNull, NotNull]string value, string? parameterName)
         {
             // To whoever is doing random code cleaning:
             // Consider the performance when changing the code to delegate to NotNull.
@@ -152,7 +152,7 @@ namespace Microsoft
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <c>null</c> or empty.</exception>
         [DebuggerStepThrough]
-        public static void NotNullOrWhiteSpace([ValidatedNotNull, NotNull]string value, string parameterName)
+        public static void NotNullOrWhiteSpace([ValidatedNotNull, NotNull]string value, string? parameterName)
         {
             // To whoever is doing random code cleaning:
             // Consider the performance when changing the code to delegate to NotNull.
@@ -181,7 +181,7 @@ namespace Microsoft
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentException">Thrown if the tested condition is false.</exception>
         [DebuggerStepThrough]
-        public static void NotNullOrEmpty([ValidatedNotNull, NotNull]System.Collections.IEnumerable values, string parameterName)
+        public static void NotNullOrEmpty([ValidatedNotNull, NotNull]System.Collections.IEnumerable values, string? parameterName)
         {
             // To whoever is doing random code cleaning:
             // Consider the performance when changing the code to delegate to NotNull.
@@ -213,13 +213,13 @@ namespace Microsoft
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentException">Thrown if the tested condition is false.</exception>
         [DebuggerStepThrough]
-        public static void NotNullEmptyOrNullElements<T>([ValidatedNotNull, NotNull]IEnumerable<T> values, string parameterName)
+        public static void NotNullEmptyOrNullElements<T>([ValidatedNotNull, NotNull]IEnumerable<T> values, string? parameterName)
             where T : class // ensures value-types aren't passed to a null checking method
         {
             NotNull(values, parameterName);
 
             bool hasElements = false;
-            foreach (T value in values)
+            foreach (T? value in values)
             {
                 hasElements = true;
 
@@ -244,7 +244,7 @@ namespace Microsoft
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentException">Thrown if the tested condition is false.</exception>
         [DebuggerStepThrough]
-        public static void NullOrNotNullElements<T>(IEnumerable<T> values, string parameterName)
+        public static void NullOrNotNullElements<T>(IEnumerable<T> values, string? parameterName)
         {
             if (values != null)
             {
@@ -265,7 +265,7 @@ namespace Microsoft
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is an empty guid (<see cref="Guid.Empty"/>.)</exception>
         [DebuggerStepThrough]
-        public static void NotEmpty(Guid value, string parameterName)
+        public static void NotEmpty(Guid value, string? parameterName)
         {
             if (value == Guid.Empty)
             {
@@ -277,7 +277,7 @@ namespace Microsoft
         /// Throws an <see cref="ArgumentOutOfRangeException"/> if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Range([DoesNotReturnIf(false)] bool condition, string parameterName, string message = null)
+        public static void Range([DoesNotReturnIf(false)] bool condition, string? parameterName, string? message = null)
         {
             if (!condition)
             {
@@ -291,7 +291,7 @@ namespace Microsoft
         /// <returns>Nothing.  This method always throws.</returns>
         [DebuggerStepThrough]
         [DoesNotReturn]
-        public static Exception FailRange(string parameterName, string message = null)
+        public static Exception FailRange(string? parameterName, string? message = null)
         {
             if (string.IsNullOrEmpty(message))
             {
@@ -307,7 +307,7 @@ namespace Microsoft
         /// Throws an ArgumentException if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Argument([DoesNotReturnIf(false)] bool condition, string parameterName, string message)
+        public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, string? message)
         {
             if (!condition)
             {
@@ -319,7 +319,7 @@ namespace Microsoft
         /// Throws an ArgumentException if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Argument([DoesNotReturnIf(false)] bool condition, string parameterName, string message, object arg1)
+        public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, string message, object? arg1)
         {
             if (!condition)
             {
@@ -331,7 +331,7 @@ namespace Microsoft
         /// Throws an ArgumentException if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Argument([DoesNotReturnIf(false)] bool condition, string parameterName, string message, object arg1, object arg2)
+        public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, string message, object? arg1, object? arg2)
         {
             if (!condition)
             {
@@ -343,7 +343,7 @@ namespace Microsoft
         /// Throws an ArgumentException if a condition does not evaluate to true.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Argument([DoesNotReturnIf(false)] bool condition, string parameterName, string message, params object[] args)
+        public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, string message, params object?[] args)
         {
             if (!condition)
             {
@@ -357,7 +357,7 @@ namespace Microsoft
         /// <returns>Nothing.  It always throws.</returns>
         [DebuggerStepThrough]
         [DoesNotReturn]
-        public static Exception Fail(string message)
+        public static Exception Fail(string? message)
         {
             throw new ArgumentException(message);
         }
@@ -368,7 +368,7 @@ namespace Microsoft
         /// <returns>Nothing.  It always throws.</returns>
         [DebuggerStepThrough]
         [DoesNotReturn]
-        public static Exception Fail(string unformattedMessage, params object[] args)
+        public static Exception Fail(string unformattedMessage, params object?[] args)
         {
             throw Fail(Format(unformattedMessage, args));
         }
@@ -378,7 +378,7 @@ namespace Microsoft
         /// </summary>
         [DebuggerStepThrough]
         [DoesNotReturn]
-        public static Exception Fail(Exception innerException, string unformattedMessage, params object[] args)
+        public static Exception Fail(Exception? innerException, string unformattedMessage, params object?[] args)
         {
             throw new ArgumentException(Format(unformattedMessage, args), innerException);
         }
@@ -386,7 +386,7 @@ namespace Microsoft
         /// <summary>
         /// Helper method that formats string arguments.
         /// </summary>
-        private static string Format(string format, params object[] arguments)
+        private static string Format(string format, params object?[] arguments)
         {
             return PrivateErrorHelpers.Format(format, arguments);
         }

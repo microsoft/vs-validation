@@ -7,11 +7,8 @@
 namespace Microsoft
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
-    using System.Linq;
     using System.Runtime.InteropServices;
 
     /// <summary>
@@ -23,7 +20,7 @@ namespace Microsoft
         /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Operation([DoesNotReturnIf(false)] bool condition, string message)
+        public static void Operation([DoesNotReturnIf(false)] bool condition, string? message)
         {
             if (!condition)
             {
@@ -35,7 +32,7 @@ namespace Microsoft
         /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Operation([DoesNotReturnIf(false)]bool condition, string unformattedMessage, object arg1)
+        public static void Operation([DoesNotReturnIf(false)]bool condition, string unformattedMessage, object? arg1)
         {
             if (!condition)
             {
@@ -47,7 +44,7 @@ namespace Microsoft
         /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Operation([DoesNotReturnIf(false)]bool condition, string unformattedMessage, object arg1, object arg2)
+        public static void Operation([DoesNotReturnIf(false)]bool condition, string unformattedMessage, object? arg1, object? arg2)
         {
             if (!condition)
             {
@@ -59,7 +56,7 @@ namespace Microsoft
         /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
         /// </summary>
         [DebuggerStepThrough]
-        public static void Operation([DoesNotReturnIf(false)]bool condition, string unformattedMessage, params object[] args)
+        public static void Operation([DoesNotReturnIf(false)]bool condition, string unformattedMessage, params object?[] args)
         {
             if (!condition)
             {
@@ -71,7 +68,7 @@ namespace Microsoft
         /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
         /// </summary>
         [DebuggerStepThrough]
-        public static void OperationWithHelp([DoesNotReturnIf(false)]bool condition, string message, string helpLink)
+        public static void OperationWithHelp([DoesNotReturnIf(false)]bool condition, string? message, string? helpLink)
         {
             if (!condition)
             {
@@ -93,7 +90,7 @@ namespace Microsoft
         /// </returns>
         [DebuggerStepThrough]
         [DoesNotReturn]
-        public static Exception FailOperation(string message, params object[] args)
+        public static Exception FailOperation(string message, params object?[] args)
         {
             throw new InvalidOperationException(PrivateErrorHelpers.Format(message, args));
         }
@@ -102,7 +99,7 @@ namespace Microsoft
         /// Throws an <see cref="ObjectDisposedException"/> if an object is disposed.
         /// </summary>
         [DebuggerStepThrough]
-        public static void NotDisposed(IDisposableObservable disposedValue, string message = null)
+        public static void NotDisposed(IDisposableObservable disposedValue, string? message = null)
         {
             Requires.NotNull(disposedValue, nameof(disposedValue));
 
@@ -124,7 +121,7 @@ namespace Microsoft
         /// Throws an <see cref="ObjectDisposedException"/> if a condition is false.
         /// </summary>
         [DebuggerStepThrough]
-        public static void NotDisposed([DoesNotReturnIf(false)] bool condition, object disposedValue, string message = null)
+        public static void NotDisposed([DoesNotReturnIf(false)] bool condition, object? disposedValue, string? message = null)
         {
             if (!condition)
             {
@@ -144,7 +141,7 @@ namespace Microsoft
         /// Throws an <see cref="ObjectDisposedException"/> if a condition is false.
         /// </summary>
         [DebuggerStepThrough]
-        public static void NotDisposed([DoesNotReturnIf(false)]bool condition, string message)
+        public static void NotDisposed([DoesNotReturnIf(false)]bool condition, string? message)
         {
             if (!condition)
             {

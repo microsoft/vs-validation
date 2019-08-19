@@ -26,7 +26,9 @@ namespace Microsoft
         /// that would be useful when debugging Watson crashes.</para>
         /// <para>Do not use this method when you expect the exception to be handled.</para>
         /// </remarks>
-        public static T AddData<T>(this T exception, string key, params object[] values)
+#pragma warning disable SA1011 // Closing square brackets should be spaced correctly https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/2989
+        public static T AddData<T>(this T exception, string key, params object[]? values)
+#pragma warning restore SA1011 // Closing square brackets should be spaced correctly https://github.com/DotNetAnalyzers/StyleCopAnalyzers/issues/2989
             where T : Exception
         {
             Requires.NotNull(exception, nameof(exception));

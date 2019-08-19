@@ -37,7 +37,7 @@ public class VerifyTests
         Assert.Equal("message", actualException.Message);
 
         Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, null));
-        Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, (object)null));
+        Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, (object?)null));
 
         actualException = Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, "hi", "message"));
         string expectedObjectName = typeof(string).FullName;
