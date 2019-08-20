@@ -1,6 +1,6 @@
 /********************************************************
 *                                                        *
-*   © Copyright (C) Microsoft. All rights reserved.      *
+*   Â© Copyright (C) Microsoft. All rights reserved.      *
 *                                                        *
 *********************************************************/
 
@@ -84,7 +84,7 @@ namespace Microsoft
         /// <param name="value">The value to test.</param>
         [DebuggerStepThrough]
         [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-        public static void Is<T>(object? value)
+        public static void Is<T>([NotNull] object? value)
         {
             True(value is T);
         }
