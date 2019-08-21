@@ -22,7 +22,7 @@
     <value>'{0}' には、null (Visual Basic では Nothing) 要素を含めることはできません。</value>
   </data>
   <data name="Argument_Whitespace" xml:space="preserve">
-    <value>パラメーター "{0}" は、すべて空白文字で構成することはできません。</value>
+    <value>引数は、すべて空白文字で構成することはできません。</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
     <value>内部エラーが発生しました。Microsoft サポートにお問い合わせください。</value>

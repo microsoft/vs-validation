@@ -22,7 +22,7 @@
     <value>“{0}”不能包含 null (Visual Basic 中为 Nothing)元素。</value>
   </data>
   <data name="Argument_Whitespace" xml:space="preserve">
-    <value>参数“{0}”不能全部由空白字符组成。</value>
+    <value>参数不能全部由空格组成。</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
     <value>发生内部错误。请与 Microsoft 支持部门联系。</value>

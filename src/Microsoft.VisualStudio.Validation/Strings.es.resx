@@ -22,7 +22,7 @@
     <value>'{0}' no puede contener un elemento null (Nothing en Visual Basic).</value>
   </data>
   <data name="Argument_Whitespace" xml:space="preserve">
-    <value>El parámetro "{0}" no puede constar solo de espacios en blanco.</value>
+    <value>El argumento no puede constar solo de caracteres de espacio en blanco.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
     <value>Se ha producido un error interno. Por favor, póngase en contacto con el Soporte técnico de Microsoft.</value>

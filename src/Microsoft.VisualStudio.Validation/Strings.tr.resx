@@ -22,7 +22,7 @@
     <value>'{0}' null (Visual Basic'te Hiçbir Şey) öğe içeremez.</value>
   </data>
   <data name="Argument_Whitespace" xml:space="preserve">
-    <value>"{0}" parametresi tamamen boşluk karakterlerinden oluşamaz.</value>
+    <value>Bağımsız değişken tamamen boşluk karakterlerinden oluşamaz.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
     <value>Bir iç hata oluştu. Lütfen Microsoft Desteğine başvurun.</value>

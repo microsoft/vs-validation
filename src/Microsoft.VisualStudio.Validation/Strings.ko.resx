@@ -22,7 +22,7 @@
     <value>'{0}에 null(Visual Basic에서는 Nothing) 요소를 포함할 수 없습니다.</value>
   </data>
   <data name="Argument_Whitespace" xml:space="preserve">
-    <value>"{0}" 매개 변수는 공백 문자로만 구성될 수 없습니다.</value>
+    <value>인수는 공백 문자로만 구성될 수 없습니다.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
     <value>내부 오류가 발생했습니다. Microsoft 지원에 문의하세요.</value>

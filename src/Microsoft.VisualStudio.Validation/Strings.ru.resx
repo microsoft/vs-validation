@@ -22,7 +22,7 @@
     <value>"{0}" не может содержать элемент NULL (Nothing в Visual Basic).</value>
   </data>
   <data name="Argument_Whitespace" xml:space="preserve">
-    <value>Параметр "{0}" не может состоять только из пробелов.</value>
+    <value>Аргумент не может состоять только из пробелов.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
     <value>Произошла внутренняя ошибка. Обратитесь в службу поддержки Майкрософт.</value>

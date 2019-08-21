@@ -20,8 +20,7 @@
         </trans-unit>
         <trans-unit id="Argument_Whitespace" translate="yes" xml:space="preserve">
           <source>The argument cannot consist entirely of white space characters.</source>
-          <target state="needs-review-translation">Parametr „{0}” nie może składać się w całości ze znaków spacji.</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="translated">Argument nie może składać się w całości z białych znaków.</target>
         </trans-unit>
         <trans-unit id="InternalExceptionMessage" translate="yes" xml:space="preserve">
           <source>An internal error occurred. Please contact Microsoft Support.</source>
