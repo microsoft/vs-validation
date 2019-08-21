@@ -22,7 +22,7 @@
     <value>"{0}" darf kein NULL-Element ("Nothing" in Visual Basic) enthalten.</value>
   </data>
   <data name="Argument_Whitespace" xml:space="preserve">
-    <value>Der Parameter "{0}" darf nicht nur aus Leerzeichen bestehen.</value>
+    <value>Das Argument darf nicht nur aus Leerraumzeichen bestehen.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
     <value>Interner Fehler. Wenden Sie sich an den Microsoft-Support.</value>

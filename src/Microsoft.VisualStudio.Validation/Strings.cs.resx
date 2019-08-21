@@ -22,7 +22,7 @@
     <value>Objekt {0} nesmí obsahovat element null (Nothing v jazyce Visual Basic).</value>
   </data>
   <data name="Argument_Whitespace" xml:space="preserve">
-    <value>Parametr {0} nemůže sestávat jen z prázdných znaků.</value>
+    <value>Argument nemůže sestávat jen z prázdných znaků.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
     <value>Došlo k vnitřní chybě. Obraťte se prosím na Podporu Microsoftu.</value>

@@ -22,7 +22,7 @@
     <value>'{0}' non può contenere un elemento Null (Nothing in Visual Basic).</value>
   </data>
   <data name="Argument_Whitespace" xml:space="preserve">
-    <value>Il parametro "{0}" non può essere interamente costituito da spazi vuoti.</value>
+    <value>L'argomento non può essere interamente costituito da spazi vuoti.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
     <value>Si è verificato un errore interno. Contattare il Supporto tecnico Microsoft.</value>

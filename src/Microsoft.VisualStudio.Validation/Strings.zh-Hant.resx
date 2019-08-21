@@ -22,7 +22,7 @@
     <value>'{0}' 不能包含 null (在 Visual Basic 中為 Nothing) 項目。</value>
   </data>
   <data name="Argument_Whitespace" xml:space="preserve">
-    <value>參數 "{0}" 不可完全由空白字元構成。</value>
+    <value>引數不可完全由空白字元構成。</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
     <value>發生內部錯誤，請連絡 Microsoft 支援服務。</value>

@@ -22,7 +22,7 @@
     <value>Element „{0}” nie może zawierać elementu null (Nothing w języku Visual Basic).</value>
   </data>
   <data name="Argument_Whitespace" xml:space="preserve">
-    <value>Parametr „{0}” nie może składać się w całości ze znaków spacji.</value>
+    <value>Argument nie może składać się w całości z białych znaków.</value>
   </data>
   <data name="InternalExceptionMessage" xml:space="preserve">
     <value>Wystąpił błąd wewnętrzny. Skontaktuj się z pomocą techniczną firmy Microsoft.</value>
