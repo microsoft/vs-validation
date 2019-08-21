@@ -20,7 +20,7 @@
         </trans-unit>
         <trans-unit id="Argument_Whitespace" translate="yes" xml:space="preserve">
           <source>The argument cannot consist entirely of white space characters.</source>
-          <target state="needs-review-translation">Parametr {0} nemůže sestávat jen z prázdných znaků.</target>
+          <target state="translated">Argument nemůže sestávat jen z prázdných znaků.</target>
           <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="InternalExceptionMessage" translate="yes" xml:space="preserve">
