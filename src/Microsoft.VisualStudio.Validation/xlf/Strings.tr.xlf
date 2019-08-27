@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="tr" original="../Strings.resx">
+    <body>
+      <trans-unit id="Argument_EmptyArray" translate="yes" xml:space="preserve">
+        <source>'{0}' must contain at least one element.</source>
+        <target state="translated">'{0}' en az bir öğe içermelidir.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Argument_EmptyString" translate="yes" xml:space="preserve">
+        <source>'{0}' cannot be an empty string ("") or start with the null character.</source>
+        <target state="translated">'{0}', boş bir dize("") olamaz veya null karakteri ile başlayamaz.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Argument_NullElement" translate="yes" xml:space="preserve">
+        <source>'{0}' cannot contain a null (Nothing in Visual Basic) element.</source>
+        <target state="translated">'{0}' null (Visual Basic'te Hiçbir Şey) öğe içeremez.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Argument_Whitespace" translate="yes" xml:space="preserve">
+        <source>The argument cannot consist entirely of white space characters.</source>
+        <target state="translated">Bağımsız değişken tamamen boşluk karakterlerinden oluşamaz.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="InternalExceptionMessage" translate="yes" xml:space="preserve">
+        <source>An internal error occurred. Please contact Microsoft Support.</source>
+        <target state="translated">Bir iç hata oluştu. Lütfen Microsoft Desteğine başvurun.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="ServiceMissing" translate="yes" xml:space="preserve">
+        <source>Cannot find an instance of the {0} service.</source>
+        <target state="translated">Cannot find an instance of the {0} service.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Argument_EmptyGuid" translate="yes" xml:space="preserve">
+        <source>'{0}' cannot be an empty guid.</source>
+        <target state="translated">'{0}' boş bir guid olamaz.</target>
+        <note />
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
