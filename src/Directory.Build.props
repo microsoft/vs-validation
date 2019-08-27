@@ -9,7 +9,7 @@
     <Nullable>enable</Nullable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-    <MicroBuildPackageVersion>2.0.55</MicroBuildPackageVersion>
+    <MicroBuildPackageVersion>2.0.58</MicroBuildPackageVersion>
 
     <SignAssembly>true</SignAssembly>
 
