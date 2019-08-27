@@ -1,40 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
-  <file datatype="xml" source-language="en-US" target-language="ja" original="MICROSOFT.VISUALSTUDIO.VALIDATION/STRINGS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
-    <header>
-      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1605.0" tool-company="Microsoft" />
-    </header>
+  <file datatype="xml" source-language="en-US" target-language="ja" original="../Strings.resx">
     <body>
-      <group id="MICROSOFT.VISUALSTUDIO.VALIDATION/STRINGS.RESX" datatype="resx">
-        <trans-unit id="Argument_EmptyArray" translate="yes" xml:space="preserve">
+      <trans-unit id="Argument_EmptyArray" translate="yes" xml:space="preserve">
           <source>'{0}' must contain at least one element.</source>
           <target state="translated">'{0}' には少なくとも 1 個の要素が含まれている必要があります。</target>
+        <note />
         </trans-unit>
-        <trans-unit id="Argument_EmptyString" translate="yes" xml:space="preserve">
+      <trans-unit id="Argument_EmptyString" translate="yes" xml:space="preserve">
           <source>'{0}' cannot be an empty string ("") or start with the null character.</source>
           <target state="translated">'{0}' を空の文字列 ("") にしたり先頭を null 文字にすることはできません。</target>
+        <note />
         </trans-unit>
-        <trans-unit id="Argument_NullElement" translate="yes" xml:space="preserve">
+      <trans-unit id="Argument_NullElement" translate="yes" xml:space="preserve">
           <source>'{0}' cannot contain a null (Nothing in Visual Basic) element.</source>
           <target state="translated">'{0}' には、null (Visual Basic では Nothing) 要素を含めることはできません。</target>
+        <note />
         </trans-unit>
-        <trans-unit id="Argument_Whitespace" translate="yes" xml:space="preserve">
+      <trans-unit id="Argument_Whitespace" translate="yes" xml:space="preserve">
           <source>The argument cannot consist entirely of white space characters.</source>
           <target state="translated">引数は、すべて空白文字で構成することはできません。</target>
+        <note />
         </trans-unit>
-        <trans-unit id="InternalExceptionMessage" translate="yes" xml:space="preserve">
+      <trans-unit id="InternalExceptionMessage" translate="yes" xml:space="preserve">
           <source>An internal error occurred. Please contact Microsoft Support.</source>
           <target state="translated">内部エラーが発生しました。Microsoft サポートにお問い合わせください。</target>
+        <note />
         </trans-unit>
-        <trans-unit id="ServiceMissing" translate="yes" xml:space="preserve">
+      <trans-unit id="ServiceMissing" translate="yes" xml:space="preserve">
           <source>Cannot find an instance of the {0} service.</source>
-          <target state="translated">{0} サービスのインスタンスが見つかりません。</target>
+          <target state="translated">Cannot find an instance of the {0} service.</target>
+        <note />
         </trans-unit>
-        <trans-unit id="Argument_EmptyGuid" translate="yes" xml:space="preserve">
+      <trans-unit id="Argument_EmptyGuid" translate="yes" xml:space="preserve">
           <source>'{0}' cannot be an empty guid.</source>
           <target state="translated">'{0}' を空の GUID にすることはできません。</target>
+        <note />
         </trans-unit>
-      </group>
     </body>
   </file>
 </xliff>
