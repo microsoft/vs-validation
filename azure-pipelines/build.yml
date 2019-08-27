@@ -6,8 +6,7 @@ jobs:
   pool: ${{ parameters.windowsPool }}
   steps:
   - checkout: self
-    clean: true # "all" doesn't work, but "true" does, despite YAML docs
-  - template: clear-packagecaches.yml
+    clean: true
   - template: install-dependencies.yml
 
   - powershell: '& (./azure-pipelines/Get-nbgv.ps1) cloud -p src'
