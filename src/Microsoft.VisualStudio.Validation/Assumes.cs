@@ -33,6 +33,18 @@ namespace Microsoft
         }
 
         /// <summary>
+        /// Throws an exception if the specified value is null.
+        /// </summary>
+        /// <typeparam name="T">The type of value to test.</typeparam>
+        [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
+        public static void NotNull<T>([ValidatedNotNull, NotNull]T? value)
+            where T : struct
+        {
+            True(value.HasValue);
+        }
+
+        /// <summary>
         /// Throws an exception if the specified value is null or empty.
         /// </summary>
         [DebuggerStepThrough]
@@ -75,6 +87,18 @@ namespace Microsoft
             where T : class
         {
             True(value == null);
+        }
+
+        /// <summary>
+        /// Throws an exception if the specified value is not null.
+        /// </summary>
+        /// <typeparam name="T">The type of value to test.</typeparam>
+        [DebuggerStepThrough]
+        [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
+        public static void Null<T>(T? value)
+            where T : struct
+        {
+            False(value.HasValue);
         }
 
         /// <summary>
