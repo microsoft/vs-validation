@@ -49,10 +49,24 @@ public partial class AssumesTests : IDisposable
     }
 
     [Fact]
+    public void NotNull_NullableStruct()
+    {
+        Assert.ThrowsAny<Exception>(() => Assumes.NotNull((int?)null));
+        Assumes.NotNull((int?)5);
+    }
+
+    [Fact]
     public void Null()
     {
         Assert.ThrowsAny<Exception>(() => Assumes.Null("not null"));
         Assumes.Null((object?)null);
+    }
+
+    [Fact]
+    public void Null_NullableStruct()
+    {
+        Assert.ThrowsAny<Exception>(() => Assumes.Null((int?)5));
+        Assumes.Null((int?)null);
     }
 
     [Fact]
