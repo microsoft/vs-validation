@@ -175,7 +175,7 @@ namespace Microsoft
 
         /// <summary>
         /// Throws an exception if the specified parameter's value is null,
-        /// has no elements or has an element with a null value.
+        /// has no elements.
         /// </summary>
         /// <param name="values">The value of the argument.</param>
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
