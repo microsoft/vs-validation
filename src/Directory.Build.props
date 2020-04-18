@@ -10,7 +10,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <UpdateXlfOnBuild Condition=" '$(UpdateXlfOnBuild)' == '' ">true</UpdateXlfOnBuild>
 
-    <MicroBuildPackageVersion>2.0.58</MicroBuildPackageVersion>
+    <MicroBuildPackageVersion>2.0.61</MicroBuildPackageVersion>
 
     <SignAssembly>true</SignAssembly>
 
@@ -30,8 +30,8 @@
 
   <ItemGroup>
     <PackageReference Include="MicroBuild.VisualStudio" Version="$(MicroBuildPackageVersion)" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0-preview.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19270-01" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.0.15-beta" PrivateAssets="all" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all" />
   </ItemGroup>

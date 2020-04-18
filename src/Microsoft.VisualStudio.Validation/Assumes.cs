@@ -209,7 +209,9 @@ namespace Microsoft
             }
             else
             {
+#pragma warning disable CS8763
                 return new Exception();
+#pragma warning restore CS8763
             }
         }
 
@@ -262,7 +264,9 @@ namespace Microsoft
             }
             else
             {
+#pragma warning disable CS8763
                 return new Exception();
+#pragma warning restore CS8763
             }
         }
 
@@ -281,7 +285,9 @@ namespace Microsoft
             }
             else
             {
+#pragma warning disable CS8763
                 return new Exception();
+#pragma warning restore CS8763
             }
         }
 
