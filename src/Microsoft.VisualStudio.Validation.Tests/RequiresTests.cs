@@ -1,11 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft;
 using Xunit;
+using Xunit.Abstractions;
 
 public class RequiresTests
 {
+    private readonly ITestOutputHelper logger;
+
+    public RequiresTests(ITestOutputHelper logger)
+    {
+        this.logger = logger;
+    }
+
+    private enum BigEnum : long
+    {
+        First,
+    }
+
     [Fact]
     public void NotNull_ThrowsOnNull()
     {
@@ -172,5 +186,21 @@ public class RequiresTests
         Requires.NullOrNotNullElements(emptyCollection, "param");
         Requires.NullOrNotNullElements(collection, "param");
         Assert.Throws<ArgumentException>(() => Requires.NullOrNotNullElements(collectionWithNullElement, "param"));
+    }
+
+    [Fact]
+    public void Defined()
+    {
+        Requires.Defined(ConsoleColor.Black, "parameterName");
+        InvalidEnumArgumentException ex = Assert.Throws<InvalidEnumArgumentException>("parameterName", () => Requires.Defined((ConsoleColor)88, "parameterName"));
+        this.logger.WriteLine(ex.Message);
+    }
+
+    [Fact]
+    public void Defined_Int64Enum()
+    {
+        Requires.Defined(BigEnum.First, "parameterName");
+        InvalidEnumArgumentException ex = Assert.Throws<InvalidEnumArgumentException>(() => Requires.Defined((BigEnum)0x100000000, "parameterName"));
+        this.logger.WriteLine(ex.Message);
     }
 }

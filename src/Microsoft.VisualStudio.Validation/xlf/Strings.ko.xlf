@@ -12,6 +12,11 @@
         <target state="translated">'{0}'은(는) 빈 문자열("")이거나 null 문자로 시작할 수 없습니다.</target>
         <note />
       </trans-unit>
+      <trans-unit id="Argument_NotEnum">
+        <source>The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.</source>
+        <target state="new">The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.</target>
+        <note />
+      </trans-unit>
       <trans-unit id="Argument_NullElement" translate="yes" xml:space="preserve">
         <source>'{0}' cannot contain a null (Nothing in Visual Basic) element.</source>
         <target state="translated">'{0}에 null(Visual Basic에서는 Nothing) 요소를 포함할 수 없습니다.</target>
