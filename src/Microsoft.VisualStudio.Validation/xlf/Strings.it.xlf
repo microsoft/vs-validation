@@ -12,6 +12,11 @@
         <target state="translated">'{0}' non può essere una stringa vuota ("") né iniziare con il carattere Null.</target>
         <note />
       </trans-unit>
+      <trans-unit id="Argument_NotEnum">
+        <source>The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.</source>
+        <target state="new">The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.</target>
+        <note />
+      </trans-unit>
       <trans-unit id="Argument_NullElement" translate="yes" xml:space="preserve">
         <source>'{0}' cannot contain a null (Nothing in Visual Basic) element.</source>
         <target state="translated">'{0}' non può contenere un elemento Null (Nothing in Visual Basic).</target>

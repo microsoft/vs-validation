@@ -88,6 +88,15 @@ namespace Microsoft {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The value of argument &apos;{0}&apos; ({1}) is invalid for Enum type &apos;{2}&apos;..
+        /// </summary>
+        internal static string Argument_NotEnum {
+            get {
+                return ResourceManager.GetString("Argument_NotEnum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &apos;{0}&apos; cannot contain a null (Nothing in Visual Basic) element..
         /// </summary>
         internal static string Argument_NullElement {
