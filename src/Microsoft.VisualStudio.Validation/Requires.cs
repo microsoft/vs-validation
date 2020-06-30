@@ -207,6 +207,38 @@ namespace Microsoft
 
         /// <summary>
         /// Throws an exception if the specified parameter's value is null,
+        /// has no elements.
+        /// </summary>
+        /// <typeparam name="T">The type produced by the enumeration.</typeparam>
+        /// <param name="values">The value of the argument.</param>
+        /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
+        /// <exception cref="ArgumentException">Thrown if the tested condition is false.</exception>
+        [DebuggerStepThrough]
+        public static void NotNullOrEmpty<T>([ValidatedNotNull, NotNull] IEnumerable<T> values, string? parameterName)
+        {
+            // To whoever is doing random code cleaning:
+            // Consider the performance when changing the code to delegate to NotNull.
+            // In general do not chain call to another function, check first and return as earlier as possible.
+            if (values is null)
+            {
+                throw new ArgumentNullException(parameterName);
+            }
+
+            bool hasElements = false;
+            foreach (T value in values)
+            {
+                hasElements = true;
+                break;
+            }
+
+            if (!hasElements)
+            {
+                throw new ArgumentException(Format(Strings.Argument_EmptyArray, parameterName), parameterName);
+            }
+        }
+
+        /// <summary>
+        /// Throws an exception if the specified parameter's value is null,
         /// has no elements or has an element with a null value.
         /// </summary>
         /// <typeparam name="T">The type of the elements in the sequence.</typeparam>

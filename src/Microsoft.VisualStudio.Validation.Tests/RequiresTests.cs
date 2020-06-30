@@ -152,9 +152,31 @@ public class RequiresTests
     [Fact]
     public void NotNullOrEmpty_Collection()
     {
-        ICollection<string>? nullCollection = null;
-        ICollection<string> emptyCollection = new string[0];
-        ICollection<string> collection = new[] { "hi" };
+        System.Collections.IEnumerable? nullCollection = null;
+        System.Collections.IEnumerable emptyCollection = new string[0];
+        System.Collections.IEnumerable collection = new[] { "hi" };
+        Requires.NotNullOrEmpty(collection, "param");
+        Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrEmpty(nullCollection!, "param"));
+        Assert.Throws<ArgumentException>(() => Requires.NotNullOrEmpty(emptyCollection, "param"));
+    }
+
+    [Fact]
+    public void NotNullOrEmpty_CollectionOfT()
+    {
+        IEnumerable<string>? nullCollection = null;
+        IEnumerable<string> emptyCollection = new string[0];
+        IEnumerable<string> collection = new[] { "hi" };
+        Requires.NotNullOrEmpty(collection, "param");
+        Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrEmpty(nullCollection!, "param"));
+        Assert.Throws<ArgumentException>(() => Requires.NotNullOrEmpty(emptyCollection, "param"));
+    }
+
+    [Fact]
+    public void NotNullOrEmpty_CollectionOfT_Struct()
+    {
+        IEnumerable<int>? nullCollection = null;
+        IEnumerable<int> emptyCollection = new int[0];
+        IEnumerable<int> collection = new[] { 5 };
         Requires.NotNullOrEmpty(collection, "param");
         Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrEmpty(nullCollection!, "param"));
         Assert.Throws<ArgumentException>(() => Requires.NotNullOrEmpty(emptyCollection, "param"));
