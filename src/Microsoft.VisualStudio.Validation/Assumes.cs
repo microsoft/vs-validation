@@ -29,7 +29,7 @@ namespace Microsoft
         public static void NotNull<T>([ValidatedNotNull, NotNull]T? value)
             where T : class
         {
-            True(value != null);
+            True(value is object);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Microsoft
         public static void Null<T>(T? value)
             where T : class
         {
-            True(value == null);
+            True(value is null);
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace Microsoft
         [DebuggerStepThrough]
         public static void Present<T>([NotNull]T component)
         {
-            if (component == null)
+            if (component is null)
             {
                 Type coreType = PrivateErrorHelpers.TrimGenericWrapper(typeof(T), typeof(Lazy<>));
                 Fail(string.Format(CultureInfo.CurrentCulture, Strings.ServiceMissing, coreType.FullName));

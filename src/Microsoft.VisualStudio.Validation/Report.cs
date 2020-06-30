@@ -27,7 +27,7 @@ namespace Microsoft
         [Conditional("DEBUG")]
         public static void IfNotPresent<T>(T part)
         {
-            if (part == null)
+            if (part is null)
             {
                 Type coreType = PrivateErrorHelpers.TrimGenericWrapper(typeof(T), typeof(Lazy<>));
                 Fail(Strings.ServiceMissing, coreType.FullName);
@@ -100,7 +100,7 @@ namespace Microsoft
         [Conditional("DEBUG")]
         public static void Fail([Localizable(false)] string? message = null)
         {
-            if (message == null)
+            if (message is null)
             {
                 message = "A recoverable error has been detected.";
             }
