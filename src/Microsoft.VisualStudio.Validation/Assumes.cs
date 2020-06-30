@@ -192,7 +192,7 @@ namespace Microsoft
         }
 
         /// <summary>
-        /// Throws an public exception.
+        /// Unconditionally throws an <see cref="InternalErrorException"/>.
         /// </summary>
         [DebuggerStepThrough]
         [DoesNotReturn]
@@ -212,6 +212,33 @@ namespace Microsoft
 #pragma warning disable CS8763
                 return new Exception();
 #pragma warning restore CS8763
+            }
+        }
+
+        /// <summary>
+        /// Unconditionally throws an <see cref="InternalErrorException"/>.
+        /// </summary>
+        /// <typeparam name="T">The type that the method should be typed to return (although it never returns anything).</typeparam>
+        /// <returns>Nothing. This method always throws.</returns>
+        [DebuggerStepThrough]
+        [DoesNotReturn]
+        [return: MaybeNull]
+        public static T NotReachable<T>()
+        {
+            // Keep these two as separate lines of code, so the debugger can come in during the assert dialog
+            // that the exception's constructor displays, and the debugger can then be made to skip the throw
+            // in order to continue the investigation.
+            var exception = new InternalErrorException();
+            bool proceed = true; // allows debuggers to skip the throw statement
+            if (proceed)
+            {
+                throw exception;
+            }
+            else
+            {
+#pragma warning disable CS8763 // A method marked [DoesNotReturn] should not return.
+                return default;
+#pragma warning restore CS8763 // A method marked [DoesNotReturn] should not return.
             }
         }
 

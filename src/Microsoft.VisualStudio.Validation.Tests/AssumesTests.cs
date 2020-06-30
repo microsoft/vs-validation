@@ -103,6 +103,13 @@ public partial class AssumesTests : IDisposable
     }
 
     [Fact]
+    public void NotReachableOfT()
+    {
+        Assert.ThrowsAny<Exception>(() => Assumes.NotReachable<int>());
+        Assert.ThrowsAny<Exception>(() => Assumes.NotReachable<object>());
+    }
+
+    [Fact]
     public void Present()
     {
         IServiceProvider? someService = null;
