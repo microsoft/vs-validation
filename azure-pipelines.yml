@@ -2,6 +2,7 @@ trigger:
   branches:
     include:
     - master
+    - 'v*'
     - validate/*
   paths:
     exclude:
@@ -20,5 +21,3 @@ variables:
 
 jobs:
 - template: azure-pipelines/build.yml
-  parameters:
-    SignType:

@@ -1,44 +1,11 @@
 <Project>
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)../, Directory.Build.props))\Directory.Build.props" Condition=" '$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)../, Directory.Build.props))' != '' " />
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <RepoRootPath>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\'))</RepoRootPath>
-    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)..\obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
-    <BaseOutputPath Condition=" '$(BaseOutputPath)' == '' ">$(RepoRootPath)bin\$(MSBuildProjectName)\</BaseOutputPath>
-    <PackageOutputPath>$(RepoRootPath)bin\Packages\$(Configuration)\NuGet\</PackageOutputPath>
-    <LangVersion>8.0</LangVersion>
-    <Nullable>enable</Nullable>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <UpdateXlfOnBuild Condition=" '$(UpdateXlfOnBuild)' == '' ">true</UpdateXlfOnBuild>
-
-    <MicroBuildPackageVersion>2.0.61</MicroBuildPackageVersion>
-
-    <SignAssembly>true</SignAssembly>
-
-    <Company>Microsoft</Company>
-    <Authors>Microsoft</Authors>
-    <PackageProjectUrl>https://github.com/Microsoft/vs-validation</PackageProjectUrl>
-    <PackageReleaseNotes>https://go.microsoft.com/fwlink/?LinkID=746387</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/Microsoft/vs-streamjsonrpc</PackageProjectUrl>
     <PackageIcon>PackageIcon.png</PackageIcon>
-    <Copyright>© Microsoft Corporation. All rights reserved.</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MicroBuild.VisualStudio" Version="$(MicroBuildPackageVersion)" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.2.31" PrivateAssets="all" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.164" PrivateAssets="all" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AdditionalFiles Include="$(MSBuildThisFileDirectory)stylecop.json" Link="stylecop.json" />
-  </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)PackageIcon.png" Pack="true" PackagePath="" />
   </ItemGroup>

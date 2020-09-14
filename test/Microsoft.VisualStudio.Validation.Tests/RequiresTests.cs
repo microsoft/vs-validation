@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -153,7 +156,7 @@ public class RequiresTests
     public void NotNullOrEmpty_Collection()
     {
         System.Collections.IEnumerable? nullCollection = null;
-        System.Collections.IEnumerable emptyCollection = new string[0];
+        System.Collections.IEnumerable emptyCollection = Array.Empty<string>();
         System.Collections.IEnumerable collection = new[] { "hi" };
         Requires.NotNullOrEmpty(collection, "param");
         Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrEmpty(nullCollection!, "param"));
@@ -164,7 +167,7 @@ public class RequiresTests
     public void NotNullOrEmpty_CollectionOfT()
     {
         IEnumerable<string>? nullCollection = null;
-        IEnumerable<string> emptyCollection = new string[0];
+        IEnumerable<string> emptyCollection = Array.Empty<string>();
         IEnumerable<string> collection = new[] { "hi" };
         Requires.NotNullOrEmpty(collection, "param");
         Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrEmpty(nullCollection!, "param"));
@@ -175,7 +178,7 @@ public class RequiresTests
     public void NotNullOrEmpty_CollectionOfT_Struct()
     {
         IEnumerable<int>? nullCollection = null;
-        IEnumerable<int> emptyCollection = new int[0];
+        IEnumerable<int> emptyCollection = Array.Empty<int>();
         IEnumerable<int> collection = new[] { 5 };
         Requires.NotNullOrEmpty(collection, "param");
         Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrEmpty(nullCollection!, "param"));
@@ -186,7 +189,7 @@ public class RequiresTests
     public void NotNullEmptyOrNullElements()
     {
         ICollection<string>? nullCollection = null;
-        ICollection<string> emptyCollection = new string[0];
+        ICollection<string> emptyCollection = Array.Empty<string>();
         ICollection<string> collection = new[] { "hi" };
         ICollection<string> collectionWithNullElement = new[] { "hi", null!, "bye" };
 
@@ -200,7 +203,7 @@ public class RequiresTests
     public void NullOrNotNullElements()
     {
         IEnumerable<string>? nullCollection = null;
-        IEnumerable<string> emptyCollection = new string[0];
+        IEnumerable<string> emptyCollection = Array.Empty<string>();
         IEnumerable<string> collection = new[] { "hi" };
         IEnumerable<string?> collectionWithNullElement = new[] { "hi", null, "bye" };
 

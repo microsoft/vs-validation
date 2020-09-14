@@ -1,8 +1,5 @@
-﻿/********************************************************
-*                                                        *
-*   © Copyright (C) Microsoft. All rights reserved.      *
-*                                                        *
-*********************************************************/
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 // Enable calling the Debug class even in Release builds,
 // and be able to call other methods in this same class.

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System;
 using System.Runtime.InteropServices;
 using Microsoft;
 using Xunit;
@@ -40,7 +43,7 @@ public class VerifyTests
         Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, (object?)null));
 
         actualException = Assert.Throws<ObjectDisposedException>(() => Verify.NotDisposed(false, "hi", "message"));
-        string expectedObjectName = typeof(string).FullName;
+        string expectedObjectName = typeof(string).FullName!;
         Assert.Equal(expectedObjectName, actualException.ObjectName);
         Assert.Equal(new ObjectDisposedException(expectedObjectName, "message").Message, actualException.Message);
 

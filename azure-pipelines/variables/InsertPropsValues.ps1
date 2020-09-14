@@ -1,0 +1,1 @@
+& "$PSScriptRoot\InsertConfigValues.ps1"

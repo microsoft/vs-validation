@@ -1,4 +1,7 @@
-﻿// Ensure the tests defined in this file always emulate a client compiled for Release
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+// Ensure the tests defined in this file always emulate a client compiled for Release
 #undef DEBUG
 
 using System;
@@ -18,7 +21,6 @@ using Xunit;
 public class ReportReleaseTests : IDisposable
 {
     private const string FailureMessage = "failure";
-    private const string DefaultFailureMessage = "A recoverable error has been detected.";
 
     private AssertDialogSuppression suppressAssertUi = new AssertDialogSuppression();
 

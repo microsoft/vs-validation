@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -124,10 +127,12 @@ public partial class AssumesTests : IDisposable
         {
             Assumes.False(true);
         }
+#pragma warning disable CA1031 // Do not catch general exception types
         catch (Exception ex)
+#pragma warning restore CA1031 // Do not catch general exception types
         {
             var formatter = new BinaryFormatter();
-            var ms = new MemoryStream();
+            using var ms = new MemoryStream();
             formatter.Serialize(ms, ex);
             ms.Position = 0;
             var ex2 = (Exception)formatter.Deserialize(ms);
