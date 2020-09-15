@@ -1,1 +1,1 @@
-'VS Core - Extensibility, Andrew Arnott'
+'Andrew Arnott'

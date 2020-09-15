@@ -70,6 +70,6 @@ stages:
             displayName: NuGet push
             inputs:
               command: push
-              packagesToPush: $(Pipeline.Workspace)/CI/deployables-Windows/*.nupkg
+              packagesToPush: $(Pipeline.Workspace)/CI/deployables-Windows/NuGet/*.nupkg
               nuGetFeedType: external
               publishFeedCredentials: VisualStudioExtensibility (nuget.org)
