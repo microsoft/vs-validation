@@ -33,41 +33,4 @@ Warning signs that should not throw exceptions via the `Report` class.
 Report.IfNot(condition, "some error");
 ```
 
-Code Snippets
--------------
-
-Make writing input validation especially convenient with [code snippets][2].
-Run the tools\install_snippets.cmd script within this package to copy the code snippets
-into your `Documents\Visual Studio 201x\Code Snippets\Visual C#\My Code Snippets`
-folder(s) and just type the first few letters of the code snippet name to get
-auto-completion assisted input validation.
-
-Note that if you have Resharper installed, code snippets don't appear in
-auto-completion lists so you may have to press `Ctrl+J` after the first few letters
-of the code snippet name for it to become available.
-
-Example:
-
-```csharp
-private void SomeMethod(string input) {
-    rnne<TAB>
-}
-```
-
-Expands to
-
-```csharp
-private void SomeMethod(string input) {
-    Requires.NotNullOrEmpty(paramName, nameof(paramName));
-}
-```
-
-And the first `paramName` is selected. Simply type the actual parameter name
-(Intellisense will auto-complete for you) and then the quoted paramName name
-will automatically be changed to match.
-
-The two snippets are `rnn` and `rnne`
-which expand to check for null inputs or null-or-empty inputs, respectively.
-
 [1]: http://nuget.org/packages/Microsoft.VisualStudio.Validation "Microsoft.VisualStudio.Validation NuGet package"
-[2]: src\Microsoft.VisualStudio.Validation.NuGet\tools "Code Snippets"
