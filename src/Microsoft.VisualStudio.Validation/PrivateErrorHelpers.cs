@@ -36,6 +36,7 @@ namespace Microsoft
         /// <summary>
         /// Helper method that formats string arguments.
         /// </summary>
+        /// <returns>The formatted string.</returns>
         internal static string Format(string format, params object?[] arguments)
         {
             return string.Format(CultureInfo.CurrentCulture, format, arguments);

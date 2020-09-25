@@ -13,6 +13,7 @@ namespace Microsoft
         /// <summary>
         /// Gets a value indicating whether this instance has been disposed.
         /// </summary>
+        /// <value><see langword="true"/> if this instance has been disposed.</value>
         bool IsDisposed { get; }
     }
 }

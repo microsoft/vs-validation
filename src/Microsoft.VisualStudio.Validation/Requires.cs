@@ -406,6 +406,7 @@ namespace Microsoft
         /// <summary>
         /// Throws an ArgumentException.
         /// </summary>
+        /// <returns>Nothing. This method always throws.</returns>
         [DebuggerStepThrough]
         [DoesNotReturn]
         public static Exception Fail(Exception? innerException, string unformattedMessage, params object?[] args)

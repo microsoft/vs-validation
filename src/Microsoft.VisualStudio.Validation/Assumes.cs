@@ -13,12 +13,12 @@ namespace Microsoft
     using System.Runtime;
 
     /// <summary>
-    /// Common runtime checks that throw public error exceptions upon failure.
+    /// Common runtime checks that throw <see cref="InternalErrorException" /> exceptions upon failure.
     /// </summary>
     public static partial class Assumes
     {
         /// <summary>
-        /// Throws an exception if the specified value is null.
+        /// Throws <see cref="InternalErrorException" /> if the specified value is null.
         /// </summary>
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
@@ -30,7 +30,7 @@ namespace Microsoft
         }
 
         /// <summary>
-        /// Throws an exception if the specified value is null.
+        /// Throws <see cref="InternalErrorException" /> if the specified value is null.
         /// </summary>
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
@@ -42,7 +42,7 @@ namespace Microsoft
         }
 
         /// <summary>
-        /// Throws an exception if the specified value is null or empty.
+        /// Throws <see cref="InternalErrorException" /> if the specified value is null or empty.
         /// </summary>
         [DebuggerStepThrough]
         public static void NotNullOrEmpty([ValidatedNotNull, NotNull]string? value)
@@ -53,7 +53,7 @@ namespace Microsoft
         }
 
         /// <summary>
-        /// Throws an exception if the specified value is null or empty.
+        /// Throws <see cref="InternalErrorException" /> if the specified value is null or empty.
         /// </summary>
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
@@ -64,7 +64,7 @@ namespace Microsoft
         }
 
         /// <summary>
-        /// Throws an exception if the specified value is null or empty.
+        /// Throws <see cref="InternalErrorException" /> if the specified value is null or empty.
         /// </summary>
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
@@ -75,7 +75,7 @@ namespace Microsoft
         }
 
         /// <summary>
-        /// Throws an exception if the specified value is not null.
+        /// Throws <see cref="InternalErrorException" /> if the specified value is not null.
         /// </summary>
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
@@ -87,7 +87,7 @@ namespace Microsoft
         }
 
         /// <summary>
-        /// Throws an exception if the specified value is not null.
+        /// Throws <see cref="InternalErrorException" /> if the specified value is not null.
         /// </summary>
         /// <typeparam name="T">The type of value to test.</typeparam>
         [DebuggerStepThrough]
@@ -99,7 +99,7 @@ namespace Microsoft
         }
 
         /// <summary>
-        /// Throws an exception if the specified object is not of a given type.
+        /// Throws <see cref="InternalErrorException" /> if the specified object is not of a given type.
         /// </summary>
         /// <typeparam name="T">The type the value is expected to be.</typeparam>
         /// <param name="value">The value to test.</param>
@@ -191,6 +191,7 @@ namespace Microsoft
         /// <summary>
         /// Unconditionally throws an <see cref="InternalErrorException"/>.
         /// </summary>
+        /// <returns>Nothing. This method always throws.</returns>
         [DebuggerStepThrough]
         [DoesNotReturn]
         public static Exception NotReachable()
@@ -240,7 +241,7 @@ namespace Microsoft
         }
 
         /// <summary>
-        /// Verifies that a value is not null, and throws an exception about a missing service otherwise.
+        /// Verifies that a value is not null, and throws <see cref="InternalErrorException" /> about a missing service otherwise.
         /// </summary>
         /// <typeparam name="T">The interface of the imported part.</typeparam>
         [DebuggerStepThrough]

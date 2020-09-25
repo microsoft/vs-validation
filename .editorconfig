@@ -168,8 +168,5 @@ dotnet_diagnostic.SA1130.severity = silent
 # SA1611: Element parameters should be documented
 dotnet_diagnostic.SA1611.severity = suggestion
 
-# SA1615: Element return value should be documented
-dotnet_diagnostic.SA1615.severity = suggestion
-
 [*.sln]
 indent_style = tab
