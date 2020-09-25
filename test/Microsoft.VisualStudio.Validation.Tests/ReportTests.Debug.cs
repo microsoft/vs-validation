@@ -8,10 +8,8 @@
 #if !NETCOREAPP3_1 // The tests fail in this environment too! :(
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Microsoft;
 using Moq;
 using Xunit;
