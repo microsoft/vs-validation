@@ -4,7 +4,7 @@ pr: none
 resources:
   pipelines:
   - pipeline: CI
-    source: vs-validation
+    source: vs-Validation
     tags:
     - Real signed
     trigger:
