@@ -238,8 +238,14 @@ namespace Microsoft
         public static void NotNullEmptyOrNullElements<T>([ValidatedNotNull, NotNull] IEnumerable<T> values, string? parameterName)
             where T : class // ensures value-types aren't passed to a null checking method
         {
-            NotNull(values, parameterName);
-
+            // To whoever is doing random code cleaning:
+            // Consider the performance when changing the code to delegate to NotNull.
+            // In general do not chain call to another function, check first and return as early as possible.
+            if (values is null)
+            {
+                throw new ArgumentNullException(parameterName);
+            }
+                
             bool hasElements = false;
             foreach (T? value in values)
             {
