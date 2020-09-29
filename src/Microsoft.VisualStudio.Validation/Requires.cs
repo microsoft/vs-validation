@@ -4,6 +4,7 @@
 namespace Microsoft
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
@@ -179,7 +180,7 @@ namespace Microsoft
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentException">Thrown if the tested condition is false.</exception>
         [DebuggerStepThrough]
-        public static void NotNullOrEmpty([ValidatedNotNull, NotNull] System.Collections.IEnumerable values, string? parameterName)
+        public static void NotNullOrEmpty([ValidatedNotNull, NotNull] IEnumerable values, string? parameterName)
         {
             // To whoever is doing random code cleaning:
             // Consider the performance when changing the code to delegate to NotNull.
@@ -189,16 +190,13 @@ namespace Microsoft
                 throw new ArgumentNullException(parameterName);
             }
 
-            bool hasElements = false;
-            foreach (object value in values)
+            IEnumerator enumerator = values.GetEnumerator();
+            using (enumerator as IDisposable)
             {
-                hasElements = true;
-                break;
-            }
-
-            if (!hasElements)
-            {
-                throw new ArgumentException(Format(Strings.Argument_EmptyArray, parameterName), parameterName);
+                if (!enumerator.MoveNext())
+                {
+                    throw new ArgumentException(Format(Strings.Argument_EmptyArray, parameterName), parameterName);
+                }
             }
         }
 
@@ -221,14 +219,8 @@ namespace Microsoft
                 throw new ArgumentNullException(parameterName);
             }
 
-            bool hasElements = false;
-            foreach (T value in values)
-            {
-                hasElements = true;
-                break;
-            }
-
-            if (!hasElements)
+            using IEnumerator<T> enumerator = values.GetEnumerator();
+            if (!enumerator.MoveNext())
             {
                 throw new ArgumentException(Format(Strings.Argument_EmptyArray, parameterName), parameterName);
             }
