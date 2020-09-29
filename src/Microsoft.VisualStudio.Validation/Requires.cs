@@ -245,7 +245,7 @@ namespace Microsoft
             {
                 throw new ArgumentNullException(parameterName);
             }
-                
+
             bool hasElements = false;
             foreach (T? value in values)
             {
