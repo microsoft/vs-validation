@@ -22,6 +22,11 @@
         <target state="translated">'{0}' 不能包含 null (在 Visual Basic 中為 Nothing) 項目。</target>
         <note />
       </trans-unit>
+      <trans-unit id="Argument_StructIsDefault">
+        <source>'{0}' cannot be the default value defined by '{1}'.</source>
+        <target state="new">'{0}' cannot be the default value defined by '{1}'.</target>
+        <note />
+      </trans-unit>
       <trans-unit id="Argument_Whitespace" translate="yes" xml:space="preserve">
         <source>The argument cannot consist entirely of white space characters.</source>
         <target state="translated">引數不可完全由空白字元構成。</target>
