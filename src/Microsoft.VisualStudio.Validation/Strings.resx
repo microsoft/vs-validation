@@ -132,6 +132,9 @@
   <data name="Argument_NullElement" xml:space="preserve">
     <value>'{0}' cannot contain a null (Nothing in Visual Basic) element.</value>
   </data>
+  <data name="Argument_StructIsDefault" xml:space="preserve">
+    <value>'{0}' cannot be the default value defined by '{1}'.</value>
+  </data>
   <data name="Argument_Whitespace" xml:space="preserve">
     <value>The argument cannot consist entirely of white space characters.</value>
   </data>

@@ -62,6 +62,17 @@ public class RequiresTests
     }
 
     [Fact]
+    public void NotDefault()
+    {
+        Requires.NotDefault(-1, "foo");
+        Assert.Throws<ArgumentException>(() => Requires.NotDefault(default(int), "foo"));
+
+        Requires.NotDefault('a', "foo");
+        Assert.Throws<ArgumentException>(() => Requires.NotDefault(default(char), "foo"));
+        Assert.Throws<ArgumentException>(() => Requires.NotDefault('\0', "foo"));
+    }
+
+    [Fact]
     public void Argument_Bool_String_String()
     {
         Requires.Argument(true, "a", "b");
@@ -227,5 +238,25 @@ public class RequiresTests
         Requires.Defined(BigEnum.First, "parameterName");
         InvalidEnumArgumentException ex = Assert.Throws<InvalidEnumArgumentException>(() => Requires.Defined((BigEnum)0x100000000, "parameterName"));
         this.logger.WriteLine(ex.Message);
+    }
+
+    [Fact]
+    public void ValidElements()
+    {
+        Assert.Throws<ArgumentNullException>("values", () => Requires.ValidElements((IEnumerable<string>)null!, x => !string.IsNullOrWhiteSpace(x), "param", "test"));
+        Assert.Throws<ArgumentNullException>("predicate", () => Requires.ValidElements(new[] { -1 }, null!, "param", "Must be greater than 0."));
+        Assert.Throws<ArgumentException>("param", () => Requires.ValidElements(new[] { -1 }, v => v > 0, "param", "Must be greater than 0."));
+        Assert.Throws<ArgumentException>("param", () => Requires.ValidElements(new[] { "a", string.Empty, "b", null }, x => !string.IsNullOrWhiteSpace(x), "param", "test"));
+        Assert.ThrowsAny<Exception>(() => Requires.ValidElements(new[] { "a", "b", "c", "d" }, x => throw new InvalidOperationException(), "param", "test"));
+        Requires.ValidElements(new[] { "a", "b", "c", "d" }, x => !string.IsNullOrWhiteSpace(x), "param", "test");
+        Requires.ValidElements(new[] { 1, 2 }, v => v > 0, "param", "Must be greater than 0.");
+
+        Assert.Throws<ArgumentNullException>("values", () => Requires.ValidElements((IEnumerable<string>)null!, x => !string.IsNullOrWhiteSpace(x), "param", "test message: {0}", "param"));
+        Assert.Throws<ArgumentNullException>("predicate", () => Requires.ValidElements(new[] { -1 }, null!, "param", "{0} must be greater than 0.", "param"));
+        Assert.Contains("param must be greater than 0.", Assert.Throws<ArgumentException>("param", () => Requires.ValidElements(new[] { -1 }, v => v > 0, "param", "{0} must be greater than 0.", "param")).Message, StringComparison.InvariantCultureIgnoreCase);
+        Assert.Contains("test message: param", Assert.Throws<ArgumentException>("param", () => Requires.ValidElements(new[] { "a", string.Empty, "b", null }, x => !string.IsNullOrWhiteSpace(x), "param", "test message: {0}", "param")).Message, StringComparison.InvariantCultureIgnoreCase);
+        Assert.ThrowsAny<Exception>(() => Requires.ValidElements(new[] { "a", "b", "c", "d" }, x => throw new InvalidOperationException(), "param", "test message: {0}", "param"));
+        Requires.ValidElements(new[] { "a", "b", "c", "d" }, x => !string.IsNullOrWhiteSpace(x), "param", "test message: {0}", "param");
+        Requires.ValidElements(new[] { 1, 2 }, v => v > 0, "param", "{0} must be greater than 0.", "param");
     }
 }
