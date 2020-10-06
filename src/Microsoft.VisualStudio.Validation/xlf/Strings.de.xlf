@@ -14,7 +14,7 @@
       </trans-unit>
       <trans-unit id="Argument_NotEnum">
         <source>The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.</source>
-        <target state="new">The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.</target>
+        <target state="translated">Der Wert des Arguments "{0}" ({1}) ist für den Enumerationstyp "{2}" ungültig.</target>
         <note />
       </trans-unit>
       <trans-unit id="Argument_NullElement" translate="yes" xml:space="preserve">
@@ -24,7 +24,7 @@
       </trans-unit>
       <trans-unit id="Argument_StructIsDefault">
         <source>'{0}' cannot be the default value defined by '{1}'.</source>
-        <target state="new">'{0}' cannot be the default value defined by '{1}'.</target>
+        <target state="translated">"{0}" kann nicht der Standardwert sein, der durch "{1}" definiert wird.</target>
         <note />
       </trans-unit>
       <trans-unit id="Argument_Whitespace" translate="yes" xml:space="preserve">
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="ServiceMissing" translate="yes" xml:space="preserve">
         <source>Cannot find an instance of the {0} service.</source>
-        <target state="translated">Cannot find an instance of the {0} service.</target>
+        <target state="translated">Es wurde keine Instanz des {0}-Diensts gefunden.</target>
         <note />
       </trans-unit>
       <trans-unit id="Argument_EmptyGuid" translate="yes" xml:space="preserve">

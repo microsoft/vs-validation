@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
-  <file datatype="xml" source-language="en-US" target-language="zh-Hans" original="../Strings.resx">
+  <file datatype="xml" source-language="en-US" target-language="zh-HANS" original="../Strings.resx">
     <body>
       <trans-unit id="Argument_EmptyArray" translate="yes" xml:space="preserve">
         <source>'{0}' must contain at least one element.</source>
@@ -14,7 +14,7 @@
       </trans-unit>
       <trans-unit id="Argument_NotEnum">
         <source>The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.</source>
-        <target state="new">The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.</target>
+        <target state="translated">参数“{0}”({1})的值对 Enum 类型“{2}”无效。</target>
         <note />
       </trans-unit>
       <trans-unit id="Argument_NullElement" translate="yes" xml:space="preserve">
@@ -39,7 +39,7 @@
       </trans-unit>
       <trans-unit id="ServiceMissing" translate="yes" xml:space="preserve">
         <source>Cannot find an instance of the {0} service.</source>
-        <target state="translated">Cannot find an instance of the {0} service.</target>
+        <target state="translated">找不到 {0} 服务的实例。</target>
         <note />
       </trans-unit>
       <trans-unit id="Argument_EmptyGuid" translate="yes" xml:space="preserve">
