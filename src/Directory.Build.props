@@ -2,7 +2,7 @@
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)../, Directory.Build.props))\Directory.Build.props" Condition=" '$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)../, Directory.Build.props))' != '' " />
 
   <PropertyGroup>
-    <PackageProjectUrl>https://github.com/Microsoft/vs-streamjsonrpc</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Microsoft/vs-validation</PackageProjectUrl>
     <PackageIcon>PackageIcon.png</PackageIcon>
   </PropertyGroup>
 
