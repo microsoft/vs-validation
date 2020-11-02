@@ -10,6 +10,12 @@ trigger:
     - '*.md'
     - .vscode/
 
+parameters:
+- name: includeMacOS
+  displayName: Build on macOS
+  type: boolean
+  default: false # macOS is often bogged down in Azure Pipelines
+
 variables:
   TreatWarningsAsErrors: true
   UpdateXlfOnBuild: false # force build breaks if xlf files aren't updated on dev box with resx changes
@@ -21,3 +27,5 @@ variables:
 
 jobs:
 - template: azure-pipelines/build.yml
+  parameters:
+    includeMacOS: ${{ parameters.includeMacOS }}
