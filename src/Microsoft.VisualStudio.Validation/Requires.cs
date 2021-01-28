@@ -219,8 +219,22 @@ namespace Microsoft
                 throw new ArgumentNullException(parameterName);
             }
 
-            using IEnumerator<T> enumerator = values.GetEnumerator();
-            if (!enumerator.MoveNext())
+            bool isEmpty;
+            if (values is ICollection<T> collection)
+            {
+                isEmpty = collection.Count == 0;
+            }
+            else if (values is IReadOnlyCollection<T> readOnlyCollection)
+            {
+                isEmpty = readOnlyCollection.Count == 0;
+            }
+            else
+            {
+                using IEnumerator<T> enumerator = values.GetEnumerator();
+                isEmpty = !enumerator.MoveNext();
+            }
+
+            if (isEmpty)
             {
                 throw new ArgumentException(Format(Strings.Argument_EmptyArray, parameterName), parameterName);
             }
