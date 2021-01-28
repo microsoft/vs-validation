@@ -71,7 +71,23 @@ namespace Microsoft
         public static void NotNullOrEmpty<T>([ValidatedNotNull, NotNull]IEnumerable<T>? values)
         {
             Assumes.NotNull(values);
-            Assumes.True(values.Any());
+
+            bool isEmpty;
+            if (values is ICollection<T> collection)
+            {
+                isEmpty = collection.Count == 0;
+            }
+            else if (values is IReadOnlyCollection<T> readOnlyCollection)
+            {
+                isEmpty = readOnlyCollection.Count == 0;
+            }
+            else
+            {
+                using IEnumerator<T> enumerator = values.GetEnumerator();
+                isEmpty = !enumerator.MoveNext();
+            }
+
+            Assumes.False(isEmpty);
         }
 
         /// <summary>
