@@ -2,8 +2,8 @@ Microsoft.VisualStudio.Validation
 =================================
 
 [![NuGet package](https://img.shields.io/nuget/v/Microsoft.VisualStudio.Validation.svg)](https://nuget.org/packages/Microsoft.VisualStudio.Validation)
-[![Build Status](https://dev.azure.com/azure-public/vside/_apis/build/status/vs-validation?branchName=master)](https://dev.azure.com/azure-public/vside/_build/latest?definitionId=11&branchName=master)
-[![codecov](https://codecov.io/gh/Microsoft/vs-validation/branch/master/graph/badge.svg)](https://codecov.io/gh/Microsoft/vs-validation)
+[![Build Status](https://dev.azure.com/azure-public/vside/_apis/build/status/vs-validation?branchName=main)](https://dev.azure.com/azure-public/vside/_build/latest?definitionId=11&branchName=main)
+[![codecov](https://codecov.io/gh/Microsoft/vs-validation/branch/main/graph/badge.svg)](https://codecov.io/gh/Microsoft/vs-validation)
 
 This project is available as the [Microsoft.VisualStudio.Validation][1] NuGet package.
 
