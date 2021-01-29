@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft;
+using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -164,7 +165,7 @@ public class RequiresTests
     }
 
     [Fact]
-    public void NotNullOrEmpty_Collection()
+    public void NotNullOrEmpty_Enumerable()
     {
         System.Collections.IEnumerable? nullCollection = null;
         System.Collections.IEnumerable emptyCollection = Array.Empty<string>();
@@ -175,7 +176,7 @@ public class RequiresTests
     }
 
     [Fact]
-    public void NotNullOrEmpty_CollectionOfT()
+    public void NotNullOrEmpty_EnumerableOfT_Class()
     {
         IEnumerable<string>? nullCollection = null;
         IEnumerable<string> emptyCollection = Array.Empty<string>();
@@ -186,11 +187,65 @@ public class RequiresTests
     }
 
     [Fact]
-    public void NotNullOrEmpty_CollectionOfT_Struct()
+    public void NotNullOrEmpty_EnumerableOfT_Struct()
     {
         IEnumerable<int>? nullCollection = null;
         IEnumerable<int> emptyCollection = Array.Empty<int>();
         IEnumerable<int> collection = new[] { 5 };
+        Requires.NotNullOrEmpty(collection, "param");
+        Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrEmpty(nullCollection!, "param"));
+        Assert.Throws<ArgumentException>(() => Requires.NotNullOrEmpty(emptyCollection, "param"));
+    }
+
+    [Fact]
+    public void NotNullOrEmpty_EnumerableOfT_AlsoImplementsICollectionOfT()
+    {
+        // Mock type that implements both IEnumerable<T> and ICollection<T>
+        var collection = new Mock<ICollection<string>>(MockBehavior.Strict);
+        Mock<IEnumerable<string>> enumerable = collection.As<IEnumerable<string>>();
+
+        enumerable.Setup(m => m.GetEnumerator()).Throws(new Exception("Should not call GetEnumerator."));
+
+        collection.SetupGet(m => m.Count).Returns(0);
+        Assert.Throws<ArgumentException>(() => Requires.NotNullOrEmpty(enumerable.Object, "param"));
+
+        collection.SetupGet(m => m.Count).Returns(1);
+        Requires.NotNullOrEmpty(enumerable.Object, "param");
+    }
+
+    [Fact]
+    public void NotNullOrEmpty_EnumerableOfT_AlsoImplementsIReadOnlyCollectionOfT()
+    {
+        // Mock type that implements both IEnumerable<T> and IReadOnlyCollection<T>
+        var collection = new Mock<IReadOnlyCollection<string>>(MockBehavior.Strict);
+        Mock<IEnumerable<string>> enumerable = collection.As<IEnumerable<string>>();
+
+        enumerable.Setup(m => m.GetEnumerator()).Throws(new Exception("Should not call GetEnumerator."));
+
+        collection.SetupGet(m => m.Count).Returns(0);
+        Assert.Throws<ArgumentException>(() => Requires.NotNullOrEmpty(enumerable.Object, "param"));
+
+        collection.SetupGet(m => m.Count).Returns(1);
+        Requires.NotNullOrEmpty(enumerable.Object, "param");
+    }
+
+    [Fact]
+    public void NotNullOrEmpty_CollectionOfT_Class()
+    {
+        ICollection<string>? nullCollection = null;
+        ICollection<string> emptyCollection = Array.Empty<string>();
+        ICollection<string> collection = new[] { "hi" };
+        Requires.NotNullOrEmpty(collection, "param");
+        Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrEmpty(nullCollection!, "param"));
+        Assert.Throws<ArgumentException>(() => Requires.NotNullOrEmpty(emptyCollection, "param"));
+    }
+
+    [Fact]
+    public void NotNullOrEmpty_CollectionOfT_Struct()
+    {
+        ICollection<int>? nullCollection = null;
+        ICollection<int> emptyCollection = Array.Empty<int>();
+        ICollection<int> collection = new[] { 5 };
         Requires.NotNullOrEmpty(collection, "param");
         Assert.Throws<ArgumentNullException>(() => Requires.NotNullOrEmpty(nullCollection!, "param"));
         Assert.Throws<ArgumentException>(() => Requires.NotNullOrEmpty(emptyCollection, "param"));

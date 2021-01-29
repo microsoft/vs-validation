@@ -219,8 +219,47 @@ namespace Microsoft
                 throw new ArgumentNullException(parameterName);
             }
 
-            using IEnumerator<T> enumerator = values.GetEnumerator();
-            if (!enumerator.MoveNext())
+            bool isEmpty;
+            if (values is ICollection<T> collection)
+            {
+                isEmpty = collection.Count == 0;
+            }
+            else if (values is IReadOnlyCollection<T> readOnlyCollection)
+            {
+                isEmpty = readOnlyCollection.Count == 0;
+            }
+            else
+            {
+                using IEnumerator<T> enumerator = values.GetEnumerator();
+                isEmpty = !enumerator.MoveNext();
+            }
+
+            if (isEmpty)
+            {
+                throw new ArgumentException(Format(Strings.Argument_EmptyArray, parameterName), parameterName);
+            }
+        }
+
+        /// <summary>
+        /// Throws an exception if the specified parameter's value is null,
+        /// has no elements.
+        /// </summary>
+        /// <typeparam name="T">The type of value in the collection.</typeparam>
+        /// <param name="values">The value of the argument.</param>
+        /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
+        /// <exception cref="ArgumentException">Thrown if the tested condition is false.</exception>
+        [DebuggerStepThrough]
+        public static void NotNullOrEmpty<T>([ValidatedNotNull, NotNull] ICollection<T> values, string? parameterName)
+        {
+            // To whoever is doing random code cleaning:
+            // Consider the performance when changing the code to delegate to NotNull.
+            // In general do not chain call to another function, check first and return as earlier as possible.
+            if (values is null)
+            {
+                throw new ArgumentNullException(parameterName);
+            }
+
+            if (values.Count == 0)
             {
                 throw new ArgumentException(Format(Strings.Argument_EmptyArray, parameterName), parameterName);
             }

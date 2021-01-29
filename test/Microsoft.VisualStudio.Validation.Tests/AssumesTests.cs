@@ -3,11 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft;
+using Moq;
 using Xunit;
 
 public partial class AssumesTests : IDisposable
@@ -88,6 +88,38 @@ public partial class AssumesTests : IDisposable
         Assert.ThrowsAny<Exception>(() => Assumes.NotNullOrEmpty((IEnumerable<string>?)null));
         Assert.ThrowsAny<Exception>(() => Assumes.NotNullOrEmpty(collection.Take(0)));
         Assumes.NotNullOrEmpty(collection.Take(1));
+    }
+
+    [Fact]
+    public void NotNullOrEmpty_EnumerableOfT_AlsoImplementsICollectionOfT()
+    {
+        // Mock type that implements both IEnumerable<T> and ICollection<T>
+        var collection = new Mock<ICollection<string>>(MockBehavior.Strict);
+        Mock<IEnumerable<string>> enumerable = collection.As<IEnumerable<string>>();
+
+        enumerable.Setup(m => m.GetEnumerator()).Throws(new Exception("Should not call GetEnumerator."));
+
+        collection.SetupGet(m => m.Count).Returns(0);
+        Assert.ThrowsAny<Exception>(() => Assumes.NotNullOrEmpty(enumerable.Object));
+
+        collection.SetupGet(m => m.Count).Returns(1);
+        Assumes.NotNullOrEmpty(enumerable.Object);
+    }
+
+    [Fact]
+    public void NotNullOrEmpty_EnumerableOfT_AlsoImplementsIReadOnlyCollectionOfT()
+    {
+        // Mock type that implements both IEnumerable<T> and IReadOnlyCollection<T>
+        var collection = new Mock<IReadOnlyCollection<string>>(MockBehavior.Strict);
+        Mock<IEnumerable<string>> enumerable = collection.As<IEnumerable<string>>();
+
+        enumerable.Setup(m => m.GetEnumerator()).Throws(new Exception("Should not call GetEnumerator."));
+
+        collection.SetupGet(m => m.Count).Returns(0);
+        Assert.ThrowsAny<Exception>(() => Assumes.NotNullOrEmpty(enumerable.Object));
+
+        collection.SetupGet(m => m.Count).Returns(1);
+        Assumes.NotNullOrEmpty(enumerable.Object);
     }
 
     [Fact]
