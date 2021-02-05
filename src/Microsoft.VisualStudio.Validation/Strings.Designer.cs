@@ -106,6 +106,15 @@ namespace Microsoft {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;{0}&apos; cannot be the default value defined by &apos;{1}&apos;..
+        /// </summary>
+        internal static string Argument_StructIsDefault {
+            get {
+                return ResourceManager.GetString("Argument_StructIsDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The argument cannot consist entirely of white space characters..
         /// </summary>
         internal static string Argument_Whitespace {

@@ -14,12 +14,17 @@
       </trans-unit>
       <trans-unit id="Argument_NotEnum">
         <source>The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.</source>
-        <target state="new">The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.</target>
+        <target state="translated">O valor do argumento '{0}' ({1}) é inválido para o tipo de Enumeração '{2}'.</target>
         <note />
       </trans-unit>
       <trans-unit id="Argument_NullElement" translate="yes" xml:space="preserve">
         <source>'{0}' cannot contain a null (Nothing in Visual Basic) element.</source>
         <target state="translated">'{0}' não pode conter um elemento nulo (Nada no Visual Basic).</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Argument_StructIsDefault">
+        <source>'{0}' cannot be the default value defined by '{1}'.</source>
+        <target state="translated">'{0}' não pode ser o valor padrão definido por '{1}'.</target>
         <note />
       </trans-unit>
       <trans-unit id="Argument_Whitespace" translate="yes" xml:space="preserve">
@@ -34,7 +39,7 @@
       </trans-unit>
       <trans-unit id="ServiceMissing" translate="yes" xml:space="preserve">
         <source>Cannot find an instance of the {0} service.</source>
-        <target state="translated">Cannot find an instance of the {0} service.</target>
+        <target state="translated">Não é possível localizar uma instância do serviço {0}.</target>
         <note />
       </trans-unit>
       <trans-unit id="Argument_EmptyGuid" translate="yes" xml:space="preserve">

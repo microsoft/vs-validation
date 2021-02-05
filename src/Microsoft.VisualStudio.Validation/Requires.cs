@@ -4,6 +4,7 @@
 namespace Microsoft
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
@@ -179,7 +180,7 @@ namespace Microsoft
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentException">Thrown if the tested condition is false.</exception>
         [DebuggerStepThrough]
-        public static void NotNullOrEmpty([ValidatedNotNull, NotNull] System.Collections.IEnumerable values, string? parameterName)
+        public static void NotNullOrEmpty([ValidatedNotNull, NotNull] IEnumerable values, string? parameterName)
         {
             // To whoever is doing random code cleaning:
             // Consider the performance when changing the code to delegate to NotNull.
@@ -189,16 +190,13 @@ namespace Microsoft
                 throw new ArgumentNullException(parameterName);
             }
 
-            bool hasElements = false;
-            foreach (object value in values)
+            IEnumerator enumerator = values.GetEnumerator();
+            using (enumerator as IDisposable)
             {
-                hasElements = true;
-                break;
-            }
-
-            if (!hasElements)
-            {
-                throw new ArgumentException(Format(Strings.Argument_EmptyArray, parameterName), parameterName);
+                if (!enumerator.MoveNext())
+                {
+                    throw new ArgumentException(Format(Strings.Argument_EmptyArray, parameterName), parameterName);
+                }
             }
         }
 
@@ -221,14 +219,8 @@ namespace Microsoft
                 throw new ArgumentNullException(parameterName);
             }
 
-            bool hasElements = false;
-            foreach (T value in values)
-            {
-                hasElements = true;
-                break;
-            }
-
-            if (!hasElements)
+            using IEnumerator<T> enumerator = values.GetEnumerator();
+            if (!enumerator.MoveNext())
             {
                 throw new ArgumentException(Format(Strings.Argument_EmptyArray, parameterName), parameterName);
             }
@@ -246,7 +238,13 @@ namespace Microsoft
         public static void NotNullEmptyOrNullElements<T>([ValidatedNotNull, NotNull] IEnumerable<T> values, string? parameterName)
             where T : class // ensures value-types aren't passed to a null checking method
         {
-            NotNull(values, parameterName);
+            // To whoever is doing random code cleaning:
+            // Consider the performance when changing the code to delegate to NotNull.
+            // In general do not chain call to another function, check first and return as early as possible.
+            if (values is null)
+            {
+                throw new ArgumentNullException(parameterName);
+            }
 
             bool hasElements = false;
             foreach (T? value in values)
@@ -433,6 +431,100 @@ namespace Microsoft
                 else
                 {
                     throw new InvalidEnumArgumentException(Format(Strings.Argument_NotEnum, parameterName, value, typeof(TEnum).FullName));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Throws an <see cref="ArgumentException"/> if the specified parameter's value is equal to the
+        /// default value of the <see cref="Type"/> <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the parameter.</typeparam>
+        /// <param name="value">The value of the argument.</param>
+        /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is <c>null</c> or empty.</exception>
+        [DebuggerStepThrough]
+        public static void NotDefault<T>(T value, string parameterName)
+            where T : struct
+        {
+            var defaultValue = default(T);
+            if (defaultValue.Equals(value))
+            {
+                throw new ArgumentException(PrivateErrorHelpers.Format(Strings.Argument_StructIsDefault, parameterName, typeof(T).FullName), parameterName);
+            }
+        }
+
+        /// <summary>
+        /// Throws an exception if <paramref name="values"/> is null,
+        /// <paramref name="predicate"/> is null, or if <paramref name="values"/> is not null
+        /// <em>and</em> has an element which does not match the given predicate.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the sequence.</typeparam>
+        /// <param name="values">The value of the argument.</param>
+        /// <param name="predicate">The predicate used to test the elements.</param>
+        /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
+        /// <param name="message">A message to be used in the resulting exception.</param>
+        /// <exception cref="ArgumentException">Thrown if the tested condition is false.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="predicate"/> or <paramref name="values"/> is <see langword="null"/>.</exception>
+        [DebuggerStepThrough]
+        public static void ValidElements<T>([ValidatedNotNull] IEnumerable<T> values, Predicate<T> predicate, string? parameterName, string? message)
+        {
+            // To whoever is doing random code cleaning:
+            // Consider the performance when changing the code to delegate to NotNull.
+            // In general do not chain call to another function, check first and return as early as possible.
+            if (values is null)
+            {
+                throw new ArgumentNullException(nameof(values));
+            }
+
+            if (predicate is null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
+
+            foreach (T value in values)
+            {
+                if (!predicate(value))
+                {
+                    throw new ArgumentException(message, parameterName);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Throws an exception if <paramref name="values"/> is null,
+        /// <paramref name="predicate"/> is null, or if <paramref name="values"/> is not null
+        /// <em>and</em> has an element which does not match the given predicate.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the sequence.</typeparam>
+        /// <param name="values">The value of the argument.</param>
+        /// <param name="predicate">The predicate used to test the elements.</param>
+        /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
+        /// <param name="unformattedMessage">The unformatted message.</param>
+        /// <param name="args">Formatting arguments.</param>
+        /// <exception cref="ArgumentException">Thrown if the tested condition is false.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="predicate"/> is <see langword="null"/>.</exception>
+        [DebuggerStepThrough]
+        public static void ValidElements<T>([ValidatedNotNull] IEnumerable<T> values, Predicate<T> predicate, string? parameterName, string unformattedMessage, params object?[] args)
+        {
+            // To whoever is doing random code cleaning:
+            // Consider the performance when changing the code to delegate to NotNull.
+            // In general do not chain call to another function, check first and return as early as possible.
+            if (values is null)
+            {
+                throw new ArgumentNullException(nameof(values));
+            }
+
+            if (predicate is null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
+
+            foreach (T value in values)
+            {
+                if (!predicate(value))
+                {
+                    throw new ArgumentException(PrivateErrorHelpers.Format(unformattedMessage, args), parameterName);
                 }
             }
         }

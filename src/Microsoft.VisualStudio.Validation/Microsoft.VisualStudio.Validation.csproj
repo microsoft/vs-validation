@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Microsoft</RootNamespace>
 
     <Description>Common input validation and state verification utility methods.</Description>
@@ -20,8 +20,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0" PrivateAssets="all" />
-    <PackageReference Include="Nullable" Version="1.2.1" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1" PrivateAssets="all" />
+    <PackageReference Include="Nullable" Version="1.3.0" PrivateAssets="all" />
     <PackageReference Include="XliffTasks" Version="1.0.0-beta.19503.1" PrivateAssets="all" />
   </ItemGroup>
 </Project>

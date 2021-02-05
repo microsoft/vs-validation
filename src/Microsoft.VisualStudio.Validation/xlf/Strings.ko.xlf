@@ -14,12 +14,17 @@
       </trans-unit>
       <trans-unit id="Argument_NotEnum">
         <source>The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.</source>
-        <target state="new">The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.</target>
+        <target state="translated">인수 '{0}'의 값({1})이 열거형 형식 '{2}'에 적합하지 않습니다.</target>
         <note />
       </trans-unit>
       <trans-unit id="Argument_NullElement" translate="yes" xml:space="preserve">
         <source>'{0}' cannot contain a null (Nothing in Visual Basic) element.</source>
         <target state="translated">'{0}에 null(Visual Basic에서는 Nothing) 요소를 포함할 수 없습니다.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="Argument_StructIsDefault">
+        <source>'{0}' cannot be the default value defined by '{1}'.</source>
+        <target state="translated">'{0}'은(는) '{1}'(으)로 정의된 기본값일 수 없습니다.</target>
         <note />
       </trans-unit>
       <trans-unit id="Argument_Whitespace" translate="yes" xml:space="preserve">
@@ -34,7 +39,7 @@
       </trans-unit>
       <trans-unit id="ServiceMissing" translate="yes" xml:space="preserve">
         <source>Cannot find an instance of the {0} service.</source>
-        <target state="translated">Cannot find an instance of the {0} service.</target>
+        <target state="translated">{0} 서비스의 인스턴스를 찾을 수 없습니다.</target>
         <note />
       </trans-unit>
       <trans-unit id="Argument_EmptyGuid" translate="yes" xml:space="preserve">
