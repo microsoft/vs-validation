@@ -45,7 +45,7 @@
         <Str Cat="Text">
           <Val><![CDATA[The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.]]></Val>
           <Tgt Cat="Text" Stat="Loc" Orig="New">
-            <Val><![CDATA[列舉類型 '{2}' 的 '{0}' ({1}) 引數值無效。]]></Val>
+            <Val><![CDATA[列舉類型 '{2}' 的引數 '{0}' 值 ({1}) 無效。]]></Val>
           </Tgt>
         </Str>
         <Disp Icon="Str" />
@@ -121,7 +121,7 @@
       <Str Cat="Text">
         <Val><![CDATA[Microsoft.VisualStudio.Validation]]></Val>
         <Tgt Cat="Text" Stat="Loc" Orig="New">
-          <Val><![CDATA[VisualStudio. 驗證]]></Val>
+          <Val><![CDATA[Microsoft.VisualStudio.Validation]]></Val>
         </Tgt>
       </Str>
       <Disp Icon="Str" />
@@ -151,7 +151,7 @@
       <Str Cat="Text">
         <Val><![CDATA[Microsoft.VisualStudio.Validation]]></Val>
         <Tgt Cat="Text" Stat="Loc" Orig="New">
-          <Val><![CDATA[VisualStudio. 驗證]]></Val>
+          <Val><![CDATA[Microsoft.VisualStudio.Validation]]></Val>
         </Tgt>
       </Str>
       <Disp Icon="Str" />

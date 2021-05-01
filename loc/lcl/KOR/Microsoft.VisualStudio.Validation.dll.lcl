@@ -45,7 +45,7 @@
         <Str Cat="Text">
           <Val><![CDATA[The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.]]></Val>
           <Tgt Cat="Text" Stat="Loc" Orig="New">
-            <Val><![CDATA['{0}'({1}) 인수의 값이 열거 유형 '{2}'에 적합하지 않습니다.]]></Val>
+            <Val><![CDATA[인수 '{0}'의 값({1})이 열거형 형식 '{2}'에 적합하지 않습니다.]]></Val>
           </Tgt>
         </Str>
         <Disp Icon="Str" />

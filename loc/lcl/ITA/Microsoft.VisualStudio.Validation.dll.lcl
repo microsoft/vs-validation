@@ -45,7 +45,7 @@
         <Str Cat="Text">
           <Val><![CDATA[The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.]]></Val>
           <Tgt Cat="Text" Stat="Loc" Orig="New">
-            <Val><![CDATA[Valore dell'argomento '{0}' ({1}) non valido per il tipo di enumerazione '{2}'.]]></Val>
+            <Val><![CDATA[Il valore dell'argomento '{0}' ({1}) non è valido per il tipo enumerazione '{2}'.]]></Val>
           </Tgt>
         </Str>
         <Disp Icon="Str" />

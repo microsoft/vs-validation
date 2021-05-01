@@ -45,7 +45,7 @@
         <Str Cat="Text">
           <Val><![CDATA[The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.]]></Val>
           <Tgt Cat="Text" Stat="Loc" Orig="New">
-            <Val><![CDATA[O valor do argumento '{0}' ({1}) é inválido para o tipo Enum '{2}'.]]></Val>
+            <Val><![CDATA[O valor do argumento '{0}' ({1}) é inválido para o tipo de Enumeração '{2}'.]]></Val>
           </Tgt>
         </Str>
         <Disp Icon="Str" />
@@ -103,7 +103,7 @@
       <Str Cat="Text">
         <Val><![CDATA[Common input validation and state verification utility methods.]]></Val>
         <Tgt Cat="Text" Stat="Loc" Orig="New">
-          <Val><![CDATA[Métodos do utilitário de validação de entrada e verificação de estado comuns.]]></Val>
+          <Val><![CDATA[Métodos comuns de validação de entrada e utilitário de verificação de estado.]]></Val>
         </Tgt>
       </Str>
       <Disp Icon="Str" />
@@ -121,7 +121,7 @@
       <Str Cat="Text">
         <Val><![CDATA[Microsoft.VisualStudio.Validation]]></Val>
         <Tgt Cat="Text" Stat="Loc" Orig="New">
-          <Val><![CDATA[Microsoft. VisualStudio. Validation]]></Val>
+          <Val><![CDATA[Microsoft.VisualStudio.Validation]]></Val>
         </Tgt>
       </Str>
       <Disp Icon="Str" />
@@ -151,7 +151,7 @@
       <Str Cat="Text">
         <Val><![CDATA[Microsoft.VisualStudio.Validation]]></Val>
         <Tgt Cat="Text" Stat="Loc" Orig="New">
-          <Val><![CDATA[Microsoft. VisualStudio. Validation]]></Val>
+          <Val><![CDATA[Microsoft.VisualStudio.Validation]]></Val>
         </Tgt>
       </Str>
       <Disp Icon="Str" />
