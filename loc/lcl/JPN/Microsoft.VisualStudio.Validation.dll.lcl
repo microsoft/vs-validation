@@ -45,7 +45,7 @@
         <Str Cat="Text">
           <Val><![CDATA[The value of argument '{0}' ({1}) is invalid for Enum type '{2}'.]]></Val>
           <Tgt Cat="Text" Stat="Loc" Orig="New">
-            <Val><![CDATA[引数 '{0}' の値 ({1}) が列挙型 '{2}' に対して無効です。]]></Val>
+            <Val><![CDATA[引数 '{0}' ({1}) の値は列挙型 '{2}' に対して無効です。]]></Val>
           </Tgt>
         </Str>
         <Disp Icon="Str" />
