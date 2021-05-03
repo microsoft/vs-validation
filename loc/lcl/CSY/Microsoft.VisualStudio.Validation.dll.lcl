@@ -103,7 +103,7 @@
       <Str Cat="Text">
         <Val><![CDATA[Common input validation and state verification utility methods.]]></Val>
         <Tgt Cat="Text" Stat="Loc" Orig="New">
-          <Val><![CDATA[Metody nástroje pro ověření běžného vstupu a ověření stavu]]></Val>
+          <Val><![CDATA[Metody nástroje pro ověření běžného vstupu a ověření stavu.]]></Val>
         </Tgt>
       </Str>
       <Disp Icon="Str" />
