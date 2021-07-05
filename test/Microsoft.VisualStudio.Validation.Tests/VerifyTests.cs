@@ -67,17 +67,19 @@ public class VerifyTests
         Assert.Throws<InvalidOperationException>(() => Verify.FailOperation("message", "arg1"));
     }
 
+#if !NETCOREAPP2_1
     [Fact]
     public void HResult()
     {
-        const int E_INALIDARG = unchecked((int)0x80070057);
+        const int E_INVALIDARG = unchecked((int)0x80070057);
         const int E_FAIL = unchecked((int)0x80004005);
         Verify.HResult(0);
-        Assert.Throws<ArgumentException>(() => Verify.HResult(E_INALIDARG));
+        Assert.Throws<ArgumentException>(() => Verify.HResult(E_INVALIDARG));
         Assert.Throws<COMException>(() => Verify.HResult(E_FAIL));
-        Assert.Throws<ArgumentException>(() => Verify.HResult(E_INALIDARG, ignorePreviousComCalls: true));
+        Assert.Throws<ArgumentException>(() => Verify.HResult(E_INVALIDARG, ignorePreviousComCalls: true));
         Assert.Throws<COMException>(() => Verify.HResult(E_FAIL, ignorePreviousComCalls: true));
     }
+#endif
 
     private class Disposable : IDisposableObservable
     {
