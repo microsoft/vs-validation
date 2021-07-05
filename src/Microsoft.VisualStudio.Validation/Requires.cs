@@ -371,9 +371,8 @@ namespace Microsoft
         }
 
         /// <summary>
-        /// Throws an ArgumentException if a condition does not evaluate to true.
+        /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.
         /// </summary>
-        [DebuggerStepThrough]
         public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, string? message)
         {
             if (!condition)
@@ -383,9 +382,8 @@ namespace Microsoft
         }
 
         /// <summary>
-        /// Throws an ArgumentException if a condition does not evaluate to true.
+        /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.
         /// </summary>
-        [DebuggerStepThrough]
         public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, string message, object? arg1)
         {
             if (!condition)
@@ -395,9 +393,8 @@ namespace Microsoft
         }
 
         /// <summary>
-        /// Throws an ArgumentException if a condition does not evaluate to true.
+        /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.
         /// </summary>
-        [DebuggerStepThrough]
         public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, string message, object? arg1, object? arg2)
         {
             if (!condition)
@@ -407,9 +404,8 @@ namespace Microsoft
         }
 
         /// <summary>
-        /// Throws an ArgumentException if a condition does not evaluate to true.
+        /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.
         /// </summary>
-        [DebuggerStepThrough]
         public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, string message, params object?[] args)
         {
             if (!condition)
