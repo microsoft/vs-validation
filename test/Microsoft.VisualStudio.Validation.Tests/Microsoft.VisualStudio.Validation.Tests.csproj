@@ -9,4 +9,17 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="TestStrings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TestStrings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="TestStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TestStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

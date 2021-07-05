@@ -9,6 +9,8 @@ namespace Microsoft
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Resources;
     using System.Runtime;
     using System.Threading.Tasks;
 
@@ -373,6 +375,7 @@ namespace Microsoft
         /// <summary>
         /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.
         /// </summary>
+        [DebuggerStepThrough]
         public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, string? message)
         {
             if (!condition)
@@ -384,6 +387,7 @@ namespace Microsoft
         /// <summary>
         /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.
         /// </summary>
+        [DebuggerStepThrough]
         public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, string message, object? arg1)
         {
             if (!condition)
@@ -395,6 +399,7 @@ namespace Microsoft
         /// <summary>
         /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.
         /// </summary>
+        [DebuggerStepThrough]
         public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, string message, object? arg1, object? arg2)
         {
             if (!condition)
@@ -406,11 +411,78 @@ namespace Microsoft
         /// <summary>
         /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.
         /// </summary>
+        [DebuggerStepThrough]
         public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, string message, params object?[] args)
         {
             if (!condition)
             {
                 throw new ArgumentException(Format(message, args), parameterName);
+            }
+        }
+
+        /// <summary>
+        /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.
+        /// </summary>
+        /// <param name="condition">The condition to check.</param>
+        /// <param name="parameterName">The name of the parameter to blame in the exception, if thrown.</param>
+        /// <param name="resourceManager">The resource manager from which to retrieve the exception message. For example: <c>Strings.ResourceManager</c>.</param>
+        /// <param name="resourceName">The name of the string resource to obtain for the exception message. For example: <c>nameof(Strings.SomeError)</c>.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="resourceManager"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="condition"/> is <see langword="false"/>.</exception>
+        /// <remarks>
+        /// This overload allows only loading a localized string in the error condition as an optimization in perf critical sections over the simpler
+        /// to use <see cref="Argument(bool, string?, string?)"/> overload.
+        /// </remarks>
+        [DebuggerStepThrough]
+        public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, ResourceManager resourceManager, string resourceName)
+        {
+            NotNull(resourceManager, nameof(resourceManager));
+            if (!condition)
+            {
+                throw new ArgumentException(resourceManager.GetString(resourceName, CultureInfo.CurrentCulture), parameterName);
+            }
+        }
+
+        /// <inheritdoc cref="Argument(bool, string?, ResourceManager, string, object?, object?)"/>
+        public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, ResourceManager resourceManager, string unformattedMessageResourceName, object? arg1)
+        {
+            NotNull(resourceManager, nameof(resourceManager));
+            if (!condition)
+            {
+                throw new ArgumentException(Format(resourceManager.GetString(unformattedMessageResourceName, CultureInfo.CurrentCulture), arg1), parameterName);
+            }
+        }
+
+        /// <inheritdoc cref="Argument(bool, string?, ResourceManager, string)"/>
+        /// <param name="unformattedMessageResourceName">The name of the string resource to obtain for the exception message. For example: <c>nameof(Strings.SomeError)</c>.</param>
+        /// <param name="condition"><inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/param[@name='condition']"/></param>
+        /// <param name="parameterName"><inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/param[@name='parameterName']"/></param>
+        /// <param name="resourceManager"><inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/param[@name='resourceManager']"/></param>
+        /// <param name="arg1">The first formatting argument.</param>
+        /// <param name="arg2">The second formatting argument.</param>
+        [DebuggerStepThrough]
+        public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, ResourceManager resourceManager, string unformattedMessageResourceName, object? arg1, object? arg2)
+        {
+            NotNull(resourceManager, nameof(resourceManager));
+            if (!condition)
+            {
+                throw new ArgumentException(Format(resourceManager.GetString(unformattedMessageResourceName, CultureInfo.CurrentCulture), arg1, arg2), parameterName);
+            }
+        }
+
+        /// <inheritdoc cref="Argument(bool, string?, ResourceManager, string)"/>
+        /// <param name="unformattedMessageResourceName">The name of the string resource to obtain for the exception message. For example: <c>nameof(Strings.SomeError)</c>.</param>
+        /// <param name="condition"><inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/param[@name='condition']"/></param>
+        /// <param name="parameterName"><inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/param[@name='parameterName']"/></param>
+        /// <param name="resourceManager"><inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/param[@name='resourceManager']"/></param>
+        /// <param name="args">The formatting arguments.</param>
+        [DebuggerStepThrough]
+        public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, ResourceManager resourceManager, string unformattedMessageResourceName, params object?[] args)
+        {
+            NotNull(resourceManager, nameof(resourceManager));
+            if (!condition)
+            {
+                throw new ArgumentException(Format(resourceManager.GetString(unformattedMessageResourceName, CultureInfo.CurrentCulture), args), parameterName);
             }
         }
 
