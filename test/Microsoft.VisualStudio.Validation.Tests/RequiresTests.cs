@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft;
+using Microsoft.VisualStudio.Validation.Tests;
 using Moq;
 using Xunit;
 using Xunit.Abstractions;
@@ -77,28 +78,68 @@ public class RequiresTests
     public void Argument_Bool_String_String()
     {
         Requires.Argument(true, "a", "b");
-        Assert.Throws<ArgumentException>("a", () => Requires.Argument(false, "a", "b"));
+        ArgumentException ex = Assert.Throws<ArgumentException>("a", () => Requires.Argument(false, "a", "b"));
+        Assert.StartsWith("b", ex.Message);
     }
 
     [Fact]
     public void Argument_Bool_String_String_Object()
     {
         Requires.Argument(true, "a", "b");
-        Assert.Throws<ArgumentException>("a", () => Requires.Argument(false, "a", "b", "arg1"));
+        ArgumentException ex = Assert.Throws<ArgumentException>("a", () => Requires.Argument(false, "a", "b: {0}", "arg1"));
+        Assert.StartsWith("b: arg1", ex.Message);
     }
 
     [Fact]
     public void Argument_Bool_String_String_Object_Object()
     {
         Requires.Argument(true, "a", "b");
-        Assert.Throws<ArgumentException>("a", () => Requires.Argument(false, "a", "b", "arg1", "arg2"));
+        ArgumentException ex = Assert.Throws<ArgumentException>("a", () => Requires.Argument(false, "a", "b: {0} {1}", "arg1", "arg2"));
+        Assert.StartsWith("b: arg1 arg2", ex.Message);
     }
 
     [Fact]
     public void Argument_Bool_String_String_ObjectArray()
     {
         Requires.Argument(true, "a", "b");
-        Assert.Throws<ArgumentException>("a", () => Requires.Argument(false, "a", "b", "arg1", "arg2", "arg3"));
+        ArgumentException ex = Assert.Throws<ArgumentException>("a", () => Requires.Argument(false, "a", "b: {0} {1} {2}", "arg1", "arg2", "arg3"));
+        Assert.StartsWith("b: arg1 arg2 arg3", ex.Message);
+    }
+
+    [Fact]
+    public void Argument_Bool_String_ResourceManager_String()
+    {
+        Requires.Argument(true, "someParameter", TestStrings.ResourceManager, nameof(TestStrings.SomeError));
+        ArgumentException ex = Assert.Throws<ArgumentException>(() => Requires.Argument(false, "someParameter", TestStrings.ResourceManager, nameof(TestStrings.SomeError)));
+        Assert.Equal("someParameter", ex.ParamName);
+        Assert.StartsWith(TestStrings.SomeError, ex.Message);
+    }
+
+    [Fact]
+    public void Argument_Bool_String_ResourceManager_String_Object()
+    {
+        Requires.Argument(true, "someParameter", TestStrings.ResourceManager, nameof(TestStrings.SomeError1Arg), "arg1");
+        ArgumentException ex = Assert.Throws<ArgumentException>(() => Requires.Argument(false, "someParameter", TestStrings.ResourceManager, nameof(TestStrings.SomeError1Arg), "arg1"));
+        Assert.Equal("someParameter", ex.ParamName);
+        Assert.StartsWith("Error text arg1", ex.Message);
+    }
+
+    [Fact]
+    public void Argument_Bool_String_ResourceManager_String_Object_Object()
+    {
+        Requires.Argument(true, "someParameter", TestStrings.ResourceManager, nameof(TestStrings.SomeError2Args), "arg1", "arg2");
+        ArgumentException ex = Assert.Throws<ArgumentException>(() => Requires.Argument(false, "someParameter", TestStrings.ResourceManager, nameof(TestStrings.SomeError2Args), "arg1", "arg2"));
+        Assert.Equal("someParameter", ex.ParamName);
+        Assert.StartsWith("Error text arg1 arg2", ex.Message);
+    }
+
+    [Fact]
+    public void Argument_Bool_String_ResourceManager_String_ObjectArray()
+    {
+        Requires.Argument(true, "someParameter", TestStrings.ResourceManager, nameof(TestStrings.SomeError3Args), "arg1", "arg2", "arg3");
+        ArgumentException ex = Assert.Throws<ArgumentException>(() => Requires.Argument(false, "someParameter", TestStrings.ResourceManager, nameof(TestStrings.SomeError3Args), "arg1", "arg2", "arg3"));
+        Assert.Equal("someParameter", ex.ParamName);
+        Assert.StartsWith("Error text arg1 arg2 arg3", ex.Message);
     }
 
     [Fact]
