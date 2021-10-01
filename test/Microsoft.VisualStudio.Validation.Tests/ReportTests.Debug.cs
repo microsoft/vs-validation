@@ -4,8 +4,6 @@
 // Ensure the tests defined in this file always emulate a client compiled for Debug
 #define DEBUG
 
-#if NETFRAMEWORK // .NET Core doesn't let us use TraceListeners to verify behavior https://github.com/dotnet/corefx/issues/16596
-
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -37,7 +35,11 @@ public class ReportDebugTests : IDisposable
         {
             Report.If(false, FailureMessage);
             listener.Value.Setup(l => l.WriteLine(FailureMessage)).Verifiable();
+#if NETCOREAPP
+            listener.Value.Setup(l => l.Fail(FailureMessage, string.Empty)).Verifiable();
+#else
             listener.Value.Setup(l => l.Fail(FailureMessage)).Verifiable();
+#endif
             Report.If(true, FailureMessage);
         }
     }
@@ -49,7 +51,11 @@ public class ReportDebugTests : IDisposable
         {
             Report.IfNot(true, FailureMessage);
             listener.Value.Setup(l => l.WriteLine(FailureMessage)).Verifiable();
+#if NETCOREAPP
+            listener.Value.Setup(l => l.Fail(FailureMessage, string.Empty)).Verifiable();
+#else
             listener.Value.Setup(l => l.Fail(FailureMessage)).Verifiable();
+#endif
             Report.IfNot(false, FailureMessage);
         }
     }
@@ -61,7 +67,11 @@ public class ReportDebugTests : IDisposable
         {
             Report.IfNot(true, "a{0}c", "b");
             listener.Value.Setup(l => l.WriteLine("abc")).Verifiable();
+#if NETCOREAPP
+            listener.Value.Setup(l => l.Fail("abc", string.Empty)).Verifiable();
+#else
             listener.Value.Setup(l => l.Fail("abc")).Verifiable();
+#endif
             Report.IfNot(false, "a{0}c", "b");
         }
     }
@@ -73,7 +83,11 @@ public class ReportDebugTests : IDisposable
         {
             Report.IfNot(true, "a{0}{1}d", "b", "c");
             listener.Value.Setup(l => l.WriteLine("abcd")).Verifiable();
+#if NETCOREAPP
+            listener.Value.Setup(l => l.Fail("abcd", string.Empty)).Verifiable();
+#else
             listener.Value.Setup(l => l.Fail("abcd")).Verifiable();
+#endif
             Report.IfNot(false, "a{0}{1}d", "b", "c");
         }
     }
@@ -85,7 +99,11 @@ public class ReportDebugTests : IDisposable
         {
             Report.IfNot(true, "a{0}{1}{2}e", "b", "c", "d");
             listener.Value.Setup(l => l.WriteLine("abcde")).Verifiable();
+#if NETCOREAPP
+            listener.Value.Setup(l => l.Fail("abcde", string.Empty)).Verifiable();
+#else
             listener.Value.Setup(l => l.Fail("abcde")).Verifiable();
+#endif
             Report.IfNot(false, "a{0}{1}{2}e", "b", "c", "d");
         }
     }
@@ -99,7 +117,11 @@ public class ReportDebugTests : IDisposable
             string missingTypeName = possiblyPresent.GetType().FullName!;
             Report.IfNotPresent(possiblyPresent);
             listener.Value.Setup(l => l.WriteLine(It.Is<string>(v => v.Contains(missingTypeName)))).Verifiable();
+#if NETCOREAPP
+            listener.Value.Setup(l => l.Fail(It.Is<string>(v => v.Contains(missingTypeName)), string.Empty)).Verifiable();
+#else
             listener.Value.Setup(l => l.Fail(It.Is<string>(v => v.Contains(missingTypeName)))).Verifiable();
+#endif
             possiblyPresent = null;
             Report.IfNotPresent(possiblyPresent);
         }
@@ -111,7 +133,11 @@ public class ReportDebugTests : IDisposable
         using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             listener.Value.Setup(l => l.WriteLine(FailureMessage)).Verifiable();
+#if NETCOREAPP
+            listener.Value.Setup(l => l.Fail(FailureMessage, string.Empty)).Verifiable();
+#else
             listener.Value.Setup(l => l.Fail(FailureMessage)).Verifiable();
+#endif
             Report.Fail(FailureMessage);
         }
     }
@@ -122,7 +148,11 @@ public class ReportDebugTests : IDisposable
         using (DisposableValue<Mock<TraceListener>> listener = Listen())
         {
             listener.Value.Setup(l => l.WriteLine(DefaultFailureMessage)).Verifiable();
+#if NETCOREAPP
+            listener.Value.Setup(l => l.Fail(DefaultFailureMessage, string.Empty)).Verifiable();
+#else
             listener.Value.Setup(l => l.Fail(DefaultFailureMessage)).Verifiable();
+#endif
             Report.Fail();
         }
     }
@@ -140,4 +170,3 @@ public class ReportDebugTests : IDisposable
             });
     }
 }
-#endif

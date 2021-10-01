@@ -67,7 +67,6 @@ public class VerifyTests
         Assert.Throws<InvalidOperationException>(() => Verify.FailOperation("message", "arg1"));
     }
 
-#if !NETCOREAPP2_1
     [Fact]
     public void HResult()
     {
@@ -79,7 +78,6 @@ public class VerifyTests
         Assert.Throws<ArgumentException>(() => Verify.HResult(E_INVALIDARG, ignorePreviousComCalls: true));
         Assert.Throws<COMException>(() => Verify.HResult(E_FAIL, ignorePreviousComCalls: true));
     }
-#endif
 
     private class Disposable : IDisposableObservable
     {
