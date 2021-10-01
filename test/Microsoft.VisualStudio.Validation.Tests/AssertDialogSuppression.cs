@@ -17,7 +17,7 @@ internal class AssertDialogSuppression : IDisposable
     /// <summary>
     /// Stores the original popup-ability of the assertion dialog.
     /// </summary>
-    private bool? originalAssertUiSetting;
+    private bool? originalAssertUiSetting = false;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AssertDialogSuppression"/> class,
@@ -25,12 +25,16 @@ internal class AssertDialogSuppression : IDisposable
     /// </summary>
     public AssertDialogSuppression()
     {
+#if NETCOREAPP
+        Trace.Listeners.Clear();
+#else
         // We disable the assertion dialog so it doesn't block tests, as we expect some tests to test failure cases.
         if (Trace.Listeners["Default"] is DefaultTraceListener assertDialogListener)
         {
             this.originalAssertUiSetting = assertDialogListener.AssertUiEnabled;
             assertDialogListener.AssertUiEnabled = false;
         }
+#endif
     }
 
     /// <summary>
