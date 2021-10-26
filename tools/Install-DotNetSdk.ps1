@@ -40,7 +40,7 @@ Get-ChildItem "$PSScriptRoot\..\src\*.*proj","$PSScriptRoot\..\test\*.*proj","$P
             $targetFrameworks = $targetFrameworks -Split ';'
         }
     }
-    $targetFrameworks |? { $_ -match 'netcoreapp(\d+\.\d+)' } |% {
+    $targetFrameworks |? { $_ -match 'net(?:coreapp)?(\d+\.\d+)' } |% {
         $runtimeVersions += $Matches[1]
     }
 }
