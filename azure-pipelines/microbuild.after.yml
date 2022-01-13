@@ -13,6 +13,15 @@ steps:
   displayName: Component Detection
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
 
+- task: ManifestGeneratorTask@0
+  displayName: Software Bill of Materials generation
+  inputs:
+    BuildDropPath: $(System.DefaultWorkingDirectory)/bin/Microsoft.VisualStudio.Validation/$(BuildConfiguration)
+    BuildComponentPath: $(System.DefaultWorkingDirectory)/obj/Microsoft.VisualStudio.Validation
+
+- powershell: Copy-Item -Recurse "$(System.DefaultWorkingDirectory)/bin/Microsoft.VisualStudio.Validation/$(BuildConfiguration)/_manifest" "$(System.DefaultWorkingDirectory)/bin/Packages/$(BuildConfiguration)/NuGet"
+  displayName: Publish Software Bill of Materials
+
 - task: Ref12.ref12-analyze-task.ref12-analyze-task.Ref12Analyze@0
   displayName: Ref12 (Codex) Analyze
   inputs:
