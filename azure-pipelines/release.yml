@@ -18,7 +18,8 @@ stages:
   jobs:
   - deployment: create
     pool:
-      vmImage: ubuntu-latest
+      name: AzurePipelines-EO
+      vmImage: AzurePipelinesUbuntu20.04compliant
     environment: No-Approval
     strategy:
       runOnce:
@@ -52,7 +53,8 @@ stages:
   jobs:
   - deployment: push
     pool:
-      vmImage: ubuntu-latest
+      name: AzurePipelines-EO
+      vmImage: AzurePipelinesUbuntu20.04compliant
     environment: No-Approval
     strategy:
       runOnce:
