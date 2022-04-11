@@ -1,14 +1,16 @@
 trigger:
+  batch: true
   branches:
     include:
     - main
     - 'v*'
-    - validate/*
+    - 'validate/*'
   paths:
     exclude:
     - doc/
     - '*.md'
     - .vscode/
+    - .github/
 
 parameters:
 - name: includeMacOS
@@ -20,7 +22,6 @@ variables:
   TreatWarningsAsErrors: true
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   BuildConfiguration: Release
-  BuildPlatform: Any CPU
   codecov_token: 1c079a51-729f-4e18-9792-2a75f2e074e0
   NUGET_PACKAGES: $(Agent.TempDirectory)/.nuget/packages
 
