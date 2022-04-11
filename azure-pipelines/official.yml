@@ -110,5 +110,5 @@ stages:
       inputs:
         nuGetServiceConnections: azure-public/vssdk
         forceReinstallCredentialProvider: true
-    - script: dotnet nuget push $(Pipeline.Workspace)/deployables-Windows/NuGet/*.nupkg -s https://pkgs.dev.azure.com/azure-public/vside/_packaging/vs-impl/nuget/v3/index.json --api-key azdo --skip-duplicate
+    - script: dotnet nuget push $(Pipeline.Workspace)/deployables-Windows/NuGet/*.nupkg -s https://pkgs.dev.azure.com/azure-public/vside/_packaging/vssdk/nuget/v3/index.json --api-key azdo --skip-duplicate
       displayName: Push nuget packages
