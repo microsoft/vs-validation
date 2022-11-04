@@ -4,7 +4,6 @@
 // Ensure the tests defined in this file always emulate a client compiled for Release
 #undef DEBUG
 
-using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft;

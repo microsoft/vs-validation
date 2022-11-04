@@ -1,10 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft;
 using Moq;
@@ -152,17 +148,14 @@ public partial class AssumesTests : IDisposable
         Assumes.Present("hi");
     }
 
-#pragma warning disable SYSLIB0011 // Type or member is obsolete
-    [Fact]
+    [Fact, Obsolete]
     public void InternalErrorException_IsSerializable()
     {
         try
         {
             Assumes.False(true);
         }
-#pragma warning disable CA1031 // Do not catch general exception types
         catch (Exception ex)
-#pragma warning restore CA1031 // Do not catch general exception types
         {
             var formatter = new BinaryFormatter();
             using var ms = new MemoryStream();
@@ -173,5 +166,4 @@ public partial class AssumesTests : IDisposable
             Assert.Equal(ex.Message, ex2.Message);
         }
     }
-#pragma warning restore SYSLIB0011 // Type or member is obsolete
 }
