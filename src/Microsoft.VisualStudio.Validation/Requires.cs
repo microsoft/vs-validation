@@ -26,7 +26,7 @@ public static class Requires
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see langword="null"/>.</exception>
     [DebuggerStepThrough]
     [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-    public static T NotNull<T>([ValidatedNotNull, NotNull] T value, string? parameterName)
+    public static T NotNull<T>([ValidatedNotNull, NotNull] T? value, string? parameterName)
         where T : class // ensures value-types aren't passed to a null checking method
     {
         if (value is null)
