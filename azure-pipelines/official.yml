@@ -12,14 +12,16 @@ trigger:
     - .vscode/
     - azure-pipelines/release.yml
     - azure-pipelines/vs-insertion.yml
-schedules:
-- cron: "0 3 * * *" # Daily @ 8 PM PST
-  displayName: Daily vs-insertion
-  branches:
-    include:
-    - main
-    - 'v16.*'
-    - 'v17.*'
+# Disable automatic real-signed builds and insertions
+# because we mostly just maintain the repo compliance and freshness without making any shipping changes.
+#schedules:
+#- cron: "0 3 * * *" # Daily @ 8 PM PST
+#  displayName: Daily vs-insertion
+#  branches:
+#    include:
+#    - main
+#    - 'v16.*'
+#    - 'v17.*'
 
 parameters:
 - name: SignTypeSelection
