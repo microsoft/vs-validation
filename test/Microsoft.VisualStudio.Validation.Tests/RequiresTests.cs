@@ -30,6 +30,17 @@ public class RequiresTests
     }
 
     [Fact]
+    public void NotNull_ThrowsOnNull_CallerArgumentExpression()
+    {
+        string? foo = null;
+        ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => Requires.NotNull(foo!));
+        Assert.Equal("foo", ex.ParamName);
+
+        ex = Assert.Throws<ArgumentNullException>(() => Requires.NotNull(foo!, null));
+        Assert.Null(ex.ParamName);
+    }
+
+    [Fact]
     public void NotNull_IntPtr_ThrowsOnZero()
     {
         Assert.Throws<ArgumentNullException>(() => Requires.NotNull(IntPtr.Zero, "foo"));

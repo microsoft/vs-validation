@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime;
+using System.Runtime.CompilerServices;
 
 namespace Microsoft;
 
@@ -128,7 +129,7 @@ public static partial class Assumes
     /// </summary>
     [DebuggerStepThrough]
     [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-    public static void False([DoesNotReturnIf(true)] bool condition, [Localizable(false)] string? message = null)
+    public static void False([DoesNotReturnIf(true)] bool condition, [CallerArgumentExpression(nameof(condition)), Localizable(false)] string? message = null)
     {
         if (condition)
         {
@@ -167,7 +168,7 @@ public static partial class Assumes
     /// </summary>
     [DebuggerStepThrough]
     [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-    public static void True([DoesNotReturnIf(false)] bool condition, [Localizable(false)] string? message = null)
+    public static void True([DoesNotReturnIf(false)] bool condition, [CallerArgumentExpression(nameof(condition)), Localizable(false)] string? message = null)
     {
         if (!condition)
         {

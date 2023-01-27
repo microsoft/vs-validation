@@ -101,7 +101,7 @@ public static partial class Verify
 
         if (disposedValue.IsDisposed)
         {
-            string objectName = disposedValue.GetType().FullName;
+            string objectName = disposedValue.GetType().FullName ?? string.Empty;
             if (message is object)
             {
                 throw new ObjectDisposedException(objectName, message);
@@ -121,7 +121,7 @@ public static partial class Verify
     {
         if (!condition)
         {
-            string objectName = disposedValue is object ? disposedValue.GetType().FullName : string.Empty;
+            string objectName = disposedValue is object ? (disposedValue.GetType().FullName ?? string.Empty) : string.Empty;
             if (message is object)
             {
                 throw new ObjectDisposedException(objectName, message);
