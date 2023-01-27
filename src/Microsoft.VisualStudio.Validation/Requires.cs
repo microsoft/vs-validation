@@ -446,7 +446,7 @@ public static class Requires
         NotNull(resourceManager, nameof(resourceManager));
         if (!condition)
         {
-            throw new ArgumentException(Format(resourceManager.GetString(unformattedMessageResourceName, CultureInfo.CurrentCulture), arg1), parameterName);
+            throw new ArgumentException(Format(resourceManager.GetString(unformattedMessageResourceName, CultureInfo.CurrentCulture)!, arg1), parameterName);
         }
     }
 
@@ -463,7 +463,7 @@ public static class Requires
         NotNull(resourceManager, nameof(resourceManager));
         if (!condition)
         {
-            throw new ArgumentException(Format(resourceManager.GetString(unformattedMessageResourceName, CultureInfo.CurrentCulture), arg1, arg2), parameterName);
+            throw new ArgumentException(Format(resourceManager.GetString(unformattedMessageResourceName, CultureInfo.CurrentCulture)!, arg1, arg2), parameterName);
         }
     }
 
@@ -479,7 +479,7 @@ public static class Requires
         NotNull(resourceManager, nameof(resourceManager));
         if (!condition)
         {
-            throw new ArgumentException(Format(resourceManager.GetString(unformattedMessageResourceName, CultureInfo.CurrentCulture), args), parameterName);
+            throw new ArgumentException(Format(resourceManager.GetString(unformattedMessageResourceName, CultureInfo.CurrentCulture)!, args), parameterName);
         }
     }
 
