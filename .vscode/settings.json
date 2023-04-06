@@ -4,6 +4,5 @@
   "files.trimFinalNewlines": true,
   "omnisharp.enableEditorConfigSupport": true,
   "omnisharp.enableImportCompletion": true,
-  "omnisharp.enableRoslynAnalyzers": true,
-  "vsgreen.defaultSolution": "Microsoft.VisualStudio.Validation.sln"
+  "omnisharp.enableRoslynAnalyzers": true
 }
