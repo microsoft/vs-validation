@@ -14,7 +14,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis.ResxSourceGenerator" PrivateAssets="all" />
     <CodeGenerationEmbeddedResource Include="@(EmbeddedResource)" Exclude="**\*.??-??.resx;**\*.??.resx" />
     <NonCodeGenerationEmbeddedResource Include="@(EmbeddedResource)" Exclude="@(CodeGenerationEmbeddedResource)" />
-    <AdditionalFiles Include="@(CodeGenerationEmbeddedResource)" EmitFormatMethods="true" />
+    <AdditionalFiles Include="@(CodeGenerationEmbeddedResource)" EmitFormatMethods="true" AsConstants="$(ResxAsConstants)" />
   </ItemGroup>
 
   <!-- Special handling for embedded resources to show as nested in Solution Explorer -->
