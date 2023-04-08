@@ -8,4 +8,20 @@
     <!-- Avoid compile error about missing namespace when combining ImplicitUsings with .NET Framework target frameworks. -->
     <Using Remove="System.Net.Http" Condition="'$(TargetFrameworkIdentifier)'=='.NETFramework'" />
   </ItemGroup>
+
+    <!-- Enable code generation for resx files. -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.ResxSourceGenerator" PrivateAssets="all" />
+    <CodeGenerationEmbeddedResource Include="@(EmbeddedResource)" Exclude="**\*.??-??.resx;**\*.??.resx" />
+    <NonCodeGenerationEmbeddedResource Include="@(EmbeddedResource)" Exclude="@(CodeGenerationEmbeddedResource)" />
+    <AdditionalFiles Include="@(CodeGenerationEmbeddedResource)" EmitFormatMethods="true" />
+  </ItemGroup>
+
+  <!-- Special handling for embedded resources to show as nested in Solution Explorer -->
+  <ItemGroup>
+    <!-- Localized embedded resources are just dependent on the parent RESX -->
+    <EmbeddedResource Update="**\*.??-??.resx" DependentUpon="$([System.IO.Path]::ChangeExtension($([System.IO.Path]::GetFileNameWithoutExtension(%(Identity))), '.resx'))" />
+    <EmbeddedResource Update="**\*.??.resx" DependentUpon="$([System.IO.Path]::ChangeExtension($([System.IO.Path]::GetFileNameWithoutExtension(%(Identity))), '.resx'))" />
+  </ItemGroup>
+
 </Project>
