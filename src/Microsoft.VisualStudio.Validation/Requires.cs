@@ -140,7 +140,7 @@ public static class Requires
 
         if (value.Length == 0 || value[0] == '\0')
         {
-            throw new ArgumentException(Strings.FormatArgument_EmptyString(parameterName!), parameterName);
+            throw new ArgumentException(Strings.FormatArgument_EmptyString(parameterName), parameterName);
         }
     }
 
@@ -163,7 +163,7 @@ public static class Requires
 
         if (value.Length == 0 || value[0] == '\0')
         {
-            throw new ArgumentException(Strings.FormatArgument_EmptyString(parameterName!), parameterName);
+            throw new ArgumentException(Strings.FormatArgument_EmptyString(parameterName), parameterName);
         }
 
         if (string.IsNullOrWhiteSpace(value))
@@ -195,7 +195,7 @@ public static class Requires
         {
             if (!enumerator.MoveNext())
             {
-                throw new ArgumentException(Strings.FormatArgument_EmptyArray(parameterName!), parameterName);
+                throw new ArgumentException(Strings.FormatArgument_EmptyArray(parameterName), parameterName);
             }
         }
     }
@@ -236,7 +236,7 @@ public static class Requires
 
         if (isEmpty)
         {
-            throw new ArgumentException(Strings.FormatArgument_EmptyArray(parameterName!), parameterName);
+            throw new ArgumentException(Strings.FormatArgument_EmptyArray(parameterName), parameterName);
         }
     }
 
@@ -261,7 +261,7 @@ public static class Requires
 
         if (values.Count == 0)
         {
-            throw new ArgumentException(Strings.FormatArgument_EmptyArray(parameterName!), parameterName);
+            throw new ArgumentException(Strings.FormatArgument_EmptyArray(parameterName), parameterName);
         }
     }
 
@@ -292,13 +292,13 @@ public static class Requires
 
             if (value is null)
             {
-                throw new ArgumentException(Strings.FormatArgument_NullElement(parameterName!), parameterName);
+                throw new ArgumentException(Strings.FormatArgument_NullElement(parameterName), parameterName);
             }
         }
 
         if (!hasElements)
         {
-            throw new ArgumentException(Strings.FormatArgument_EmptyArray(parameterName!), parameterName);
+            throw new ArgumentException(Strings.FormatArgument_EmptyArray(parameterName), parameterName);
         }
     }
 
@@ -319,7 +319,7 @@ public static class Requires
             {
                 if (value is null)
                 {
-                    throw new ArgumentException(Strings.FormatArgument_NullElement(parameterName!), parameterName);
+                    throw new ArgumentException(Strings.FormatArgument_NullElement(parameterName), parameterName);
                 }
             }
         }
@@ -336,7 +336,7 @@ public static class Requires
     {
         if (value == Guid.Empty)
         {
-            throw new ArgumentException(Strings.FormatArgument_EmptyGuid(parameterName!), parameterName);
+            throw new ArgumentException(Strings.FormatArgument_EmptyGuid(parameterName), parameterName);
         }
     }
 
@@ -535,7 +535,7 @@ public static class Requires
             }
             else
             {
-                throw new InvalidEnumArgumentException(Strings.FormatArgument_NotEnum(parameterName!, value, typeof(TEnum).FullName!));
+                throw new InvalidEnumArgumentException(Strings.FormatArgument_NotEnum(parameterName, value, typeof(TEnum).FullName));
             }
         }
     }
@@ -555,7 +555,7 @@ public static class Requires
         var defaultValue = default(T);
         if (defaultValue.Equals(value))
         {
-            throw new ArgumentException(Strings.FormatArgument_StructIsDefault(parameterName!, typeof(T).FullName!), parameterName);
+            throw new ArgumentException(Strings.FormatArgument_StructIsDefault(parameterName, typeof(T).FullName), parameterName);
         }
     }
 

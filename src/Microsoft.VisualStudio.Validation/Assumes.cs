@@ -264,7 +264,7 @@ public static partial class Assumes
         if (component is null)
         {
             Type coreType = PrivateErrorHelpers.TrimGenericWrapper(typeof(T), typeof(Lazy<>));
-            Fail(Strings.FormatServiceMissing(coreType.FullName!));
+            Fail(Strings.FormatServiceMissing(coreType.FullName));
         }
     }
 

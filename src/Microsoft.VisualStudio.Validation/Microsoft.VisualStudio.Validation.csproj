@@ -10,4 +10,7 @@
   <ItemGroup>
     <None Include="$(RepoRootPath)README.md" Pack="true" PackagePath="" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Strings.resx" EmitFormatMethods="true" />
+  </ItemGroup>
 </Project>
