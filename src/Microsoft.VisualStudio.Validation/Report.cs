@@ -26,7 +26,7 @@ public static class Report
         if (part is null)
         {
             Type coreType = PrivateErrorHelpers.TrimGenericWrapper(typeof(T), typeof(Lazy<>));
-            Fail(Strings.ServiceMissing, coreType.FullName);
+            Fail(Strings.FormatServiceMissing(coreType.FullName));
         }
     }
 
