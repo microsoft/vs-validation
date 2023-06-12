@@ -1,4 +1,5 @@
-$nbgv = & "$PSScriptRoot\..\Get-nbgv.ps1"
+$MacroName = 'MicrosoftVisualStudioValidationVersion'
+$SampleProject = "$PSScriptRoot\..\..\src\Microsoft.VisualStudio.Validation"
 [string]::join(',',(@{
-    ('MicrosoftVisualStudioValidationVersion') = & { (& $nbgv get-version --project "$PSScriptRoot\..\..\src\Microsoft.VisualStudio.Validation" --format json | ConvertFrom-Json).AssemblyVersion };
+    ($MacroName) = & { (dotnet tool run nbgv -- get-version --project $SampleProject --format json | ConvertFrom-Json).AssemblyVersion };
 }.GetEnumerator() |% { "$($_.key)=$($_.value)" }))
