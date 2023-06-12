@@ -8,4 +8,8 @@
     <!-- Avoid compile error about missing namespace when combining ImplicitUsings with .NET Framework target frameworks. -->
     <Using Remove="System.Net.Http" Condition="'$(TargetFrameworkIdentifier)'=='.NETFramework'" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.ResxSourceGenerator" PrivateAssets="all" />
+  </ItemGroup>
 </Project>
