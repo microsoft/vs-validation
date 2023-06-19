@@ -7,7 +7,7 @@
     <MicroBuildVersion>2.0.127</MicroBuildVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Microsoft.CodeAnalysis.ResxSourceGenerator" Version="3.3.5-beta1.23227.3" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.ResxSourceGenerator" Version="3.3.5-beta1.23308.2" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.6.2" />
     <PackageVersion Include="Microsoft.VisualStudio.Internal.MicroBuild.NonShipping" Version="$(MicroBuildVersion)" />
     <PackageVersion Include="Moq" Version="4.18.4" />
