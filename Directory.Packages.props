@@ -4,7 +4,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
 
-    <MicroBuildVersion>2.0.127</MicroBuildVersion>
+    <MicroBuildVersion>2.0.130</MicroBuildVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.CodeAnalysis.ResxSourceGenerator" Version="3.3.5-beta1.23308.2" />
