@@ -418,6 +418,22 @@ public static class Requires
         }
     }
 
+#if NET6_0_OR_GREATER
+
+    /// <summary>
+    /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.
+    /// </summary>
+    [DebuggerStepThrough]
+    public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, [InterpolatedStringHandlerArgument("condition")] ref ValidationInterpolatedStringHandler message)
+    {
+        if (!condition)
+        {
+            throw new ArgumentException(message.ToStringAndClear(), parameterName);
+        }
+    }
+
+#endif
+
     /// <summary>
     /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.
     /// </summary>

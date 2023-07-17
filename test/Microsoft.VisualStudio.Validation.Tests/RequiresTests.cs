@@ -150,6 +150,28 @@ public class RequiresTests
         Assert.StartsWith(TestStrings.FormatSomeError3Args("arg1", "arg2", "arg3"), ex.Message);
     }
 
+#if NET6_0_OR_GREATER
+
+    [Fact]
+    public void Argument_InterpolatedString()
+    {
+        int formatCount = 0;
+        string FormattingMethod()
+        {
+            formatCount++;
+            return "generated string";
+        }
+
+        Requires.Argument(true, "paramName", $"Some {FormattingMethod()} method.");
+        Assert.Equal(0, formatCount);
+
+        ArgumentException ex = Assert.Throws<ArgumentException>(() => Requires.Argument(false, "paramName", $"Some {FormattingMethod()} method."));
+        Assert.Equal(1, formatCount);
+        Assert.StartsWith("Some generated string method.", ex.Message);
+    }
+
+#endif
+
     [Fact]
     public void Fail()
     {
