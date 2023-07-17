@@ -83,9 +83,17 @@ public class VerifyTests
     }
 
     [Fact]
-    public void FailOperation()
+    public void FailOperation_ParamsFormattingArgs()
     {
-        Assert.Throws<InvalidOperationException>(() => Verify.FailOperation("message", "arg1"));
+        InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => Verify.FailOperation("a{0}c", "b"));
+        Assert.Equal("abc", ex.Message);
+    }
+
+    [Fact]
+    public void FailOperation_String()
+    {
+        InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => Verify.FailOperation("a{0}c"));
+        Assert.Equal("a{0}c", ex.Message);
     }
 
     [Fact]

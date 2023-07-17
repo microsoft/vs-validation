@@ -103,6 +103,21 @@ public static partial class Verify
     /// </returns>
     [DebuggerStepThrough]
     [DoesNotReturn]
+    public static Exception FailOperation(string message)
+    {
+        throw new InvalidOperationException(message);
+    }
+
+    /// <summary>
+    /// Throws an <see cref="InvalidOperationException"/>.
+    /// </summary>
+    /// <returns>
+    /// Nothing.  This method always throws.
+    /// The signature claims to return an exception to allow callers to throw this method
+    /// to satisfy C# execution path constraints.
+    /// </returns>
+    [DebuggerStepThrough]
+    [DoesNotReturn]
     public static Exception FailOperation(string message, params object?[] args)
     {
         throw new InvalidOperationException(PrivateErrorHelpers.Format(message, args));
