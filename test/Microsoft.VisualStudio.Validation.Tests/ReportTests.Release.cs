@@ -76,6 +76,29 @@ public class ReportReleaseTests : IDisposable
         }
     }
 
+#if NET6_0_OR_GREATER
+
+    [Fact]
+    public void IfNot_InterpolatedString()
+    {
+        int formatCount = 0;
+        string FormattingMethod()
+        {
+            formatCount++;
+            return "b";
+        }
+
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
+        {
+            Report.IfNot(true, $"a{FormattingMethod()}c");
+            Assert.Equal(0, formatCount);
+            Report.IfNot(false, $"a{FormattingMethod()}c");
+            Assert.Equal(0, formatCount);
+        }
+    }
+
+#endif
+
     [Fact]
     public void IfNotPresent()
     {
