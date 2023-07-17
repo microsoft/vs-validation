@@ -12,21 +12,21 @@ namespace Microsoft;
 /// <summary>Provides an interpolated string handler for validation functions that only perform formatting if the condition check fails.</summary>
 [EditorBrowsable(EditorBrowsableState.Never)]
 [InterpolatedStringHandler]
-public ref struct ValidationInterpolatedStringHandler
+public ref struct ValidationInterpolatedStringHandlerInvertedCondition
 {
     /// <summary>The handler we use to perform the formatting.</summary>
     private StringBuilder.AppendInterpolatedStringHandler stringBuilderHandler;
     private StringBuilder? stringBuilder;
 
-    /// <summary>Initializes a new instance of the <see cref="ValidationInterpolatedStringHandler"/> struct.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ValidationInterpolatedStringHandlerInvertedCondition"/> struct.</summary>
     /// <param name="literalLength">The number of constant characters outside of interpolation expressions in the interpolated string.</param>
     /// <param name="formattedCount">The number of interpolation expressions in the interpolated string.</param>
     /// <param name="condition">The condition Boolean passed to the method.</param>
     /// <param name="shouldAppend">A value indicating whether formatting should proceed.</param>
     /// <remarks>This is intended to be called only by compiler-generated code. Arguments are not validated as they'd otherwise be for members intended to be used directly.</remarks>
-    public ValidationInterpolatedStringHandler(int literalLength, int formattedCount, bool condition, out bool shouldAppend)
+    public ValidationInterpolatedStringHandlerInvertedCondition(int literalLength, int formattedCount, bool condition, out bool shouldAppend)
     {
-        if (condition)
+        if (!condition)
         {
             shouldAppend = false;
         }

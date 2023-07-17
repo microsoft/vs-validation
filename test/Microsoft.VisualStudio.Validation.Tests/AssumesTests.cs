@@ -34,6 +34,46 @@ public partial class AssumesTests : IDisposable
         Assert.ThrowsAny<Exception>(() => Assumes.False(true, TestMessage, "arg1", "arg2"));
     }
 
+#if NET6_0_OR_GREATER
+
+    [Fact]
+    public void True_InterpolatedString()
+    {
+        int formatCount = 0;
+        string FormattingMethod()
+        {
+            formatCount++;
+            return "generated string";
+        }
+
+        Assumes.True(true, $"Some {FormattingMethod()} method.");
+        Assert.Equal(0, formatCount);
+
+        Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.True(false, $"Some {FormattingMethod()} method."));
+        Assert.Equal(1, formatCount);
+        Assert.StartsWith("Some generated string method.", ex.Message);
+    }
+
+    [Fact]
+    public void False_InterpolatedString()
+    {
+        int formatCount = 0;
+        string FormattingMethod()
+        {
+            formatCount++;
+            return "generated string";
+        }
+
+        Assumes.False(false, $"Some {FormattingMethod()} method.");
+        Assert.Equal(0, formatCount);
+
+        Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.False(true, $"Some {FormattingMethod()} method."));
+        Assert.Equal(1, formatCount);
+        Assert.StartsWith("Some generated string method.", ex.Message);
+    }
+
+#endif
+
     [Fact]
     public void Fail()
     {
