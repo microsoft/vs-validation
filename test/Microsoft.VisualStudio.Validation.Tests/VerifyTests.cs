@@ -21,6 +21,28 @@ public class VerifyTests
         Assert.Throws<InvalidOperationException>(() => Verify.Operation(false, "throw", "arg1", "arg2", "arg3"));
     }
 
+#if NET6_0_OR_GREATER
+
+    [Fact]
+    public void Operation_InterpolatedString()
+    {
+        int formatCount = 0;
+        string FormattingMethod()
+        {
+            formatCount++;
+            return "generated string";
+        }
+
+        Verify.Operation(true, $"Some {FormattingMethod()} method.");
+        Assert.Equal(0, formatCount);
+
+        InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => Verify.Operation(false, $"Some {FormattingMethod()} method."));
+        Assert.Equal(1, formatCount);
+        Assert.StartsWith("Some generated string method.", ex.Message);
+    }
+
+#endif
+
     [Fact]
     public void OperationWithHelp()
     {

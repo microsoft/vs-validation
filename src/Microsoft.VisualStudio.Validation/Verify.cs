@@ -3,6 +3,7 @@
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace Microsoft;
@@ -59,6 +60,22 @@ public static partial class Verify
             throw new InvalidOperationException(PrivateErrorHelpers.Format(unformattedMessage, args));
         }
     }
+
+#if NET6_0_OR_GREATER
+
+    /// <summary>
+    /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
+    /// </summary>
+    [DebuggerStepThrough]
+    public static void Operation([DoesNotReturnIf(false)]bool condition, [InterpolatedStringHandlerArgument("condition")] ref ValidationInterpolatedStringHandler message)
+    {
+        if (!condition)
+        {
+            throw new InvalidOperationException(message.ToStringAndClear());
+        }
+    }
+
+#endif
 
     /// <summary>
     /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
