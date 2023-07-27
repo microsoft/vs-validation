@@ -151,6 +151,24 @@ public class RequiresTests
     }
 
     [Fact]
+    public void Argument_InterpolatedString()
+    {
+        int formatCount = 0;
+        string FormattingMethod()
+        {
+            formatCount++;
+            return "generated string";
+        }
+
+        Requires.Argument(true, "paramName", $"Some {FormattingMethod()} method.");
+        Assert.Equal(0, formatCount);
+
+        ArgumentException ex = Assert.Throws<ArgumentException>(() => Requires.Argument(false, "paramName", $"Some {FormattingMethod()} method."));
+        Assert.Equal(1, formatCount);
+        Assert.StartsWith("Some generated string method.", ex.Message);
+    }
+
+    [Fact]
     public void Fail()
     {
         Assert.Throws<ArgumentException>(() => Requires.Fail("message"));

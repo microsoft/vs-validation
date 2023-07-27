@@ -7,6 +7,7 @@
 
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace Microsoft;
 
@@ -87,6 +88,18 @@ public static class Report
         if (!condition)
         {
             Fail(PrivateErrorHelpers.Format(message, args));
+        }
+    }
+
+    /// <summary>
+    /// Reports an error if a condition does not evaluate to true.
+    /// </summary>
+    [Conditional("DEBUG")]
+    public static void IfNot(bool condition, [InterpolatedStringHandlerArgument("condition")] ref ValidationInterpolatedStringHandler message)
+    {
+        if (!condition)
+        {
+            Fail(message.ToStringAndClear());
         }
     }
 

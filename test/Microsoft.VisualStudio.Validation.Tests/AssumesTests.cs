@@ -35,6 +35,42 @@ public partial class AssumesTests : IDisposable
     }
 
     [Fact]
+    public void True_InterpolatedString()
+    {
+        int formatCount = 0;
+        string FormattingMethod()
+        {
+            formatCount++;
+            return "generated string";
+        }
+
+        Assumes.True(true, $"Some {FormattingMethod()} method.");
+        Assert.Equal(0, formatCount);
+
+        Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.True(false, $"Some {FormattingMethod()} method."));
+        Assert.Equal(1, formatCount);
+        Assert.StartsWith("Some generated string method.", ex.Message);
+    }
+
+    [Fact]
+    public void False_InterpolatedString()
+    {
+        int formatCount = 0;
+        string FormattingMethod()
+        {
+            formatCount++;
+            return "generated string";
+        }
+
+        Assumes.False(false, $"Some {FormattingMethod()} method.");
+        Assert.Equal(0, formatCount);
+
+        Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.False(true, $"Some {FormattingMethod()} method."));
+        Assert.Equal(1, formatCount);
+        Assert.StartsWith("Some generated string method.", ex.Message);
+    }
+
+    [Fact]
     public void Fail()
     {
         Assert.ThrowsAny<Exception>(() => Assumes.Fail("some message", new InvalidOperationException()));

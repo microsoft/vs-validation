@@ -22,6 +22,24 @@ public class VerifyTests
     }
 
     [Fact]
+    public void Operation_InterpolatedString()
+    {
+        int formatCount = 0;
+        string FormattingMethod()
+        {
+            formatCount++;
+            return "generated string";
+        }
+
+        Verify.Operation(true, $"Some {FormattingMethod()} method.");
+        Assert.Equal(0, formatCount);
+
+        InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => Verify.Operation(false, $"Some {FormattingMethod()} method."));
+        Assert.Equal(1, formatCount);
+        Assert.StartsWith("Some generated string method.", ex.Message);
+    }
+
+    [Fact]
     public void OperationWithHelp()
     {
         Verify.OperationWithHelp(true, "message", "helpLink");
@@ -61,9 +79,17 @@ public class VerifyTests
     }
 
     [Fact]
-    public void FailOperation()
+    public void FailOperation_ParamsFormattingArgs()
     {
-        Assert.Throws<InvalidOperationException>(() => Verify.FailOperation("message", "arg1"));
+        InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => Verify.FailOperation("a{0}c", "b"));
+        Assert.Equal("abc", ex.Message);
+    }
+
+    [Fact]
+    public void FailOperation_String()
+    {
+        InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => Verify.FailOperation("a{0}c"));
+        Assert.Equal("a{0}c", ex.Message);
     }
 
     [Fact]

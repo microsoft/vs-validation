@@ -421,6 +421,18 @@ public static class Requires
     /// <summary>
     /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.
     /// </summary>
+    [DebuggerStepThrough]
+    public static void Argument([DoesNotReturnIf(false)] bool condition, string? parameterName, [InterpolatedStringHandlerArgument("condition")] ref ValidationInterpolatedStringHandler message)
+    {
+        if (!condition)
+        {
+            throw new ArgumentException(message.ToStringAndClear(), parameterName);
+        }
+    }
+
+    /// <summary>
+    /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.
+    /// </summary>
     /// <param name="condition">The condition to check.</param>
     /// <param name="parameterName">The name of the parameter to blame in the exception, if thrown.</param>
     /// <param name="resourceManager">The resource manager from which to retrieve the exception message. For example: <c>Strings.ResourceManager</c>.</param>

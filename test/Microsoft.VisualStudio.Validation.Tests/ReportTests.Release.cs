@@ -77,6 +77,25 @@ public class ReportReleaseTests : IDisposable
     }
 
     [Fact]
+    public void IfNot_InterpolatedString()
+    {
+        int formatCount = 0;
+        string FormattingMethod()
+        {
+            formatCount++;
+            return "b";
+        }
+
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
+        {
+            Report.IfNot(true, $"a{FormattingMethod()}c");
+            Assert.Equal(0, formatCount);
+            Report.IfNot(false, $"a{FormattingMethod()}c");
+            Assert.Equal(0, formatCount);
+        }
+    }
+
+    [Fact]
     public void IfNotPresent()
     {
         using (DisposableValue<Mock<TraceListener>> listener = Listen())

@@ -108,6 +108,31 @@ public class ReportDebugTests : IDisposable
     }
 
     [Fact]
+    public void IfNot_InterpolatedString()
+    {
+        int formatCount = 0;
+        string FormattingMethod()
+        {
+            formatCount++;
+            return "b";
+        }
+
+        using (DisposableValue<Mock<TraceListener>> listener = Listen())
+        {
+            Report.IfNot(true, $"a{FormattingMethod()}c");
+            Assert.Equal(0, formatCount);
+            listener.Value.Setup(l => l.WriteLine("abc")).Verifiable();
+#if NETCOREAPP
+            listener.Value.Setup(l => l.Fail("abc", string.Empty)).Verifiable();
+#else
+            listener.Value.Setup(l => l.Fail("abc")).Verifiable();
+#endif
+            Report.IfNot(false, $"a{FormattingMethod()}c");
+            Assert.Equal(1, formatCount);
+        }
+    }
+
+    [Fact]
     public void IfNotPresent()
     {
         using (DisposableValue<Mock<TraceListener>> listener = Listen())

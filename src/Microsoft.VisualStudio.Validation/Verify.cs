@@ -3,6 +3,7 @@
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace Microsoft;
@@ -64,6 +65,18 @@ public static partial class Verify
     /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
     /// </summary>
     [DebuggerStepThrough]
+    public static void Operation([DoesNotReturnIf(false)]bool condition, [InterpolatedStringHandlerArgument("condition")] ref ValidationInterpolatedStringHandler message)
+    {
+        if (!condition)
+        {
+            throw new InvalidOperationException(message.ToStringAndClear());
+        }
+    }
+
+    /// <summary>
+    /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
+    /// </summary>
+    [DebuggerStepThrough]
     public static void OperationWithHelp([DoesNotReturnIf(false)]bool condition, string? message, string? helpLink)
     {
         if (!condition)
@@ -74,6 +87,21 @@ public static partial class Verify
             };
             throw ex;
         }
+    }
+
+    /// <summary>
+    /// Throws an <see cref="InvalidOperationException"/>.
+    /// </summary>
+    /// <returns>
+    /// Nothing.  This method always throws.
+    /// The signature claims to return an exception to allow callers to throw this method
+    /// to satisfy C# execution path constraints.
+    /// </returns>
+    [DebuggerStepThrough]
+    [DoesNotReturn]
+    public static Exception FailOperation(string message)
+    {
+        throw new InvalidOperationException(message);
     }
 
     /// <summary>
