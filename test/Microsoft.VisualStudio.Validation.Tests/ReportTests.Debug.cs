@@ -107,8 +107,6 @@ public class ReportDebugTests : IDisposable
         }
     }
 
-#if NET6_0_OR_GREATER
-
     [Fact]
     public void IfNot_InterpolatedString()
     {
@@ -124,13 +122,15 @@ public class ReportDebugTests : IDisposable
             Report.IfNot(true, $"a{FormattingMethod()}c");
             Assert.Equal(0, formatCount);
             listener.Value.Setup(l => l.WriteLine("abc")).Verifiable();
+#if NETCOREAPP
             listener.Value.Setup(l => l.Fail("abc", string.Empty)).Verifiable();
+#else
+            listener.Value.Setup(l => l.Fail("abc")).Verifiable();
+#endif
             Report.IfNot(false, $"a{FormattingMethod()}c");
             Assert.Equal(1, formatCount);
         }
     }
-
-#endif
 
     [Fact]
     public void IfNotPresent()

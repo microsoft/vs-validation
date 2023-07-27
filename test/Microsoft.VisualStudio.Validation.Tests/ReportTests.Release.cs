@@ -76,8 +76,6 @@ public class ReportReleaseTests : IDisposable
         }
     }
 
-#if NET6_0_OR_GREATER
-
     [Fact]
     public void IfNot_InterpolatedString()
     {
@@ -96,8 +94,6 @@ public class ReportReleaseTests : IDisposable
             Assert.Equal(0, formatCount);
         }
     }
-
-#endif
 
     [Fact]
     public void IfNotPresent()

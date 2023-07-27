@@ -34,8 +34,6 @@ public partial class AssumesTests : IDisposable
         Assert.ThrowsAny<Exception>(() => Assumes.False(true, TestMessage, "arg1", "arg2"));
     }
 
-#if NET6_0_OR_GREATER
-
     [Fact]
     public void True_InterpolatedString()
     {
@@ -71,8 +69,6 @@ public partial class AssumesTests : IDisposable
         Assert.Equal(1, formatCount);
         Assert.StartsWith("Some generated string method.", ex.Message);
     }
-
-#endif
 
     [Fact]
     public void Fail()

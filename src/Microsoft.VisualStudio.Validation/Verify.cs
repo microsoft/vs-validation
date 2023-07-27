@@ -61,8 +61,6 @@ public static partial class Verify
         }
     }
 
-#if NET6_0_OR_GREATER
-
     /// <summary>
     /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
     /// </summary>
@@ -74,8 +72,6 @@ public static partial class Verify
             throw new InvalidOperationException(message.ToStringAndClear());
         }
     }
-
-#endif
 
     /// <summary>
     /// Throws an <see cref="InvalidOperationException"/> if a condition is false.

@@ -418,8 +418,6 @@ public static class Requires
         }
     }
 
-#if NET6_0_OR_GREATER
-
     /// <summary>
     /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.
     /// </summary>
@@ -431,8 +429,6 @@ public static class Requires
             throw new ArgumentException(message.ToStringAndClear(), parameterName);
         }
     }
-
-#endif
 
     /// <summary>
     /// Throws an <see cref="ArgumentException"/> if a condition does not evaluate to true.

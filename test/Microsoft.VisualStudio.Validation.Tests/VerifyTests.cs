@@ -21,8 +21,6 @@ public class VerifyTests
         Assert.Throws<InvalidOperationException>(() => Verify.Operation(false, "throw", "arg1", "arg2", "arg3"));
     }
 
-#if NET6_0_OR_GREATER
-
     [Fact]
     public void Operation_InterpolatedString()
     {
@@ -40,8 +38,6 @@ public class VerifyTests
         Assert.Equal(1, formatCount);
         Assert.StartsWith("Some generated string method.", ex.Message);
     }
-
-#endif
 
     [Fact]
     public void OperationWithHelp()

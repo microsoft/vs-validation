@@ -91,8 +91,6 @@ public static class Report
         }
     }
 
-#if NET6_0_OR_GREATER
-
     /// <summary>
     /// Reports an error if a condition does not evaluate to true.
     /// </summary>
@@ -104,8 +102,6 @@ public static class Report
             Fail(message.ToStringAndClear());
         }
     }
-
-#endif
 
     /// <summary>
     /// Reports a certain failure.

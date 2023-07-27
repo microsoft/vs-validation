@@ -163,8 +163,6 @@ public static partial class Assumes
         }
     }
 
-#if NET6_0_OR_GREATER
-
     /// <summary>
     /// Throws an public exception if a condition evaluates to true.
     /// </summary>
@@ -177,8 +175,6 @@ public static partial class Assumes
             Fail(message.ToStringAndClear());
         }
     }
-
-#endif
 
     /// <summary>
     /// Throws an public exception if a condition evaluates to false.
@@ -219,8 +215,6 @@ public static partial class Assumes
         }
     }
 
-#if NET6_0_OR_GREATER
-
     /// <summary>
     /// Throws an public exception if a condition evaluates to false.
     /// </summary>
@@ -233,8 +227,6 @@ public static partial class Assumes
             Fail(message.ToStringAndClear());
         }
     }
-
-#endif
 
     /// <summary>
     /// Unconditionally throws an <see cref="InternalErrorException"/>.
