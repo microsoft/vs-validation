@@ -79,28 +79,40 @@ public partial class AssumesTests : IDisposable
     [Fact]
     public void NotNull()
     {
-        Assert.ThrowsAny<Exception>(() => Assumes.NotNull((object?)null));
+        Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.NotNull((string?)null));
+
+        Assert.Equal("Unexpected null value of type 'String'.", ex.Message);
+
         Assumes.NotNull("success");
     }
 
     [Fact]
     public void NotNull_NullableStruct()
     {
-        Assert.ThrowsAny<Exception>(() => Assumes.NotNull((int?)null));
+        Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.NotNull((int?)null));
+
+        Assert.Equal("Unexpected null value of type 'Int32'.", ex.Message);
+
         Assumes.NotNull((int?)5);
     }
 
     [Fact]
     public void Null()
     {
-        Assert.ThrowsAny<Exception>(() => Assumes.Null("not null"));
+        Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.Null("not null"));
+
+        Assert.Equal("Unexpected non-null value of type 'String'.", ex.Message);
+
         Assumes.Null((object?)null);
     }
 
     [Fact]
     public void Null_NullableStruct()
     {
-        Assert.ThrowsAny<Exception>(() => Assumes.Null((int?)5));
+        Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.Null((int?)5));
+
+        Assert.Equal("Unexpected non-null value of type 'Int32'.", ex.Message);
+
         Assumes.Null((int?)null);
     }
 
