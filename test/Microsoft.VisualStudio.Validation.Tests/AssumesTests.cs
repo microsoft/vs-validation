@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Globalization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft;
 using Moq;
@@ -9,11 +10,13 @@ using Xunit;
 public partial class AssumesTests : IDisposable
 {
     private const string TestMessage = "Some test message.";
-    private AssertDialogSuppression suppressAssertUi = new AssertDialogSuppression();
+    private readonly AssertDialogSuppression suppressAssertUi = new();
+    private readonly OverrideCulture overrideCulture = new(CultureInfo.InvariantCulture);
 
     public void Dispose()
     {
         this.suppressAssertUi.Dispose();
+        this.overrideCulture.Dispose();
     }
 
     [Fact]
