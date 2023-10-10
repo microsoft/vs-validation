@@ -144,4 +144,10 @@
   <data name="ServiceMissing" xml:space="preserve">
     <value>Cannot find an instance of the {0} service.</value>
   </data>
+  <data name="UnexpectedNull" xml:space="preserve">
+    <value>Unexpected null value of type '{0}'.</value>
+  </data>
+  <data name="UnexpectedNonNull" xml:space="preserve">
+    <value>Unexpected non-null value of type '{0}'.</value>
+  </data>
 </root>

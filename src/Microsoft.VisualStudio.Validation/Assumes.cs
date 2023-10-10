@@ -4,7 +4,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 
@@ -24,7 +23,10 @@ public static partial class Assumes
     public static void NotNull<T>([ValidatedNotNull, NotNull]T? value)
         where T : class
     {
-        True(value is object);
+        if (value is null)
+        {
+            FailNotNull<T>();
+        }
     }
 
     /// <summary>
@@ -36,7 +38,10 @@ public static partial class Assumes
     public static void NotNull<T>([ValidatedNotNull, NotNull]T? value)
         where T : struct
     {
-        True(value.HasValue);
+        if (!value.HasValue)
+        {
+            FailNotNull<T>();
+        }
     }
 
     /// <summary>
@@ -97,7 +102,10 @@ public static partial class Assumes
     public static void Null<T>(T? value)
         where T : class
     {
-        True(value is null);
+        if (value is not null)
+        {
+            FailNull<T>();
+        }
     }
 
     /// <summary>
@@ -109,7 +117,10 @@ public static partial class Assumes
     public static void Null<T>(T? value)
         where T : struct
     {
-        False(value.HasValue);
+        if (value.HasValue)
+        {
+            FailNull<T>();
+        }
     }
 
     /// <summary>
@@ -354,6 +365,20 @@ public static partial class Assumes
             return new Exception();
 #pragma warning restore CS8763
         }
+    }
+
+    [DoesNotReturn]
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private static void FailNotNull<T>()
+    {
+        Fail(Strings.FormatUnexpectedNull(typeof(T).Name));
+    }
+
+    [DoesNotReturn]
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private static void FailNull<T>()
+    {
+        Fail(Strings.FormatUnexpectedNonNull(typeof(T).Name));
     }
 
     /// <summary>

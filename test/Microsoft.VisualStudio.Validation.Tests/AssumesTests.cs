@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Globalization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft;
 using Moq;
@@ -9,11 +10,13 @@ using Xunit;
 public partial class AssumesTests : IDisposable
 {
     private const string TestMessage = "Some test message.";
-    private AssertDialogSuppression suppressAssertUi = new AssertDialogSuppression();
+    private readonly AssertDialogSuppression suppressAssertUi = new();
+    private readonly OverrideCulture overrideCulture = new(CultureInfo.InvariantCulture);
 
     public void Dispose()
     {
         this.suppressAssertUi.Dispose();
+        this.overrideCulture.Dispose();
     }
 
     [Fact]
@@ -79,28 +82,40 @@ public partial class AssumesTests : IDisposable
     [Fact]
     public void NotNull()
     {
-        Assert.ThrowsAny<Exception>(() => Assumes.NotNull((object?)null));
+        Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.NotNull((string?)null));
+
+        Assert.Equal("Unexpected null value of type 'String'.", ex.Message);
+
         Assumes.NotNull("success");
     }
 
     [Fact]
     public void NotNull_NullableStruct()
     {
-        Assert.ThrowsAny<Exception>(() => Assumes.NotNull((int?)null));
+        Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.NotNull((int?)null));
+
+        Assert.Equal("Unexpected null value of type 'Int32'.", ex.Message);
+
         Assumes.NotNull((int?)5);
     }
 
     [Fact]
     public void Null()
     {
-        Assert.ThrowsAny<Exception>(() => Assumes.Null("not null"));
+        Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.Null("not null"));
+
+        Assert.Equal("Unexpected non-null value of type 'String'.", ex.Message);
+
         Assumes.Null((object?)null);
     }
 
     [Fact]
     public void Null_NullableStruct()
     {
-        Assert.ThrowsAny<Exception>(() => Assumes.Null((int?)5));
+        Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.Null((int?)5));
+
+        Assert.Equal("Unexpected non-null value of type 'Int32'.", ex.Message);
+
         Assumes.Null((int?)null);
     }
 
