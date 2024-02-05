@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
     <!-- Workaround https://github.com/dotnet/wpf/issues/1718 -->
@@ -8,8 +9,10 @@
     <!-- Avoid compile error about missing namespace when combining ImplicitUsings with .NET Framework target frameworks. -->
     <Using Remove="System.Net.Http" Condition="'$(TargetFrameworkIdentifier)'=='.NETFramework'" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.ResxSourceGenerator" PrivateAssets="all" />
   </ItemGroup>
+
+  <Import Project="azure-pipelines\NuGetSbom.targets" Condition="'$(IsPackable)'!='false'" />
 </Project>
