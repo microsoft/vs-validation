@@ -29,7 +29,7 @@ public static partial class Verify
     /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
     /// </summary>
     [DebuggerStepThrough]
-    public static void Operation([DoesNotReturnIf(false)]bool condition, string unformattedMessage, object? arg1)
+    public static void Operation([DoesNotReturnIf(false)] bool condition, string unformattedMessage, object? arg1)
     {
         if (!condition)
         {
@@ -41,7 +41,7 @@ public static partial class Verify
     /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
     /// </summary>
     [DebuggerStepThrough]
-    public static void Operation([DoesNotReturnIf(false)]bool condition, string unformattedMessage, object? arg1, object? arg2)
+    public static void Operation([DoesNotReturnIf(false)] bool condition, string unformattedMessage, object? arg1, object? arg2)
     {
         if (!condition)
         {
@@ -53,7 +53,7 @@ public static partial class Verify
     /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
     /// </summary>
     [DebuggerStepThrough]
-    public static void Operation([DoesNotReturnIf(false)]bool condition, string unformattedMessage, params object?[] args)
+    public static void Operation([DoesNotReturnIf(false)] bool condition, string unformattedMessage, params object?[] args)
     {
         if (!condition)
         {
@@ -65,7 +65,7 @@ public static partial class Verify
     /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
     /// </summary>
     [DebuggerStepThrough]
-    public static void Operation([DoesNotReturnIf(false)]bool condition, [InterpolatedStringHandlerArgument("condition")] ref ValidationInterpolatedStringHandler message)
+    public static void Operation([DoesNotReturnIf(false)] bool condition, [InterpolatedStringHandlerArgument("condition")] ref ValidationInterpolatedStringHandler message)
     {
         if (!condition)
         {
@@ -77,7 +77,7 @@ public static partial class Verify
     /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
     /// </summary>
     [DebuggerStepThrough]
-    public static void OperationWithHelp([DoesNotReturnIf(false)]bool condition, string? message, string? helpLink)
+    public static void OperationWithHelp([DoesNotReturnIf(false)] bool condition, string? message, string? helpLink)
     {
         if (!condition)
         {
@@ -165,7 +165,7 @@ public static partial class Verify
     /// Throws an <see cref="ObjectDisposedException"/> if a condition is false.
     /// </summary>
     [DebuggerStepThrough]
-    public static void NotDisposed([DoesNotReturnIf(false)]bool condition, string? message)
+    public static void NotDisposed([DoesNotReturnIf(false)] bool condition, string? message)
     {
         if (!condition)
         {

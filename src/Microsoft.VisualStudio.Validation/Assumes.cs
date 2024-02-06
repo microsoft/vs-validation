@@ -20,7 +20,7 @@ public static partial class Assumes
     /// <typeparam name="T">The type of value to test.</typeparam>
     [DebuggerStepThrough]
     [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-    public static void NotNull<T>([ValidatedNotNull, NotNull]T? value)
+    public static void NotNull<T>([ValidatedNotNull, NotNull] T? value)
         where T : class
     {
         if (value is null)
@@ -35,7 +35,7 @@ public static partial class Assumes
     /// <typeparam name="T">The type of value to test.</typeparam>
     [DebuggerStepThrough]
     [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-    public static void NotNull<T>([ValidatedNotNull, NotNull]T? value)
+    public static void NotNull<T>([ValidatedNotNull, NotNull] T? value)
         where T : struct
     {
         if (!value.HasValue)
@@ -48,7 +48,7 @@ public static partial class Assumes
     /// Throws <see cref="InternalErrorException" /> if the specified value is null or empty.
     /// </summary>
     [DebuggerStepThrough]
-    public static void NotNullOrEmpty([ValidatedNotNull, NotNull]string? value)
+    public static void NotNullOrEmpty([ValidatedNotNull, NotNull] string? value)
     {
         NotNull(value);
         True(value.Length > 0);
@@ -60,7 +60,7 @@ public static partial class Assumes
     /// </summary>
     /// <typeparam name="T">The type of value to test.</typeparam>
     [DebuggerStepThrough]
-    public static void NotNullOrEmpty<T>([ValidatedNotNull, NotNull]ICollection<T>? values)
+    public static void NotNullOrEmpty<T>([ValidatedNotNull, NotNull] ICollection<T>? values)
     {
         Assumes.NotNull(values);
         Assumes.True(values.Count > 0);
@@ -71,7 +71,7 @@ public static partial class Assumes
     /// </summary>
     /// <typeparam name="T">The type of value to test.</typeparam>
     [DebuggerStepThrough]
-    public static void NotNullOrEmpty<T>([ValidatedNotNull, NotNull]IEnumerable<T>? values)
+    public static void NotNullOrEmpty<T>([ValidatedNotNull, NotNull] IEnumerable<T>? values)
     {
         Assumes.NotNull(values);
 
@@ -296,7 +296,7 @@ public static partial class Assumes
     /// </summary>
     /// <typeparam name="T">The interface of the imported part.</typeparam>
     [DebuggerStepThrough]
-    public static void Present<T>([NotNull]T component)
+    public static void Present<T>([NotNull] T component)
     {
         if (component is null)
         {

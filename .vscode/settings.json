@@ -2,8 +2,13 @@
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
+  "azure-pipelines.1ESPipelineTemplatesSchemaFile": true,
   "omnisharp.enableEditorConfigSupport": true,
   "omnisharp.enableRoslynAnalyzers": true,
   "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
+  "editor.formatOnSave": true,
+  "[xml]": {
+    "editor.wordWrap": "off"
+  },
   "dotnet.defaultSolution": "Microsoft.VisualStudio.Validation.sln"
 }
