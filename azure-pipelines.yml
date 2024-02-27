@@ -14,7 +14,7 @@ trigger:
     - azure-pipelines/release.yml
 
 parameters:
-- name: includeMacOS
+- name: EnableMacOSBuild
   displayName: Build on macOS
   type: boolean
   default: false # macOS is often bogged down in Azure Pipelines
@@ -24,13 +24,11 @@ parameters:
   default: true
 
 variables:
-  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-  BuildConfiguration: Release
-  codecov_token: 1c079a51-729f-4e18-9792-2a75f2e074e0
-  NUGET_PACKAGES: $(Agent.TempDirectory)/.nuget/packages/
+- template: /azure-pipelines/BuildStageVariables.yml@self
 
 jobs:
 - template: azure-pipelines/build.yml
   parameters:
-    includeMacOS: ${{ parameters.includeMacOS }}
+    Is1ESPT: false
+    EnableMacOSBuild: ${{ parameters.EnableMacOSBuild }}
     RunTests: ${{ parameters.RunTests }}
