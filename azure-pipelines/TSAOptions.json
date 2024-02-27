@@ -1,0 +1,19 @@
+{
+  "tsaVersion": "TsaV2",
+  "codebase": "NewOrUpdate",
+  "codebaseName": "Microsoft.VisualStudio.Validation",
+  "tsaStamp": "DevDiv",
+  "tsaEnvironment": "PROD",
+  "notificationAliases": [
+     "andarno@microsoft.com"
+  ],
+  "codebaseAdmins": [
+      "REDMOND\\andarno"
+  ],
+  "instanceUrl": "https://devdiv.visualstudio.com",
+  "projectName": "DevDiv",
+  "areaPath": "DevDiv\\VS Core\\Special Projects",
+  "iterationPath": "DevDiv",
+  "alltools": true,
+  "repositoryName": "vs-validation"
+}
