@@ -3,6 +3,8 @@
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -70,6 +72,70 @@ public static partial class Verify
         if (!condition)
         {
             throw new InvalidOperationException(message.ToStringAndClear());
+        }
+    }
+
+    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?)"/>
+    /// <param name="condition"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='condition']"/></param>
+    /// <param name="resourceManager"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='resourceManager']"/></param>
+    /// <param name="resourceName"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='unformattedMessageResourceName']"/></param>
+    [DebuggerStepThrough]
+    public static void Operation([DoesNotReturnIf(false)] bool condition, ResourceManager resourceManager, string resourceName)
+    {
+        Requires.NotNull(resourceManager, nameof(resourceManager));
+        if (!condition)
+        {
+            throw new InvalidOperationException(resourceManager.GetString(resourceName, CultureInfo.CurrentCulture));
+        }
+    }
+
+    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?, object?)"/>
+    [DebuggerStepThrough]
+    public static void Operation([DoesNotReturnIf(false)] bool condition, ResourceManager resourceManager, string unformattedMessageResourceName, object? arg1)
+    {
+        Requires.NotNull(resourceManager, nameof(resourceManager));
+        if (!condition)
+        {
+            throw new InvalidOperationException(PrivateErrorHelpers.Format(resourceManager.GetString(unformattedMessageResourceName, CultureInfo.CurrentCulture)!, arg1));
+        }
+    }
+
+    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?[])"/>
+    /// <param name="condition"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='condition']"/></param>
+    /// <param name="resourceManager"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='resourceManager']"/></param>
+    /// <param name="unformattedMessageResourceName"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='unformattedMessageResourceName']"/></param>
+    /// <param name="arg1">The first formatting argument.</param>
+    /// <param name="arg2">The second formatting argument.</param>
+    [DebuggerStepThrough]
+    public static void Operation([DoesNotReturnIf(false)] bool condition, ResourceManager resourceManager, string unformattedMessageResourceName, object? arg1, object? arg2)
+    {
+        Requires.NotNull(resourceManager, nameof(resourceManager));
+        if (!condition)
+        {
+            throw new InvalidOperationException(PrivateErrorHelpers.Format(resourceManager.GetString(unformattedMessageResourceName, CultureInfo.CurrentCulture)!, arg1, arg2));
+        }
+    }
+
+    /// <summary>
+    /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
+    /// </summary>
+    /// <param name="condition">The condition to check.</param>
+    /// <param name="resourceManager">The resource manager from which to retrieve the exception message. For example: <c>Strings.ResourceManager</c>.</param>
+    /// <param name="unformattedMessageResourceName">The name of the string resource to obtain for the exception message. For example: <c>nameof(Strings.SomeError)</c>.</param>
+    /// <param name="args">The formatting arguments.</param>
+    /// <remarks>
+    /// This overload allows only loading a localized string in the error condition as an optimization in perf critical sections over the simpler
+    /// to use <see cref="Operation(bool, string?)"/> overload.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="resourceManager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="InvalidOperationException">Thrown if <paramref name="condition"/> is <see langword="false"/>.</exception>
+    [DebuggerStepThrough]
+    public static void Operation([DoesNotReturnIf(false)] bool condition, ResourceManager resourceManager, string unformattedMessageResourceName, params object?[] args)
+    {
+        Requires.NotNull(resourceManager, nameof(resourceManager));
+        if (!condition)
+        {
+            throw new InvalidOperationException(PrivateErrorHelpers.Format(resourceManager.GetString(unformattedMessageResourceName, CultureInfo.CurrentCulture)!, args));
         }
     }
 
