@@ -3,6 +3,7 @@
 
 using System.Runtime.InteropServices;
 using Microsoft;
+using Microsoft.VisualStudio.Validation.Tests;
 using Xunit;
 
 public class VerifyTests
@@ -37,6 +38,23 @@ public class VerifyTests
         InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => Verify.Operation(false, $"Some {FormattingMethod()} method."));
         Assert.Equal(1, formatCount);
         Assert.StartsWith("Some generated string method.", ex.Message);
+    }
+
+    [Fact]
+    public void Operation_ResourceManager()
+    {
+        AssertThrows(TestStrings.GetResourceString(TestStrings.SomeError), c => Verify.Operation(c, TestStrings.ResourceManager, TestStrings.SomeError));
+        AssertThrows(TestStrings.FormatSomeError1Arg("A"), c => Verify.Operation(c, TestStrings.ResourceManager, TestStrings.SomeError1Arg, "A"));
+        AssertThrows(TestStrings.FormatSomeError2Args("A", "B"), c => Verify.Operation(c, TestStrings.ResourceManager, TestStrings.SomeError2Args, "A", "B"));
+        AssertThrows(TestStrings.FormatSomeError3Args("A", "B", "C"), c => Verify.Operation(c, TestStrings.ResourceManager, TestStrings.SomeError3Args, "A", "B", "C"));
+
+        static void AssertThrows(string? expectedMessage, Action<bool> action)
+        {
+            action(true);
+
+            InvalidOperationException actual = Assert.Throws<InvalidOperationException>(() => action(false));
+            Assert.Equal(expectedMessage, actual.Message);
+        }
     }
 
     [Fact]
