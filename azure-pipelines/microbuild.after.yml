@@ -5,14 +5,16 @@ parameters:
 - name: IsOptProf
   type: boolean
   default: false
-- name: ValidationBuild
+- name: SkipCodesignVerify
   type: boolean
 
 steps:
-- ${{ if not(parameters.ValidationBuild) }}: # skip CodesignVerify on validation builds because we don't even test-sign nupkg's.
+- ${{ if not(parameters.SkipCodesignVerify) }}: # skip CodesignVerify on validation builds because we don't even test-sign nupkg's.
   - task: MicroBuildCodesignVerify@3
     displayName: 🔍 Verify Signed Files
     inputs:
+      ApprovalListPathForSigs: $(Build.SourcesDirectory)\azure-pipelines\no_strongname.txt
+      ApprovalListPathForCerts: $(Build.SourcesDirectory)\azure-pipelines\no_authenticode.txt
       TargetFolders: |
         $(Build.SourcesDirectory)/bin/Packages/$(BuildConfiguration)
     condition: and(succeeded(), eq(variables['Agent.OS'], 'Windows_NT'))
@@ -27,7 +29,6 @@ steps:
       usePat: true
     displayName: 📢 Publish to Artifact Services - ProfilingInputs
     condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-    continueOnError: true
 
   - task: PublishBuildArtifacts@1
     inputs:
