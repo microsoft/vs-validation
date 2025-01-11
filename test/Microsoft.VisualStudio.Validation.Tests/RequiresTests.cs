@@ -6,7 +6,6 @@ using Microsoft;
 using Microsoft.VisualStudio.Validation.Tests;
 using Moq;
 using Xunit;
-using Xunit.Abstractions;
 
 public class RequiresTests
 {

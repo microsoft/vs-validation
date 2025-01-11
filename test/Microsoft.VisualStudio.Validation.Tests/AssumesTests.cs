@@ -199,7 +199,8 @@ public partial class AssumesTests : IDisposable
         Assumes.Present("hi");
     }
 
-    [Fact, Obsolete]
+#if NETFRAMEWORK
+    [Fact]
     public void InternalErrorException_IsSerializable()
     {
         try
@@ -217,4 +218,5 @@ public partial class AssumesTests : IDisposable
             Assert.Equal(ex.Message, ex2.Message);
         }
     }
+#endif
 }
