@@ -75,7 +75,9 @@ public static partial class Verify
         }
     }
 
-    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?)"/>
+    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?)" path="/summary"/>
+    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?)" path="/remarks"/>
+    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?)" path="/exception"/>
     /// <param name="condition"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='condition']"/></param>
     /// <param name="resourceManager"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='resourceManager']"/></param>
     /// <param name="resourceName"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='unformattedMessageResourceName']"/></param>
@@ -100,7 +102,9 @@ public static partial class Verify
         }
     }
 
-    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?[])"/>
+    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/summary"/>
+    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/remarks"/>
+    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/exception"/>
     /// <param name="condition"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='condition']"/></param>
     /// <param name="resourceManager"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='resourceManager']"/></param>
     /// <param name="unformattedMessageResourceName"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='unformattedMessageResourceName']"/></param>

@@ -463,11 +463,13 @@ public static class Requires
         }
     }
 
-    /// <inheritdoc cref="Argument(bool, string?, ResourceManager, string)"/>
-    /// <param name="unformattedMessageResourceName">The name of the string resource to obtain for the exception message. For example: <c>nameof(Strings.SomeError)</c>.</param>
+    /// <inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/summary" />
+    /// <inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/remarks" />
+    /// <inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/exception" />
     /// <param name="condition"><inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/param[@name='condition']"/></param>
     /// <param name="parameterName"><inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/param[@name='parameterName']"/></param>
     /// <param name="resourceManager"><inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/param[@name='resourceManager']"/></param>
+    /// <param name="unformattedMessageResourceName">The name of the string resource to obtain for the exception message. For example: <c>nameof(Strings.SomeError)</c>.</param>
     /// <param name="arg1">The first formatting argument.</param>
     /// <param name="arg2">The second formatting argument.</param>
     [DebuggerStepThrough]
@@ -480,7 +482,9 @@ public static class Requires
         }
     }
 
-    /// <inheritdoc cref="Argument(bool, string?, ResourceManager, string)"/>
+    /// <inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/summary" />
+    /// <inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/remarks" />
+    /// <inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/exception" />
     /// <param name="unformattedMessageResourceName">The name of the string resource to obtain for the exception message. For example: <c>nameof(Strings.SomeError)</c>.</param>
     /// <param name="condition"><inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/param[@name='condition']"/></param>
     /// <param name="parameterName"><inheritdoc cref="Argument(bool, string?, ResourceManager, string)" path="/param[@name='parameterName']"/></param>

@@ -40,6 +40,7 @@ public partial class Assumes
         /// Initializes a new instance of the <see cref="InternalErrorException"/> class.
         /// </summary>
         [DebuggerStepThrough]
+        [Obsolete]
         private InternalErrorException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
