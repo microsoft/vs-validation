@@ -8,6 +8,8 @@ pipelines:
           lastModifiedDate: 2024-08-22
         binskim:
           lastModifiedDate: 2024-12-02
+        spotbugs:
+          lastModifiedDate: 2025-02-13
       source:
         credscan:
           lastModifiedDate: 2024-09-06
@@ -15,6 +17,10 @@ pipelines:
           lastModifiedDate: 2024-09-06
         armory:
           lastModifiedDate: 2024-09-06
+        policheck:
+          lastModifiedDate: 2025-02-13
+        psscriptanalyzer:
+          lastModifiedDate: 2025-02-13
   17762:
     retail:
       source:
