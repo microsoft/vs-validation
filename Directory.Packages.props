@@ -8,7 +8,7 @@
     <MicroBuildVersion>2.0.187</MicroBuildVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="Microsoft.CodeAnalysis.ResxSourceGenerator" Version="3.11.0-beta1.24629.2" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.ResxSourceGenerator" Version="3.11.0-beta1.25076.3" />
     <PackageVersion Include="Moq" Version="4.20.72" />
   </ItemGroup>
   <ItemGroup Label="Library.Template">
