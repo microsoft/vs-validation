@@ -5,7 +5,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
 
-    <MicroBuildVersion>2.0.187</MicroBuildVersion>
+    <MicroBuildVersion>2.0.198</MicroBuildVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.CodeAnalysis.ResxSourceGenerator" Version="3.11.0-beta1.25076.3" />
@@ -14,8 +14,8 @@
   <ItemGroup Label="Library.Template">
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageVersion Include="Microsoft.VisualStudio.Internal.MicroBuild.NonShipping" Version="$(MicroBuildVersion)" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.0" />
-    <PackageVersion Include="xunit.v3" Version="2.0.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.1" />
+    <PackageVersion Include="xunit.v3" Version="2.0.3" />
   </ItemGroup>
   <ItemGroup>
     <!-- Put repo-specific GlobalPackageReference items in this group. -->
