@@ -75,12 +75,18 @@ public static partial class Verify
         }
     }
 
-    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?)" path="/summary"/>
-    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?)" path="/remarks"/>
-    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?)" path="/exception"/>
-    /// <param name="condition"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='condition']"/></param>
-    /// <param name="resourceManager"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='resourceManager']"/></param>
-    /// <param name="resourceName"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='unformattedMessageResourceName']"/></param>
+    /// <summary>
+    /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
+    /// </summary>
+    /// <param name="condition">The condition to check.</param>
+    /// <param name="resourceManager">The resource manager from which to retrieve the exception message. For example: <c>Strings.ResourceManager</c>.</param>
+    /// <param name="resourceName">The name of the string resource to obtain for the exception message. For example: <c>nameof(Strings.SomeError)</c>.</param>
+    /// <remarks>
+    /// This overload allows only loading a localized string in the error condition as an optimization in perf critical sections over the simpler
+    /// to use <see cref="Operation(bool, string?)"/> overload.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="resourceManager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="InvalidOperationException">Thrown if <paramref name="condition"/> is <see langword="false"/>.</exception>
     [DebuggerStepThrough]
     public static void Operation([DoesNotReturnIf(false)] bool condition, ResourceManager resourceManager, string resourceName)
     {
@@ -91,7 +97,19 @@ public static partial class Verify
         }
     }
 
-    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?, object?)"/>
+    /// <summary>
+    /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
+    /// </summary>
+    /// <param name="condition">The condition to check.</param>
+    /// <param name="resourceManager">The resource manager from which to retrieve the exception message. For example: <c>Strings.ResourceManager</c>.</param>
+    /// <param name="unformattedMessageResourceName">The name of the string resource to obtain for the exception message. For example: <c>nameof(Strings.SomeError)</c>.</param>
+    /// <param name="arg1">The first formatting argument.</param>
+    /// <remarks>
+    /// This overload allows only loading a localized string in the error condition as an optimization in perf critical sections over the simpler
+    /// to use <see cref="Operation(bool, string?)"/> overload.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="resourceManager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="InvalidOperationException">Thrown if <paramref name="condition"/> is <see langword="false"/>.</exception>
     [DebuggerStepThrough]
     public static void Operation([DoesNotReturnIf(false)] bool condition, ResourceManager resourceManager, string unformattedMessageResourceName, object? arg1)
     {
@@ -102,14 +120,20 @@ public static partial class Verify
         }
     }
 
-    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/summary"/>
-    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/remarks"/>
-    /// <inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/exception"/>
-    /// <param name="condition"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='condition']"/></param>
-    /// <param name="resourceManager"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='resourceManager']"/></param>
-    /// <param name="unformattedMessageResourceName"><inheritdoc cref="Operation(bool, ResourceManager, string, object?[])" path="/param[@name='unformattedMessageResourceName']"/></param>
+    /// <summary>
+    /// Throws an <see cref="InvalidOperationException"/> if a condition is false.
+    /// </summary>
+    /// <param name="condition">The condition to check.</param>
+    /// <param name="resourceManager">The resource manager from which to retrieve the exception message. For example: <c>Strings.ResourceManager</c>.</param>
+    /// <param name="unformattedMessageResourceName">The name of the string resource to obtain for the exception message. For example: <c>nameof(Strings.SomeError)</c>.</param>
     /// <param name="arg1">The first formatting argument.</param>
     /// <param name="arg2">The second formatting argument.</param>
+    /// <remarks>
+    /// This overload allows only loading a localized string in the error condition as an optimization in perf critical sections over the simpler
+    /// to use <see cref="Operation(bool, string?)"/> overload.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="resourceManager"/> is <see langword="null"/>.</exception>
+    /// <exception cref="InvalidOperationException">Thrown if <paramref name="condition"/> is <see langword="false"/>.</exception>
     [DebuggerStepThrough]
     public static void Operation([DoesNotReturnIf(false)] bool condition, ResourceManager resourceManager, string unformattedMessageResourceName, object? arg1, object? arg2)
     {
