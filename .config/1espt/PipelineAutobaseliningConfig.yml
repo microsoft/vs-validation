@@ -50,3 +50,16 @@ pipelines:
           lastModifiedDate: 2025-01-15
         binskim:
           lastModifiedDate: 2025-01-15
+  13631:
+    retail:
+      source:
+        credscan:
+          lastModifiedDate: 2025-08-09
+        eslint:
+          lastModifiedDate: 2025-08-09
+        psscriptanalyzer:
+          lastModifiedDate: 2025-08-09
+        armory:
+          lastModifiedDate: 2025-08-09
+        accessibilityinsights:
+          lastModifiedDate: 2025-08-09
