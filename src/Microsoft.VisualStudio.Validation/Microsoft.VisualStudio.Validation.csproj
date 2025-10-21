@@ -5,6 +5,7 @@
 
     <Description>Common input validation and state verification utility methods.</Description>
     <PackageTags>InputValidation IntegrityCheck</PackageTags>
+    <PackageValidationBaselineVersion>17.13.22</PackageValidationBaselineVersion>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Update="Strings.resx" EmitFormatMethods="true" />
