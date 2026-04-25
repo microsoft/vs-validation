@@ -73,6 +73,24 @@ public class UseRequiresGuardsAnalyzerTests
     }
 
     [Fact]
+    public async Task NumericParameter_WithMismatchedRequiresRangeGuard_ProducesDiagnostic()
+    {
+        string test = """
+            using Microsoft;
+
+            class Test
+            {
+                void M(int {|VSV0002:count|}, int {|VSV0002:other|})
+                {
+                    Requires.Range(other >= 0, nameof(count));
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
     public async Task ExpressionBodiedMember_ProducesNoDiagnostic()
     {
         string test = """

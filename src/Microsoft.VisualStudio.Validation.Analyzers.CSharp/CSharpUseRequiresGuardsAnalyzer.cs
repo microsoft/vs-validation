@@ -154,7 +154,8 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
                 continue;
             }
 
-            if (IsParameterNameExpression(invocation.ArgumentList.Arguments[1].Expression, semanticModel, parameterSymbol, cancellationToken))
+            if (ExpressionReferencesParameter(invocation.ArgumentList.Arguments[0].Expression, semanticModel, parameterSymbol, cancellationToken)
+                && IsParameterNameExpression(invocation.ArgumentList.Arguments[1].Expression, semanticModel, parameterSymbol, cancellationToken))
             {
                 return true;
             }
@@ -162,6 +163,12 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
 
         return false;
     }
+
+    private static bool ExpressionReferencesParameter(ExpressionSyntax expression, SemanticModel semanticModel, IParameterSymbol parameterSymbol, CancellationToken cancellationToken)
+        => expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(identifier =>
+            SymbolEqualityComparer.Default.Equals(
+                semanticModel.GetSymbolInfo(identifier, cancellationToken).Symbol,
+                parameterSymbol));
 
     private static bool IsRequiresMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel, string methodName, CancellationToken cancellationToken)
     {
