@@ -5,5 +5,10 @@
 		"github>microsoft/vs-renovate-presets:vs_main_dependencies",
 		"github>microsoft/vs-renovate-presets:dotnet_packages_LTS"
 	],
-	"packageRules": []
+	"packageRules": [
+		{
+			"matchFileNames": ["Directory.Packages.Analyzers.props"],
+			"enabled": false
+		}
+	]
 }

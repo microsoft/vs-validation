@@ -1,5 +1,7 @@
 items:
 - name: Docs
   href: docs/
+- name: Analyzers
+  href: analyzers/
 - name: API
   href: api/

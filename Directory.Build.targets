@@ -8,4 +8,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.ResxSourceGenerator" PrivateAssets="all" />
   </ItemGroup>
+
+  <Import Project="Directory.Packages.Analyzers.props" Condition="'$(IsAnalyzerProject)'=='true'" />
 </Project>
