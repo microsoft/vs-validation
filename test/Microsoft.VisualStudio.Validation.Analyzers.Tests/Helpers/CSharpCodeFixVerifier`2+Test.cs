@@ -4,6 +4,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 
 namespace Microsoft.VisualStudio.Validation.Analyzers.Tests.Helpers;
@@ -16,7 +17,10 @@ internal static partial class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
         {
             this.ReferenceAssemblies = ReferencesHelper.References;
             this.SolutionTransforms.Add((solution, projectId) =>
-                solution.AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(Requires).Assembly.Location)));
+            {
+                solution = solution.WithOptions(solution.Options.WithChangedOption(FormattingOptions.NewLine, LanguageNames.CSharp, "\n"));
+                return solution.AddMetadataReference(projectId, MetadataReference.CreateFromFile(typeof(Requires).Assembly.Location));
+            });
         }
 
         internal DiagnosticDescriptor? ExpectedDescriptor { get; set; }

@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Formatting;
 
 namespace Microsoft.VisualStudio.Validation.Analyzers;
 
@@ -91,9 +90,9 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
             return document;
         }
 
+        string newLine = GetPreferredNewLine(root);
         string parameterName = parameter.Identifier.Text;
-        StatementSyntax guardStatement = ParseGuardStatement(parameterName, useRange)
-            .WithAdditionalAnnotations(Formatter.Annotation);
+        StatementSyntax guardStatement = CreateGuardStatement(body, parameterName, useRange, GetInsertionIndex(body), newLine);
 
         int insertionIndex = GetInsertionIndex(body);
         BlockSyntax newBody = body.WithStatements(body.Statements.Insert(insertionIndex, guardStatement));
@@ -101,7 +100,7 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
 
         if (newRoot is CompilationUnitSyntax compilationUnit)
         {
-            newRoot = AddUsingIfMissing(compilationUnit);
+            newRoot = AddUsingIfMissing(compilationUnit, newLine);
         }
 
         return document.WithSyntaxRoot(newRoot);
@@ -121,15 +120,15 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
             return document;
         }
 
+        string newLine = GetPreferredNewLine(root);
         StatementSyntax replacement = ParseGuardStatement(parameterName, useRange: false)
             .WithLeadingTrivia(ifStatement.GetLeadingTrivia())
-            .WithTrailingTrivia(ifStatement.GetTrailingTrivia())
-            .WithAdditionalAnnotations(Formatter.Annotation);
+            .WithTrailingTrivia(ifStatement.GetTrailingTrivia());
 
         SyntaxNode newRoot = root.ReplaceNode(ifStatement, replacement);
         if (newRoot is CompilationUnitSyntax compilationUnit)
         {
-            newRoot = AddUsingIfMissing(compilationUnit);
+            newRoot = AddUsingIfMissing(compilationUnit, newLine);
         }
 
         return document.WithSyntaxRoot(newRoot);
@@ -174,23 +173,49 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
             }
         };
 
+    private static StatementSyntax CreateGuardStatement(BlockSyntax body, string parameterName, bool useRange, int insertionIndex, string newLine)
+    {
+        SyntaxTriviaList leadingTrivia;
+        if (insertionIndex < body.Statements.Count)
+        {
+            leadingTrivia = body.Statements[insertionIndex].GetLeadingTrivia();
+        }
+        else
+        {
+            string closingIndentation = string.Concat(body.CloseBraceToken.LeadingTrivia.Where(t => t.IsKind(SyntaxKind.WhitespaceTrivia)).Select(t => t.ToString()));
+            leadingTrivia = SyntaxFactory.TriviaList(SyntaxFactory.Whitespace(closingIndentation + "    "));
+        }
+
+        return ParseGuardStatement(parameterName, useRange)
+            .WithLeadingTrivia(leadingTrivia)
+            .WithTrailingTrivia(SyntaxFactory.EndOfLine(newLine));
+    }
+
     private static StatementSyntax ParseGuardStatement(string parameterName, bool useRange)
     {
         string statementText = useRange
             ? $"Requires.Range({parameterName} >= 0, nameof({parameterName}));"
             : $"Requires.NotNull({parameterName});";
         return SyntaxFactory.ParseStatement(statementText)
-            .WithTrailingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed);
+            .WithTrailingTrivia(SyntaxFactory.ElasticLineFeed);
     }
 
-    private static CompilationUnitSyntax AddUsingIfMissing(CompilationUnitSyntax root)
+    private static CompilationUnitSyntax AddUsingIfMissing(CompilationUnitSyntax root, string newLine)
     {
         if (root.Usings.Any(u => !u.StaticKeyword.IsKind(SyntaxKind.StaticKeyword) && string.Equals(u.Name?.ToString(), "Microsoft", StringComparison.Ordinal)))
         {
             return root;
         }
 
-        return root.AddUsings(SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName("Microsoft")).WithAdditionalAnnotations(Formatter.Annotation));
+        UsingDirectiveSyntax usingDirective = SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName("Microsoft"))
+            .WithTrailingTrivia(SyntaxFactory.EndOfLine(newLine), SyntaxFactory.EndOfLine(newLine));
+        return root.AddUsings(usingDirective);
+    }
+
+    private static string GetPreferredNewLine(SyntaxNode root)
+    {
+        string text = root.SyntaxTree.GetText().ToString();
+        return text.Contains("\r\n", StringComparison.Ordinal) ? "\r\n" : "\n";
     }
 
     private static string? ExtractParameterName(ExpressionSyntax condition)
