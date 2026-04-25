@@ -1,0 +1,2 @@
+# Analyzer tests compare exact source text across platforms.
+*.cs text eol=lf
