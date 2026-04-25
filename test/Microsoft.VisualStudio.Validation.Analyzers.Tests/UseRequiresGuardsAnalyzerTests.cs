@@ -73,6 +73,21 @@ public class UseRequiresGuardsAnalyzerTests
     }
 
     [Fact]
+    public async Task NullableNumericParameter_ProducesNoDiagnostic()
+    {
+        string test = """
+            class Test
+            {
+                void M(int? count)
+                {
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
     public async Task NumericParameter_WithMismatchedRequiresRangeGuard_ProducesDiagnostic()
     {
         string test = """

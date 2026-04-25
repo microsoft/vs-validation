@@ -294,11 +294,12 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
             return DiagnosticDescriptors.AddRequiresNotNull;
         }
 
-        ITypeSymbol type = parameterSymbol.Type is INamedTypeSymbol { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T } nullableType
-            ? nullableType.TypeArguments[0]
-            : parameterSymbol.Type;
+        if (parameterSymbol.Type is INamedTypeSymbol { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T })
+        {
+            return null;
+        }
 
-        if (IsSupportedNumericType(type))
+        if (IsSupportedNumericType(parameterSymbol.Type))
         {
             return DiagnosticDescriptors.AddRequiresRange;
         }

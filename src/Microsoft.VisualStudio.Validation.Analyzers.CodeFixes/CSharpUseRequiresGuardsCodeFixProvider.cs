@@ -92,9 +92,8 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
 
         string newLine = GetPreferredNewLine(root);
         string parameterName = parameter.Identifier.Text;
-        StatementSyntax guardStatement = CreateGuardStatement(body, parameterName, useRange, GetInsertionIndex(body), newLine);
-
         int insertionIndex = GetInsertionIndex(body);
+        StatementSyntax guardStatement = CreateGuardStatement(body, parameterName, useRange, insertionIndex, newLine);
         BlockSyntax newBody = body.WithStatements(body.Statements.Insert(insertionIndex, guardStatement));
         SyntaxNode newRoot = root.ReplaceNode(body, newBody);
 
@@ -175,20 +174,37 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
 
     private static StatementSyntax CreateGuardStatement(BlockSyntax body, string parameterName, bool useRange, int insertionIndex, string newLine)
     {
-        SyntaxTriviaList leadingTrivia;
+        return ParseGuardStatement(parameterName, useRange)
+            .WithLeadingTrivia(GetStatementIndentation(body, insertionIndex))
+            .WithTrailingTrivia(SyntaxFactory.EndOfLine(newLine));
+    }
+
+    private static SyntaxTriviaList GetStatementIndentation(BlockSyntax body, int insertionIndex)
+    {
         if (insertionIndex < body.Statements.Count)
         {
-            leadingTrivia = body.Statements[insertionIndex].GetLeadingTrivia();
-        }
-        else
-        {
-            string closingIndentation = string.Concat(body.CloseBraceToken.LeadingTrivia.Where(t => t.IsKind(SyntaxKind.WhitespaceTrivia)).Select(t => t.ToString()));
-            leadingTrivia = SyntaxFactory.TriviaList(SyntaxFactory.Whitespace(closingIndentation + "    "));
+            SyntaxTriviaList leadingTrivia = body.Statements[insertionIndex].GetLeadingTrivia();
+            int lastEndOfLine = -1;
+            for (int i = 0; i < leadingTrivia.Count; i++)
+            {
+                if (leadingTrivia[i].IsKind(SyntaxKind.EndOfLineTrivia))
+                {
+                    lastEndOfLine = i;
+                }
+            }
+
+            IEnumerable<SyntaxTrivia> indentationTrivia = leadingTrivia
+                .Skip(lastEndOfLine + 1)
+                .TakeWhile(t => t.IsKind(SyntaxKind.WhitespaceTrivia));
+            string indentation = string.Concat(indentationTrivia.Select(t => t.ToString()));
+            if (indentation.Length > 0)
+            {
+                return SyntaxFactory.TriviaList(SyntaxFactory.Whitespace(indentation));
+            }
         }
 
-        return ParseGuardStatement(parameterName, useRange)
-            .WithLeadingTrivia(leadingTrivia)
-            .WithTrailingTrivia(SyntaxFactory.EndOfLine(newLine));
+        string closingIndentation = string.Concat(body.CloseBraceToken.LeadingTrivia.Where(t => t.IsKind(SyntaxKind.WhitespaceTrivia)).Select(t => t.ToString()));
+        return SyntaxFactory.TriviaList(SyntaxFactory.Whitespace(closingIndentation + "    "));
     }
 
     private static StatementSyntax ParseGuardStatement(string parameterName, bool useRange)

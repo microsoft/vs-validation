@@ -129,6 +129,37 @@ public class UseRequiresGuardsCodeFixTests
     }
 
     [Fact]
+    public async Task ParameterCodeFix_WithLeadingComment_DoesNotDuplicateTrivia()
+    {
+        string test = """
+            class Test
+            {
+                void M(string {|VSV0001:value|})
+                {
+                    // Existing comment
+                    System.Console.WriteLine(value);
+                }
+            }
+            """;
+
+        string fixedCode = """
+            using Microsoft;
+
+            class Test
+            {
+                void M(string value)
+                {
+                    Requires.NotNull(value);
+                    // Existing comment
+                    System.Console.WriteLine(value);
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
+    }
+
+    [Fact]
     public async Task ManualNullCheck_CodeFixReplacesIfStatement()
     {
         string test = """
