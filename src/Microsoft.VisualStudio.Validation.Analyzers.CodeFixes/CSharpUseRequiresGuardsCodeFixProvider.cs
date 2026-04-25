@@ -91,7 +91,7 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
             return document;
         }
 
-        string parameterName = parameter.Identifier.ValueText;
+        string parameterName = parameter.Identifier.Text;
         StatementSyntax guardStatement = ParseGuardStatement(parameterName, useRange)
             .WithAdditionalAnnotations(Formatter.Annotation);
 
@@ -196,9 +196,9 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
     private static string? ExtractParameterName(ExpressionSyntax condition)
         => condition switch
         {
-            BinaryExpressionSyntax { Left: IdentifierNameSyntax left, Right: LiteralExpressionSyntax right } when right.IsKind(SyntaxKind.NullLiteralExpression) => left.Identifier.ValueText,
-            BinaryExpressionSyntax { Right: IdentifierNameSyntax right, Left: LiteralExpressionSyntax left } when left.IsKind(SyntaxKind.NullLiteralExpression) => right.Identifier.ValueText,
-            IsPatternExpressionSyntax { Expression: IdentifierNameSyntax identifier, Pattern: ConstantPatternSyntax { Expression: LiteralExpressionSyntax literal } } when literal.IsKind(SyntaxKind.NullLiteralExpression) => identifier.Identifier.ValueText,
+            BinaryExpressionSyntax { Left: IdentifierNameSyntax left, Right: LiteralExpressionSyntax right } when right.IsKind(SyntaxKind.NullLiteralExpression) => left.Identifier.Text,
+            BinaryExpressionSyntax { Right: IdentifierNameSyntax right, Left: LiteralExpressionSyntax left } when left.IsKind(SyntaxKind.NullLiteralExpression) => right.Identifier.Text,
+            IsPatternExpressionSyntax { Expression: IdentifierNameSyntax identifier, Pattern: ConstantPatternSyntax { Expression: LiteralExpressionSyntax literal } } when literal.IsKind(SyntaxKind.NullLiteralExpression) => identifier.Identifier.Text,
             _ => null,
         };
 }

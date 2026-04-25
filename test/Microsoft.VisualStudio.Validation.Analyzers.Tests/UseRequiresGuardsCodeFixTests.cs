@@ -38,6 +38,35 @@ public class UseRequiresGuardsCodeFixTests
     }
 
     [Fact]
+    public async Task ReferenceTypeParameter_WithEscapedIdentifier_PreservesIdentifierText()
+    {
+        string test = """
+            class Test
+            {
+                void M(string {|VSV0001:@class|})
+                {
+                    System.Console.WriteLine(@class);
+                }
+            }
+            """;
+
+        string fixedCode = """
+            using Microsoft;
+
+            class Test
+            {
+                void M(string @class)
+                {
+                    Requires.NotNull(@class);
+                    System.Console.WriteLine(@class);
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
+    }
+
+    [Fact]
     public async Task NumericParameter_CodeFixAddsRequiresRange()
     {
         string test = """
@@ -125,6 +154,39 @@ public class UseRequiresGuardsCodeFixTests
                 {
                     Requires.NotNull(value);
                     System.Console.WriteLine(value);
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
+    }
+
+    [Fact]
+    public async Task ManualNullCheck_WithEscapedIdentifier_PreservesIdentifierText()
+    {
+        string test = """
+            class Test
+            {
+                void M(string @class)
+                {
+                    {|VSV0003:if (@class == null)
+                    {
+                        throw new System.ArgumentNullException(nameof(@class));
+                    }|}
+                    System.Console.WriteLine(@class);
+                }
+            }
+            """;
+
+        string fixedCode = """
+            using Microsoft;
+
+            class Test
+            {
+                void M(string @class)
+                {
+                    Requires.NotNull(@class);
+                    System.Console.WriteLine(@class);
                 }
             }
             """;

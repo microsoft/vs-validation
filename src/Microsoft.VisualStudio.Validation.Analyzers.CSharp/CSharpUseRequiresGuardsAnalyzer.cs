@@ -28,7 +28,7 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
         }
 
         context.EnableConcurrentExecution();
-        context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze);
+        context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
         context.RegisterCompilationStartAction(startContext =>
         {
@@ -96,7 +96,8 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
     {
         foreach (StatementSyntax statement in body.Statements)
         {
-            if (statement is IfStatementSyntax ifStatement && IsNullCheckForParameter(ifStatement.Condition, parameterSymbol.Name))
+            if (statement is IfStatementSyntax ifStatement
+                && IsArgumentNullCheckGuard(ifStatement, semanticModel, parameterSymbol, cancellationToken))
             {
                 return true;
             }
@@ -119,6 +120,24 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
         }
 
         return false;
+    }
+
+    private static bool IsArgumentNullCheckGuard(IfStatementSyntax ifStatement, SemanticModel semanticModel, IParameterSymbol parameterSymbol, CancellationToken cancellationToken)
+    {
+        if (ifStatement.Else is not null || !IsNullCheckForParameter(ifStatement.Condition, parameterSymbol.Name))
+        {
+            return false;
+        }
+
+        ThrowStatementSyntax? throwStatement = ExtractSingleThrowStatement(ifStatement.Statement);
+        if (throwStatement?.Expression is null
+            || semanticModel.GetOperation(throwStatement.Expression, cancellationToken) is not IObjectCreationOperation objectCreation)
+        {
+            return false;
+        }
+
+        return IsArgumentNullException(objectCreation)
+            && HasMatchingParameterNameArgument(objectCreation, parameterSymbol, cancellationToken);
     }
 
     private static bool HasRequiresRangeGuard(BlockSyntax body, SemanticModel semanticModel, IParameterSymbol parameterSymbol, CancellationToken cancellationToken)

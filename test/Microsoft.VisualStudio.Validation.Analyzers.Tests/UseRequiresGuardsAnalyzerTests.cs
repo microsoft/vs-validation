@@ -9,10 +9,6 @@ namespace Microsoft.VisualStudio.Validation.Analyzers.Tests;
 
 public class UseRequiresGuardsAnalyzerTests
 {
-    private const string AddRequiresNotNullId = "VSV0001";
-    private const string AddRequiresRangeId = "VSV0002";
-    private const string UseRequiresNotNullId = "VSV0003";
-
     [Fact]
     public async Task ReferenceTypeParameter_WithBody_ProducesDiagnostic()
     {
@@ -109,12 +105,12 @@ public class UseRequiresGuardsAnalyzerTests
     }
 
     [Fact]
-    public async Task ManualNullCheck_WithElse_ProducesNoDiagnostic()
+    public async Task ManualNullCheck_WithElse_ProducesRequiresNotNullDiagnostic()
     {
         string test = """
             class Test
             {
-                void M(string value)
+                void M(string {|VSV0001:value|})
                 {
                     if (value is null)
                     {
@@ -132,16 +128,35 @@ public class UseRequiresGuardsAnalyzerTests
     }
 
     [Fact]
-    public async Task ManualNullCheck_WithDifferentException_ProducesNoDiagnostic()
+    public async Task ManualNullCheck_WithDifferentException_ProducesRequiresNotNullDiagnostic()
     {
         string test = """
             class Test
             {
-                void M(string value)
+                void M(string {|VSV0001:value|})
                 {
                     if (value is null)
                     {
                         throw new System.ArgumentException(nameof(value));
+                    }
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
+    public async Task ReferenceTypeParameter_WithNonThrowingNullCheck_ProducesDiagnostic()
+    {
+        string test = """
+            class Test
+            {
+                void M(string {|VSV0001:value|})
+                {
+                    if (value is null)
+                    {
+                        return;
                     }
                 }
             }
