@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Microsoft.VisualStudio.Validation.Analyzers.Tests;
 
-public class UseRequiresGuardsCodeFixTests
+public class UseRequiresGuardsTests
 {
     [Fact]
     public async Task ReferenceTypeParameter_CodeFixAddsRequiresNotNull()
@@ -67,6 +67,72 @@ public class UseRequiresGuardsCodeFixTests
     }
 
     [Fact]
+    public async Task ReferenceTypeParameter_WithExistingGuard_ProducesNoDiagnostic()
+    {
+        string test = """
+            using Microsoft;
+
+            class Test
+            {
+                void M(string value)
+                {
+                    Requires.NotNull(value);
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
+    public async Task ReferenceTypeParameter_WithNullableAnnotationsDisabled_ProducesDiagnostic()
+    {
+        string test = """
+            #nullable disable
+            class Test
+            {
+                void M(string {|VSV0001:value|})
+                {
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
+    public async Task NullableReferenceTypeParameter_ProducesNoDiagnostic()
+    {
+        string test = """
+            #nullable enable
+            class Test
+            {
+                void M(string? value)
+                {
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
+    public async Task NonNullableReferenceTypeParameter_WithNullableAnnotationsEnabled_ProducesDiagnostic()
+    {
+        string test = """
+            #nullable enable
+            class Test
+            {
+                void M(string {|VSV0001:value|})
+                {
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
     public async Task NumericParameter_CodeFixAddsRequiresRange()
     {
         string test = """
@@ -93,6 +159,54 @@ public class UseRequiresGuardsCodeFixTests
             """;
 
         await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
+    }
+
+    [Fact]
+    public async Task UnsignedNumericParameter_ProducesNoDiagnostic()
+    {
+        string test = """
+            class Test
+            {
+                void M(uint count)
+                {
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
+    public async Task NullableNumericParameter_ProducesNoDiagnostic()
+    {
+        string test = """
+            class Test
+            {
+                void M(int? count)
+                {
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
+    public async Task NumericParameter_WithMismatchedRequiresRangeGuard_ProducesDiagnostic()
+    {
+        string test = """
+            using Microsoft;
+
+            class Test
+            {
+                void M(int {|VSV0002:count|}, int {|VSV0002:other|})
+                {
+                    Requires.Range(other >= 0, nameof(count));
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
     [Fact]
@@ -160,6 +274,19 @@ public class UseRequiresGuardsCodeFixTests
     }
 
     [Fact]
+    public async Task ExpressionBodiedMember_ProducesNoDiagnostic()
+    {
+        string test = """
+            class Test
+            {
+                void M(string value) => System.Console.WriteLine(value);
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
     public async Task ManualNullCheck_CodeFixReplacesIfStatement()
     {
         string test = """
@@ -223,5 +350,66 @@ public class UseRequiresGuardsCodeFixTests
             """;
 
         await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
+    }
+
+    [Fact]
+    public async Task ManualNullCheck_WithElse_ProducesRequiresNotNullDiagnostic()
+    {
+        string test = """
+            class Test
+            {
+                void M(string {|VSV0001:value|})
+                {
+                    if (value is null)
+                    {
+                        throw new System.ArgumentNullException(nameof(value));
+                    }
+                    else
+                    {
+                        System.Console.WriteLine(value);
+                    }
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
+    public async Task ManualNullCheck_WithDifferentException_ProducesRequiresNotNullDiagnostic()
+    {
+        string test = """
+            class Test
+            {
+                void M(string {|VSV0001:value|})
+                {
+                    if (value is null)
+                    {
+                        throw new System.ArgumentException(nameof(value));
+                    }
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
+    public async Task ReferenceTypeParameter_WithNonThrowingNullCheck_ProducesDiagnostic()
+    {
+        string test = """
+            class Test
+            {
+                void M(string {|VSV0001:value|})
+                {
+                    if (value is null)
+                    {
+                        return;
+                    }
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 }

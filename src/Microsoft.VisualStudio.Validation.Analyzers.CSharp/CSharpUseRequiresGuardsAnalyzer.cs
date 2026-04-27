@@ -291,7 +291,9 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
 
         if (parameterSymbol.Type.IsReferenceType)
         {
-            return DiagnosticDescriptors.AddRequiresNotNull;
+            return parameterSymbol.NullableAnnotation == NullableAnnotation.Annotated
+                ? null
+                : DiagnosticDescriptors.AddRequiresNotNull;
         }
 
         if (parameterSymbol.Type is INamedTypeSymbol { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T })
