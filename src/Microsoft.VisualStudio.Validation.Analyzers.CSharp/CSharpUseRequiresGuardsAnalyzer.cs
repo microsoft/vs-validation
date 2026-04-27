@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -37,7 +39,8 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
                 return;
             }
 
-            startContext.RegisterSyntaxNodeAction<SyntaxKind>(AnalyzeParameter, SyntaxKind.Parameter);
+            var guardedParametersByBody = new ConcurrentDictionary<BlockSyntax, GuardedParameters>();
+            startContext.RegisterSyntaxNodeAction<SyntaxKind>(context => AnalyzeParameter(context, guardedParametersByBody), SyntaxKind.Parameter);
             startContext.RegisterSyntaxNodeAction<SyntaxKind>(AnalyzeIfStatement, SyntaxKind.IfStatement);
             startContext.RegisterSyntaxNodeAction<SyntaxKind>(AnalyzeInvocation, SyntaxKind.InvocationExpression);
         });
@@ -69,7 +72,8 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
             return;
         }
 
-        if (!HasMatchingParameterNameArgument(objectCreation, parameterSymbol, context.CancellationToken))
+        if (!TryGetArgumentParameterName(objectCreation, context.CancellationToken, out string? parameterName)
+            || !string.Equals(parameterName, parameterSymbol.Name, StringComparison.Ordinal))
         {
             return;
         }
@@ -93,39 +97,52 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
         }
     }
 
-    private static bool HasRequiresNotNullGuard(BlockSyntax body, SemanticModel semanticModel, IParameterSymbol parameterSymbol, CancellationToken cancellationToken)
+    private static bool TryGetContainingParameters(BlockSyntax body, out SeparatedSyntaxList<ParameterSyntax> parameters)
     {
-        foreach (StatementSyntax statement in body.Statements)
+        switch (body.Parent)
         {
-            if (statement is IfStatementSyntax ifStatement
-                && IsArgumentNullCheckGuard(ifStatement, semanticModel, parameterSymbol, cancellationToken))
-            {
+            case BaseMethodDeclarationSyntax { ParameterList: { } parameterList }:
+                parameters = parameterList.Parameters;
                 return true;
-            }
-
-            if (statement is not ExpressionStatementSyntax { Expression: InvocationExpressionSyntax invocation })
-            {
-                continue;
-            }
-
-            if (!IsRequiresMethod(invocation, semanticModel, "NotNull", cancellationToken) || invocation.ArgumentList.Arguments.Count == 0)
-            {
-                continue;
-            }
-
-            if (semanticModel.GetSymbolInfo(invocation.ArgumentList.Arguments[0].Expression, cancellationToken).Symbol is IParameterSymbol argumentSymbol
-                && SymbolEqualityComparer.Default.Equals(argumentSymbol, parameterSymbol))
-            {
+            case LocalFunctionStatementSyntax { ParameterList: { } parameterList }:
+                parameters = parameterList.Parameters;
                 return true;
-            }
+            default:
+                parameters = default;
+                return false;
         }
-
-        return false;
     }
 
-    private static bool IsArgumentNullCheckGuard(IfStatementSyntax ifStatement, SemanticModel semanticModel, IParameterSymbol parameterSymbol, CancellationToken cancellationToken)
+    private static bool TryGetRequiresNotNullGuardedParameter(InvocationExpressionSyntax invocation, SemanticModel semanticModel, IReadOnlyDictionary<string, IParameterSymbol> parametersByName, CancellationToken cancellationToken, out IParameterSymbol parameterSymbol)
     {
-        if (ifStatement.Else is not null || !IsNullCheckForParameter(ifStatement.Condition, parameterSymbol.Name))
+        parameterSymbol = null!;
+
+        if (!IsRequiresMethod(invocation, semanticModel, "NotNull", cancellationToken) || invocation.ArgumentList.Arguments.Count == 0)
+        {
+            return false;
+        }
+
+        if (semanticModel.GetSymbolInfo(invocation.ArgumentList.Arguments[0].Expression, cancellationToken).Symbol is not IParameterSymbol argumentSymbol)
+        {
+            return false;
+        }
+
+        if (!parametersByName.TryGetValue(argumentSymbol.Name, out parameterSymbol)
+            || !SymbolEqualityComparer.Default.Equals(argumentSymbol, parameterSymbol))
+        {
+            parameterSymbol = null!;
+            return false;
+        }
+
+        return true;
+    }
+
+    private static bool TryGetArgumentNullCheckGuardedParameter(IfStatementSyntax ifStatement, SemanticModel semanticModel, IReadOnlyDictionary<string, IParameterSymbol> parametersByName, CancellationToken cancellationToken, out IParameterSymbol parameterSymbol)
+    {
+        parameterSymbol = null!;
+
+        if (ifStatement.Else is not null
+            || !TryGetNullCheckedParameterName(ifStatement.Condition, out string? checkedParameterName))
         {
             return false;
         }
@@ -137,32 +154,34 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
             return false;
         }
 
-        return IsArgumentNullException(objectCreation)
-            && HasMatchingParameterNameArgument(objectCreation, parameterSymbol, cancellationToken);
-    }
-
-    private static bool HasRequiresRangeGuard(BlockSyntax body, SemanticModel semanticModel, IParameterSymbol parameterSymbol, CancellationToken cancellationToken)
-    {
-        foreach (StatementSyntax statement in body.Statements)
+        if (!IsArgumentNullException(objectCreation)
+            || !TryGetArgumentParameterName(objectCreation, cancellationToken, out string thrownParameterName)
+            || !string.Equals(checkedParameterName, thrownParameterName, StringComparison.Ordinal))
         {
-            if (statement is not ExpressionStatementSyntax { Expression: InvocationExpressionSyntax invocation })
-            {
-                continue;
-            }
-
-            if (!IsRequiresMethod(invocation, semanticModel, "Range", cancellationToken) || invocation.ArgumentList.Arguments.Count < 2)
-            {
-                continue;
-            }
-
-            if (ExpressionReferencesParameter(invocation.ArgumentList.Arguments[0].Expression, semanticModel, parameterSymbol, cancellationToken)
-                && IsParameterNameExpression(invocation.ArgumentList.Arguments[1].Expression, semanticModel, parameterSymbol, cancellationToken))
-            {
-                return true;
-            }
+            return false;
         }
 
-        return false;
+        return checkedParameterName is not null && parametersByName.TryGetValue(checkedParameterName, out parameterSymbol);
+    }
+
+    private static bool TryGetRequiresRangeGuardedParameter(InvocationExpressionSyntax invocation, SemanticModel semanticModel, IReadOnlyDictionary<string, IParameterSymbol> parametersByName, CancellationToken cancellationToken, out IParameterSymbol parameterSymbol)
+    {
+        parameterSymbol = null!;
+
+        if (!IsRequiresMethod(invocation, semanticModel, "Range", cancellationToken) || invocation.ArgumentList.Arguments.Count < 2)
+        {
+            return false;
+        }
+
+        if (!TryGetParameterNameExpression(invocation.ArgumentList.Arguments[1].Expression, semanticModel, cancellationToken, out string parameterName)
+            || !parametersByName.TryGetValue(parameterName, out parameterSymbol)
+            || !ExpressionReferencesParameter(invocation.ArgumentList.Arguments[0].Expression, semanticModel, parameterSymbol, cancellationToken))
+        {
+            parameterSymbol = null!;
+            return false;
+        }
+
+        return true;
     }
 
     private static bool ExpressionReferencesParameter(ExpressionSyntax expression, SemanticModel semanticModel, IParameterSymbol parameterSymbol, CancellationToken cancellationToken)
@@ -215,11 +234,12 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
         return true;
     }
 
-    private static bool IsParameterNameExpression(ExpressionSyntax expression, SemanticModel semanticModel, IParameterSymbol parameterSymbol, CancellationToken cancellationToken)
+    private static bool TryGetParameterNameExpression(ExpressionSyntax expression, SemanticModel semanticModel, CancellationToken cancellationToken, out string parameterName)
     {
         Optional<object?> constantValue = semanticModel.GetConstantValue(expression, cancellationToken);
-        if (constantValue.HasValue && string.Equals(constantValue.Value as string, parameterSymbol.Name, StringComparison.Ordinal))
+        if (constantValue.HasValue && constantValue.Value is string constantParameterName)
         {
+            parameterName = constantParameterName;
             return true;
         }
 
@@ -228,9 +248,11 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
             && nameofInvocation.ArgumentList.Arguments.Count == 1
             && nameofInvocation.ArgumentList.Arguments[0].Expression is IdentifierNameSyntax identifier)
         {
-            return string.Equals(identifier.Identifier.ValueText, parameterSymbol.Name, StringComparison.Ordinal);
+            parameterName = identifier.Identifier.ValueText;
+            return true;
         }
 
+        parameterName = null!;
         return false;
     }
 
@@ -243,10 +265,6 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
             SpecialType.System_Single or
             SpecialType.System_Double or
             SpecialType.System_Decimal;
-
-    private static bool IsNullCheckForParameter(ExpressionSyntax condition, string parameterName)
-        => TryGetNullCheckedParameterName(condition, out string? actualParameterName)
-            && actualParameterName == parameterName;
 
     private static bool TryGetNullCheckedIdentifier(ExpressionSyntax condition, out IdentifierNameSyntax identifier)
     {
@@ -282,17 +300,19 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
     private static bool IsArgumentNullException(IObjectCreationOperation objectCreation)
         => objectCreation.Type?.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat) == typeof(ArgumentNullException).FullName;
 
-    private static bool HasMatchingParameterNameArgument(IObjectCreationOperation objectCreation, IParameterSymbol parameterSymbol, CancellationToken cancellationToken)
+    private static bool TryGetArgumentParameterName(IObjectCreationOperation objectCreation, CancellationToken cancellationToken, out string parameterName)
     {
         if (objectCreation.Arguments.Length == 0)
         {
+            parameterName = null!;
             return false;
         }
 
         IArgumentOperation argument = objectCreation.Arguments[0];
         Optional<object?> constantValue = argument.Value.ConstantValue;
-        if (constantValue.HasValue && string.Equals(constantValue.Value as string, parameterSymbol.Name, StringComparison.Ordinal))
+        if (constantValue.HasValue && constantValue.Value is string constantParameterName)
         {
+            parameterName = constantParameterName;
             return true;
         }
 
@@ -302,9 +322,11 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
             && nameofInvocation.ArgumentList.Arguments.Count == 1
             && nameofInvocation.ArgumentList.Arguments[0].Expression is IdentifierNameSyntax identifier)
         {
-            return string.Equals(identifier.Identifier.ValueText, parameterSymbol.Name, StringComparison.Ordinal);
+            parameterName = identifier.Identifier.ValueText;
+            return true;
         }
 
+        parameterName = null!;
         return false;
     }
 
@@ -343,7 +365,7 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
         return null;
     }
 
-    private static void AnalyzeParameter(SyntaxNodeAnalysisContext context)
+    private static void AnalyzeParameter(SyntaxNodeAnalysisContext context, ConcurrentDictionary<BlockSyntax, GuardedParameters> guardedParametersByBody)
     {
         var parameterSyntax = (ParameterSyntax)context.Node;
         if (parameterSyntax.Identifier.IsMissing || !TryGetContainingBody(parameterSyntax, out BlockSyntax body))
@@ -362,17 +384,76 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
             return;
         }
 
-        if (descriptor == DiagnosticDescriptors.AddRequiresNotNull && HasRequiresNotNullGuard(body, context.SemanticModel, parameterSymbol, context.CancellationToken))
+        GuardedParameters guardedParameters = guardedParametersByBody.GetOrAdd(body, _ => ScanGuardedParameters(body, context.SemanticModel, context.CancellationToken));
+        if (descriptor == DiagnosticDescriptors.AddRequiresNotNull && guardedParameters.NotNullParameters.Contains(parameterSymbol))
         {
             return;
         }
 
-        if (descriptor == DiagnosticDescriptors.AddRequiresRange && HasRequiresRangeGuard(body, context.SemanticModel, parameterSymbol, context.CancellationToken))
+        if (descriptor == DiagnosticDescriptors.AddRequiresRange && guardedParameters.RangeParameters.Contains(parameterSymbol))
         {
             return;
         }
 
         context.ReportDiagnostic(Diagnostic.Create(descriptor, parameterSyntax.Identifier.GetLocation(), parameterSymbol.Name));
+    }
+
+    private static GuardedParameters ScanGuardedParameters(BlockSyntax body, SemanticModel semanticModel, CancellationToken cancellationToken)
+    {
+        var guardedParameters = new GuardedParameters();
+        if (!TryGetContainingParameters(body, out SeparatedSyntaxList<ParameterSyntax> parameters))
+        {
+            return guardedParameters;
+        }
+
+        var parametersByName = new Dictionary<string, IParameterSymbol>(StringComparer.Ordinal);
+        foreach (ParameterSyntax parameterSyntax in parameters)
+        {
+            if (parameterSyntax.Identifier.IsMissing
+                || semanticModel.GetDeclaredSymbol(parameterSyntax, cancellationToken) is not IParameterSymbol parameterSymbol)
+            {
+                continue;
+            }
+
+            DiagnosticDescriptor? descriptor = GetParameterDescriptor(parameterSymbol);
+            if (descriptor is null)
+            {
+                continue;
+            }
+
+            parametersByName[parameterSymbol.Name] = parameterSymbol;
+        }
+
+        if (parametersByName.Count == 0)
+        {
+            return guardedParameters;
+        }
+
+        foreach (StatementSyntax statement in body.Statements)
+        {
+            if (statement is IfStatementSyntax ifStatement
+                && TryGetArgumentNullCheckGuardedParameter(ifStatement, semanticModel, parametersByName, cancellationToken, out IParameterSymbol guardedNotNullParameter))
+            {
+                guardedParameters.NotNullParameters.Add(guardedNotNullParameter);
+            }
+
+            if (statement is not ExpressionStatementSyntax { Expression: InvocationExpressionSyntax invocation })
+            {
+                continue;
+            }
+
+            if (TryGetRequiresNotNullGuardedParameter(invocation, semanticModel, parametersByName, cancellationToken, out guardedNotNullParameter))
+            {
+                guardedParameters.NotNullParameters.Add(guardedNotNullParameter);
+            }
+
+            if (TryGetRequiresRangeGuardedParameter(invocation, semanticModel, parametersByName, cancellationToken, out IParameterSymbol guardedRangeParameter))
+            {
+                guardedParameters.RangeParameters.Add(guardedRangeParameter);
+            }
+        }
+
+        return guardedParameters;
     }
 
     private static void AnalyzeInvocation(SyntaxNodeAnalysisContext context)
@@ -384,5 +465,12 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
         }
 
         context.ReportDiagnostic(Diagnostic.Create(DiagnosticDescriptors.RemoveRedundantNotNullParameterName, redundantArgument.GetLocation()));
+    }
+
+    private sealed class GuardedParameters
+    {
+        internal HashSet<IParameterSymbol> NotNullParameters { get; } = new(SymbolEqualityComparer.Default);
+
+        internal HashSet<IParameterSymbol> RangeParameters { get; } = new(SymbolEqualityComparer.Default);
     }
 }

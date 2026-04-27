@@ -365,6 +365,24 @@ public class UseRequiresGuardsTests
     }
 
     [Fact]
+    public async Task LocalFunctionParameter_ProducesDiagnostic()
+    {
+        string test = """
+            class Test
+            {
+                void Outer()
+                {
+                    void Local(string {|VSV0001:value|})
+                    {
+                    }
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
     public async Task ManualNullCheck_CodeFixReplacesIfStatement()
     {
         string test = """
