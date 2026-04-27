@@ -36,12 +36,21 @@ public static class DiagnosticDescriptors
         "Replace the manual null check for '{0}' with Requires.NotNull");
 
     /// <summary>
+    /// Gets the diagnostic that offers removing a redundant parameter-name argument from <c>Requires.NotNull</c>.
+    /// </summary>
+    public static DiagnosticDescriptor RemoveRedundantNotNullParameterName { get; } = Create(
+        DiagnosticIds.RemoveRedundantNotNullParameterName,
+        "Remove redundant Requires.NotNull argument name",
+        "Remove the redundant parameter-name argument from Requires.NotNull");
+
+    /// <summary>
     /// Gets all diagnostics supported by this analyzer package.
     /// </summary>
     public static ImmutableArray<DiagnosticDescriptor> All { get; } = ImmutableArray.Create(
         AddRequiresNotNull,
         AddRequiresRange,
-        UseRequiresNotNull);
+        UseRequiresNotNull,
+        RemoveRedundantNotNullParameterName);
 
     private static DiagnosticDescriptor Create(string id, string title, string messageFormat)
         => new(

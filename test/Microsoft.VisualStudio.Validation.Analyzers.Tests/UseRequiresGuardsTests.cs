@@ -85,6 +85,84 @@ public class UseRequiresGuardsTests
     }
 
     [Fact]
+    public async Task RequiresNotNull_WithRedundantStringLiteralParameterName_CodeFixRemovesArgument()
+    {
+        string test = """
+            using Microsoft;
+
+            class Test
+            {
+                void M(string value)
+                {
+                    Requires.NotNull(value, {|VSV0004:"value"|});
+                }
+            }
+            """;
+
+        string fixedCode = """
+            using Microsoft;
+
+            class Test
+            {
+                void M(string value)
+                {
+                    Requires.NotNull(value);
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
+    }
+
+    [Fact]
+    public async Task RequiresNotNull_WithRedundantNameofParameterName_CodeFixRemovesArgument()
+    {
+        string test = """
+            using Microsoft;
+
+            class Test
+            {
+                void M(string value)
+                {
+                    Requires.NotNull(value, {|VSV0004:nameof(value)|});
+                }
+            }
+            """;
+
+        string fixedCode = """
+            using Microsoft;
+
+            class Test
+            {
+                void M(string value)
+                {
+                    Requires.NotNull(value);
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
+    }
+
+    [Fact]
+    public async Task RequiresNotNull_WithEscapedIdentifierParameterName_ProducesNoDiagnostic()
+    {
+        string test = """
+            using Microsoft;
+
+            class Test
+            {
+                void M(string @class)
+                {
+                    Requires.NotNull(@class, nameof(@class));
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
     public async Task ReferenceTypeParameter_WithNullableAnnotationsDisabled_ProducesDiagnostic()
     {
         string test = """

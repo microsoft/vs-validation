@@ -39,6 +39,7 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
 
             startContext.RegisterSyntaxNodeAction<SyntaxKind>(AnalyzeParameter, SyntaxKind.Parameter);
             startContext.RegisterSyntaxNodeAction<SyntaxKind>(AnalyzeIfStatement, SyntaxKind.IfStatement);
+            startContext.RegisterSyntaxNodeAction<SyntaxKind>(AnalyzeInvocation, SyntaxKind.InvocationExpression);
         });
     }
 
@@ -179,6 +180,39 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
 
         return method.Name == methodName
             && method.ContainingType?.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat) == KnownTypeNames.Requires;
+    }
+
+    private static bool TryGetRedundantNotNullParameterNameArgument(InvocationExpressionSyntax invocation, SemanticModel semanticModel, CancellationToken cancellationToken, out ArgumentSyntax redundantArgument)
+    {
+        redundantArgument = null!;
+
+        if (!IsRequiresMethod(invocation, semanticModel, "NotNull", cancellationToken)
+            || semanticModel.GetOperation(invocation, cancellationToken) is not IInvocationOperation operation)
+        {
+            return false;
+        }
+
+        IArgumentOperation? valueArgument = operation.Arguments.FirstOrDefault(arg => string.Equals(arg.Parameter?.Name, "value", StringComparison.Ordinal));
+        IArgumentOperation? parameterNameArgument = operation.Arguments.FirstOrDefault(arg => string.Equals(arg.Parameter?.Name, "parameterName", StringComparison.Ordinal) && !arg.IsImplicit);
+        if (valueArgument?.Syntax is not ArgumentSyntax { Expression: ExpressionSyntax valueExpression }
+            || parameterNameArgument?.Syntax is not ArgumentSyntax explicitParameterNameArgument)
+        {
+            return false;
+        }
+
+        Optional<object?> constantValue = parameterNameArgument.Value.ConstantValue;
+        if (!constantValue.HasValue || constantValue.Value is not string parameterName)
+        {
+            return false;
+        }
+
+        if (!string.Equals(parameterName, valueExpression.ToString(), StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        redundantArgument = explicitParameterNameArgument;
+        return true;
     }
 
     private static bool IsParameterNameExpression(ExpressionSyntax expression, SemanticModel semanticModel, IParameterSymbol parameterSymbol, CancellationToken cancellationToken)
@@ -339,5 +373,16 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
         }
 
         context.ReportDiagnostic(Diagnostic.Create(descriptor, parameterSyntax.Identifier.GetLocation(), parameterSymbol.Name));
+    }
+
+    private static void AnalyzeInvocation(SyntaxNodeAnalysisContext context)
+    {
+        var invocation = (InvocationExpressionSyntax)context.Node;
+        if (!TryGetRedundantNotNullParameterNameArgument(invocation, context.SemanticModel, context.CancellationToken, out ArgumentSyntax redundantArgument))
+        {
+            return;
+        }
+
+        context.ReportDiagnostic(Diagnostic.Create(DiagnosticDescriptors.RemoveRedundantNotNullParameterName, redundantArgument.GetLocation()));
     }
 }

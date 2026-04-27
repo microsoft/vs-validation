@@ -22,4 +22,9 @@ public static class DiagnosticIds
     /// The diagnostic ID for replacing a manual null check with <c>Requires.NotNull</c>.
     /// </summary>
     public const string UseRequiresNotNull = "VSV0003";
+
+    /// <summary>
+    /// The diagnostic ID for removing redundant parameter-name arguments from <c>Requires.NotNull</c>.
+    /// </summary>
+    public const string RemoveRedundantNotNullParameterName = "VSV0004";
 }

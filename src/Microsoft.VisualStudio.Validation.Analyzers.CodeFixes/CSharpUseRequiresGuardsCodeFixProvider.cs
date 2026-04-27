@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.VisualStudio.Validation.Analyzers;
 
@@ -22,7 +23,8 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
     public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(
         DiagnosticIds.AddRequiresNotNull,
         DiagnosticIds.AddRequiresRange,
-        DiagnosticIds.UseRequiresNotNull);
+        DiagnosticIds.UseRequiresNotNull,
+        DiagnosticIds.RemoveRedundantNotNullParameterName);
 
     /// <inheritdoc />
     public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
@@ -75,6 +77,22 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
                             "Replace with Requires.NotNull",
                             cancellationToken => ReplaceManualNullCheckAsync(context.Document, ifStatement, cancellationToken),
                             nameof(DiagnosticIds.UseRequiresNotNull)),
+                        diagnostic);
+                }
+
+                break;
+
+            case DiagnosticIds.RemoveRedundantNotNullParameterName:
+                SemanticModel? semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+                if (semanticModel is not null
+                    && node.AncestorsAndSelf().OfType<InvocationExpressionSyntax>().FirstOrDefault(candidate =>
+                        TryGetRedundantNotNullParameterNameArgument(candidate, semanticModel, context.CancellationToken, out _)) is InvocationExpressionSyntax invocation)
+                {
+                    context.RegisterCodeFix(
+                        CodeAction.Create(
+                            "Remove redundant parameter name",
+                            cancellationToken => RemoveRedundantNotNullParameterNameAsync(context.Document, invocation, cancellationToken),
+                            nameof(DiagnosticIds.RemoveRedundantNotNullParameterName)),
                         diagnostic);
                 }
 
@@ -133,6 +151,21 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
         return document.WithSyntaxRoot(newRoot);
     }
 
+    private static async Task<Document> RemoveRedundantNotNullParameterNameAsync(Document document, InvocationExpressionSyntax invocation, CancellationToken cancellationToken)
+    {
+        SyntaxNode? root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        SemanticModel? semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+        if (root is null || semanticModel is null || !TryGetRedundantNotNullParameterNameArgument(invocation, semanticModel, cancellationToken, out ArgumentSyntax redundantArgument))
+        {
+            return document;
+        }
+
+        InvocationExpressionSyntax newInvocation = invocation.WithArgumentList(
+            invocation.ArgumentList.WithArguments(invocation.ArgumentList.Arguments.Remove(redundantArgument)));
+        SyntaxNode newRoot = root.ReplaceNode(invocation, newInvocation);
+        return document.WithSyntaxRoot(newRoot);
+    }
+
     private static bool TryGetContainingBody(ParameterSyntax parameterSyntax, out BlockSyntax body)
     {
         switch (parameterSyntax.Parent?.Parent)
@@ -171,6 +204,44 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
                 }
             }
         };
+
+    private static bool TryGetRedundantNotNullParameterNameArgument(InvocationExpressionSyntax invocation, SemanticModel semanticModel, CancellationToken cancellationToken, out ArgumentSyntax redundantArgument)
+    {
+        redundantArgument = null!;
+
+        if (!IsRequiresNotNullMethod(invocation, semanticModel, cancellationToken)
+            || semanticModel.GetOperation(invocation, cancellationToken) is not IInvocationOperation operation)
+        {
+            return false;
+        }
+
+        IArgumentOperation? valueArgument = operation.Arguments.FirstOrDefault(arg => string.Equals(arg.Parameter?.Name, "value", StringComparison.Ordinal));
+        IArgumentOperation? parameterNameArgument = operation.Arguments.FirstOrDefault(arg => string.Equals(arg.Parameter?.Name, "parameterName", StringComparison.Ordinal) && !arg.IsImplicit);
+        if (valueArgument?.Syntax is not ArgumentSyntax { Expression: ExpressionSyntax valueExpression }
+            || parameterNameArgument?.Syntax is not ArgumentSyntax explicitParameterNameArgument)
+        {
+            return false;
+        }
+
+        Optional<object?> constantValue = parameterNameArgument.Value.ConstantValue;
+        if (!constantValue.HasValue || constantValue.Value is not string parameterName)
+        {
+            return false;
+        }
+
+        if (!string.Equals(parameterName, valueExpression.ToString(), StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        redundantArgument = explicitParameterNameArgument;
+        return true;
+    }
+
+    private static bool IsRequiresNotNullMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel, CancellationToken cancellationToken)
+        => semanticModel.GetSymbolInfo(invocation, cancellationToken).Symbol is IMethodSymbol method
+            && method.Name == "NotNull"
+            && method.ContainingType?.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat) == KnownTypeNames.Requires;
 
     private static StatementSyntax CreateGuardStatement(BlockSyntax body, string parameterName, bool useRange, int insertionIndex, string newLine)
     {
