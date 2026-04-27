@@ -431,6 +431,26 @@ public class UseRequiresGuardsTests
     }
 
     [Fact]
+    public async Task ManualNullCheck_WithNullableAnnotationsDisabled_ProducesDiagnostic()
+    {
+        string test = """
+            #nullable disable
+            class Test
+            {
+                void M(string value)
+                {
+                    {|VSV0003:if (value is null)
+                    {
+                        throw new System.ArgumentNullException(nameof(value));
+                    }|}
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
     public async Task ManualNullCheck_WithElse_ProducesRequiresNotNullDiagnostic()
     {
         string test = """
