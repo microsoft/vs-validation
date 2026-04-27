@@ -288,6 +288,43 @@ public class UseRequiresGuardsTests
     }
 
     [Fact]
+    public async Task NumericParameter_WithUnrelatedRequiresRangeGuard_ProducesDiagnostic()
+    {
+        string test = """
+            using Microsoft;
+
+            class Test
+            {
+                void M(int {|VSV0002:count|}, int max)
+                {
+                    Requires.Range(count <= max, nameof(count));
+                    Requires.Range(max >= 0, nameof(max));
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
+    public async Task NumericParameter_WithEquivalentRequiresRangeGuard_ProducesNoDiagnostic()
+    {
+        string test = """
+            using Microsoft;
+
+            class Test
+            {
+                void M(int count)
+                {
+                    Requires.Range(0 <= count, nameof(count));
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
+    }
+
+    [Fact]
     public async Task ParameterCodeFix_AppendsAfterExistingRequiresGuards()
     {
         string test = """
@@ -344,6 +381,36 @@ public class UseRequiresGuardsTests
                     Requires.NotNull(value);
                     // Existing comment
                     System.Console.WriteLine(value);
+                }
+            }
+            """;
+
+        await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
+    }
+
+    [Fact]
+    public async Task ParameterCodeFix_WithMicrosoftAlias_AddsMicrosoftUsing()
+    {
+        string test = """
+            using MS = Microsoft;
+
+            class Test
+            {
+                void M(string {|VSV0001:value|})
+                {
+                }
+            }
+            """;
+
+        string fixedCode = """
+            using MS = Microsoft;
+            using Microsoft;
+
+            class Test
+            {
+                void M(string value)
+                {
+                    Requires.NotNull(value);
                 }
             }
             """;

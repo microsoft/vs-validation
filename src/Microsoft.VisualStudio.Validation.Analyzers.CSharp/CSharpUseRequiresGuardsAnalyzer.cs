@@ -175,7 +175,7 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
 
         if (!TryGetParameterNameExpression(invocation.ArgumentList.Arguments[1].Expression, semanticModel, cancellationToken, out string parameterName)
             || !parametersByName.TryGetValue(parameterName, out parameterSymbol)
-            || !ExpressionReferencesParameter(invocation.ArgumentList.Arguments[0].Expression, semanticModel, parameterSymbol, cancellationToken))
+            || !IsNonNegativeRangeCheck(invocation.ArgumentList.Arguments[0].Expression, semanticModel, parameterSymbol, cancellationToken))
         {
             parameterSymbol = null!;
             return false;
@@ -184,11 +184,53 @@ public class CSharpUseRequiresGuardsAnalyzer : DiagnosticAnalyzer
         return true;
     }
 
-    private static bool ExpressionReferencesParameter(ExpressionSyntax expression, SemanticModel semanticModel, IParameterSymbol parameterSymbol, CancellationToken cancellationToken)
-        => expression.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(identifier =>
-            SymbolEqualityComparer.Default.Equals(
-                semanticModel.GetSymbolInfo(identifier, cancellationToken).Symbol,
-                parameterSymbol));
+    private static bool IsNonNegativeRangeCheck(ExpressionSyntax expression, SemanticModel semanticModel, IParameterSymbol parameterSymbol, CancellationToken cancellationToken)
+    {
+        expression = Unwrap(expression);
+        return expression switch
+        {
+            BinaryExpressionSyntax { RawKind: (int)SyntaxKind.GreaterThanOrEqualExpression, Left: var left, Right: var right }
+                => IsDirectParameterReference(left, semanticModel, parameterSymbol, cancellationToken) && IsZeroConstant(right, semanticModel, cancellationToken),
+            BinaryExpressionSyntax { RawKind: (int)SyntaxKind.LessThanOrEqualExpression, Left: var left, Right: var right }
+                => IsZeroConstant(left, semanticModel, cancellationToken) && IsDirectParameterReference(right, semanticModel, parameterSymbol, cancellationToken),
+            _ => false,
+        };
+    }
+
+    private static bool IsDirectParameterReference(ExpressionSyntax expression, SemanticModel semanticModel, IParameterSymbol parameterSymbol, CancellationToken cancellationToken)
+        => Unwrap(expression) is IdentifierNameSyntax identifier
+            && SymbolEqualityComparer.Default.Equals(semanticModel.GetSymbolInfo(identifier, cancellationToken).Symbol, parameterSymbol);
+
+    private static bool IsZeroConstant(ExpressionSyntax expression, SemanticModel semanticModel, CancellationToken cancellationToken)
+    {
+        expression = Unwrap(expression);
+        Optional<object?> constantValue = semanticModel.GetConstantValue(expression, cancellationToken);
+        if (!constantValue.HasValue || constantValue.Value is null)
+        {
+            return false;
+        }
+
+        return constantValue.Value switch
+        {
+            sbyte value => value == 0,
+            byte value => value == 0,
+            short value => value == 0,
+            ushort value => value == 0,
+            int value => value == 0,
+            uint value => value == 0,
+            long value => value == 0,
+            ulong value => value == 0,
+            float value => value == 0,
+            double value => value == 0,
+            decimal value => value == 0,
+            _ => false,
+        };
+    }
+
+    private static ExpressionSyntax Unwrap(ExpressionSyntax expression)
+        => expression is ParenthesizedExpressionSyntax { Expression: { } innerExpression }
+            ? Unwrap(innerExpression)
+            : expression;
 
     private static bool IsRequiresMethod(InvocationExpressionSyntax invocation, SemanticModel semanticModel, string methodName, CancellationToken cancellationToken)
     {

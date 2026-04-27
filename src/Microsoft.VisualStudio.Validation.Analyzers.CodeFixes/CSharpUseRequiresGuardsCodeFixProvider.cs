@@ -320,14 +320,25 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
 
     private static CompilationUnitSyntax AddUsingIfMissing(CompilationUnitSyntax root, string newLine)
     {
-        if (root.Usings.Any(u => !u.StaticKeyword.IsKind(SyntaxKind.StaticKeyword) && string.Equals(u.Name?.ToString(), "Microsoft", StringComparison.Ordinal)))
+        if (root.Usings.Any(u =>
+            u.Alias is null
+            && !u.StaticKeyword.IsKind(SyntaxKind.StaticKeyword)
+            && (string.Equals(u.Name?.ToString(), "Microsoft", StringComparison.Ordinal)
+                || string.Equals(u.Name?.ToString(), "global::Microsoft", StringComparison.Ordinal))))
         {
             return root;
         }
 
         UsingDirectiveSyntax usingDirective = SyntaxFactory.UsingDirective(SyntaxFactory.IdentifierName("Microsoft"))
             .WithTrailingTrivia(SyntaxFactory.EndOfLine(newLine), SyntaxFactory.EndOfLine(newLine));
-        return root.AddUsings(usingDirective);
+        if (root.Usings.LastOrDefault() is not { } lastUsing)
+        {
+            return root.AddUsings(usingDirective);
+        }
+
+        usingDirective = usingDirective.WithTrailingTrivia(SyntaxFactory.EndOfLine(newLine));
+        UsingDirectiveSyntax normalizedLastUsing = lastUsing.WithTrailingTrivia(SyntaxFactory.EndOfLine(newLine));
+        return root.ReplaceNode(lastUsing, normalizedLastUsing).AddUsings(usingDirective);
     }
 
     private static string GetPreferredNewLine(SyntaxNode root)
