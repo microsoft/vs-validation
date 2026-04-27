@@ -38,65 +38,96 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
             return;
         }
 
-        Diagnostic diagnostic = context.Diagnostics[0];
         SyntaxNode node = root.FindNode(context.Span, getInnermostNodeForTie: true);
+        SemanticModel? semanticModel = null;
+        bool handledAddRequiresNotNull = false;
+        bool handledAddRequiresRange = false;
+        bool handledUseRequiresNotNull = false;
+        bool handledRemoveRedundantNotNullParameterName = false;
 
-        switch (diagnostic.Id)
+        foreach (Diagnostic diagnostic in context.Diagnostics)
         {
-            case DiagnosticIds.AddRequiresNotNull:
-                if (node.FirstAncestorOrSelf<ParameterSyntax>() is ParameterSyntax notNullParameter)
-                {
-                    context.RegisterCodeFix(
-                        CodeAction.Create(
-                            "Add Requires.NotNull",
-                            cancellationToken => AddParameterGuardAsync(context.Document, notNullParameter, useRange: false, cancellationToken),
-                            nameof(DiagnosticIds.AddRequiresNotNull)),
-                        diagnostic);
-                }
+            switch (diagnostic.Id)
+            {
+                case DiagnosticIds.AddRequiresNotNull:
+                    if (handledAddRequiresNotNull)
+                    {
+                        break;
+                    }
 
-                break;
+                    handledAddRequiresNotNull = true;
+                    if (node.FirstAncestorOrSelf<ParameterSyntax>() is ParameterSyntax notNullParameter)
+                    {
+                        context.RegisterCodeFix(
+                            CodeAction.Create(
+                                "Add Requires.NotNull",
+                                cancellationToken => AddParameterGuardAsync(context.Document, notNullParameter, useRange: false, cancellationToken),
+                                nameof(DiagnosticIds.AddRequiresNotNull)),
+                            diagnostic);
+                    }
 
-            case DiagnosticIds.AddRequiresRange:
-                if (node.FirstAncestorOrSelf<ParameterSyntax>() is ParameterSyntax rangeParameter)
-                {
-                    context.RegisterCodeFix(
-                        CodeAction.Create(
-                            "Add Requires.Range",
-                            cancellationToken => AddParameterGuardAsync(context.Document, rangeParameter, useRange: true, cancellationToken),
-                            nameof(DiagnosticIds.AddRequiresRange)),
-                        diagnostic);
-                }
+                    break;
 
-                break;
+                case DiagnosticIds.AddRequiresRange:
+                    if (handledAddRequiresRange)
+                    {
+                        break;
+                    }
 
-            case DiagnosticIds.UseRequiresNotNull:
-                if (node.FirstAncestorOrSelf<IfStatementSyntax>() is IfStatementSyntax ifStatement)
-                {
-                    context.RegisterCodeFix(
-                        CodeAction.Create(
-                            "Replace with Requires.NotNull",
-                            cancellationToken => ReplaceManualNullCheckAsync(context.Document, ifStatement, cancellationToken),
-                            nameof(DiagnosticIds.UseRequiresNotNull)),
-                        diagnostic);
-                }
+                    handledAddRequiresRange = true;
+                    if (node.FirstAncestorOrSelf<ParameterSyntax>() is ParameterSyntax rangeParameter)
+                    {
+                        context.RegisterCodeFix(
+                            CodeAction.Create(
+                                "Add Requires.Range",
+                                cancellationToken => AddParameterGuardAsync(context.Document, rangeParameter, useRange: true, cancellationToken),
+                                nameof(DiagnosticIds.AddRequiresRange)),
+                            diagnostic);
+                    }
 
-                break;
+                    break;
 
-            case DiagnosticIds.RemoveRedundantNotNullParameterName:
-                SemanticModel? semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
-                if (semanticModel is not null
-                    && node.AncestorsAndSelf().OfType<InvocationExpressionSyntax>().FirstOrDefault(candidate =>
-                        TryGetRedundantNotNullParameterNameArgument(candidate, semanticModel, context.CancellationToken, out _)) is InvocationExpressionSyntax invocation)
-                {
-                    context.RegisterCodeFix(
-                        CodeAction.Create(
-                            "Remove redundant parameter name",
-                            cancellationToken => RemoveRedundantNotNullParameterNameAsync(context.Document, invocation, cancellationToken),
-                            nameof(DiagnosticIds.RemoveRedundantNotNullParameterName)),
-                        diagnostic);
-                }
+                case DiagnosticIds.UseRequiresNotNull:
+                    if (handledUseRequiresNotNull)
+                    {
+                        break;
+                    }
 
-                break;
+                    handledUseRequiresNotNull = true;
+                    if (node.FirstAncestorOrSelf<IfStatementSyntax>() is IfStatementSyntax ifStatement)
+                    {
+                        context.RegisterCodeFix(
+                            CodeAction.Create(
+                                "Replace with Requires.NotNull",
+                                cancellationToken => ReplaceManualNullCheckAsync(context.Document, ifStatement, cancellationToken),
+                                nameof(DiagnosticIds.UseRequiresNotNull)),
+                            diagnostic);
+                    }
+
+                    break;
+
+                case DiagnosticIds.RemoveRedundantNotNullParameterName:
+                    if (handledRemoveRedundantNotNullParameterName)
+                    {
+                        break;
+                    }
+
+                    handledRemoveRedundantNotNullParameterName = true;
+                    semanticModel ??= await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+                    if (semanticModel is not null
+                        && node.AncestorsAndSelf().OfType<InvocationExpressionSyntax>().FirstOrDefault(candidate =>
+                            TryGetRedundantNotNullParameterNameArgument(candidate, semanticModel, context.CancellationToken, out _)) is InvocationExpressionSyntax invocation)
+                    {
+                        context.RegisterCodeFix(
+                            CodeAction.Create(
+                                "Remove redundant parameter name",
+                                cancellationToken => RemoveRedundantNotNullParameterNameAsync(context.Document, invocation, cancellationToken),
+                                nameof(DiagnosticIds.RemoveRedundantNotNullParameterName)),
+                            diagnostic);
+                    }
+
+                    break;
+            }
         }
     }
 

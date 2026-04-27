@@ -7,3 +7,4 @@ Analyzer ID | Description
 VSV0001 | Add `Requires.NotNull` for a reference-type parameter.
 VSV0002 | Add `Requires.Range` for a supported numeric parameter.
 VSV0003 | Replace a manual null check with `Requires.NotNull`.
+VSV0004 | Remove a redundant parameter-name argument from `Requires.NotNull`.
