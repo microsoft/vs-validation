@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft;
 using Moq;
+using TUnit.Core;
 using Xunit;
 
 public partial class AssumesTests : IDisposable
@@ -19,7 +20,7 @@ public partial class AssumesTests : IDisposable
         this.overrideCulture.Dispose();
     }
 
-    [Fact]
+    [Test]
     public void True()
     {
         Assumes.True(true);
@@ -28,7 +29,7 @@ public partial class AssumesTests : IDisposable
         Assert.ThrowsAny<Exception>(() => Assumes.True(false, TestMessage, "arg1", "arg2"));
     }
 
-    [Fact]
+    [Test]
     public void False()
     {
         Assumes.False(false);
@@ -37,7 +38,7 @@ public partial class AssumesTests : IDisposable
         Assert.ThrowsAny<Exception>(() => Assumes.False(true, TestMessage, "arg1", "arg2"));
     }
 
-    [Fact]
+    [Test]
     public void True_InterpolatedString()
     {
         int formatCount = 0;
@@ -55,7 +56,7 @@ public partial class AssumesTests : IDisposable
         Assert.StartsWith("Some generated string method.", ex.Message);
     }
 
-    [Fact]
+    [Test]
     public void False_InterpolatedString()
     {
         int formatCount = 0;
@@ -73,13 +74,13 @@ public partial class AssumesTests : IDisposable
         Assert.StartsWith("Some generated string method.", ex.Message);
     }
 
-    [Fact]
+    [Test]
     public void Fail()
     {
         Assert.ThrowsAny<Exception>(() => Assumes.Fail("some message", new InvalidOperationException()));
     }
 
-    [Fact]
+    [Test]
     public void NotNull()
     {
         Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.NotNull((string?)null));
@@ -89,7 +90,7 @@ public partial class AssumesTests : IDisposable
         Assumes.NotNull("success");
     }
 
-    [Fact]
+    [Test]
     public void NotNull_NullableStruct()
     {
         Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.NotNull((int?)null));
@@ -99,7 +100,7 @@ public partial class AssumesTests : IDisposable
         Assumes.NotNull((int?)5);
     }
 
-    [Fact]
+    [Test]
     public void Null()
     {
         Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.Null("not null"));
@@ -109,7 +110,7 @@ public partial class AssumesTests : IDisposable
         Assumes.Null((object?)null);
     }
 
-    [Fact]
+    [Test]
     public void Null_NullableStruct()
     {
         Exception ex = Assert.ThrowsAny<Exception>(() => Assumes.Null((int?)5));
@@ -119,7 +120,7 @@ public partial class AssumesTests : IDisposable
         Assumes.Null((int?)null);
     }
 
-    [Fact]
+    [Test]
     public void NotNullOrEmpty()
     {
         ICollection<string> collection = new string[] { "foo" };
@@ -137,7 +138,7 @@ public partial class AssumesTests : IDisposable
         Assumes.NotNullOrEmpty(collection.Take(1));
     }
 
-    [Fact]
+    [Test]
     public void NotNullOrEmpty_EnumerableOfT_AlsoImplementsICollectionOfT()
     {
         // Mock type that implements both IEnumerable<T> and ICollection<T>
@@ -153,7 +154,7 @@ public partial class AssumesTests : IDisposable
         Assumes.NotNullOrEmpty(enumerable.Object);
     }
 
-    [Fact]
+    [Test]
     public void NotNullOrEmpty_EnumerableOfT_AlsoImplementsIReadOnlyCollectionOfT()
     {
         // Mock type that implements both IEnumerable<T> and IReadOnlyCollection<T>
@@ -169,7 +170,7 @@ public partial class AssumesTests : IDisposable
         Assumes.NotNullOrEmpty(enumerable.Object);
     }
 
-    [Fact]
+    [Test]
     public void Is()
     {
         Assert.ThrowsAny<Exception>(() => Assumes.Is<string>(null));
@@ -178,20 +179,20 @@ public partial class AssumesTests : IDisposable
         Assumes.Is<string>("hi");
     }
 
-    [Fact]
+    [Test]
     public void NotReachable()
     {
         Assert.ThrowsAny<Exception>(Assumes.NotReachable);
     }
 
-    [Fact]
+    [Test]
     public void NotReachableOfT()
     {
         Assert.ThrowsAny<Exception>(() => Assumes.NotReachable<int>());
         Assert.ThrowsAny<Exception>(() => Assumes.NotReachable<object>());
     }
 
-    [Fact]
+    [Test]
     public void Present()
     {
         IServiceProvider? someService = null;
@@ -200,7 +201,7 @@ public partial class AssumesTests : IDisposable
     }
 
 #if NETFRAMEWORK
-    [Fact]
+    [Test]
     public void InternalErrorException_IsSerializable()
     {
         try

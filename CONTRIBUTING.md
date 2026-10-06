@@ -45,6 +45,15 @@ You can use `dotnet test` to build and/or test the repo.
 
 There may be tests that are known to be unstable or have special requirements. These can be avoided by running tests using the [dotnet-test-cloud.ps1](tools/dotnet-test-cloud.ps1) script *after* running `dotnet build`.
 
+To build managed tests and validate the shipping library's NativeAOT compatibility, run `dotnet publish tools/dirs.proj -c Release`.
+Then run `./tools/dotnet-test-cloud.ps1 -Configuration Release` for managed TUnit tests.
+The traversal projects discover projects under `src` and `test`; `test/AotCompatibilityTest` is published to compile the shipping assembly with NativeAOT.
+Keep test projects in the solution as well: managed test runs still use the solution, while the traversal handles NativeAOT compatibility publishing.
+The test projects remain managed because the Moq-based tests and Roslyn analyzer tests rely on runtime code generation or dynamic composition.
+Shipping libraries targeting .NET 8 or later opt into NativeAOT compatibility analysis with `IsAotCompatible`.
+Add each NativeAOT-compatible shipping assembly as a `TrimmerRootAssembly` in `test/AotCompatibilityTest`, and keep this project publishable in `test/dirs.proj`.
+Root `Directory.Build.props` supplies project-reference defaults for both traversal and SDK projects that remove the `_IsPublishing` global property for managed dependencies, avoiding duplicate project instances that write to the same outputs during parallel publishing.
+
 ## Releases
 
 Use `nbgv tag` to create a tag for a particular commit that you mean to release.
