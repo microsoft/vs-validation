@@ -42,6 +42,7 @@ Follow the [TUnit xUnit migration guide](https://tunit.dev/docs/migration/xunit)
 * Validate managed tests and coverage, then run `dotnet publish tools\dirs.proj -c Release` and `.\tools\dotnet-test-cloud.ps1 -Configuration Release -IncludeNativeAOT`.
   Test projects targeting .NET 8 or later are eligible for NativeAOT publication by default.
   If a project cannot support NativeAOT, set `<PublishNativeAOTTests>false</PublishNativeAOTTests>` in its project file; it will still run as managed tests.
+  The traversal publish compiles eligible test executables and the compatibility project; `-IncludeNativeAOT` discovers and runs the published test executables, so it does not replace the compatibility-project publish.
 
 ## Template expansion validation
 
