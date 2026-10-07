@@ -2,13 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft.VisualStudio.Validation.Analyzers.Tests.Helpers;
+using TUnit.Core;
 using Xunit;
 
 namespace Microsoft.VisualStudio.Validation.Analyzers.Tests;
 
 public class UseRequiresGuardsTests
 {
-    [Fact]
+    [Test]
     public async Task ReferenceTypeParameter_CodeFixAddsRequiresNotNull()
     {
         string test = """
@@ -37,7 +38,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
     }
 
-    [Fact]
+    [Test]
     public async Task ReferenceTypeParameter_WithEscapedIdentifier_PreservesIdentifierText()
     {
         string test = """
@@ -66,7 +67,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
     }
 
-    [Fact]
+    [Test]
     public async Task ReferenceTypeParameter_WithExistingGuard_ProducesNoDiagnostic()
     {
         string test = """
@@ -84,7 +85,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task RequiresNotNull_WithRedundantStringLiteralParameterName_CodeFixRemovesArgument()
     {
         string test = """
@@ -114,7 +115,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
     }
 
-    [Fact]
+    [Test]
     public async Task RequiresNotNull_WithRedundantNameofParameterName_CodeFixRemovesArgument()
     {
         string test = """
@@ -144,7 +145,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
     }
 
-    [Fact]
+    [Test]
     public async Task RequiresNotNull_WithEscapedIdentifierParameterName_ProducesNoDiagnostic()
     {
         string test = """
@@ -162,7 +163,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task ReferenceTypeParameter_WithNullableAnnotationsDisabled_ProducesDiagnostic()
     {
         string test = """
@@ -178,7 +179,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task NullableReferenceTypeParameter_ProducesNoDiagnostic()
     {
         string test = """
@@ -194,7 +195,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task NonNullableReferenceTypeParameter_WithNullableAnnotationsEnabled_ProducesDiagnostic()
     {
         string test = """
@@ -210,7 +211,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task NumericParameter_CodeFixAddsRequiresRange()
     {
         string test = """
@@ -239,7 +240,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
     }
 
-    [Fact]
+    [Test]
     public async Task UnsignedNumericParameter_ProducesNoDiagnostic()
     {
         string test = """
@@ -254,7 +255,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task NullableNumericParameter_ProducesNoDiagnostic()
     {
         string test = """
@@ -269,7 +270,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task NumericParameter_WithMismatchedRequiresRangeGuard_ProducesDiagnostic()
     {
         string test = """
@@ -287,7 +288,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task NumericParameter_WithUnrelatedRequiresRangeGuard_ProducesDiagnostic()
     {
         string test = """
@@ -306,7 +307,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task NumericParameter_WithEquivalentRequiresRangeGuard_ProducesNoDiagnostic()
     {
         string test = """
@@ -324,7 +325,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task ParameterCodeFix_AppendsAfterExistingRequiresGuards()
     {
         string test = """
@@ -357,7 +358,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
     }
 
-    [Fact]
+    [Test]
     public async Task ParameterCodeFix_WithLeadingComment_DoesNotDuplicateTrivia()
     {
         string test = """
@@ -388,7 +389,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
     }
 
-    [Fact]
+    [Test]
     public async Task ParameterCodeFix_WithMicrosoftAlias_AddsMicrosoftUsing()
     {
         string test = """
@@ -418,7 +419,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
     }
 
-    [Fact]
+    [Test]
     public async Task ExpressionBodiedMember_ProducesNoDiagnostic()
     {
         string test = """
@@ -431,7 +432,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task LocalFunctionParameter_ProducesDiagnostic()
     {
         string test = """
@@ -449,7 +450,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task ManualNullCheck_CodeFixReplacesIfStatement()
     {
         string test = """
@@ -482,7 +483,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
     }
 
-    [Fact]
+    [Test]
     public async Task ManualNullCheck_WithEscapedIdentifier_PreservesIdentifierText()
     {
         string test = """
@@ -515,7 +516,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyCodeFixAsync(test, fixedCode);
     }
 
-    [Fact]
+    [Test]
     public async Task ManualNullCheck_WithNullableAnnotationsDisabled_ProducesDiagnostic()
     {
         string test = """
@@ -535,7 +536,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task ManualNullCheck_WithElse_ProducesRequiresNotNullDiagnostic()
     {
         string test = """
@@ -558,7 +559,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task ManualNullCheck_WithDifferentException_ProducesRequiresNotNullDiagnostic()
     {
         string test = """
@@ -577,7 +578,7 @@ public class UseRequiresGuardsTests
         await UseRequiresGuardsVerifier.VerifyAnalyzerAsync(test);
     }
 
-    [Fact]
+    [Test]
     public async Task ReferenceTypeParameter_WithNonThrowingNullCheck_ProducesDiagnostic()
     {
         string test = """

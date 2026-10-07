@@ -34,10 +34,9 @@ internal class AssertDialogSuppression : IDisposable
             assertDialogListener.AssertUiEnabled = false;
         }
 
-        // Xunit.v3 v2 also adds a TraceListener that throws on failure, so remove that too.
-        // See also https://github.com/xunit/xunit/issues/3317.
-        // My mechanism for removing the listener is designed to work before and after that issue is resolved.
-        if (Trace.Listeners.OfType<Xunit.Internal.TraceAssertOverrideListener>().FirstOrDefault() is { } listener)
+        // The xUnit compatibility layer adds a TraceListener that throws on failure. Remove
+        // non-default listeners so these tests can verify Report's listener calls directly.
+        foreach (TraceListener listener in Trace.Listeners.OfType<TraceListener>().Where(l => l is not DefaultTraceListener).ToArray())
         {
             Trace.Listeners.Remove(listener);
         }
@@ -56,6 +55,14 @@ internal class AssertDialogSuppression : IDisposable
             {
                 assertDialogListener.AssertUiEnabled = this.originalAssertUiSetting.Value;
             }
+        }
+    }
+
+    internal static void RemoveNonDefaultTraceListeners()
+    {
+        foreach (TraceListener listener in Trace.Listeners.OfType<TraceListener>().Where(l => l is not DefaultTraceListener).ToArray())
+        {
+            Trace.Listeners.Remove(listener);
         }
     }
 }

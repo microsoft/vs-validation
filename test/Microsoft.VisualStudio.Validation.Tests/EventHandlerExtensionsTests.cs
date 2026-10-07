@@ -2,13 +2,14 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using Microsoft;
+using TUnit.Core;
 using Xunit;
 
 public class EventHandlerExtensionsTests
 {
     private static readonly EventArgs Args = new EventArgs();
 
-    [Fact]
+    [Test]
     public void Raise_EventHandlerOfT()
     {
         bool invoked = false;
@@ -30,7 +31,7 @@ public class EventHandlerExtensionsTests
         Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null!));
     }
 
-    [Fact]
+    [Test]
     public void Raise_EventHandler()
     {
         bool invoked = false;
@@ -52,7 +53,7 @@ public class EventHandlerExtensionsTests
         Assert.Throws<ArgumentNullException>(() => handler.Raise(this, null!));
     }
 
-    [Fact]
+    [Test]
     public void Raise_Delegate()
     {
         bool invoked = false;

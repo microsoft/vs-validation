@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft;
 using Moq;
+using TUnit.Core;
 using Xunit;
 
 /// <summary>
@@ -26,7 +27,7 @@ public class ReportReleaseTests : IDisposable
         this.suppressAssertUi.Dispose();
     }
 
-    [Fact]
+    [Test]
     public void If()
     {
         using (DisposableValue<Mock<TraceListener>> listener = Listen())
@@ -36,7 +37,7 @@ public class ReportReleaseTests : IDisposable
         }
     }
 
-    [Fact]
+    [Test]
     public void IfNot()
     {
         using (DisposableValue<Mock<TraceListener>> listener = Listen())
@@ -46,7 +47,7 @@ public class ReportReleaseTests : IDisposable
         }
     }
 
-    [Fact]
+    [Test]
     public void IfNot_Format1Arg()
     {
         using (DisposableValue<Mock<TraceListener>> listener = Listen())
@@ -56,7 +57,7 @@ public class ReportReleaseTests : IDisposable
         }
     }
 
-    [Fact]
+    [Test]
     public void IfNot_Format2Arg()
     {
         using (DisposableValue<Mock<TraceListener>> listener = Listen())
@@ -66,7 +67,7 @@ public class ReportReleaseTests : IDisposable
         }
     }
 
-    [Fact]
+    [Test]
     public void IfNot_FormatNArg()
     {
         using (DisposableValue<Mock<TraceListener>> listener = Listen())
@@ -76,7 +77,7 @@ public class ReportReleaseTests : IDisposable
         }
     }
 
-    [Fact]
+    [Test]
     public void IfNot_InterpolatedString()
     {
         int formatCount = 0;
@@ -95,7 +96,7 @@ public class ReportReleaseTests : IDisposable
         }
     }
 
-    [Fact]
+    [Test]
     public void IfNotPresent()
     {
         using (DisposableValue<Mock<TraceListener>> listener = Listen())
@@ -108,7 +109,7 @@ public class ReportReleaseTests : IDisposable
         }
     }
 
-    [Fact]
+    [Test]
     public void Fail()
     {
         using (DisposableValue<Mock<TraceListener>> listener = Listen())
@@ -117,7 +118,7 @@ public class ReportReleaseTests : IDisposable
         }
     }
 
-    [Fact]
+    [Test]
     public void Fail_DefaultMessage()
     {
         using (DisposableValue<Mock<TraceListener>> listener = Listen())
