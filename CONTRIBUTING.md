@@ -49,7 +49,7 @@ Run `dotnet publish tools/dirs.proj -c Release` to publish the shipping-library 
 Then run `./tools/dotnet-test-cloud.ps1 -Configuration Release -IncludeNativeAOT` to run managed TUnit tests and the published NativeAOT tests.
 The traversal projects discover projects under `src` and `test`; `test/AotCompatibilityTest` compiles the shipping assembly with NativeAOT, while `-IncludeNativeAOT` runs eligible test executables. These are separate validations.
 Keep test projects in the solution as well: managed test runs still use the solution, while the traversal handles NativeAOT publishing.
-The test projects remain managed because the Moq-based tests and Roslyn analyzer tests rely on runtime code generation or dynamic composition.
+The test projects remain managed because the Moq-based tests and Roslyn analyzer tests rely on runtime code generation or dynamic composition.`nTest projects can opt out of NativeAOT publishing with `<PublishNativeAOTTests>false</PublishNativeAOTTests>`.
 Shipping libraries targeting .NET 8 or later opt into NativeAOT compatibility analysis with `IsAotCompatible`.
 Add each NativeAOT-compatible shipping assembly as a `TrimmerRootAssembly` in `test/AotCompatibilityTest`, and keep this project publishable in `test/dirs.proj`.
 Root `Directory.Build.props` supplies project-reference defaults for both traversal and SDK projects that remove the `_IsPublishing` global property for managed dependencies, avoiding duplicate project instances that write to the same outputs during parallel publishing.
