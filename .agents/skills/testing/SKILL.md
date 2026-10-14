@@ -13,7 +13,7 @@ user-invocable: false
 
 **Run all tests**:
 ```bash
-dotnet test --project test/Microsoft.VisualStudio.Validation.Tests/Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release
+dotnet test --no-build -c Release
 ```
 
 **Run tests for a specific test project**:
@@ -48,7 +48,7 @@ dotnet test --project test/Microsoft.VisualStudio.Validation.Tests/Microsoft.Vis
 
 **List all available tests without running them**:
 ```bash
-dotnet run --no-build -c Release --framework net8.0 -- --list-tests
+dotnet run --project test/Microsoft.VisualStudio.Validation.Tests/Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release --framework net8.0 -- --list-tests
 ```
 
 **Key points about test filtering with TUnit / MTP v2**:
