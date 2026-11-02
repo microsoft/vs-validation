@@ -231,9 +231,9 @@ public class CSharpUseRequiresGuardsCodeFixProvider : CodeFixProvider
             {
                 Expression: MemberAccessExpressionSyntax
                 {
-                    Expression: IdentifierNameSyntax { Identifier.ValueText: "Requires" }
-                }
-            }
+                    Expression: IdentifierNameSyntax { Identifier.ValueText: "Requires" },
+                },
+            },
         };
 
     private static bool TryGetRedundantNotNullParameterNameArgument(InvocationExpressionSyntax invocation, SemanticModel semanticModel, CancellationToken cancellationToken, out ArgumentSyntax redundantArgument)

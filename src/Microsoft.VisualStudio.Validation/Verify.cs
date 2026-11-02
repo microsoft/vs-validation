@@ -259,7 +259,7 @@ public static partial class Verify
         {
             if (ignorePreviousComCalls)
             {
-                Marshal.ThrowExceptionForHR(hresult, new IntPtr(-1));
+                Marshal.ThrowExceptionForHR(hresult, (nint)(-1));
             }
             else
             {

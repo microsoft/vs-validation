@@ -36,8 +36,8 @@ public class RequiresTests
     [Test]
     public void NotNull_IntPtr_ThrowsOnZero()
     {
-        Assert.Throws<ArgumentNullException>(() => Requires.NotNull(IntPtr.Zero, "foo"));
-        Requires.NotNull(new IntPtr(5), "foo");
+        Assert.Throws<ArgumentNullException>(() => Requires.NotNull(0, "foo"));
+        Requires.NotNull((nint)5, "foo");
     }
 
     [Test]
