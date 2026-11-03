@@ -39,17 +39,17 @@ public static class Requires
     }
 
     /// <summary>
-    /// Throws an exception if the specified parameter's value is IntPtr.Zero.
+    /// Throws an exception if the specified parameter's value is zero.
     /// </summary>
     /// <param name="value">The value of the argument.</param>
     /// <param name="parameterName">The name of the parameter to include in any thrown exception. If this argument is omitted (explicitly writing <see langword="null" /> does not qualify), the expression used in the first argument will be used as the parameter name.</param>
     /// <returns>The value of the parameter.</returns>
-    /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <see cref="IntPtr.Zero"/>.</exception>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is zero.</exception>
     [DebuggerStepThrough]
     [TargetedPatchingOptOut("Performance critical to inline across NGen image boundaries")]
-    public static IntPtr NotNull(IntPtr value, [CallerArgumentExpression(nameof(value))] string? parameterName = null)
+    public static nint NotNull(nint value, [CallerArgumentExpression(nameof(value))] string? parameterName = null)
     {
-        if (value == IntPtr.Zero)
+        if (value == 0)
         {
             throw new ArgumentNullException(parameterName);
         }
