@@ -24,37 +24,37 @@ To run a specific test project, change to that project's directory first; the co
 
 **Run tests for a specific test project** (within that test project's directory):
 ```bash
-dotnet test --project test/Microsoft.VisualStudio.Validation.Tests/Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release
+dotnet test --project Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release
 ```
 
 **Run a single test method**:
 ```bash
-dotnet test --project test/Microsoft.VisualStudio.Validation.Tests/Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release -- --treenode-filter "/*/*/ClassName/MethodName"
+dotnet test --project Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release -- --treenode-filter "/*/*/ClassName/MethodName"
 ```
 
 **Run all tests in a test class**:
 ```bash
-dotnet test --project test/Microsoft.VisualStudio.Validation.Tests/Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release -- --treenode-filter "/*/*/ClassName/*"
+dotnet test --project Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release -- --treenode-filter "/*/*/ClassName/*"
 ```
 
 **Run tests with wildcard matching** (supports wildcards at beginning and/or end):
 ```bash
-dotnet test --project test/Microsoft.VisualStudio.Validation.Tests/Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release -- --treenode-filter "/*/*/*/*Pattern*"
+dotnet test --project Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release -- --treenode-filter "/*/*/*/*Pattern*"
 ```
 
 **Run tests with a specific property**:
 ```bash
-dotnet test --project test/Microsoft.VisualStudio.Validation.Tests/Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release -- --treenode-filter "/*/*/*/*[PropertyName=value]"
+dotnet test --project Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release -- --treenode-filter "/*/*/*/*[PropertyName=value]"
 ```
 
 **Run tests for a specific framework only**:
 ```bash
-dotnet test --project test/Microsoft.VisualStudio.Validation.Tests/Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release --framework net8.0
+dotnet test --project Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release --framework net8.0
 ```
 
 **List all available tests without running them**:
 ```bash
-dotnet run --project test/Microsoft.VisualStudio.Validation.Tests/Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release --framework net8.0 -- --list-tests
+dotnet run --project Microsoft.VisualStudio.Validation.Tests.csproj --no-build -c Release --framework net8.0 -- --list-tests
 ```
 
 **Key points about test filtering with TUnit / MTP v2**:
