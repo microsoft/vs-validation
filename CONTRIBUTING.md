@@ -49,7 +49,9 @@ Run `dotnet publish tools/dirs.proj -c Release` to publish the shipping-library 
 Then run `./tools/dotnet-test-cloud.ps1 -Configuration Release -IncludeNativeAOT` to run managed TUnit tests and the published NativeAOT tests.
 The traversal projects discover projects under `src` and `test`; `test/AotCompatibilityTest` compiles the shipping assembly with NativeAOT, while `-IncludeNativeAOT` runs eligible test executables. These are separate validations.
 Keep test projects in the solution as well: managed test runs still use the solution, while the traversal handles NativeAOT publishing.
-The test projects remain managed because the Moq-based tests and Roslyn analyzer tests rely on runtime code generation or dynamic composition.`nTest projects can opt out of NativeAOT publishing with `<PublishNativeAOTTests>false</PublishNativeAOTTests>`.
+The test projects remain managed because the Moq-based tests and Roslyn analyzer tests rely on runtime code generation or dynamic composition.
+
+Test projects can opt out of NativeAOT publishing with `<PublishNativeAOTTests>false</PublishNativeAOTTests>`.
 Shipping libraries targeting .NET 8 or later opt into NativeAOT compatibility analysis with `IsAotCompatible`.
 Add each NativeAOT-compatible shipping assembly as a `TrimmerRootAssembly` in `test/AotCompatibilityTest`, and keep this project publishable in `test/dirs.proj`.
 Root `Directory.Build.props` supplies project-reference defaults for both traversal and SDK projects that remove the `_IsPublishing` global property for managed dependencies, avoiding duplicate project instances that write to the same outputs during parallel publishing.
@@ -76,15 +78,16 @@ API and hand-written docs are found under the `docfx/` directory and are built b
 You can make changes and host the site locally to preview them by switching to that directory and running the `dotnet docfx --serve` command.
 After making a change, you can rebuild the docs site while the localhost server is running by running `dotnet docfx` again from a separate terminal.
 
-DocFX metadata extraction suppresses `NU1901` through `NU1904` in `docfx/docfx.json` to match the nonfatal NuGet audit warning policy in `.github/workflows/build.yml`.
+DocFX metadata extraction suppresses `NU1901` through `NU1904` in `docfx/docfx.json` to match the nonfatal NuGet audit warning policy in `azure-pipelines/dotnet.yml`.
 DocFX otherwise turns MSBuild workspace warnings into fatal documentation warnings under `--warningsAsErrors`.
 Normal builds still report these audit warnings, and other documentation warnings remain fatal in CI.
 
 The `.github/workflows/docs.yml` GitHub Actions workflow publishes the content of these docs to github.io if the workflow itself and [GitHub Pages is enabled for your repository](https://docs.github.com/en/pages/quickstart).
 
-### Documentation validation feed authentication
+### Documentation validation and Copilot feed authentication
 
-The `.github/workflows/docs_validate.yml` workflow uses GitHub OIDC to authenticate
+The `.github/workflows/docs_validate.yml` and `.github/workflows/copilot-setup-steps.yml`
+workflows use GitHub OIDC to authenticate
 as the **azure-public/vside package pull** Entra application before `init.ps1` restores packages.
 It requests an Azure DevOps access token and supplies it through
 `NuGetPackageSourceCredentials_<source name>` for each Azure Artifacts source in
@@ -98,18 +101,27 @@ Sign in with `gh auth login` and
 `az login --tenant 72f988bf-86f1-41af-91ab-2d7cd011db47 --allow-no-subscriptions` first.
 The signed-in identities need repository administration and permission to manage the app's
 federated credentials. Use `-WhatIf` to preview without making changes.
-The script discovers the calling repository, trusts pull requests plus its default branch,
-and can be rerun without duplicating credentials.
+The script discovers the calling repository, trusts pull requests, its default branch,
+and the `copilot` environment used by Copilot code review and cloud agent setup.
+It can be rerun without duplicating credentials.
 Use `-Branches microbuild,release` to add other trusted branches; the default branch
-and PR context are always included. The script reports each created or reused credential.
-Credential names identify the owner, repository, and PR or branch context, for example
-`github-AArnott-Library.Template-pull-request` and
+and the PR and Copilot environment contexts are always included.
+The script reports each created or reused credential.
+Credential names identify the owner, repository, and PR, environment, or branch context, for example
+`github-AArnott-Library.Template-pull-request`,
+`github-AArnott-Library.Template-environment-copilot`, and
 `github-AArnott-Library.Template-branch-main`. Names requiring punctuation replacement
 or truncation include a short hash suffix to preserve uniqueness within Entra's name limits.
 
 This changes OIDC subjects for **all workflows** in the repository. Update any other cloud
 trust policies (including environment subjects) before running it; existing Entra credentials
 are preserved. The script does not configure Azure DevOps feed permissions.
+
+For repositories configured before Copilot environment trust was included, rerun the script
+with any additional trusted branches retained, then re-request the Copilot review.
+Copilot setup runs use an OIDC subject ending in `:environment:copilot`, rather than the
+PR or branch subject, so those existing credentials alone do not authenticate Copilot.
+Without the environment credential, Azure login fails with `AADSTS700213` before package restore.
 
 Authentication is enabled only for repositories owned by the `microsoft` organization,
 because this Entra tenant requires enterprise-issued GitHub assertions.
