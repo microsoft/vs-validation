@@ -5,7 +5,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     <MicrosoftTestingPlatformVersion>2.5.3</MicrosoftTestingPlatformVersion>
-    <CodeAnalysisVersion>5.9.0</CodeAnalysisVersion>
+    <CodeAnalysisVersion>5.12.0</CodeAnalysisVersion>
     <CodefixTestingVersion>1.1.2</CodefixTestingVersion>
     <MicrosoftCodeAnalysisAnalyzersVersion>4.14.0</MicrosoftCodeAnalysisAnalyzersVersion>
 
