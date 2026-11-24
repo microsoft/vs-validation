@@ -19,6 +19,10 @@ internal static partial class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
             this.SolutionTransforms.Add((solution, projectId) =>
             {
                 solution = solution.WithOptions(solution.Options.WithChangedOption(FormattingOptions.NewLine, LanguageNames.CSharp, "\n"));
+#if NET10_0_OR_GREATER
+                string referenceDirectory = Path.Combine(AppContext.BaseDirectory, "reference-assemblies");
+                solution = solution.AddMetadataReferences(projectId, Directory.GetFiles(referenceDirectory, "*.dll").Select(path => MetadataReference.CreateFromFile(path)));
+#endif
                 return solution.AddMetadataReference(projectId, MetadataReference.CreateFromFile(Path.Combine(AppContext.BaseDirectory, "Microsoft.VisualStudio.Validation.dll")));
             });
         }

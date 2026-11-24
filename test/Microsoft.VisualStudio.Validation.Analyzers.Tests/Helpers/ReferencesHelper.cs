@@ -12,10 +12,8 @@ internal static class ReferencesHelper
     private static ReferenceAssemblies CreateReferenceAssemblies()
     {
 #if NET10_0_OR_GREATER
-        ReferenceAssemblies references = new(
-            "net10.0",
-            new PackageIdentity("Microsoft.NETCore.App.Ref", "10.0.0"),
-            Path.Combine("ref", "net10.0"));
+        // The verifier supplies the SDK reference pack directly instead of downloading it during the test run.
+        ReferenceAssemblies references = new("net10.0");
 #else
         ReferenceAssemblies references = ReferenceAssemblies.Net.Net80;
 #endif

@@ -28,4 +28,19 @@
     <ProjectReference Include="..\..\src\Microsoft.VisualStudio.Validation.Analyzers\Microsoft.VisualStudio.Validation.Analyzers.csproj" />
     <ProjectReference Include="..\..\src\Microsoft.VisualStudio.Validation\Microsoft.VisualStudio.Validation.csproj" />
   </ItemGroup>
+
+  <Target Name="CopyAnalyzerTestReferenceAssemblies" AfterTargets="Build" Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)','net10.0'))">
+    <ItemGroup>
+      <_AnalyzerTestReferencePack Include="@(ResolvedTargetingPack)" Condition="'%(ResolvedTargetingPack.NuGetPackageId)' == 'Microsoft.NETCore.App.Ref'" />
+    </ItemGroup>
+    <PropertyGroup>
+      <_AnalyzerTestReferencePackDirectory>@(_AnalyzerTestReferencePack->'%(PackageDirectory)')</_AnalyzerTestReferencePackDirectory>
+    </PropertyGroup>
+    <ItemGroup>
+      <_AnalyzerTestReferenceAssemblies Include="$(_AnalyzerTestReferencePackDirectory)\ref\$(TargetFramework)\*.dll" Condition="'$(_AnalyzerTestReferencePackDirectory)' != ''" />
+      <FileWrites Include="@(_AnalyzerTestReferenceAssemblies->'$(OutDir)reference-assemblies\%(Filename)%(Extension)')" />
+    </ItemGroup>
+    <Error Condition="'@(_AnalyzerTestReferenceAssemblies)' == ''" Text="The .NET reference pack for analyzer tests was not found." />
+    <Copy SourceFiles="@(_AnalyzerTestReferenceAssemblies)" DestinationFolder="$(OutDir)reference-assemblies" SkipUnchangedFiles="true" />
+  </Target>
 </Project>
