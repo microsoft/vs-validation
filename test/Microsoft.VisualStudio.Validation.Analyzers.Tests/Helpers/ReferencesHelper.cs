@@ -10,7 +10,17 @@ internal static class ReferencesHelper
     internal static readonly ReferenceAssemblies References = CreateReferenceAssemblies();
 
     private static ReferenceAssemblies CreateReferenceAssemblies()
-        => ReferenceAssemblies.Net.Net80.WithNuGetConfigFilePath(FindNuGetConfigPath());
+    {
+#if NET10_0_OR_GREATER
+        ReferenceAssemblies references = new(
+            "net10.0",
+            new PackageIdentity("Microsoft.NETCore.App.Ref", "10.0.0"),
+            Path.Combine("ref", "net10.0"));
+#else
+        ReferenceAssemblies references = ReferenceAssemblies.Net.Net80;
+#endif
+        return references.WithNuGetConfigFilePath(FindNuGetConfigPath());
+    }
 
     private static string FindNuGetConfigPath()
     {
