@@ -10,7 +10,15 @@ internal static class ReferencesHelper
     internal static readonly ReferenceAssemblies References = CreateReferenceAssemblies();
 
     private static ReferenceAssemblies CreateReferenceAssemblies()
-        => ReferenceAssemblies.Net.Net80.WithNuGetConfigFilePath(FindNuGetConfigPath());
+    {
+#if NET10_0_OR_GREATER
+        // The verifier supplies the SDK reference pack directly instead of downloading it during the test run.
+        ReferenceAssemblies references = new("net10.0");
+#else
+        ReferenceAssemblies references = ReferenceAssemblies.Net.Net80;
+#endif
+        return references.WithNuGetConfigFilePath(FindNuGetConfigPath());
+    }
 
     private static string FindNuGetConfigPath()
     {
